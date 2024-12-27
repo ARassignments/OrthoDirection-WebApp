@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'index'])->name('home');
 
 // AJAX Page Loader
-Route::get('/{page}', [PageController::class, 'loadPage'])->name('page.load');
+Route::get('user-side/{page}', [PageController::class, 'loadPage'])->name('page.load');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function loadPage(page) {
         contentDiv.classList.remove("fade-in");
-        fetch(`/${page}`)
+        fetch(`user-side/${page}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Page not found");
