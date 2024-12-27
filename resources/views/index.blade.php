@@ -159,8 +159,7 @@
             </div>
         </section>
         <!-- subscribe-section end -->
-
-
+        
         <!-- main-footer -->
         <footer class="main-footer">
             <div class="pattern-layer">
