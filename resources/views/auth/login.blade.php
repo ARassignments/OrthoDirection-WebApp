@@ -14,6 +14,7 @@
                         <div class="card-body">
                             <h4 class="mb-3">Welcome
                                 Back!</h4>
+                            <x-auth-session-status class="mb-4" :status="session('status')" />
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="row g-4">

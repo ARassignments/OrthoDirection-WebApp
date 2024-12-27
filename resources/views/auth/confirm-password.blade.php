@@ -1,27 +1,76 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+
+    <div class="text-center mt-6 mb-4">
+        <a href="/" class="logo-link">
+            <div class="logo-wrap">
+                <img class="logo-img logo-dark" src="{{ asset('assets/images/logo.png') }}" alt>
+            </div>
+        </a>
     </div>
 
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+    <div class="my-auto">
+        <div class="container">
+            <div class="row g-gs justify-content-center">
+                <div class="col-md-7 col-lg-6 col-xl-5">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body">
+                            <h4>Confirm password</h4>
+                            <p>This is a secure area of the application. Please confirm your password before continuing.</p>
+                            <form method="POST" action="{{ route('password.confirm') }}">
+                                @csrf
+                                <div class="row g-4">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="toggle-password">Password</label>
+                                            <div class="form-control-wrap">
+                                                <a class="form-control-icon end password-toggle" style="cursor: pointer"
+                                                    onclick="togglePassword()" title="Toggle show/hide password">
+                                                    <em class="on icon ni ni-eye text-base"></em>
+                                                    <em class="off icon ni ni-eye-off text-base"></em>
+                                                </a>
+                                                <input type="password" name="password" id="toggle-password"
+                                                    class="form-control form-control-lg" placeholder="Enter Password"
+                                                    autocomplete="current-password" autofocus required>
+                                            </div>
+                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                        </div>
+                                    </div>
+                                    <script>
+                                        function togglePassword() {
+                                            if (document.getElementById("toggle-password").type == "password") {
+                                                document.getElementById("toggle-password").type = "text";
+                                                document.querySelector(".password-toggle .ni-eye").classList.add("off");
+                                                document.querySelector(".password-toggle .ni-eye").classList.remove("on");
+                                                document.querySelector(".password-toggle .ni-eye-off").classList.add("on");
+                                                document.querySelector(".password-toggle .ni-eye-off").classList.remove("off");
+                                            } else {
+                                                document.getElementById("toggle-password").type = "password";
+                                                document.querySelector(".password-toggle .ni-eye").classList.add("on");
+                                                document.querySelector(".password-toggle .ni-eye").classList.remove("off");
+                                                document.querySelector(".password-toggle .ni-eye-off").classList.add("off");
+                                                document.querySelector(".password-toggle .ni-eye-off").classList.remove("on");
+                                            }
+                                        }
+                                    </script>
+                                    <div class="col-12">
+                                        <div
+                                            class="d-flex flex-wrap justify-content-between align-items-center has-gap g-3">
+                                            <div class="form-group"><button class="btn btn-primary" type="submit"
+                                                    id="submit-btn">Confirm Password</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4"><a class="link has-gap g-2" href="{{ route('login') }}"><em
+                                class="icon ni ni-arrow-left"></em><span>Back to Login</span></a></p>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
+    <div class="mt-5"></div>
+    <p class="text-center text-heading mt-4 mb-6 d-none">&copy; 2025 All Rights Reserved</a>
+    </p>
 </x-guest-layout>
