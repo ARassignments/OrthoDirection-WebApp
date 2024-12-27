@@ -11,7 +11,7 @@ class ProfessionalController extends Controller
      */
     public function dashboard()
     {
-        return view('professionals.dashboard');
+        return view('professionals.index');
     }
     public function index()
     {
