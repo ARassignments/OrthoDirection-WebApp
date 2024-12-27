@@ -174,13 +174,13 @@
                     <div class="row clearfix">
                         <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
                             <div class="footer-widget logo-widget">
-                                <figure class="footer-logo"><a href="index.html"><img src="assets/images/footer-logo.png" alt=""></a></figure>
+                                <figure class="footer-logo"><a href="#" class="navigator" data-page="home"><img src="assets/images/footer-logo.png" alt=""></a></figure>
                                 <p>Lorem ipsum dolor sit amet constetur adipiscing elit. Etiam eu turpis mostie dictum est a, mattis tellus.</p>
                                 <ul class="social-links clearfix">
-                                    <li><a href="index.html"><i class="icon-4"></i></a></li>
-                                    <li><a href="index.html"><i class="icon-5"></i></a></li>
-                                    <li><a href="index.html"><i class="icon-6"></i></a></li>
-                                    <li><a href="index.html"><i class="icon-7"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="icon-4"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="icon-5"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="icon-6"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="icon-7"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -191,11 +191,11 @@
                                 </div>
                                 <div class="widget-content">
                                     <ul class="links-list clearfix">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="service.html">Services</a></li>
-                                        <li><a href="index.html">Elements</a></li>
-                                        <li><a href="contact.html">Contacts Us</a></li>
+                                        <li><a href="#" class="navigator" data-page="home">Home</a></li>
+                                        <li><a href="#" class="navigator" data-page="about-us">About Us</a></li>
+                                        <li><a href="#" class="navigator" data-page="services">Services</a></li>
+                                        <li><a href="#" class="navigator" data-page="blods">Blogs</a></li>
+                                        <li><a href="#" class="navigator" data-page="pricing-plans">Pricing Plans</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -207,12 +207,12 @@
                                 </div>
                                 <div class="widget-content">
                                     <ul class="links-list clearfix">
-                                        <li><a href="index.html">Privacy Policy</a></li>
+                                        <li><a href="#">Privacy Policy</a></li>
                                         <li><a href="index.html">Terms &</a></li>
-                                        <li><a href="index.html">Condition</a></li>
                                         <li><a href="index.html">Support</a></li>
                                         <li><a href="index.html">Disclaimer</a></li>
                                         <li><a href="index.html">Faq</a></li>
+                                        <li><a href="#" class="navigator" data-page="contact-us">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -238,14 +238,12 @@
                 <div class="auto-container">
                     <div class="bottom-inner">
                         <ul class="footer-nav clearfix">
-                            <li><a href="index.html">Privacy Policy</a></li>
-                            <li><a href="index.html">Terms of Use</a></li>
-                            <li><a href="index.html">Sales and Refunds</a></li>
-                            <li><a href="index.html">Legal</a></li>
-                            <li><a href="index.html">Site Map</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Conditions</a></li>
+                            <li><a href="#" class="navigator" data-page="faqs">FAQs</a></li>
                         </ul>
                         <div class="copyright">
-                            <p>&copy; 2023 All Rights Reserved</p>
+                            <p>&copy; 2025 All Rights Reserved</p>
                         </div>
                     </div>
                 </div>

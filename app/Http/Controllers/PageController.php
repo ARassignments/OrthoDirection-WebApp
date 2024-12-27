@@ -14,7 +14,7 @@ class PageController extends Controller
     // AJAX page loader
     public function loadPage($page)
     {
-        $validPages = ['home', 'about-us', 'services', 'blogs', 'contact-us', 'pricing-plans'];
+        $validPages = ['home', 'about-us', 'services', 'blogs', 'contact-us', 'pricing-plans','faqs'];
         if (in_array($page, $validPages)) {
             return view("pages.$page");
         }

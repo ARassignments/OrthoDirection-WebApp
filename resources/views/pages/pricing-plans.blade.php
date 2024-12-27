@@ -5,7 +5,7 @@
         <div class="content-box">
             <h1>Pricing Table</h1>
             <ul class="bread-crumb clearfix">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="navigator" data-page="home">Home</a></li>
                 <li>Pricing Table</li>
             </ul>
         </div>
@@ -23,7 +23,7 @@
                     <div class="pricing-table">
                         <div class="shape" style="background-image: url(assets/images/shape/shape-22.png);"></div>
                         <div class="table-header">
-                            <h5>Standard Consultation</h5>
+                            <h5>Free Plan</h5>
                             <h2>$49.99</h2>
                             <span>Monthly</span>
                         </div>
@@ -48,7 +48,7 @@
                     <div class="pricing-table">
                         <div class="shape" style="background-image: url(assets/images/shape/shape-22.png);"></div>
                         <div class="table-header">
-                            <h5>Annual Physical</h5>
+                            <h5>Professional Plan</h5>
                             <h2>$149.99</h2>
                             <span>Monthly</span>
                         </div>
@@ -73,7 +73,7 @@
                     <div class="pricing-table">
                         <div class="shape" style="background-image: url(assets/images/shape/shape-22.png);"></div>
                         <div class="table-header">
-                            <h5>Extended Consultation</h5>
+                            <h5>Community Plan</h5>
                             <h2>$99.99</h2>
                             <span>Monthly</span>
                         </div>
