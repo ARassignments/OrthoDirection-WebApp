@@ -30,5 +30,6 @@ Route::prefix('admin/')->group(function () {
 Route::prefix('professionals/')->group(function () {
     Route::get('/dashboard', [ProfessionalController::class, 'dashboard'])->name('admin.dashboard');
 });
+Route::get("/logout",[AdminController::class,'logout'])->name("logout");
 
 require __DIR__.'/auth.php';
