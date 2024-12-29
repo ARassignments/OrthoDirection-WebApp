@@ -1,11 +1,11 @@
 <x-guest-layout>
-    <div class="text-center mt-6 mb-4">
+    {{-- <div class="text-center mt-6 mb-4">
         <a href="/" class="logo-link">
             <div class="logo-wrap">
                 <img class="logo-img logo-dark" src="{{ asset('assets/images/logo.png') }}" alt>
             </div>
         </a>
-    </div>
+    </div> --}}
     <div class="my-auto">
         <div class="container">
             <div class="row g-gs justify-content-center">
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <div class="small mb-3">or
+                                        {{-- <div class="small mb-3">or
                                             login with</div>
                                         <ul class="btn-list btn-list-inline gx-2">
                                             <li>
@@ -108,8 +108,8 @@
                                                     <em class="icon fs-5 ni ni-apple"></em>
                                                 </a>
                                             </li>
-                                        </ul>
-                                        <p class="mt-4">Don't
+                                        </ul> --}}
+                                        <p class="mt-0">Don't
                                             have an account? <a href="{{ route('register') }}">Register</a>
                                         </p>
                                     </div>

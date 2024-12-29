@@ -61,8 +61,13 @@
                                     </div>
                                 </nav>
                             </div>
-                            <div class="btn-box">
-                                <a href="#" class="theme-btn btn-one navigator" data-page="home"><span>Request A Pickup</span></a>
+                            <div class="d-flex justify-content-end gap-2">
+                                <div class="btn-box">
+                                    <a href="/login" class="theme-btn btn-one"><span>Login</span></a>
+                                </div>
+                                <div class="btn-box">
+                                    <a href="/register" class="theme-btn btn-two"><span>Register</span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -121,9 +126,6 @@
 
         <main>
             <div id="page-content">
-                <!-- Default content -->
-                <h1>Welcome to Ajax Pages</h1>
-                <p>Click the navigation links to load content dynamically.</p>
             </div>
         </main>
 
