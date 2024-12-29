@@ -27,7 +27,7 @@ class AuthenticatedSessionController extends Controller
         
         if(Auth::user()->role == 'admin')
         {
-            return redirect('admin/dashboard');
+            return redirect('admin');
         }
         else if(Auth::user()->role == 'patients')
         {
@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         }
         else if(Auth::user()->role == 'professionals')
         {
-            return redirect('professionals/dashboard');
+            return redirect('professionals');
         }
             return redirect('/');
     }

@@ -24,17 +24,18 @@
                         <div class="shape" style="background-image: url(assets/images/shape/shape-22.png);"></div>
                         <div class="table-header">
                             <h5>Free Plan</h5>
-                            <h2>$49.99</h2>
+                            <h2>Free</h2>
                             <span>Monthly</span>
                         </div>
                         <div class="table-content">
                             <ul class="feature-list clearfix">
-                                <li>Virtual visit</li>
-                                <li>Up to 30 minutes</li>
-                                <li>Securely conducted online</li>
-                                <li>Discuss and receive guidance</li>
-                                <li>Rate varies on specific needs</li>
-                                <li>Healthcare provider Consult</li>
+                                <li>Basic Patient Tools:
+                                    <p>Basic treatment recommendations, introductory educational
+                                        content, and limited access to Cephalometric.</p>
+                                </li>
+                                <li>Patient Dashboard:
+                                    <p>Track progress and manage basic information.</p>
+                                </li>
                             </ul>
                         </div>
                         <div class="table-footer">

@@ -4,6 +4,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfessionalController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfessionalController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -27,10 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::prefix('admin/')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.index');
 });
 Route::prefix('professionals/')->group(function () {
-    Route::get('/dashboard', [ProfessionalController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/', [ProfessionalController::class, 'dashboard'])->name('professionals.index');
 });
 Route::get("/logout",[AdminController::class,'logout'])->name("logout");
 
