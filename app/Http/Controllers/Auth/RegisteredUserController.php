@@ -43,8 +43,18 @@ class RegisteredUserController extends Controller
         ]);
        
         $user->sendEmailVerificationNotification();
-        event(new Registered($user));
+
+        session()->invalidate();
+        session()->regenerateToken();
+    
+        return redirect('email-verify');
+        // event(new Registered($user));
         // Auth::login($user);
-        return redirect(route('dashboard', absolute: false));
+        // return redirect(route('dashboard', absolute: false));
+    }
+    public function showVerificationNotice()
+    {
+        // Display the verification view
+        return view('auth.verify-email');
     }
 }

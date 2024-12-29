@@ -3,8 +3,8 @@
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfessionalController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfessionalController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -16,6 +16,8 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 
 // AJAX Page Loader
 Route::get('user-side/{page}', [PageController::class, 'loadPage'])->name('page.load');
+// web.php
+Route::get('email-verify', [RegisteredUserController::class, 'showVerificationNotice'])->name('verification.email');
 
 
 Route::get('/dashboard', function () {
