@@ -35,19 +35,16 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         
-        $otp = rand(1000, 9999); 
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'otp_code' => $otp
         ]);
-
+       
+        $user->sendEmailVerificationNotification();
         event(new Registered($user));
-
-        Auth::login($user);
-
+        // Auth::login($user);
         return redirect(route('dashboard', absolute: false));
     }
 }

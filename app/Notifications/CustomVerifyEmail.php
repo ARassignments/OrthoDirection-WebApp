@@ -2,14 +2,14 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Lang;
+use Carbon\Carbon;
 
 class CustomVerifyEmail extends Notification
 {
-    use Queueable;
     public $otp;
 
     public function __construct($otp)
@@ -17,19 +17,11 @@ class CustomVerifyEmail extends Notification
         $this->otp = $otp;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @return array<int, string>
-     */
-    public function via(object $notifiable): array
+    public function via($notifiable)
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
     public function toMail($notifiable)
     {
         $verificationUrl = $this->verificationUrl($notifiable);
@@ -42,11 +34,6 @@ class CustomVerifyEmail extends Notification
             ->line(Lang::get('If you did not create an account, no further action is required.'));
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
     protected function verificationUrl($notifiable)
     {
         return URL::temporarySignedRoute(

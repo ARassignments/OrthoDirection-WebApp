@@ -10,15 +10,6 @@ use App\Notifications\CustomVerifyEmail;
 
 class User extends Authenticatable 
 {
-    public function sendEmailVerificationNotification()
-    {
-        $otp = random_int(1000, 9999); 
-        $this->otp_code = $otp;       
-        $this->save();
-
-        $this->notify(new CustomVerifyEmail($otp));
-    }
-
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -54,5 +45,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $otp = random_int(1000, 9999); // Generate OTP
+        $this->otp_code = $otp;       // Save OTP in the database if needed
+        $this->save();
+
+        $this->notify(new CustomVerifyEmail($otp)); // Send the notification
     }
 }

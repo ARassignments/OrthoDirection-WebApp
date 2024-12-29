@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'allow-unverified' => \App\Http\Middleware\AllowUnverifiedUsers::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
