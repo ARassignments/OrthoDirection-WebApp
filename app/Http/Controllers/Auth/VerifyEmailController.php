@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 
@@ -15,6 +16,7 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
+           
             return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
         }
 
@@ -22,6 +24,19 @@ class VerifyEmailController extends Controller
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        if(Auth::user()->role == 'admin')
+        {
+            return redirect('admin/dashboard');
+        }
+        else if(Auth::user()->role == 'patients')
+        {
+            return redirect('/');
+        }
+        else if(Auth::user()->role == 'professionals')
+        {
+            return redirect('professionals/dashboard');
+        }
+            return redirect('/');
+        // return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
     }
 }

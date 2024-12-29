@@ -34,29 +34,20 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        
+        $otp = rand(1000, 9999); 
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'otp_code' => $otp
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        if(Auth::user()->role == 'admin')
-        {
-            return redirect('admin/dashboard');
-        }
-        else if(Auth::user()->role == 'patients')
-        {
-            return redirect('/');
-        }
-        else if(Auth::user()->role == 'professionals')
-        {
-            return redirect('professionals/dashboard');
-        }
-            return redirect('/');
+        return redirect(route('dashboard', absolute: false));
     }
 }
