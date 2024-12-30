@@ -1,6 +1,7 @@
 <!-- banner-section -->
 <section class="banner-section p_relative">
-    <div class="pattern-layer wow slideInDown animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-image: url(assets/images/shape/shape-1.png);"></div>
+    <div class="pattern-layer wow slideInDown animated" data-wow-delay="00ms" data-wow-duration="1500ms"
+        style="background-image: url(assets/images/shape/shape-1.png);"></div>
     <div class="shape">
         <div class="shape-1" style="background-image: url(assets/images/shape/shape-2.png);"></div>
         <div class="shape-2 float-bob-x" style="background-image: url(assets/images/shape/shape-3.png);"></div>
@@ -13,7 +14,8 @@
                 <div class="content-box">
                     <span class="upper-text">Highest level of service you can find</span>
                     <h2>Take <span>Care of Your</span> Health Now.</h2>
-                    <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                    <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
+                        duis enim velit mollit.</p>
                     <div class="btn-box">
                         <a href="index.html" class="theme-btn btn-two"><span>Explore Our Service</span></a>
                     </div>
@@ -21,13 +23,200 @@
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 image-column">
                 <div class="image-box">
-                    <figure class="image float-bob-y"><img src="assets/images/banner/banner-img-1.png" alt=""></figure>
+                    <figure class="image float-bob-y"><img src="assets/images/banner/banner-img-1.png" alt="">
+                    </figure>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- banner-section end -->
+
+<link rel="stylesheet" href="{{ asset('assets/dashboard/assets/css/style6572.css?v1.5.0') }}">
+
+<body class="nk-body" data-menu-collapse="lg">
+    <main class="nk-pages">
+        <section class="section section-bottom-0 bg-light rounded-top-6">
+            <div class="container">
+                <div class="section-content">
+                    <div class="pricing-toggle-wrap mb-5 pb-2 pricing-monthly">
+                        <div class="h5 mb-0 pricing-toggle-text monthly">Monthly</div>
+                        <div class="mx-3"><button class="pricing-toggle" data-parent="pricing-toggle-wrap"
+                                data-target="pricing-toggle-content"><span class="pricing-toggle-ball"></span></button>
+                        </div>
+                        <div class="h5 mb-0 pricing-toggle-text yearly position-relative"> Yearly <span
+                                class="badge text-bg-success-soft-outline fw-normal text-uppercase smaller rounded-pill position-absolute ms-n5 mb-2 mb-sm-0 ms-sm-3 translate-middle-sm-y start-100 bottom-100 bottom-sm-auto top-sm-50">Save
+                                12%</span></div>
+                    </div>
+                    <div class="row g-gs">
+                        <div class="col-xxl-4 col-xl-4">
+                            <div class="pricing h-100 pricing-featured bg-gradient-primary">
+                                <div
+                                    class="pricing-body h-100 p-5 pt-3 p-md-0 pt-md-0 p-xl-5 pt-xl-3 d-md-flex d-xl-block">
+                                    <div class="text-center p-md-5 p-xl-0 w-md-50 w-xl-100">
+                                        <div
+                                            class="badge bg-gradient-primary bg-opacity-20 gradient-angle-90 mb-4 px-3 py-2 rounded-pill small text-primary text-tracking-1">
+                                            <div class="p-1">Most Popurlar</div>
+                                        </div>
+                                        <h3 class="mb-3">Professional Plan</h3>
+                                        <div class="pricing-price-wrap pricing-toggle-content show-monthly">
+                                            <div class="pricing-price monthly">
+                                                <h3 class="display-6 mb-3">$24.99 <span class="caption-text text-muted">
+                                                        /
+                                                        month</span></h3>
+                                            </div>
+                                            <div class="pricing-price yearly">
+                                                <h3 class="display-6 mb-3">$249.99 <span
+                                                        class="caption-text text-muted"> /
+                                                        yearly</span></h3>
+                                            </div>
+                                        </div>
+                                        <p class="fw-bold text-primary">Orthodontists, dental clinics, and
+                                            professionals seeking advanced tools.
+                                        </p>
+                                        <div class="bg-light px-4 py-2 mb-4 smaller rounded-1">Try out all features to
+                                            determine what works best for you</div>
+                                        <div class="px-4 pricing-toggle-content">
+                                            <div class="pricing-toggle-option"><a href="#"
+                                                    class="btn btn-primary btn-block rounded-pill">Get Committed</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-md-block d-xl-none border-start h-100"></div>
+                                    <div class="pt-4 p-md-5 p-xl-0 pt-xl-4 w-md-50 w-xl-100">
+                                        <h5 class="fw-medium pb-1">Everything in Free, plus</h5>
+                                        <ul class="list gy-3">
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Advanced Treatment Planning: </strong> Access to in-depth
+                                                    tools for creating personalized
+                                                    treatment plans.</span>
+                                            </li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Full Access to Cephalometric:</strong> Unlimited access to
+                                                    advanced Cephalometric tools and
+                                                    case management.
+                                                </span></li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Patient Management: </strong> Integrate and track patient
+                                                    records, schedule appointments, and
+                                                    follow-up care.</span></li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Priority Support:</strong> Direct access to support
+                                                    teams.</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-md-6 order-xl-first">
+                            <div class="h-100 pt-xl-6">
+                                <div class="pricing h-100">
+                                    <div class="pricing-body h-100 p-5">
+                                        <div class="text-center">
+                                            <h3 class="mb-3">Free Plan</h3>
+                                            <h3 class="display-6 mb-3">$0 <span class="caption-text text-muted"> /
+                                                    month</span></h3>
+                                            <p class="fw-bold">Patients and individuals seeking basic orthodontic care
+                                                and resources.</p>
+                                            <div class="bg-light px-4 py-2 mb-4 smaller rounded-1">Try out all features
+                                                to
+                                                determine what works best for you</div>
+                                            <div class="px-4"><a href="#"
+                                                    class="btn btn-outline-primary btn-block rounded-pill">Start Writing
+                                                    for
+                                                    Free</a></div>
+                                        </div>
+                                        <h5 class="fw-medium pt-4 pb-1">Give a try for free</h5>
+                                        <ul class="list gy-3">
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Basic Patient Tools:</strong> Basic treatment
+                                                    recommendations, introductory educational
+                                                    content, and limited access to Cephalometric</span>
+                                            </li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Patient Dashboard:</strong> Track progress and manage
+                                                    basic information.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-md-6">
+                            <div class="h-100 pt-xl-6">
+                                <div class="pricing h-100">
+                                    <div class="pricing-body h-100 p-5">
+                                        <div class="text-center">
+                                            <h3 class="mb-3">Community Plan</h3>
+                                            <div class="pricing-price-wrap pricing-toggle-content show-monthly">
+                                                <div class="pricing-price monthly">
+                                                    <h3 class="display-6 mb-3">$14.99 <span
+                                                            class="caption-text text-muted"> /
+                                                            month</span></h3>
+                                                </div>
+                                                <div class="pricing-price yearly">
+                                                    <h3 class="display-6 mb-3">$149.99 <span
+                                                            class="caption-text text-muted"> /
+                                                            yearly</span></h3>
+                                                </div>
+                                            </div>
+                                            <p class="fw-bold">Both patients and professionals who want to connect,
+                                                learn, and network with
+                                                a global community
+                                            </p>
+                                            <div class="bg-light px-4 py-2 mb-4 smaller rounded-1">Take your business
+                                                to
+                                                the another level with custom package and support.</div>
+                                            <div class="px-4"><a href="#"
+                                                    class="btn btn-outline-primary btn-block rounded-pill">Request for
+                                                    Demo</a></div>
+                                        </div>
+                                        <h5 class="fw-medium pt-4 pb-1">Everything in Pro, plus</h5>
+                                        <ul class="list gy-3">
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Community Networking:</strong> Connect with professionals
+                                                    and patients for learning and
+                                                    support.
+                                                </span>
+                                            </li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Exclusive Webinars and Events:</strong> Access to live
+                                                    sessions with orthodontic experts.
+                                                </span></li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Mentorship Program:</strong> Join mentorship groups and
+                                                    get expert advice.
+                                                </span></li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Exclusive Webinars and Events: </strong> Access to live
+                                                    sessions with orthodontic experts.
+                                                </span></li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Mentorship Program:</strong> Join mentorship groups and
+                                                    get expert advice.
+                                                </span></li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Resource Sharing:</strong> Access and contribute to shared
+                                                    knowledge, case studies, and more.
+                                                </span></li>
+                                            <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
+                                                <span><strong>Discounts on Products and Courses:</strong> Special rates
+                                                    for members on orthodontic
+                                                    products and training.
+                                                </span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="{{ asset('assets/dashboard/assets/js/bundle6572.js?v1.5.0') }}"></script>
+    <script src="{{ asset('assets/dashboard/assets/js/scripts6572.js?v1.5.0') }}"></script>
+</body>
 
 
 <!-- feature-section -->
@@ -91,7 +280,8 @@
             <div class="col-lg-6 col-md-12 col-sm-12 image-column">
                 <div class="image_block_one">
                     <div class="image-box">
-                        <div class="shape float-bob-x" style="background-image: url(assets/images/shape/shape-7.png);"></div>
+                        <div class="shape float-bob-x"
+                            style="background-image: url(assets/images/shape/shape-7.png);"></div>
                         <figure class="image"><img src="assets/images/resource/about-1.jpg" alt=""></figure>
                         <div class="icon-one"><i class="icon-13"></i></div>
                         <div class="icon-two"><i class="icon-14"></i></div>
@@ -111,7 +301,8 @@
                         </div>
                         <div class="text-box mb_40">
                             <h6>Committed To Delivering High Quality Medical & Diagnostics Services!</h6>
-                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
+                                consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
                             <ul class="list-style-one clearfix">
                                 <li>Ambulance Services</li>
                                 <li>Oxizen on Wheel</li>
@@ -141,10 +332,12 @@
         </div>
         <div class="row clearfix">
             <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                <div class="service-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                <div class="service-block-one wow fadeInUp animated" data-wow-delay="00ms"
+                    data-wow-duration="1500ms">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><a href="service-details-3.html"><img src="assets/images/service/service-1.jpg" alt=""></a></figure>
+                            <figure class="image"><a href="service-details-3.html"><img
+                                        src="assets/images/service/service-1.jpg" alt=""></a></figure>
                             <div class="icon-box"><i class="icon-15"></i></div>
                         </div>
                         <div class="lower-content">
@@ -155,10 +348,12 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                <div class="service-block-one wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                <div class="service-block-one wow fadeInUp animated" data-wow-delay="300ms"
+                    data-wow-duration="1500ms">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><a href="service-details-6.html"><img src="assets/images/service/service-2.jpg" alt=""></a></figure>
+                            <figure class="image"><a href="service-details-6.html"><img
+                                        src="assets/images/service/service-2.jpg" alt=""></a></figure>
                             <div class="icon-box"><i class="icon-16"></i></div>
                         </div>
                         <div class="lower-content">
@@ -169,10 +364,12 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                <div class="service-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                <div class="service-block-one wow fadeInUp animated" data-wow-delay="600ms"
+                    data-wow-duration="1500ms">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><a href="service-details.html"><img src="assets/images/service/service-3.jpg" alt=""></a></figure>
+                            <figure class="image"><a href="service-details.html"><img
+                                        src="assets/images/service/service-3.jpg" alt=""></a></figure>
                             <div class="icon-box"><i class="icon-17"></i></div>
                         </div>
                         <div class="lower-content">
@@ -255,7 +452,8 @@
                     <div class="funfact-block-one">
                         <div class="inner-box">
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="75">0</span><span class="symble">+</span>
+                                <span class="count-text" data-speed="1500" data-stop="75">0</span><span
+                                    class="symble">+</span>
                             </div>
                             <span class="text">Expert Doctors</span>
                         </div>
@@ -399,13 +597,15 @@
 
 <!-- video-section -->
 <section class="video-section p_relative">
-    <div class="bg-layer parallax-bg" data-parallax='{"y": 100}' style="background-image: url(assets/images/background/video-bg.jpg);"></div>
+    <div class="bg-layer parallax-bg" data-parallax='{"y": 100}'
+        style="background-image: url(assets/images/background/video-bg.jpg);"></div>
     <figure class="image-layer"><img src="assets/images/resource/video-1.png" alt=""></figure>
     <div class="auto-container">
         <div class="inner-box">
             <div class="shape" style="background-image: url(assets/images/shape/shape-17.png);"></div>
             <div class="video-btn">
-                <a href="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s" class="lightbox-image" data-caption="">
+                <a href="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s" class="lightbox-image"
+                    data-caption="">
                     <i class="fas fa-play"></i>
                     <span class="border-animation border-1"></span>
                     <span class="border-animation border-2"></span>
@@ -437,30 +637,36 @@
         </div>
         <div class="inner-container">
             <div class="arrow-shape" style="background-image: url(assets/images/shape/shape-18.png);"></div>
-            <div class="processing-block-one wow fadeInLeft animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+            <div class="processing-block-one wow fadeInLeft animated" data-wow-delay="00ms"
+                data-wow-duration="1500ms">
                 <div class="inner-box">
                     <span class="count-text">01</span>
-                    <figure class="image-box"><img src="assets/images/resource/process-1.jpg" alt=""></figure>
+                    <figure class="image-box"><img src="assets/images/resource/process-1.jpg" alt="">
+                    </figure>
                     <div class="lower-content">
                         <h3>Get Appointment</h3>
                         <p>Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. </p>
                     </div>
                 </div>
             </div>
-            <div class="processing-block-one wow fadeInLeft animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+            <div class="processing-block-one wow fadeInLeft animated" data-wow-delay="300ms"
+                data-wow-duration="1500ms">
                 <div class="inner-box">
                     <span class="count-text">02</span>
-                    <figure class="image-box"><img src="assets/images/resource/process-2.jpg" alt=""></figure>
+                    <figure class="image-box"><img src="assets/images/resource/process-2.jpg" alt="">
+                    </figure>
                     <div class="lower-content">
                         <h3>Start Check-Up</h3>
                         <p>Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. </p>
                     </div>
                 </div>
             </div>
-            <div class="processing-block-one wow fadeInLeft animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+            <div class="processing-block-one wow fadeInLeft animated" data-wow-delay="600ms"
+                data-wow-duration="1500ms">
                 <div class="inner-box">
                     <span class="count-text">03</span>
-                    <figure class="image-box"><img src="assets/images/resource/process-3.jpg" alt=""></figure>
+                    <figure class="image-box"><img src="assets/images/resource/process-3.jpg" alt="">
+                    </figure>
                     <div class="lower-content">
                         <h3>Enjoy Healthy Life</h3>
                         <p>Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. </p>
@@ -489,9 +695,11 @@
                         <div class="testimonial-block-one">
                             <div class="inner-box">
                                 <div class="icon-box"><i class="icon-23"></i></div>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia coequat duis enim velit mollit.</p>
+                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
+                                    officia coequat duis enim velit mollit.</p>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png" alt=""></figure>
+                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png"
+                                            alt=""></figure>
                                     <ul class="rating clearfix">
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
@@ -507,9 +715,11 @@
                         <div class="testimonial-block-one">
                             <div class="inner-box">
                                 <div class="icon-box"><i class="icon-23"></i></div>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia coequat duis enim velit mollit.</p>
+                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
+                                    officia coequat duis enim velit mollit.</p>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png" alt=""></figure>
+                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png"
+                                            alt=""></figure>
                                     <ul class="rating clearfix">
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
@@ -525,9 +735,11 @@
                         <div class="testimonial-block-one">
                             <div class="inner-box">
                                 <div class="icon-box"><i class="icon-23"></i></div>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia coequat duis enim velit mollit.</p>
+                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
+                                    officia coequat duis enim velit mollit.</p>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png" alt=""></figure>
+                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png"
+                                            alt=""></figure>
                                     <ul class="rating clearfix">
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
@@ -558,7 +770,8 @@
         </div>
         <div class="row clearfix">
             <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                <div class="pricing-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                <div class="pricing-block-one wow fadeInUp animated" data-wow-delay="00ms"
+                    data-wow-duration="1500ms">
                     <div class="pricing-table">
                         <div class="shape" style="background-image: url(assets/images/shape/shape-22.png);"></div>
                         <div class="table-header">
@@ -577,13 +790,15 @@
                             </ul>
                         </div>
                         <div class="table-footer">
-                            <a href="index.html" class="theme-btn btn-three"><span>Choose Plan <i class="icon-25"></i></span></a>
+                            <a href="index.html" class="theme-btn btn-three"><span>Choose Plan <i
+                                        class="icon-25"></i></span></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                <div class="pricing-block-one active-block wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                <div class="pricing-block-one active-block wow fadeInUp animated" data-wow-delay="300ms"
+                    data-wow-duration="1500ms">
                     <div class="pricing-table">
                         <div class="shape" style="background-image: url(assets/images/shape/shape-22.png);"></div>
                         <div class="table-header">
@@ -602,13 +817,15 @@
                             </ul>
                         </div>
                         <div class="table-footer">
-                            <a href="index.html" class="theme-btn btn-three"><span>Choose Plan <i class="icon-25"></i></span></a>
+                            <a href="index.html" class="theme-btn btn-three"><span>Choose Plan <i
+                                        class="icon-25"></i></span></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                <div class="pricing-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                <div class="pricing-block-one wow fadeInUp animated" data-wow-delay="600ms"
+                    data-wow-duration="1500ms">
                     <div class="pricing-table">
                         <div class="shape" style="background-image: url(assets/images/shape/shape-22.png);"></div>
                         <div class="table-header">
@@ -627,7 +844,8 @@
                             </ul>
                         </div>
                         <div class="table-footer">
-                            <a href="index.html" class="theme-btn btn-three"><span>Choose Plan <i class="icon-25"></i></span></a>
+                            <a href="index.html" class="theme-btn btn-three"><span>Choose Plan <i
+                                        class="icon-25"></i></span></a>
                         </div>
                     </div>
                 </div>
@@ -649,7 +867,8 @@
             <div class="col-lg-4 col-md-6 col-sm-12 news-block">
                 <div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                     <div class="inner-box">
-                        <figure class="image-box"><a href="blog-details.html"><img src="assets/images/news/news-1.jpg" alt=""></a></figure>
+                        <figure class="image-box"><a href="blog-details.html"><img
+                                    src="assets/images/news/news-1.jpg" alt=""></a></figure>
                         <div class="lower-content">
                             <ul class="post-info mb_15 clearfix">
                                 <li><a href="blog-details.html">Admin</a></li>
@@ -657,7 +876,8 @@
                                 <li>03 Comt</li>
                             </ul>
                             <h3><a href="blog-details.html">How do Inherited Retinal of Diseases Happen?</a></h3>
-                            <p>Tincidunt Maur nemi sit Interdum praesento eget morbi lacinia volutpat pellentesque Tincidunt aurna suspit.</p>
+                            <p>Tincidunt Maur nemi sit Interdum praesento eget morbi lacinia volutpat pellentesque
+                                Tincidunt aurna suspit.</p>
                             <div class="link">
                                 <a href="blog-details.html"><span>Read More</span></a>
                             </div>
@@ -668,7 +888,8 @@
             <div class="col-lg-4 col-md-6 col-sm-12 news-block">
                 <div class="news-block-one wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
                     <div class="inner-box">
-                        <figure class="image-box"><a href="blog-details.html"><img src="assets/images/news/news-2.jpg" alt=""></a></figure>
+                        <figure class="image-box"><a href="blog-details.html"><img
+                                    src="assets/images/news/news-2.jpg" alt=""></a></figure>
                         <div class="lower-content">
                             <ul class="post-info mb_15 clearfix">
                                 <li><a href="blog-details.html">Admin</a></li>
@@ -676,7 +897,8 @@
                                 <li>0 Comt</li>
                             </ul>
                             <h3><a href="blog-details.html">Prepare to Speak with Your Eye Specialist.</a></h3>
-                            <p>Tincidunt Maur nemi sit Interdum praesento eget morbi lacinia volutpat pellentesque Tincidunt aurna suspit.</p>
+                            <p>Tincidunt Maur nemi sit Interdum praesento eget morbi lacinia volutpat pellentesque
+                                Tincidunt aurna suspit.</p>
                             <div class="link">
                                 <a href="blog-details.html"><span>Read More</span></a>
                             </div>
@@ -687,7 +909,8 @@
             <div class="col-lg-4 col-md-6 col-sm-12 news-block">
                 <div class="news-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
                     <div class="inner-box">
-                        <figure class="image-box"><a href="blog-details.html"><img src="assets/images/news/news-3.jpg" alt=""></a></figure>
+                        <figure class="image-box"><a href="blog-details.html"><img
+                                    src="assets/images/news/news-3.jpg" alt=""></a></figure>
                         <div class="lower-content">
                             <ul class="post-info mb_15 clearfix">
                                 <li><a href="blog-details.html">Admin</a></li>
@@ -695,7 +918,8 @@
                                 <li>02 Comt</li>
                             </ul>
                             <h3><a href="blog-details.html">How reliece can help you manage diabetes</a></h3>
-                            <p>Tincidunt Maur nemi sit Interdum praesento eget morbi lacinia volutpat pellentesque Tincidunt aurna suspit.</p>
+                            <p>Tincidunt Maur nemi sit Interdum praesento eget morbi lacinia volutpat pellentesque
+                                Tincidunt aurna suspit.</p>
                             <div class="link">
                                 <a href="blog-details.html"><span>Read More</span></a>
                             </div>

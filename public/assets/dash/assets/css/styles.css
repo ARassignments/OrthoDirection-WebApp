@@ -99,7 +99,7 @@
 
 [data-bs-theme=light][data-color-theme=Blue_Theme]:root,
 [data-bs-theme=dark][data-color-theme=Blue_Theme]:root {
-  --bs-primary: #5d87ff;
+  --bs-primary: #1376F8;
   --bs-primary-rgb: 93, 135, 255;
   --bs-light-primary: rgba(93, 135, 255, 0.1);
   --bs-primary-bg-subtle: rgba(93, 135, 255, 0.1);
@@ -110,10 +110,10 @@
 }
 [data-bs-theme=light][data-color-theme=Blue_Theme]:root .btn-primary,
 [data-bs-theme=dark][data-color-theme=Blue_Theme]:root .btn-primary {
-  --bs-btn-bg: #5d87ff;
-  --bs-btn-border-color: #5d87ff;
-  --bs-btn-hover-bg: #4f73d9;
-  --bs-btn-hover-border-color: #4f73d9;
+  --bs-btn-bg: #1376F8;
+  --bs-btn-border-color: #1376F8;
+  --bs-btn-hover-bg: #0d69e2;
+  --bs-btn-hover-border-color: #0d69e2;
 }
 [data-bs-theme=light][data-color-theme=Blue_Theme]:root .btn-secondary,
 [data-bs-theme=dark][data-color-theme=Blue_Theme]:root .btn-secondary {
@@ -260,7 +260,7 @@
  */
 :root,
 [data-bs-theme=light] {
-  --bs-blue: #5d87ff;
+  --bs-blue: #1376F8;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
@@ -283,7 +283,7 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #5d87ff;
+  --bs-primary: #1376F8;
   --bs-secondary: #49beff;
   --bs-success: #13deb9;
   --bs-info: #539bff;
@@ -305,7 +305,7 @@
   --bs-muted-rgb: 90, 106, 133;
   --bs-indigo-rgb: 102, 16, 242;
   --bs-light-indigo-rgb: 235, 243, 254;
-  --bs-primary-text-emphasis: shade-color(#5d87ff, 60%);
+  --bs-primary-text-emphasis: shade-color(#1376F8, 60%);
   --bs-secondary-text-emphasis: shade-color(#49beff, 60%);
   --bs-success-text-emphasis: shade-color(#13deb9, 60%);
   --bs-info-text-emphasis: shade-color(#539bff, 60%);
@@ -356,7 +356,7 @@
   --bs-link-color: #2a3547;
   --bs-link-color-rgb: 42, 53, 71;
   --bs-link-decoration: underline;
-  --bs-link-hover-color: #5d87ff;
+  --bs-link-hover-color: #0d69e2;
   --bs-link-hover-color-rgb: 93, 135, 255;
   --bs-code-color: #d63384;
   --bs-highlight-color: #5a6a85;
@@ -427,7 +427,7 @@
   --bs-dark-border-subtle: #343a40;
   --bs-heading-color: inherit;
   --bs-link-color: #7c8fac;
-  --bs-link-hover-color: #5d87ff;
+  --bs-link-hover-color: #0d69e2;
   --bs-link-color-rgb: 124, 143, 172;
   --bs-link-hover-color-rgb: 93, 135, 255;
   --bs-code-color: #e685b5;
