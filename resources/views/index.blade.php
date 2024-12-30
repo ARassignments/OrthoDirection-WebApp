@@ -62,13 +62,23 @@
                                 </nav>
                             </div>
                             <div class="d-flex justify-content-end gap-2">
-                                <div class="btn-box">
-                                    <a href="/login" class="theme-btn btn-one"><span>Login</span></a>
-                                </div>
-                                <div class="btn-box">
-                                    <a href="/register" class="theme-btn btn-two"><span>Register</span></a>
-                                </div>
+                                @auth
+                                    <!-- Show Logout button when the user is logged in -->
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="theme-btn btn-one"><span>Logout</span></button>
+                                    </form>
+                                @else
+                                    <!-- Show Login and Register buttons when the user is not logged in -->
+                                    <div class="btn-box">
+                                        <a href="{{ route('login') }}" class="theme-btn btn-one"><span>Login</span></a>
+                                    </div>
+                                    <div class="btn-box">
+                                        <a href="{{ route('register') }}" class="theme-btn btn-two"><span>Register</span></a>
+                                    </div>
+                                @endauth
                             </div>
+                            
                         </div>
                     </div>
                 </div>
