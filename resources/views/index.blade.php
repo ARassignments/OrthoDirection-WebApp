@@ -8,6 +8,7 @@
     <title>Ajax Page Loader</title>
     @vite(['resources/js/app.js'])
     <link rel="stylesheet" href="{{asset("assets/css/config.css")}}">
+    <link rel="shortcut icon" href="{{asset("assets/images/favicon.png")}}" type="image/x-icon">
 </head>
 
 <body>
@@ -65,9 +66,9 @@
                                 <div class="btn-box">
                                     <a href="/login" class="theme-btn btn-one"><span>Login</span></a>
                                 </div>
-                                <div class="btn-box">
-                                    <a href="/register" class="theme-btn btn-two"><span>Register</span></a>
-                                </div>
+                                {{-- <div class="btn-box">
+                                    <a href="/register" class="theme-btn btn-two"><span><i class="fa-solid fa-right-to-bracket"></i></span></a>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -86,8 +87,13 @@
                                 <!--Keep This Empty / Menu will come through Javascript-->
                             </nav>
                         </div>
-                        <div class="btn-box">
-                            <a href="index.html" class="theme-btn btn-one navigator" data-page="home"><span>Request A Pickup</span></a>
+                        <div class="d-flex justify-content-end gap-2">
+                            <div class="btn-box">
+                                <a href="/login" class="theme-btn btn-one"><span>Login</span></a>
+                            </div>
+                            {{-- <div class="btn-box">
+                                <a href="/register" class="theme-btn btn-two"><span>Register</span></a>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -175,7 +181,7 @@
                     <div class="row clearfix">
                         <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
                             <div class="footer-widget logo-widget">
-                                <figure class="footer-logo"><a href="#" class="navigator" data-page="home"><img src="assets/images/footer-logo.png" alt=""></a></figure>
+                                <figure class="footer-logo"><a href="/" class="navigator" data-page="home"><img src="assets/images/footer-logo.png" alt=""></a></figure>
                                 <p>Lorem ipsum dolor sit amet constetur adipiscing elit. Etiam eu turpis mostie dictum est a, mattis tellus.</p>
                                 <ul class="social-links clearfix">
                                     <li><a href="#" target="_blank"><i class="icon-4"></i></a></li>
@@ -288,5 +294,6 @@
     <script src="{{asset("assets/js/script.js")}}"></script>
 
 </body>
+
 
 </html>

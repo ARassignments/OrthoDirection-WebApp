@@ -23,7 +23,7 @@
 <body>
     <!-- Preloader -->
     <div class="preloader">
-        <img src="../assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid" />
+        <img src="{{ asset('assets/images/favicon.png')}}" alt="loader" class="lds-ripple img-fluid" />
     </div>
     <div id="main-wrapper">
         {{ $slot }}

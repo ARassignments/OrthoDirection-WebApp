@@ -50,17 +50,26 @@
                         <div class="shape" style="background-image: url(assets/images/shape/shape-22.png);"></div>
                         <div class="table-header">
                             <h5>Professional Plan</h5>
-                            <h2>$149.99</h2>
+                            <h2>$24.99</h2>
                             <span>Monthly</span>
                         </div>
                         <div class="table-content">
                             <ul class="feature-list clearfix">
-                                <li>In-person examination</li>
-                                <li>Up to 60 minutes</li>
-                                <li>Various tests and assessments</li>
-                                <li>In-person service</li>
-                                <li>Rate varies on specific needs</li>
-                                <li>Healthcare provider Consult</li>
+                                <li>Advanced Treatment Planning:
+                                    <p>Access to in-depth tools for creating personalized
+                                        treatment plans.</p>
+                                </li>
+                                <li>Full Access to Cephalometric:
+                                    <p>Unlimited access to advanced Cephalometric tools and
+                                        case management.</p>
+                                </li>
+                                <li>Patient Management:
+                                    <p>Integrate and track patient records, schedule appointments, and
+                                        follow-up care.</p>
+                                </li>
+                                <li>Priority Support:
+                                    <p>Direct access to support teams.</p>
+                                </li>
                             </ul>
                         </div>
                         <div class="table-footer">
@@ -80,12 +89,27 @@
                         </div>
                         <div class="table-content">
                             <ul class="feature-list clearfix">
-                                <li>Virtual visit</li>
-                                <li>Up to 60 minutes</li>
-                                <li>Discuss more details</li>
-                                <li>Receive in-depth guidance</li>
-                                <li>Rate varies on specific needs</li>
-                                <li>Healthcare provider Consult</li>
+                                <li>Community Networking:
+                                    <p>Connect with professionals and patients for learning and support.</p>
+                                </li>
+                                <li>Exclusive Webinars and Events:
+                                    <p>Access to live sessions with orthodontic experts.</p>
+                                </li>
+                                <li>Mentorship Program:
+                                    <p>Join mentorship groups and get expert advice.</p>
+                                </li>
+                                <li>Exclusive Webinars and Events:
+                                    <p>Access to live sessions with orthodontic experts.</p>
+                                </li>
+                                <li>Mentorship Program: 
+                                    <p>Join mentorship groups and get expert advice.</p>
+                                </li>
+                                <li>Resource Sharing:
+                                    <p>Access and contribute to shared knowledge, case studies, and more.</p>
+                                </li>
+                                <li>Discounts on Products and Courses:
+                                    <p>Special rates for members on orthodontic products and training.</p>
+                                </li>
                             </ul>
                         </div>
                         <div class="table-footer">
@@ -95,6 +119,9 @@
                 </div>
             </div>
         </div>
+        <table>
+            
+        </table>
     </div>
 </section>
 <!-- pricing-section end -->
