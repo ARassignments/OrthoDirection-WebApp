@@ -17,10 +17,14 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 
 // AJAX Page Loader
 Route::get('user-side/{page}', [PageController::class, 'loadPage'])->name('page.load');
-// web.php
+//login routes
 Route::get('email-verify', [RegisteredUserController::class, 'showVerificationNotice'])->name('verification.email');
 Route::get('/verify-otp', [AuthenticatedSessionController::class, 'showOtpForm'])->name('otp.verify');
 Route::post('/verify-otp', [AuthenticatedSessionController::class, 'verifyOtp'])->name('otp.check');
+
+//register routes
+Route::get('/register-otp-verify', [RegisteredUserController::class, 'showOtpForm'])->name('register.otp.verify');
+Route::post('/register-otp-verify', [RegisteredUserController::class, 'verifyOtp'])->name('register.otp.check');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
