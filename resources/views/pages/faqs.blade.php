@@ -1,3 +1,5 @@
+@extends('../index')
+@section('content')
  <!-- page-title -->
  <section class="page-title p_relative centred">
     <div class="bg-layer" style="background-image: url(assets/images/background/page-title.jpg);"></div>
@@ -5,7 +7,7 @@
         <div class="content-box">
             <h1>FAQs</h1>
             <ul class="bread-crumb clearfix">
-                <li><a href="#" class="navigator" data-page="home">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li>FAQs</li>
             </ul>
         </div>
@@ -118,3 +120,4 @@
     </div>
 </section>
 <!-- faq-page-section end -->
+@endsection

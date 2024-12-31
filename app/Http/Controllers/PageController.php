@@ -8,7 +8,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        return view('index'); // Main SPA view
+        return view('pages.home'); // Main SPA view
     }
 
     // AJAX page loader

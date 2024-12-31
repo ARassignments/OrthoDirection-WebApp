@@ -63,6 +63,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    document.querySelectorAll("nav.main-menu .navigation li, .sticky-header .main-menu .navigation li").forEach((li) => {
+        li.classList.remove("current"); // Remove the 'current' class from all items
+    });
+    
+    document.querySelectorAll("nav.main-menu .navigation li a, .sticky-header .main-menu .navigation li a").forEach((link) => {
+        const linkHref = link.getAttribute("href");
+        const currentPath = window.location.pathname;
+    
+        // Check if the href matches the current location path
+        if (linkHref === currentPath || (linkHref === "/" && currentPath === "/")) {
+            const parentLi = link.closest("li");
+            if (parentLi) {
+                parentLi.classList.add("current"); // Add the 'current' class to the matching item
+            }
+        }
+    });
+
     function reinitializePlugins() {
         // Reinitialize Owl Carousel
         // if (typeof $.fn.owlCarousel === "function") {

@@ -23,7 +23,7 @@
                         <ul class="info-list clearfix">
                             <li><i class="icon-1"></i>Mon - Fri 8:00 - 18:00 / Sunday 8:00 - 14:00</li>
                             <li><i class="icon-2"></i>Email: <a href="tel:01989526503">0198-9526503</a></li>
-                            <li><img src="assets/images/icons/icon-1.png" alt=""> 47 Bakery Street, London, UK</li>
+                            <li><img src="{{asset('assets/images/icons/icon-1.png')}}" alt="" loading="lazy"> 47 Bakery Street, London, UK</li>
                         </ul>
                         <ul class="social-links clearfix">
                             <li><a href="index.html"><i class="icon-4"></i></a></li>
@@ -40,7 +40,7 @@
                     <div class="auto-container">
                         <div class="outer-box">
                             <div class="logo-box">
-                                <figure class="logo"><a href="#" class="navigator" data-page="home"><img src="assets/images/logo.png" alt=""></a></figure>
+                                <figure class="logo"><a href="/"><img src="{{asset('assets/images/logo.png')}}" alt="" loading="lazy"></a></figure>
                             </div>
                             <div class="menu-area">
                                 <!--Mobile Navigation Toggler-->
@@ -52,12 +52,12 @@
                                 <nav class="main-menu navbar-expand-md navbar-light clearfix">
                                     <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                         <ul class="navigation clearfix">
-                                            <li class="current"><a href="#" class="navigator" data-page="home">Home</a></li>
-                                            <li><a href="#" class="navigator" data-page="about-us">About Us</a></li>
-                                            <li><a href="#" class="navigator" data-page="services">Services</a></li>
-                                            <li><a href="#" class="navigator" data-page="blogs">Blogs</a></li> 
-                                            <li><a href="#" class="navigator" data-page="pricing-plans">Pricing</a></li> 
-                                            <li><a href="#" class="navigator" data-page="contact-us">Contact</a></li> 
+                                            <li class="current"><a href="/">Home</a></li>
+                                            <li><a href="/about">About Us</a></li>
+                                            <li><a href="/services">Services</a></li>
+                                            <li><a href="/blogs">Blogs</a></li> 
+                                            <li><a href="/pricing">Pricing</a></li> 
+                                            <li><a href="/contact">Contact</a></li> 
                                         </ul>
                                     </div>
                                 </nav>
@@ -80,7 +80,7 @@
                 <div class="auto-container">
                     <div class="outer-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="#" class="navigator" data-page="home"><img src="assets/images/logo.png" alt=""></a></figure>
+                            <figure class="logo"><a href="/"><img src="{{asset('assets/images/logo.png')}}" alt="" loading="lazy"></a></figure>
                         </div>
                         <div class="menu-area">
                             <nav class="main-menu clearfix">
@@ -107,7 +107,7 @@
             <div class="close-btn"><i class="fas fa-times"></i></div>
             
             <nav class="menu-box">
-                <div class="nav-logo"><a href="#" class="navigator" data-page="home"><img src="assets/images/logo-2.png" alt="" title=""></a></div>
+                <div class="nav-logo"><a href="/"><img src="{{asset('assets/images/logo-2.png')}}" loading="lazy" alt="" title=""></a></div>
                 <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
                 <div class="contact-info">
                     <h4>Contact Info</h4>
@@ -128,13 +128,13 @@
                 </div>
             </nav>
         </div><!-- End Mobile Menu -->
-
-
+        
         <main>
-            <div id="page-content">
+            <div id="page-conten">
             </div>
         </main>
-
+        
+        @yield('content')
 
         <!-- subscribe-section -->
         <section class="subscribe-section bg-color-1">
@@ -171,9 +171,9 @@
         <!-- main-footer -->
         <footer class="main-footer">
             <div class="pattern-layer">
-                <div class="pattern-1" style="background-image: url(assets/images/shape/shape-23.png);"></div>
-                <div class="pattern-2" style="background-image: url(assets/images/shape/shape-24.png);"></div>
-                <div class="pattern-3" style="background-image: url(assets/images/shape/shape-25.png);"></div>
+                <div class="pattern-1" style="background-image: url({{asset('assets/images/shape/shape-23.png')}});"></div>
+                <div class="pattern-2" style="background-image: url({{asset('assets/images/shape/shape-24.png')}});"></div>
+                <div class="pattern-3" style="background-image: url({{asset('assets/images/shape/shape-25.png')}});"></div>
                 <div class="pattern-4"></div>
             </div>
             <div class="widget-section pt_120 pb_100">
@@ -181,7 +181,7 @@
                     <div class="row clearfix">
                         <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
                             <div class="footer-widget logo-widget">
-                                <figure class="footer-logo"><a href="/" class="navigator" data-page="home"><img src="assets/images/footer-logo.png" alt=""></a></figure>
+                                <figure class="footer-logo"><a href="/" class="navigator" data-page="home"><img src="{{asset('assets/images/footer-logo.png')}}" loading="lazy" alt=""></a></figure>
                                 <p>Lorem ipsum dolor sit amet constetur adipiscing elit. Etiam eu turpis mostie dictum est a, mattis tellus.</p>
                                 <ul class="social-links clearfix">
                                     <li><a href="#" target="_blank"><i class="icon-4"></i></a></li>
@@ -198,11 +198,11 @@
                                 </div>
                                 <div class="widget-content">
                                     <ul class="links-list clearfix">
-                                        <li><a href="#" class="navigator" data-page="home">Home</a></li>
-                                        <li><a href="#" class="navigator" data-page="about-us">About Us</a></li>
-                                        <li><a href="#" class="navigator" data-page="services">Services</a></li>
-                                        <li><a href="#" class="navigator" data-page="blods">Blogs</a></li>
-                                        <li><a href="#" class="navigator" data-page="pricing-plans">Pricing Plans</a></li>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/about">About Us</a></li>
+                                        <li><a href="/services">Services</a></li>
+                                        <li><a href="/blogs">Blogs</a></li>
+                                        <li><a href="/pricing">Pricing Plans</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@
                                         <li><a href="index.html">Support</a></li>
                                         <li><a href="index.html">Disclaimer</a></li>
                                         <li><a href="index.html">Faq</a></li>
-                                        <li><a href="#" class="navigator" data-page="contact-us">Contact Us</a></li>
+                                        <li><a href="/contact">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
                                 </div>
                                 <div class="widget-content">
                                     <ul class="info-list">
-                                        <li><img src="assets/images/icons/icon-1.png" alt="">3891 Ranchview Dr. Richardson, California USA</li>
+                                        <li><img src="{{asset('assets/images/icons/icon-1.png')}}" loading="lazy" alt="">3891 Ranchview Dr. Richardson, California USA</li>
                                         <li><i class="icon-2"></i><a href="tel:01989526503">0198-9526503</a></li>
                                         <li><i class="icon-26"></i><a href="mailto:example@info.com">example@info.com</a></li>
                                     </ul>
@@ -258,8 +258,6 @@
         </footer>
         <!-- main-footer end -->
 
-
-
         <!--Scroll to top-->
         <div class="scroll-to-top">
             <div>
@@ -273,9 +271,7 @@
         </div>
         <!-- Scroll to top end -->
 
-
     </div>
-
 
     <!-- jequery plugins -->
     <script src="{{asset("assets/js/jquery.js")}}"></script>
@@ -294,6 +290,7 @@
     <script src="{{asset("assets/js/script.js")}}"></script>
 
 </body>
-
+{{-- <script src="{{ asset('assets/dashboard/assets/js/bundle6572.js?v1.5.0') }}"></script>
+<script src="{{ asset('assets/dashboard/assets/js/scripts6572.js?v1.5.0') }}"></script> --}}
 
 </html>

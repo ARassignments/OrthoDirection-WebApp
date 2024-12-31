@@ -11,11 +11,16 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// Main route
+// Main Route
 Route::get('/', [PageController::class, 'index'])->name('home');
 
-// AJAX Page Loader
-Route::get('user-side/{page}', [PageController::class, 'loadPage'])->name('page.load');
+// User Pages Routes
+Route::get('/about', function () {return view('pages.about-us');})->name('about');
+Route::get('/services', function () {return view('pages.services');})->name('services');
+Route::get('/blogs', function () {return view('pages.blogs');})->name('blogs');
+Route::get('/pricing', function () {return view('pages.pricing-plans');})->name('pricing');
+Route::get('/contact', function () {return view('pages.contact-us');})->name('contact');
+
 // web.php
 Route::get('email-verify', [RegisteredUserController::class, 'showVerificationNotice'])->name('verification.email');
 
