@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -19,27 +21,76 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
-        
-        if(Auth::user()->role == 'admin')
-        {
-            return redirect('admin');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['email' => 'Invalid email or password.']);
         }
-        else if(Auth::user()->role == 'patients')
-        {
-            return redirect('/');
-        }
-        else if(Auth::user()->role == 'professionals')
-        {
-            return redirect('professionals');
-        }
-            return redirect('/');
+
+        // Generate OTP
+        $otp = random_int(1000, 9999);
+        $user->otp_code = $otp;
+        $user->save();
+
+        // Send OTP to the user's email
+        Mail::raw("Your OTP code is: $otp", function ($message) use ($user) {
+            $message->to($user->email)->subject('Login OTP');
+        });
+
+        session()->put('email', $user->email);
+
+        return redirect()->route('otp.verify');
     }
 
+    public function showOtpForm(): View
+    {
+        return view('auth.verify-otp');
+    }
+
+    /**
+     * Step 2: Verify OTP and log in the user.
+     */
+    public function verifyOtp(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'otp' => 'required|digits:4', // 4-digit string validation
+        ]);        
+    
+        $email = session('email');
+        $user = User::where('email', $email)->first();
+    
+        if (!$user || $user->otp_code !== $request->otp) {
+            return back()->withErrors(['otp' => 'Invalid OTP.']);
+        }
+
+    
+        // Clear OTP after successful login
+        $user->otp_code = null;
+        $user->save();
+    
+        // Log the user in
+        Auth::login($user);
+    
+        // Redirect based on user role
+        if ($user->role === 'admin') {
+            return redirect('admin');
+        } elseif ($user->role === 'patients') {
+            return redirect('/');
+        } elseif ($user->role === 'professionals') {
+            return redirect('professionals');
+        }
+    
+        return redirect('/');
+    }
+    
     /**
      * Destroy an authenticated session.
      */

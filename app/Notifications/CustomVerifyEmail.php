@@ -28,21 +28,9 @@ class CustomVerifyEmail extends Notification
 
         return (new MailMessage)
             ->subject(Lang::get('Verify Your Email Address'))
-            ->line(Lang::get('Your OTP code is: ') . $this->otp)
-            ->line(Lang::get('Click the button below to verify your email address.'))
-            ->action(Lang::get('Verify Email Address'), $verificationUrl)
-            ->line(Lang::get('If you did not create an account, no further action is required.'));
-    }
-
-    protected function verificationUrl($notifiable)
-    {
-        return URL::temporarySignedRoute(
-            'verification.verify',
-            Carbon::now()->addMinutes(60),
-            [
-                'id' => $notifiable->getKey(),
-                'hash' => sha1($notifiable->getEmailForVerification()),
-            ]
-        );
+            ->line(Lang::get('Your OTP code is: ') . $this->otp);
+            // ->line(Lang::get('Click the button below to verify your email address.'))
+            // ->action(Lang::get('Verify Email Address'), $verificationUrl)
+            // ->line(Lang::get('If you did not create an account, no further action is required.'));
     }
 }
