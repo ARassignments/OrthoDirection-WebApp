@@ -95,10 +95,10 @@
                                     <div class="btn-box">
                                         <a href="{{ route('login') }}" class="theme-btn btn-one"><span>Login</span></a>
                                     </div>
-                                    <div class="btn-box">
+                                    {{-- <div class="btn-box">
                                         <a href="{{ route('register') }}"
                                             class="theme-btn btn-two"><span>Register</span></a>
-                                    </div>
+                                    </div> --}}
                                 @endauth
                             </div>
 

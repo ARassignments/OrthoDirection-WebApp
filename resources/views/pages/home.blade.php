@@ -1,54 +1,39 @@
 @extends('../index')
 @section('content')
 <!-- banner-style-two -->
-<section class="banner-style-two p_relative">
+<section class="banner-style-two">
     <div class="banner-carousel owl-theme owl-carousel owl-nav-none owl-dots-none">
         <div class="slide-item">
             <div class="bg-layer" style="background-image:url(assets/images/banner/banner-1.jpg)"></div>
             <figure class="image-layer"><img src="assets/images/banner/banner-img-2.png" alt=""></figure>
             <div class="auto-container">
                 <div class="content-box">
-                    <span class="upper-text">The Art of Healthcare Starts Right Now</span>
-                    <h2>We offer <span>complete</span> Healthcare services.</h2>
-                    <p>It is not only the medicine that cures and recovers your health earlier, it is the Healthcare team who loves the art of treatment with love.</p>
+                    <span class="upper-text">Care For Lifetime</span>
+                    <h2>Let Us <span>Brighten</span> Your Smile</h2>
+                    <p>We are a team of dentists, hygienists and receptionists who work together to ensure that you receive the best treatment that you require at a very time that suits you.</p>
                     <div class="btn-box">
-                        <a href="index-2.html" class="theme-btn btn-one"><span>Explore Our Service</span></a>
+                        <a href="/services" class="theme-btn btn-one"><span>Explore Our Service</span></a>
                     </div>
                 </div> 
             </div>
         </div>
         <div class="slide-item">
-            <div class="bg-layer" style="background-image:url(assets/images/banner/banner-1.jpg)"></div>
-            <figure class="image-layer"><img src="assets/images/banner/banner-img-2.png" alt=""></figure>
+            <div class="bg-layer" style="background-image:url(assets/images/banner/banner-2.jpg)"></div>
+            <figure class="image-layer"><img src="assets/images/banner/banner-img-4.png" width="550px" alt=""></figure>
             <div class="auto-container">
                 <div class="content-box">
-                    <span class="upper-text">The Art of Healthcare Starts Right Now</span>
-                    <h2>We offer <span>complete</span> Healthcare services.</h2>
-                    <p>It is not only the medicine that cures and recovers your health earlier, it is the Healthcare team who loves the art of treatment with love.</p>
+                    <span class="upper-text">Care For Your Smile</span>
+                    <h2>Committed To <span>Excellence</span> Service</h2>
+                    <p>We are a team of dentists, hygienists and receptionists who work together to ensure that you receive the best treatment that you require at a very time that suits you.</p>
                     <div class="btn-box">
-                        <a href="index-2.html" class="theme-btn btn-one"><span>Explore Our Service</span></a>
+                        <a href="/services" class="theme-btn btn-one"><span>Explore Our Service</span></a>
                     </div>
                 </div> 
-            </div>
-        </div>
-        <div class="slide-item">
-            <div class="bg-layer" style="background-image:url(assets/images/banner/banner-1.jpg)"></div>
-            <figure class="image-layer"><img src="assets/images/banner/banner-img-2.png" alt=""></figure>
-            <div class="auto-container">
-                <div class="content-box">
-                    <span class="upper-text">The Art of Healthcare Starts Right Now</span>
-                    <h2>We offer <span>complete</span> Healthcare services.</h2>
-                    <p>It is not only the medicine that cures and recovers your health earlier, it is the Healthcare team who loves the art of treatment with love.</p>
-                    <div class="btn-box">
-                        <a href="index-2.html" class="theme-btn btn-one"><span>Explore Our Service</span></a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
 <!-- banner-style-two end -->
-
 
 <!-- feature-style-two -->
 <section class="feature-style-two centred">
@@ -59,8 +44,8 @@
                     <div class="feature-block-two">
                         <div class="inner-box">
                             <div class="icon-box"><i class="icon-9"></i></div>
-                            <h3><a href="index.html">Qualified Doctor</a></h3>
-                            <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                            <h3><a href="index.html">Full Protection</a></h3>
+                            <p>Competently parallel task researched data and process improvements.</p>
                         </div>
                     </div>
                 </div>
@@ -68,8 +53,8 @@
                     <div class="feature-block-two">
                         <div class="inner-box">
                             <div class="icon-box"><i class="icon-10"></i></div>
-                            <h3><a href="index.html">Emergency Help</a></h3>
-                            <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                            <h3><a href="index.html">Complete Service</a></h3>
+                            <p>Collaboratively expedite quality products via client focused results.</p>
                         </div>
                     </div>
                 </div>
@@ -77,8 +62,8 @@
                     <div class="feature-block-two">
                         <div class="inner-box">
                             <div class="icon-box"><i class="icon-11"></i></div>
-                            <h3><a href="index.html">Modern Equment</a></h3>
-                            <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                            <h3><a href="index.html">Prosthesis</a></h3>
+                            <p>Holistically foster superior methodologies without market-driven best practices.</p>
                         </div>
                     </div>
                 </div>
@@ -86,8 +71,8 @@
                     <div class="feature-block-two">
                         <div class="inner-box">
                             <div class="icon-box"><i class="icon-12"></i></div>
-                            <h3><a href="index.html">Family Medicine</a></h3>
-                            <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                            <h3><a href="index.html">Alignments</a></h3>
+                            <p>Dynamically innovate resource leveling service for state of the art customer.</p>
                         </div>
                     </div>
                 </div>

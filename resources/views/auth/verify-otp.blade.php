@@ -1,15 +1,5 @@
 <x-guest-layout>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <div
         class="position-relative overflow-hidden radial-gradient min-vh-100 w-100 d-flex align-items-center justify-content-center">
         <div class="d-flex align-items-center justify-content-center w-100">
@@ -25,16 +15,18 @@
                                     field below. If you didn't receive the email, we will gladly send you another.</p>
                                 <h6 class="fw-bolder">
                                     {{ substr(session('email'), 0, 4) }}*******{{ substr(session('email'), -4) }}</h6>
-                                @if (session('status') == 'verification-link-sent')
-                                    <div class="alert alert-danger" role="alert">
-                                        <strong>Successfully - </strong> A new verification link has been sent to the
-                                        email address you provided during registration.
-                                    </div>
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $error }}
+                                        </div>
+                                    @endforeach
                                 @endif
 
                             </div>
                             <div>
                                 <form method="POST" action="{{ route('otp.check') }}">
+                                    @csrf
                                     <input type="hidden" name="email" value="{{ session('email') }}">
                                     <input type="hidden" name="otp" id="otp">
                                     <div class="mb-3">
