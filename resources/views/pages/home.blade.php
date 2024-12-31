@@ -1,84 +1,101 @@
 @extends('../index')
 @section('content')
-<!-- banner-section -->
-<section class="banner-section p_relative">
-    <div class="pattern-layer wow slideInDown animated" data-wow-delay="00ms" data-wow-duration="1500ms"
-        style="background-image: url({{asset('assets/images/shape/shape-1.png')}});"></div>
-    <div class="shape">
-        <div class="shape-1" style="background-image: url({{asset('assets/images/shape/shape-2.png')}});"></div>
-        <div class="shape-2 float-bob-x" style="background-image: url({{asset('assets/images/shape/shape-3.png')}});"></div>
-        <div class="shape-3" style="background-image: url({{asset('assets/images/shape/shape-4.png')}});"></div>
-        <div class="shape-4" style="background-image: url({{asset('assets/images/shape/shape-5.png')}});"></div>
-    </div>
-    <div class="auto-container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+<!-- banner-style-two -->
+<section class="banner-style-two p_relative">
+    <div class="banner-carousel owl-theme owl-carousel owl-nav-none owl-dots-none">
+        <div class="slide-item">
+            <div class="bg-layer" style="background-image:url(assets/images/banner/banner-1.jpg)"></div>
+            <figure class="image-layer"><img src="assets/images/banner/banner-img-2.png" alt=""></figure>
+            <div class="auto-container">
                 <div class="content-box">
-                    <span class="upper-text">Highest level of service you can find</span>
-                    <h2>Take <span>Care of Your</span> Health Now.</h2>
-                    <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-                        duis enim velit mollit.</p>
+                    <span class="upper-text">The Art of Healthcare Starts Right Now</span>
+                    <h2>We offer <span>complete</span> Healthcare services.</h2>
+                    <p>It is not only the medicine that cures and recovers your health earlier, it is the Healthcare team who loves the art of treatment with love.</p>
                     <div class="btn-box">
-                        <a href="index.html" class="theme-btn btn-two"><span>Explore Our Service</span></a>
+                        <a href="index-2.html" class="theme-btn btn-one"><span>Explore Our Service</span></a>
                     </div>
-                </div>
+                </div> 
             </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                <div class="image-box">
-                    <figure class="image float-bob-y"><img src="{{asset('assets/images/banner/banner-img-1.png')}}" alt="">
-                    </figure>
+        </div>
+        <div class="slide-item">
+            <div class="bg-layer" style="background-image:url(assets/images/banner/banner-1.jpg)"></div>
+            <figure class="image-layer"><img src="assets/images/banner/banner-img-2.png" alt=""></figure>
+            <div class="auto-container">
+                <div class="content-box">
+                    <span class="upper-text">The Art of Healthcare Starts Right Now</span>
+                    <h2>We offer <span>complete</span> Healthcare services.</h2>
+                    <p>It is not only the medicine that cures and recovers your health earlier, it is the Healthcare team who loves the art of treatment with love.</p>
+                    <div class="btn-box">
+                        <a href="index-2.html" class="theme-btn btn-one"><span>Explore Our Service</span></a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="slide-item">
+            <div class="bg-layer" style="background-image:url(assets/images/banner/banner-1.jpg)"></div>
+            <figure class="image-layer"><img src="assets/images/banner/banner-img-2.png" alt=""></figure>
+            <div class="auto-container">
+                <div class="content-box">
+                    <span class="upper-text">The Art of Healthcare Starts Right Now</span>
+                    <h2>We offer <span>complete</span> Healthcare services.</h2>
+                    <p>It is not only the medicine that cures and recovers your health earlier, it is the Healthcare team who loves the art of treatment with love.</p>
+                    <div class="btn-box">
+                        <a href="index-2.html" class="theme-btn btn-one"><span>Explore Our Service</span></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- banner-section end -->
+<!-- banner-style-two end -->
 
-<!-- feature-section -->
-<section class="feature-section pt_120 pb_90">
-    <div class="shape" style="background-image: url({{asset('assets/images/shape/shape-6.png')}});"></div>
+
+<!-- feature-style-two -->
+<section class="feature-style-two centred">
     <div class="auto-container">
-        <div class="row clearfix">
-            <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
-                <div class="feature-block-one">
-                    <div class="inner-box">
-                        <div class="icon-box"><i class="icon-9"></i></div>
-                        <h3><a href="index.html">Qualified Doctor</a></h3>
-                        <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+        <div class="inner-container">
+            <div class="row clearfix">
+                <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
+                    <div class="feature-block-two">
+                        <div class="inner-box">
+                            <div class="icon-box"><i class="icon-9"></i></div>
+                            <h3><a href="index.html">Qualified Doctor</a></h3>
+                            <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
-                <div class="feature-block-one">
-                    <div class="inner-box">
-                        <div class="icon-box"><i class="icon-10"></i></div>
-                        <h3><a href="index.html">Emergency Help</a></h3>
-                        <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
+                    <div class="feature-block-two">
+                        <div class="inner-box">
+                            <div class="icon-box"><i class="icon-10"></i></div>
+                            <h3><a href="index.html">Emergency Help</a></h3>
+                            <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
-                <div class="feature-block-one">
-                    <div class="inner-box">
-                        <div class="icon-box"><i class="icon-11"></i></div>
-                        <h3><a href="index.html">Modern Equment</a></h3>
-                        <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
+                    <div class="feature-block-two">
+                        <div class="inner-box">
+                            <div class="icon-box"><i class="icon-11"></i></div>
+                            <h3><a href="index.html">Modern Equment</a></h3>
+                            <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
-                <div class="feature-block-one">
-                    <div class="inner-box">
-                        <div class="icon-box"><i class="icon-12"></i></div>
-                        <h3><a href="index.html">Family Medicine</a></h3>
-                        <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
+                    <div class="feature-block-two">
+                        <div class="inner-box">
+                            <div class="icon-box"><i class="icon-12"></i></div>
+                            <h3><a href="index.html">Family Medicine</a></h3>
+                            <p>Lorem ipsum dolor sit amet ctetur adipiscing</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- feature-section end -->
+<!-- feature-style-two end -->
 
 
 <!-- about-section -->
