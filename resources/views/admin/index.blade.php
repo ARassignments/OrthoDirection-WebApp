@@ -2362,9 +2362,9 @@
                             <li class="nav-item d-none d-xl-block">
                                 <a href="/" class="text-nowrap nav-link">
                                     <img src="{{ asset('assets/images/logo.png')}}" class="dark-logo"
-                                        width="180" alt="" />
+                                        width="110" alt="" />
                                     <img src="{{ asset('assets/images/logo.png')}}" class="light-logo"
-                                        width="180" alt="" />
+                                        width="110" alt="" />
                                 </a>
                             </li>
                             <li class="nav-item d-none d-xl-block">
@@ -2603,8 +2603,8 @@
                             </li>
                         </ul>
                         <div class="d-block d-xl-none">
-                            <a href="../main/index.html" class="text-nowrap nav-link">
-                                <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+                            <a href="/" class="text-nowrap nav-link">
+                                <img src="{{asset('assets/images/logo.png')}}" width="120" alt="" />
                             </a>
                         </div>
                         <a class="navbar-toggler nav-icon-hover p-0 border-0" href="javascript:void(0)"
@@ -2629,7 +2629,7 @@
                                     <li class="nav-item dropdown">
                                         <a class="nav-link nav-icon-hover" href="javascript:void(0)"
                                             id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="../assets/images/svgs/icon-flag-en.svg" alt=""
+                                            <img src="assets/images/svgs/icon-flag-en.svg" alt=""
                                                 width="20px" height="20px"
                                                 class="rounded-circle object-fit-cover round-20" />
                                         </a>
@@ -2639,7 +2639,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
                                                     <div class="position-relative">
-                                                        <img src="../assets/images/svgs/icon-flag-en.svg"
+                                                        <img src="assets/images/svgs/icon-flag-en.svg"
                                                             alt="" width="20px" height="20px"
                                                             class="rounded-circle object-fit-cover round-20" />
                                                     </div>
@@ -2648,7 +2648,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
                                                     <div class="position-relative">
-                                                        <img src="../assets/images/svgs/icon-flag-cn.svg"
+                                                        <img src="assets/images/svgs/icon-flag-cn.svg"
                                                             alt="" width="20px" height="20px"
                                                             class="rounded-circle object-fit-cover round-20" />
                                                     </div>
@@ -2657,7 +2657,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
                                                     <div class="position-relative">
-                                                        <img src="../assets/images/svgs/icon-flag-fr.svg"
+                                                        <img src="assets/images/svgs/icon-flag-fr.svg"
                                                             alt="" width="20px" height="20px"
                                                             class="rounded-circle object-fit-cover round-20" />
                                                     </div>
@@ -2666,7 +2666,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
                                                     <div class="position-relative">
-                                                        <img src="../assets/images/svgs/icon-flag-sa.svg"
+                                                        <img src="assets/images/svgs/icon-flag-sa.svg"
                                                             alt="" width="20px" height="20px"
                                                             class="rounded-circle object-fit-cover round-20" />
                                                     </div>
@@ -2714,7 +2714,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="../assets/images/profile/user-1.jpg"
+                                                        <img src="assets/images/profile/user-1.jpg"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -2728,7 +2728,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="../assets/images/profile/user-2.jpg"
+                                                        <img src="assets/images/profile/user-2.jpg"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -2741,7 +2741,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="../assets/images/profile/user-3.jpg"
+                                                        <img src="assets/images/profile/user-3.jpg"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -2754,7 +2754,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="../assets/images/profile/user-4.jpg"
+                                                        <img src="assets/images/profile/user-4.jpg"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -2768,7 +2768,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="../assets/images/profile/user-5.jpg"
+                                                        <img src="assets/images/profile/user-5.jpg"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -2782,7 +2782,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="../assets/images/profile/user-1.jpg"
+                                                        <img src="assets/images/profile/user-1.jpg"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -2813,7 +2813,7 @@
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-profile-img">
-                                                    <img src="../assets/images/profile/user-1.jpg"
+                                                    <img src="assets/images/profile/user-1.jpg"
                                                         class="rounded-circle" width="35" height="35"
                                                         alt="" />
                                                 </div>
@@ -2826,7 +2826,7 @@
                                                     <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                                                 </div>
                                                 <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                                    <img src="../assets/images/profile/user-1.jpg"
+                                                    <img src="assets/images/profile/user-1.jpg"
                                                         class="rounded-circle" width="80" height="80"
                                                         alt="" />
                                                     <div class="ms-3">
@@ -2842,7 +2842,7 @@
                                                         class="py-8 px-7 mt-8 d-flex align-items-center">
                                                         <span
                                                             class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
-                                                            <img src="../assets/images/svgs/icon-account.svg"
+                                                            <img src="assets/images/svgs/icon-account.svg"
                                                                 alt="" width="24" height="24" />
                                                         </span>
                                                         <div class="w-75 d-inline-block v-middle ps-3">
@@ -2855,7 +2855,7 @@
                                                         class="py-8 px-7 d-flex align-items-center">
                                                         <span
                                                             class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
-                                                            <img src="../assets/images/svgs/icon-inbox.svg"
+                                                            <img src="assets/images/svgs/icon-inbox.svg"
                                                                 alt="" width="24" height="24" />
                                                         </span>
                                                         <div class="w-75 d-inline-block v-middle ps-3">
@@ -2868,7 +2868,7 @@
                                                         class="py-8 px-7 d-flex align-items-center">
                                                         <span
                                                             class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
-                                                            <img src="../assets/images/svgs/icon-tasks.svg"
+                                                            <img src="assets/images/svgs/icon-tasks.svg"
                                                                 alt="" width="24" height="24" />
                                                         </span>
                                                         <div class="w-75 d-inline-block v-middle ps-3">
@@ -2889,13 +2889,13 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <div class="m-n4 unlimited-img">
-                                                                    <img src="../assets/images/backgrounds/unlimited-bg.png"
+                                                                    <img src="assets/images/backgrounds/unlimited-bg.png"
                                                                         alt="" class="w-100" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <a href="../main/authentication-login.html"
+                                                    <a href="{{route('logout')}}"
                                                         class="btn btn-outline-primary">Log Out</a>
                                                 </div>
                                             </div>
@@ -2939,7 +2939,7 @@
                                 </a>
                                 <ul aria-expanded="false" class="collapse first-level">
                                     <li class="sidebar-item">
-                                        <a href="../main/index.html" class="sidebar-link">
+                                        <a href="/" class="sidebar-link">
                                             <i class="ti ti-aperture"></i>
                                             <span class="hide-menu">Modern</span>
                                         </a>
