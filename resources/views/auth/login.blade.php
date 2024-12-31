@@ -5,13 +5,13 @@
             <div class="row">
                 <div class="col-xl-7 col-xxl-8">
                     <a href="/" class="text-nowrap logo-img d-block px-4 py-9 w-100">
-                        <img src="{{ asset('assets/images/logo.png')}}" class="dark-logo" alt="Logo-Dark" />
-                        <img src="{{ asset('assets/images/logo.png')}}" class="light-logo" alt="Logo-light" />
+                        <img src="{{ asset('assets/images/logo.png') }}" class="dark-logo" alt="Logo-Dark" />
+                        <img src="{{ asset('assets/images/logo.png') }}" class="light-logo" alt="Logo-light" />
                     </a>
                     <div class="d-none d-xl-flex align-items-center justify-content-center"
                         style="height: calc(100vh - 80px);">
-                        <img src="{{ asset('assets/dash/assets/images/backgrounds/login-security.svg')}}" alt="" class="img-fluid"
-                            width="500">
+                        <img src="{{ asset('assets/dash/assets/images/backgrounds/login-security.svg') }}"
+                            alt="" class="img-fluid" width="500">
                     </div>
                 </div>
                 <div class="col-xl-5 col-xxl-4">
@@ -48,35 +48,41 @@
                                     class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
                             </div> --}}
                             <x-auth-session-status class="mb-4" :status="session('status')" />
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email or Username</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email or Username" :value="old('email')"
-                                    autofocus autocomplete="username" required>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Enter Email or Username" :value="old('email')" autofocus
+                                        autocomplete="username" required>
                                     <small>
                                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     </small>
                                 </div>
                                 <div class="mb-4">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password"
-                                    autocomplete="current-password" required>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Enter Password" autocomplete="current-password" required>
                                     <small>
                                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="form-check">
-                                        <input class="form-check-input primary" name="remember" type="checkbox" value=""
-                                            id="flexCheckChecked" checked>
+                                        <input class="form-check-input primary" name="remember" type="checkbox"
+                                            value="" id="flexCheckChecked" checked>
                                         <label class="form-check-label text-dark" for="flexCheckChecked">
                                             Remeber this Device
                                         </label>
                                     </div>
                                     @if (Route::has('password.request'))
-                                        <a href="{{ route('password.request') }}"
-                                            class="text-primary fw-medium">Forgot
+                                        <a href="{{ route('password.request') }}" class="text-primary fw-medium">Forgot
                                             Password ?</a>
                                     @endif
                                 </div>

@@ -27,6 +27,10 @@ Route::get('email-verify', [RegisteredUserController::class, 'showVerificationNo
 Route::get('/verify-otp', [AuthenticatedSessionController::class, 'showOtpForm'])->name('otp.verify');
 Route::post('/verify-otp', [AuthenticatedSessionController::class, 'verifyOtp'])->name('otp.check');
 
+//register routes
+Route::get('/register-otp-verify', [RegisteredUserController::class, 'showOtpForm'])->name('register.otp.verify');
+Route::post('/register-otp-verify', [RegisteredUserController::class, 'verifyOtp'])->name('register.otp.check');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
