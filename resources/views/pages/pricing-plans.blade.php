@@ -5,10 +5,10 @@
     <div class="bg-layer" style="background-image: url(assets/images/background/page-title.jpg);"></div>
     <div class="auto-container">
         <div class="content-box">
-            <h1>Pricing Table</h1>
+            <h1>Pricing Plans</h1>
             <ul class="bread-crumb clearfix">
                 <li><a href="/">Home</a></li>
-                <li>Pricing Table</li>
+                <li>Pricing Plans</li>
             </ul>
         </div>
     </div>
@@ -60,7 +60,7 @@
                                         <div class="bg-light px-4 py-2 mb-4 smaller rounded-1">Try out all features to
                                             determine what works best for you</div>
                                         <div class="px-4 pricing-toggle-content">
-                                            <div class="pricing-toggle-option"><a href="#"
+                                            <div class="pricing-toggle-option"><a href="/payment"
                                                     class="btn btn-primary btn-block rounded-pill">Get Committed</a>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                                             <div class="bg-light px-4 py-2 mb-4 smaller rounded-1">Try out all features
                                                 to
                                                 determine what works best for you</div>
-                                            <div class="px-4"><a href="#"
+                                            <div class="px-4"><a href="/payment"
                                                     class="btn btn-outline-primary btn-block rounded-pill">Start Writing
                                                     for
                                                     Free</a></div>
@@ -150,7 +150,7 @@
                                             <div class="bg-light px-4 py-2 mb-4 smaller rounded-1">Take your business
                                                 to
                                                 the another level with custom package and support.</div>
-                                            <div class="px-4"><a href="#"
+                                            <div class="px-4"><a href="/payment"
                                                     class="btn btn-outline-primary btn-block rounded-pill">Request for
                                                     Demo</a></div>
                                         </div>

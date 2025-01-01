@@ -30,4 +30,8 @@
 @import url(module-css/contact.css);
 @import url(module-css/error.css);
 @import url(module-css/faq.css);
+@import url(module-css/team-details.css);
+@import url(module-css/solutions.css);
+@import url(module-css/blog-details.css);
+@import url(module-css/appointments.css);
 @import url(responsive.css);

@@ -166,7 +166,7 @@
             </nav>
         </div><!-- End Mobile Menu -->
 
-        <main>
+        <main class="my-5 pt-3">
             <div id="page-conten">
             </div>
         </main>
@@ -227,8 +227,7 @@
                                 <figure class="footer-logo"><a href="/" class="navigator"
                                         data-page="home"><img src="{{ asset('assets/images/footer-logo.png') }}"
                                             loading="lazy" alt="Ortho Direction Logo"></a></figure>
-                                <p>Lorem ipsum dolor sit amet constetur adipiscing elit. Etiam eu turpis mostie dictum
-                                    est a, mattis tellus.</p>
+                                <p>We are a team of dentists, hygienists and receptionists who work together to ensure that you receive the best treatment that you require at a very time that suits you.</p>
                                 <ul class="social-links clearfix">
                                     <li><a href="#" target="_blank"><i class="icon-4"></i></a></li>
                                     <li><a href="#" target="_blank"><i class="icon-5"></i></a></li>
@@ -261,10 +260,9 @@
                                 <div class="widget-content">
                                     <ul class="links-list clearfix">
                                         <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="index.html">Terms &</a></li>
-                                        <li><a href="index.html">Support</a></li>
-                                        <li><a href="index.html">Disclaimer</a></li>
-                                        <li><a href="index.html">Faq</a></li>
+                                        <li><a href="#">Terms & Conditions</a></li>
+                                        <li><a href="/appointment">Appointment</a></li>
+                                        <li><a href="/faqs">Faq</a></li>
                                         <li><a href="/contact">Contact Us</a></li>
                                     </ul>
                                 </div>
@@ -295,7 +293,7 @@
                         <ul class="footer-nav clearfix">
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Terms of Conditions</a></li>
-                            <li><a href="#" class="navigator" data-page="faqs">FAQs</a></li>
+                            <li><a href="/faqs">FAQs</a></li>
                         </ul>
                         <div class="copyright">
                             <p>&copy; 2025 All Rights Reserved</p>

@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 image-column">
-                <figure class="image-box"><img src="assets/images/resource/contact-1.jpg" alt=""></figure>
+                <figure class="image-box"><img src="assets/images/resource/contact-1.jpg" height="100%" alt=""></figure>
             </div>
         </div>
     </div>

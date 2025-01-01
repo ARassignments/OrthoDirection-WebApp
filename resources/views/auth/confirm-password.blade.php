@@ -4,14 +4,14 @@
         <div class="position-relative z-index-5">
             <div class="row">
                 <div class="col-xl-7 col-xxl-8">
-                    <a href="/" class="text-nowrap logo-img d-block px-4 py-9 w-100">
+                    <a href="/" class="text-nowrap logo-img d-block px-4 py-9 w-100"  style="position: relative; z-index:12;">
                         <img src="{{ asset('assets/images/logo.png') }}" class="dark-logo" alt="Logo-Dark" />
                         <img src="{{ asset('assets/images/logo.png') }}" class="light-logo" alt="Logo-light" />
                     </a>
                     <div class="d-none d-xl-flex align-items-center justify-content-center"
-                        style="height: calc(100vh - 80px);">
-                        <img src="{{ asset('assets/dash/assets/images/backgrounds/login-security.svg') }}"
-                            alt="" class="img-fluid" width="500">
+                        style="height: calc(100vh - 110px);">
+                        <img src="{{ asset('assets/dash/assets/images/backgrounds/forgot_bg.svg') }}"
+                            alt="" class="img-fluid" width="100%">
                     </div>
                 </div>
                 <div class="col-xl-5 col-xxl-4">

@@ -100,11 +100,11 @@
                         <div class="shape float-bob-x"
                             style="background-image: url({{asset('assets/images/shape/shape-7.png')}});"></div>
                         <figure class="image"><img src="{{asset('assets/images/resource/about-1.jpg')}}" alt=""></figure>
-                        <div class="icon-one"><i class="icon-13"></i></div>
-                        <div class="icon-two"><i class="icon-14"></i></div>
+                        <div class="icon-one"><i class="icon-29"></i></div>
+                        <div class="icon-two"><i class="icon-32"></i></div>
                         <div class="text-box">
                             <h3>Wade Warren</h3>
-                            <span>Medical Assistant</span>
+                            <span>Senior Orthodontist</span>
                         </div>
                     </div>
                 </div>
@@ -114,22 +114,21 @@
                     <div class="content-box ml_30">
                         <div class="sec-title mb_15">
                             <span class="sub-title">About Us</span>
-                            <h2>Medical services & diagnostics</h2>
+                            <h2>Dental services & diagnostics</h2>
                         </div>
                         <div class="text-box mb_40">
-                            <h6>Committed To Delivering High Quality Medical & Diagnostics Services!</h6>
-                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-                                consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                            <h6>Committed To Delivering High Quality Dental & Diagnostics Services!</h6>
+                            <p>Distinctively exploit optimal alignments for intuitive bandwidth. Quickly coordinate e-business applications through revolutionary catalysts for change. Seamlessly underwhelm optimal testing processes.</p>
                             <ul class="list-style-one clearfix">
-                                <li>Ambulance Services</li>
-                                <li>Oxizen on Wheel</li>
-                                <li>Pharmacy on Clinic</li>
-                                <li>On duty Doctors</li>
-                                <li>24/7 Medical Emergency</li>
+                                <li>Client Satisfaction</li>
+                                <li>Dental Success</li>
+                                <li>Client Referral</li>
+                                <li>Teeth Whitening</li>
+                                <li>Dental Implants</li>
                             </ul>
                         </div>
                         <div class="btn-box">
-                            <a href="index.html" class="theme-btn btn-one"><span>Discover More</span></a>
+                            <a href="/services" class="theme-btn btn-one"><span>Discover More</span></a>
                         </div>
                     </div>
                 </div>
@@ -145,7 +144,7 @@
     <div class="auto-container">
         <div class="sec-title mb_50 centred">
             <span class="sub-title">Our Services</span>
-            <h2>We Offer For You Medical & <br />Saving Lives</h2>
+            <h2>We Offer For You Ortho <br />Dental Saving Smile</h2>
         </div>
         <div class="row clearfix">
             <div class="col-lg-4 col-md-6 col-sm-12 service-block">
@@ -155,11 +154,11 @@
                         <div class="image-box">
                             <figure class="image"><a href="service-details-3.html"><img
                                         src="{{asset('assets/images/service/service-1.jpg')}}" alt=""></a></figure>
-                            <div class="icon-box"><i class="icon-15"></i></div>
+                            <div class="icon-box"><i class="icon-29"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details-3.html">Neurosurgery</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
+                            <h3><a href="service-details-3.html">Dental Services</a></h3>
+                            <p>Globally harness multimedia based collaboration and idea haring with backend products.</p>
                         </div>
                     </div>
                 </div>
@@ -174,8 +173,8 @@
                             <div class="icon-box"><i class="icon-16"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details-6.html">Modern Laboratory</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
+                            <h3><a href="service-details-6.html">Dental Implants</a></h3>
+                            <p>Dramatically disseminate standardized metrics after resource-leveling processes.</p>
                         </div>
                     </div>
                 </div>
@@ -190,8 +189,8 @@
                             <div class="icon-box"><i class="icon-17"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details.html">Experienced Doctors</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
+                            <h3><a href="service-details.html">Surgery</a></h3>
+                            <p>Proactively fabricate one-to-one materials via effective e-business services processes.</p>
                         </div>
                     </div>
                 </div>
@@ -212,24 +211,24 @@
                 <div class="content-box">
                     <div class="sec-title light mb_50">
                         <span class="sub-title">Why Choose Us</span>
-                        <h2>Choose The Best For Your <br />Health</h2>
+                        <h2>Choose The Best For Your <br />Smile</h2>
                     </div>
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-6 col-sm-12 chooseus-block">
                             <div class="chooseus-block-one">
                                 <div class="inner-box">
-                                    <div class="icon-box"><i class="icon-18"></i></div>
-                                    <h3>Professional Staff</h3>
-                                    <p>Amet minim mollit non deserunt aliqua dolor do amet sint.</p>
+                                    <div class="icon-box"><i class="icon-17"></i></div>
+                                    <h3>Professional Doctor</h3>
+                                    <p>Experience care with compassion, trust, and professionalism.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 chooseus-block">
                             <div class="chooseus-block-one">
                                 <div class="inner-box">
-                                    <div class="icon-box"><i class="icon-21"></i></div>
-                                    <h3>Emergency Case</h3>
-                                    <p>Amet minim mollit non deserunt aliqua dolor do amet sint.</p>
+                                    <div class="icon-box"><i class="icon-29"></i></div>
+                                    <h3>Dental Service</h3>
+                                    <p>We provides comprehensive oral care for a healthy & confident smile.</p>
                                 </div>
                             </div>
                         </div>
@@ -238,7 +237,7 @@
                                 <div class="inner-box">
                                     <div class="icon-box"><i class="icon-19"></i></div>
                                     <h3>Online Appointment</h3>
-                                    <p>Amet minim mollit non deserunt aliqua dolor do amet sint.</p>
+                                    <p>Book an online appointment with our professional doctors at your convenience.</p>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +246,7 @@
                                 <div class="inner-box">
                                     <div class="icon-box"><i class="icon-20"></i></div>
                                     <h3>24/7 Services</h3>
-                                    <p>Amet minim mollit non deserunt aliqua dolor do amet sint.</p>
+                                    <p>Our 24/7 Dental Service is here to care for your oral health around the clock.</p>
                                 </div>
                             </div>
                         </div>
@@ -269,10 +268,10 @@
                     <div class="funfact-block-one">
                         <div class="inner-box">
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="75">0</span><span
-                                    class="symble">+</span>
+                                <span class="count-text" data-speed="1500" data-stop="99">0</span><span
+                                    class="symble">%</span>
                             </div>
-                            <span class="text">Expert Doctors</span>
+                            <span class="text">Client Satisfaction</span>
                         </div>
                     </div>
                 </div>
@@ -280,9 +279,9 @@
                     <div class="funfact-block-one">
                         <div class="inner-box">
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="7">0</span><span>k</span>
+                                <span class="count-text" data-speed="1500" data-stop="97">0</span><span class="symble">%</span>
                             </div>
-                            <span class="text">Happy Patients</span>
+                            <span class="text">Intervention Success</span>
                         </div>
                     </div>
                 </div>
@@ -290,9 +289,9 @@
                     <div class="funfact-block-one">
                         <div class="inner-box">
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="850">0</span>
+                                <span class="count-text" data-speed="1500" data-stop="100">0</span><span class="symble">%</span>
                             </div>
-                            <span class="text">Modern Rooms</span>
+                            <span class="text">Happy with Staff</span>
                         </div>
                     </div>
                 </div>
@@ -300,9 +299,9 @@
                     <div class="funfact-block-one">
                         <div class="inner-box">
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="15">0</span>
+                                <span class="count-text" data-speed="1500" data-stop="95">0</span><span class="symble">%</span>
                             </div>
-                            <span class="text">Awards Win</span>
+                            <span class="text">Quick Recovery</span>
                         </div>
                     </div>
                 </div>
@@ -343,8 +342,8 @@
                             </ul>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="team-details.html">Black Marvin</a></h3>
-                            <span class="designation">Medical Assistant</span>
+                            <h3><a href="/doctor-detail">Carlie Addison</a></h3>
+                            <span class="designation">Dental Assistant</span>
                         </div>
                     </div>
                 </div>
@@ -362,8 +361,8 @@
                             </ul>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="team-details.html">Eleanor Pena</a></h3>
-                            <span class="designation">Doctor</span>
+                            <h3><a href="/doctor-detail">Alex Terrel</a></h3>
+                            <span class="designation">Senior Orthodontist</span>
                         </div>
                     </div>
                 </div>
@@ -381,8 +380,8 @@
                             </ul>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="team-details.html">Arlene Maccy</a></h3>
-                            <span class="designation">Nursing Assistant</span>
+                            <h3><a href="/doctor-detail">Arlene Maccy</a></h3>
+                            <span class="designation">Dental Assistant</span>
                         </div>
                     </div>
                 </div>
@@ -400,8 +399,8 @@
                             </ul>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="team-details.html">Jenny Wilson</a></h3>
-                            <span class="designation">Senior Doctor</span>
+                            <h3><a href="/doctor-detail">Jenny Wilson</a></h3>
+                            <span class="designation">Senior Orthodontist</span>
                         </div>
                     </div>
                 </div>
@@ -431,7 +430,7 @@
             </div>
             <h2>Online Consultations With <br />Qualified Doctors</h2>
             <div class="btn-box">
-                <a href="index.html" class="theme-btn btn-one"><span>Make an Appointment</span></a>
+                <a href="/appointment" class="theme-btn btn-one"><span>Make an Appointment</span></a>
             </div>
         </div>
     </div>
@@ -450,7 +449,7 @@
     <div class="auto-container">
         <div class="sec-title mb_50 centred">
             <span class="sub-title">Process</span>
-            <h2>How it Helps You to <br />Keep Healthy</h2>
+            <h2>How it Helps You to <br />Keep Healthy Smile</h2>
         </div>
         <div class="inner-container">
             <div class="arrow-shape" style="background-image: url(assets/images/shape/shape-18.png);"></div>
@@ -462,7 +461,7 @@
                     </figure>
                     <div class="lower-content">
                         <h3>Get Appointment</h3>
-                        <p>Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. </p>
+                        <p>Book your appointment today with just a few clicks. </p>
                     </div>
                 </div>
             </div>
@@ -474,7 +473,7 @@
                     </figure>
                     <div class="lower-content">
                         <h3>Start Check-Up</h3>
-                        <p>Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. </p>
+                        <p>Begin your professional check-up with our expert doctors. </p>
                     </div>
                 </div>
             </div>
@@ -485,8 +484,8 @@
                     <figure class="image-box"><img src="assets/images/resource/process-3.jpg" alt="">
                     </figure>
                     <div class="lower-content">
-                        <h3>Enjoy Healthy Life</h3>
-                        <p>Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. </p>
+                        <h3>Enjoy Healthy Smile</h3>
+                        <p>You can enjoy a healthy, radiant smile that boosts your confidence. </p>
                     </div>
                 </div>
             </div>
@@ -506,16 +505,15 @@
                 <div class="content-box p_relative ml_45">
                     <div class="sec-title mb_50">
                         <span class="sub-title">Testimonials</span>
-                        <h2>What Our Client Say About medimart</h2>
+                        <h2>What Our Client Say About Ortho Direction</h2>
                     </div>
                     <div class="single-item-carousel owl-carousel owl-theme owl-dots-none owl-nav-none">
                         <div class="testimonial-block-one">
                             <div class="inner-box">
                                 <div class="icon-box"><i class="icon-23"></i></div>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                    officia coequat duis enim velit mollit.</p>
+                                <p>Uniquely deploy cross-unit benefits with wireless testing procedures. Build full backward compatible relationships.</p>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png"
+                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.jpg"
                                             alt=""></figure>
                                     <ul class="rating clearfix">
                                         <li><i class="fas fa-star"></i></li>
@@ -524,48 +522,46 @@
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="far fa-star"></i></li>
                                     </ul>
-                                    <h3>Robert Fox</h3>
-                                    <span class="designation">Dog Trainer</span>
+                                    <h3>Brad Wilson</h3>
+                                    <span class="designation">Dental Surgery</span>
                                 </div>
                             </div>
                         </div>
                         <div class="testimonial-block-one">
                             <div class="inner-box">
                                 <div class="icon-box"><i class="icon-23"></i></div>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                    officia coequat duis enim velit mollit.</p>
+                                <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test clickthroughs from users.</p>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png"
+                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-2.jpg"
                                             alt=""></figure>
                                     <ul class="rating clearfix">
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
+                                        <li><i class="far fa-star"></i></li>
                                         <li><i class="far fa-star"></i></li>
                                     </ul>
-                                    <h3>Robert Fox</h3>
-                                    <span class="designation">Dog Trainer</span>
+                                    <h3>Trixie Payton</h3>
+                                    <span class="designation">Full Dental Implants</span>
                                 </div>
                             </div>
                         </div>
                         <div class="testimonial-block-one">
                             <div class="inner-box">
                                 <div class="icon-box"><i class="icon-23"></i></div>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                    officia coequat duis enim velit mollit.</p>
+                                <p>Collaboratively administrate empowered markets via plug-and-play networks after installed base benefits.</p>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-1.png"
+                                    <figure class="author-thumb"><img src="assets/images/resource/testimonial-3.jpg"
                                             alt=""></figure>
                                     <ul class="rating clearfix">
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
-                                        <li><i class="far fa-star"></i></li>
+                                        <li><i class="fas fa-star"></i></li>
                                     </ul>
-                                    <h3>Robert Fox</h3>
-                                    <span class="designation">Dog Trainer</span>
+                                    <h3>Kristin Yang</h3>
+                                    <span class="designation">Cosmetic Dentistry</span>
                                 </div>
                             </div>
                         </div>
@@ -579,7 +575,7 @@
 
 
 <!-- pricing-section -->
-<section class="pricing-section sec-pad">
+<section class="pricing-section sec-pad d-none">
     <div class="auto-container">
         <div class="sec-title mb_50 centred">
             <span class="sub-title">Our Pricing</span>

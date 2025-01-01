@@ -21,6 +21,11 @@ Route::get('/services', function () {return view('pages.services');})->name('ser
 Route::get('/blogs', function () {return view('pages.blogs');})->name('blogs');
 Route::get('/pricing', function () {return view('pages.pricing-plans');})->name('pricing');
 Route::get('/contact', function () {return view('pages.contact-us');})->name('contact');
+Route::get('/faqs', function () {return view('pages.faqs');})->name('faqs');
+Route::get('/doctor-detail', function () {return view('pages.doctor-detail');})->name('doctor-detail');
+Route::get('/blog-detail', function () {return view('pages.blog-detail');})->name('blog-detail');
+Route::get('/appointment', function () {return view('pages.appointment');})->name('appointment');
+Route::get('/payment', function () {return view('pages.payment');})->name('payment');
 
 // web.php
 Route::get('email-verify', [RegisteredUserController::class, 'showVerificationNotice'])->name('verification.email');

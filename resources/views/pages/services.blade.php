@@ -24,12 +24,12 @@
                 <div class="service-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><a href="service-details.html"><img src="assets/images/service/service-4.jpg" alt=""></a></figure>
-                            <div class="icon-box"><i class="icon-30"></i></div>
+                            <figure class="image"><a href="service-details.html"><img src="assets/images/service/service-1.jpg" alt=""></a></figure>
+                            <div class="icon-box"><i class="icon-29"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details.html">Cardiology</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
+                            <h3><a href="service-details.html">Dental Services</a></h3>
+                            <p>Globally harness multimedia based collaboration and idea haring with backend products.</p>
                         </div>
                     </div>
                 </div>
@@ -42,8 +42,8 @@
                             <div class="icon-box"><i class="icon-16"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details-6.html">Modern Laboratory</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
+                            <h3><a href="service-details-6.html">Dental Implants</a></h3>
+                            <p>Dramatically disseminate standardized metrics after resource-leveling processes.</p>
                         </div>
                     </div>
                 </div>
@@ -52,40 +52,12 @@
                 <div class="service-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><a href="service-details-2.html"><img src="assets/images/service/service-5.jpg" alt=""></a></figure>
+                            <figure class="image"><a href="service-details-2.html"><img src="assets/images/service/service-4.jpg" alt=""></a></figure>
                             <div class="icon-box"><i class="icon-32"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details-2.html">Dental Clinic</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                <div class="service-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><a href="service-details-3.html"><img src="assets/images/service/service-1.jpg" alt=""></a></figure>
-                            <div class="icon-box"><i class="icon-15"></i></div>
-                        </div>
-                        <div class="lower-content">
-                            <h3><a href="service-details-3.html">Neurosurgery</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                <div class="service-block-one wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><a href="service-details-5.html"><img src="assets/images/service/service-6.jpg" alt=""></a></figure>
-                            <div class="icon-box"><i class="icon-31"></i></div>
-                        </div>
-                        <div class="lower-content">
-                            <h3><a href="service-details-5.html">Pediatrics</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
+                            <h3><a href="service-details-2.html">Teeth Whitening</a></h3>
+                            <p>Distinctively re-engineer revolutionary meta-services and premium architectures.</p>
                         </div>
                     </div>
                 </div>
@@ -98,8 +70,8 @@
                             <div class="icon-box"><i class="icon-17"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details-4.html">Experienced Doctors</a></h3>
-                            <p>Amet minim mollit non deserunt ullamco aliqua dolor do amet sint.</p>
+                            <h3><a href="service-details-4.html">Surgery</a></h3>
+                            <p>Proactively fabricate one-to-one materials via effective e-business services processes.</p>
                         </div>
                     </div>
                 </div>
