@@ -10,14 +10,25 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    {{-- <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
+    <meta name="description"
+        content="Ortho Direction - Comprehensive dental services with expert care. Learn more about our services, pricing, and team.">
+    <meta name="keywords" content="dentist, dental care, dental services, ortho direction">
+    <meta name="author" content="Ortho Direction">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Ortho Direction | Expert Dental Care">
+    <meta property="og:description" content="Comprehensive dental services with expert care.">
+    <meta property="og:image" content="{{ asset('assets/images/logo.png') }}">
+    <meta property="og:url" content="https://www.orthodirection.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ortho Direction | Expert Dental Care">
+    <meta name="twitter:description" content="Comprehensive dental services with expert care.">
+    <meta name="twitter:image" content="{{ asset('assets/images/logo.png') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/dash/assets/css/styles.css') }}">
 
-    <!-- Scripts -->
     @vite(['resources/js/app.js'])
+    <link rel="preload" href="{{ asset('assets/dash/assets/css/styles.css') }}" as="style">
+    <link rel="stylesheet" href="{{ asset('assets/dash/assets/css/styles.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -33,8 +44,8 @@
 </body>
 
 <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/dash/assets/js/app.min.js') }}"></script>
-<script src="{{ asset('assets/dash/assets/js/app.init.js') }}"></script>
+<script src="{{ asset('assets/dash/assets/js/app.min.js') }}" defer></script>
+<script src="{{ asset('assets/dash/assets/js/app.init.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/dash/assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
 <script src="{{ asset('assets/dash/assets/js/sidebarmenu.js') }}"></script>
