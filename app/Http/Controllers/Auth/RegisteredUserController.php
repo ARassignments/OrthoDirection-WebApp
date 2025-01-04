@@ -34,6 +34,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'roles' => ['required'],
         ]);
 
         $otp = random_int(1000, 9999); // Generate a 4-digit OTP
@@ -42,6 +43,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->roles,
             'otp_code' => $otp, // Assuming 'otp_code' column exists in the users table
         ]);
 

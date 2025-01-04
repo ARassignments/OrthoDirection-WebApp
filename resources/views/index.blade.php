@@ -88,17 +88,17 @@
                                     <!-- Show Logout button when the user is logged in -->
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="theme-btn btn-one"><span>Logout</span></button>
+                                        <button type="submit" class="theme-btn btn-two"><span>Logout</span></button>
                                     </form>
                                 @else
                                     <!-- Show Login and Register buttons when the user is not logged in -->
                                     <div class="btn-box">
                                         <a href="{{ route('login') }}" class="theme-btn btn-one"><span>Login</span></a>
                                     </div>
-                                    {{-- <div class="btn-box">
+                                    <div class="btn-box">
                                         <a href="{{ route('register') }}"
                                             class="theme-btn btn-two"><span>Register</span></a>
-                                    </div> --}}
+                                    </div>
                                 @endauth
                             </div>
 
@@ -122,12 +122,21 @@
                             </nav>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
-                            <div class="btn-box">
-                                <a href="/login" class="theme-btn btn-one"><span>Login</span></a>
-                            </div>
-                            {{-- <div class="btn-box">
-                                <a href="/register" class="theme-btn btn-two"><span>Register</span></a>
-                            </div> --}}
+                            @auth
+                                <!-- Show Logout button when the user is logged in -->
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="theme-btn btn-two"><span>Logout</span></button>
+                                </form>
+                            @else
+                                <!-- Show Login and Register buttons when the user is not logged in -->
+                                <div class="btn-box">
+                                    <a href="{{ route('login') }}" class="theme-btn btn-one"><span>Login</span></a>
+                                </div>
+                                <div class="btn-box">
+                                    <a href="{{ route('register') }}" class="theme-btn btn-two"><span>Register</span></a>
+                                </div>
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -227,7 +236,9 @@
                                 <figure class="footer-logo"><a href="/" class="navigator"
                                         data-page="home"><img src="{{ asset('assets/images/footer-logo.png') }}"
                                             loading="lazy" alt="Ortho Direction Logo"></a></figure>
-                                <p>We are a team of dentists, hygienists and receptionists who work together to ensure that you receive the best treatment that you require at a very time that suits you.</p>
+                                <p>We are a team of dentists, hygienists and receptionists who work together to ensure
+                                    that you receive the best treatment that you require at a very time that suits you.
+                                </p>
                                 <ul class="social-links clearfix">
                                     <li><a href="#" target="_blank"><i class="icon-4"></i></a></li>
                                     <li><a href="#" target="_blank"><i class="icon-5"></i></a></li>
@@ -259,8 +270,8 @@
                                 </div>
                                 <div class="widget-content">
                                     <ul class="links-list clearfix">
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="#">Terms & Conditions</a></li>
+                                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                                        <li><a href="/terms-conditions">Terms & Conditions</a></li>
                                         <li><a href="/appointment">Appointment</a></li>
                                         <li><a href="/faqs">Faq</a></li>
                                         <li><a href="/contact">Contact Us</a></li>
@@ -282,6 +293,17 @@
                                                 href="mailto:example@info.com">example@info.com</a></li>
                                     </ul>
                                 </div>
+                                <div class="widget-title mt-4 mb-3">
+                                    <h4 class="text-white fs-6">Mobile App</h4>
+                                </div>
+                                <div class="row">
+                                    <a href="#" class="col-md-6 pe-0">
+                                        <img src="{{asset('assets/images/badges/apple.png')}}" class="w-100" alt="">
+                                    </a>
+                                    <a href="#" class="col-md-6 pe-0">
+                                        <img src="{{asset('assets/images/badges/google.png')}}" class="w-100 h-100" alt="">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -291,8 +313,8 @@
                 <div class="auto-container">
                     <div class="bottom-inner">
                         <ul class="footer-nav clearfix">
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms of Conditions</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
+                            <li><a href="/terms-conditions">Terms of Conditions</a></li>
                             <li><a href="/faqs">FAQs</a></li>
                         </ul>
                         <div class="copyright">
