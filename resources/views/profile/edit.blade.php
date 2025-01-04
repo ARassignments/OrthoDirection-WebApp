@@ -168,10 +168,11 @@
                                                     </select>
                                                 </div>
                                                 <div class="mb-4">
-                                                    <label for="email"
-                                                        class="form-label fw-semibold">Email</label>
-                                                    <input type="email" name="email" class="form-control" id="email"
-                                                        placeholder="info@orthodirection.com" :value="old('email', $user->email)" required autocomplete="username">
+                                                    <label for="email" class="form-label fw-semibold">Email</label>
+                                                    <input type="email" name="email" class="form-control"
+                                                        id="email" placeholder="info@orthodirection.com"
+                                                        :value="old('email', $user - > email)" required
+                                                        autocomplete="username">
                                                     <small>
                                                         <x-input-error class="mt-2" :messages="$errors->get('email')" />
                                                     </small>
@@ -212,13 +213,29 @@
                                             <div class="col-12">
                                                 <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
                                                     <button class="btn btn-primary">Save Changes</button>
-                                                    <button class="btn bg-danger-subtle text-danger" type="button">Cancel</button>
+                                                    <button class="btn bg-danger-subtle text-danger"
+                                                        type="button">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <form method="post" action="{{ route('profile.destroy') }}" class="card">
+                                @csrf
+                                @method('delete')
+                                <div class="card-body p-4">
+                                    <h4 class="fw-semibold mb-3">Delete Account</h4>
+                                    <p>Once your account is deleted, all of its resources and data will be permanently
+                                        deleted. Before deleting your account, please download any data or information
+                                        that you wish to retain.</p>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <button class="btn btn-outline-danger">Delete Account</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -610,17 +627,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
                 </div>
             </div>
         </div>
