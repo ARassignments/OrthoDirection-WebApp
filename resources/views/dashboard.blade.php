@@ -1,15 +1,17 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center gap-4 mb-4">
+                <div class="position-relative">
+                    <div class="border border-2 border-primary rounded-circle">
+                        <img src="assets/images/profile/user-1.jpg" class="rounded-circle m-1" alt="user1"
+                            width="60">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="fw-semibold">Hi, <span class="text-dark text-capitalize">{{ Auth::user()->name }}</span>
+                    </h3>
+                    <span>Cheers, and happy activities - July 6 2023</span>
                 </div>
             </div>
         </div>

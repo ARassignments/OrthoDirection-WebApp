@@ -22,6 +22,8 @@ Route::get('/blogs', function () {return view('pages.blogs');})->name('blogs');
 Route::get('/pricing', function () {return view('pages.pricing-plans');})->name('pricing');
 Route::get('/contact', function () {return view('pages.contact-us');})->name('contact');
 Route::get('/faqs', function () {return view('pages.faqs');})->name('faqs');
+Route::get('/privacy-policy', function () {return view('pages.privacy-policy');})->name('privacy-policy');
+Route::get('/terms-conditions', function () {return view('pages.terms-conditions');})->name('terms-conditions');
 Route::get('/doctor-detail', function () {return view('pages.doctor-detail');})->name('doctor-detail');
 Route::get('/blog-detail', function () {return view('pages.blog-detail');})->name('blog-detail');
 Route::get('/appointment', function () {return view('pages.appointment');})->name('appointment');
