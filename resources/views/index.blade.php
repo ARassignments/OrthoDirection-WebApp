@@ -74,10 +74,10 @@
                                     <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                         <ul class="navigation clearfix">
                                             <li class="current"><a href="/">Home</a></li>
-                                            <li><a href="/about">About Us</a></li>
-                                            <li><a href="/services">Services</a></li>
                                             <li><a href="/blogs">Blogs</a></li>
+                                            <li><a href="/services">Services</a></li>
                                             <li><a href="/pricing">Pricing</a></li>
+                                            <li><a href="/about">About Us</a></li>
                                             <li><a href="/contact">Contact</a></li>
                                         </ul>
                                     </div>
@@ -255,10 +255,11 @@
                                 <div class="widget-content">
                                     <ul class="links-list clearfix">
                                         <li><a href="/">Home</a></li>
-                                        <li><a href="/about">About Us</a></li>
-                                        <li><a href="/services">Services</a></li>
                                         <li><a href="/blogs">Blogs</a></li>
+                                        <li><a href="/services">Services</a></li>
                                         <li><a href="/pricing">Pricing Plans</a></li>
+                                        <li><a href="/about">About Us</a></li>
+                                        <li><a href="/contact">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -270,11 +271,11 @@
                                 </div>
                                 <div class="widget-content">
                                     <ul class="links-list clearfix">
-                                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                                        <li><a href="/terms-conditions">Terms & Conditions</a></li>
                                         <li><a href="/appointment">Appointment</a></li>
                                         <li><a href="/faqs">Faq</a></li>
-                                        <li><a href="/contact">Contact Us</a></li>
+                                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                                        <li><a href="/terms-conditions">Terms & Conditions</a></li>
+                                        {{-- <li><a href="/contact">Contact Us</a></li> --}}
                                     </ul>
                                 </div>
                             </div>

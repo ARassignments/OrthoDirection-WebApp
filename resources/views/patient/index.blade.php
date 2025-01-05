@@ -73,7 +73,7 @@
                         <!-- Dashboard -->
                         <!-- ---------------------------------- -->
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="/admin" aria-expanded="false">
+                            <a class="sidebar-link" href="/patient" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-home"></i>
                                 </span>
@@ -81,54 +81,43 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="/admin/blogs" aria-expanded="false">
+                            <a class="sidebar-link" href="/patient/tracking" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-chart-donut-3"></i>
+                                    <i class="ti ti-route"></i>
                                 </span>
-                                <span class="hide-menu">Blogs</span>
+                                <span class="hide-menu">Tracking</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                                <span class="d-flex">
-                                    <i class="ti ti-users"></i>
+                            <a class="sidebar-link" href="/patient/appointments" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-calendar"></i>
                                 </span>
-                                <span class="hide-menu">Users</span>
+                                <span class="hide-menu">Appointments</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a href="/admin/family" class="sidebar-link">
-                                        <div class="round-16 d-flex align-items-center justify-content-center">
-                                            <i class="ti ti-circle"></i>
-                                        </div>
-                                        <span class="hide-menu">Family Members</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="/admin/patients" class="sidebar-link">
-                                        <div class="round-16 d-flex align-items-center justify-content-center">
-                                            <i class="ti ti-circle"></i>
-                                        </div>
-                                        <span class="hide-menu">Patients</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="/admin/doctors" class="sidebar-link">
-                                        <div class="round-16 d-flex align-items-center justify-content-center">
-                                            <i class="ti ti-circle"></i>
-                                        </div>
-                                        <span class="hide-menu">Doctors</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link justify-content-between" href="/patient/messages" aria-expanded="false">
+                              <div class="d-flex align-items-center gap-3">
+                                <span class="d-flex">
+                                  <i class="ti ti-messages"></i>
+                                </span>
+                                <span class="hide-menu">Messages</span>
+                              </div>
+                              <div class="hide-menu">
+                                <span class="badge rounded-circle bg-primary d-flex align-items-center justify-content-center rounded-pill fs-2">0</span>
+                              </div>
+                            </a>
+                          </li>
 
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu text-capitalize">Account Setting</span>
                         </li>
+
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="/admin/profile" aria-expanded="false">
+                            <a class="sidebar-link" href="/patient/profile" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-user-circle"></i>
                                 </span>
@@ -940,7 +929,7 @@
 <script src="{{ asset('assets/dash/assets/js/theme.js') }}"></script>
 
 <script src="{{ asset('assets/dash/assets/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
-{{-- <script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script> --}}
+<script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/dash/assets/js/dashboards/dashboard.js') }}"></script>
 
 </html>

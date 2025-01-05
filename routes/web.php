@@ -51,16 +51,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::prefix('/admin/')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
-Route::prefix('/doctors/')->group(function () {
-    Route::get('/dashboard', [ProfessionalController::class, 'dashboard'])->name('doctors.dahboard');
+Route::prefix('/doctor/')->group(function () {
+    Route::get('/', [DoctorController::class, 'dashboard'])->name('doctors.dahboard');
 });
 Route::prefix('/family/')->group(function () {
-    Route::get('/dashboard', [FamilyController::class, 'dashboard'])->name('family.dahboard');
+    Route::get('/', [FamilyController::class, 'dashboard'])->name('family.dahboard');
 });
 Route::prefix('/patient/')->group(function () {
-    Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patient.dahboard');
+    Route::get('/', [PatientController::class, 'dashboard'])->name('patient.dahboard');
 });
 
 Route::get("/logout", [AdminController::class, 'logout'])->name("logout");

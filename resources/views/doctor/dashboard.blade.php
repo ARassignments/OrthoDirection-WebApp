@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('doctor.index')
 @section('content')
 <!--  Owl carousel -->
 <div class="owl-carousel counter-carousel owl-theme">
