@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProfessionalController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -48,12 +50,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::prefix('admin/')->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.index');
+Route::prefix('/admin/')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
-Route::prefix('professionals/')->group(function () {
-    Route::get('/', [ProfessionalController::class, 'dashboard'])->name('professionals.index');
+Route::prefix('/doctors/')->group(function () {
+    Route::get('/dashboard', [ProfessionalController::class, 'dashboard'])->name('doctors.dahboard');
 });
+Route::prefix('/family/')->group(function () {
+    Route::get('/dashboard', [FamilyController::class, 'dashboard'])->name('family.dahboard');
+});
+Route::prefix('/patient/')->group(function () {
+    Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patient.dahboard');
+});
+
 Route::get("/logout", [AdminController::class, 'logout'])->name("logout");
 
 
