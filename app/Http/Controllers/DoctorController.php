@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProfessionalController extends Controller
+class DoctorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function dashboard()
     {
-        return view('professionals.index');
+        return view('doctors.dashboard');
     }
     public function index()
     {

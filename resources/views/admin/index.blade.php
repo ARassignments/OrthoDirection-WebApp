@@ -136,8 +136,15 @@
                                 height="40" alt="" />
                         </div>
                         <div class="john-title">
-                            <h6 class="mb-0 fs-4 fw-semibold">Kiran</h6>
-                            <span class="fs-2">Admin</span>
+                            <h6 class="mb-0 fs-4 fw-semibold">
+                                @if(auth()->check())
+                                    {{ auth()->user()->name }}
+                                @endif
+                            </h6>
+                            <span class="fs-2"> 
+                                @if(auth()->check())
+                                    {{ auth()->user()->role }}
+                                @endif</span>
                         </div>
                         <a href="{{ route('logout') }}" class="border-0 bg-transparent text-primary ms-auto" tabindex="0" type="button"
                             aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -603,10 +610,21 @@
                                                         class="rounded-circle" width="80" height="80"
                                                         alt="" />
                                                     <div class="ms-3">
-                                                        <h5 class="mb-1 fs-3">Mathew Anderson</h5>
-                                                        <span class="mb-1 d-block">Designer</span>
+                                                        <h5 class="mb-1 fs-3">
+                                                        @if (auth()->check())
+                                                                {{ auth()->user()->name }}
+                                                        @endif
+                                                        </h5>
+                                                        <span class="mb-1 d-block">
+                                                        @if (auth()->check())
+                                                            {{ auth()->user()->role }}
+                                                        @endif
+                                                        </span>
                                                         <p class="mb-0 d-flex align-items-center gap-2">
-                                                            <i class="ti ti-mail fs-4"></i> info@modernize.com
+                                                            <i class="ti ti-mail fs-4"></i> 
+                                                        @if (auth()->check())
+                                                            {{ auth()->user()->email }}
+                                                        @endif
                                                         </p>
                                                     </div>
                                                 </div>
