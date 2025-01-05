@@ -15,6 +15,11 @@
                                     field below. If you didn't receive the email, we will gladly send you another.</p>
                                 <h6 class="fw-bolder">
                                     {{ substr(session('email'), 0, 4) }}*******{{ substr(session('email'), -4) }}</h6>
+                                @if (session('success'))
+                                    <div class="alert alert-success mt-2" role="alert">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 @if ($errors->any())
                                     @foreach ($errors->all() as $error)
                                         <div class="alert alert-danger" role="alert">
@@ -53,7 +58,7 @@
                                 </form>
                                 <div class="d-flex align-items-center">
                                     <p class="fs-4 mb-0 text-dark">Didn't get the code?</p>
-                                    <form method="POST" action="{{ route('verification.send') }}">
+                                    <form method="POST" action="{{ route('verification.resend') }}">
                                         @csrf
                                         <button
                                             class="text-primary fw-medium ms-2 border-0 bg-white px-0">Resend</button>
@@ -66,8 +71,12 @@
             </div>
         </div>
     </div>
-
     <script>
+        document.querySelector('form[action="{{ route('verification.resend') }}"]').addEventListener('submit', function (e) {
+            const resendButton = e.target.querySelector('button');
+            resendButton.disabled = true;
+            resendButton.textContent = 'Resending...';
+        });
         document.addEventListener('DOMContentLoaded', () => {
             const inputs = document.querySelectorAll('.otp-input');
             const hiddenInput = document.getElementById('otp');

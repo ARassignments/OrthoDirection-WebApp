@@ -33,6 +33,7 @@ Route::get('/payment', function () {return view('pages.payment');})->name('payme
 Route::get('email-verify', [RegisteredUserController::class, 'showVerificationNotice'])->name('verification.email');
 Route::get('/verify-otp', [AuthenticatedSessionController::class, 'showOtpForm'])->name('otp.verify');
 Route::post('/verify-otp', [AuthenticatedSessionController::class, 'verifyOtp'])->name('otp.check');
+Route::post('/resend-otp', [RegisteredUserController::class, 'resend'])->name('verification.resend');
 
 //register routes
 Route::get('/register-otp-verify', [RegisteredUserController::class, 'showOtpForm'])->name('register.otp.verify');
