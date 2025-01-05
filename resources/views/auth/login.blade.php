@@ -62,7 +62,7 @@
                                         placeholder="Enter Email or Username" :value="old('email')" autofocus
                                         autocomplete="username" required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"/>
                                     </small>
                                 </div>
                                 <div class="mb-4">
@@ -70,7 +70,7 @@
                                     <input type="password" class="form-control" id="password" name="password"
                                         placeholder="Enter Password" autocomplete="current-password" required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"/>
                                     </small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
@@ -98,4 +98,24 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        @if (session('success'))
+            Toast.fire({
+                icon: "success",
+                title: "Login Successfully"
+            });
+        @endif
+    </script>
 </x-guest-layout>

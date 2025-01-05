@@ -33,7 +33,7 @@
                                     <input type="email" class="form-control" id="email" name="email"
                                         placeholder="Enter Email Address" :value="old('email')" autofocus required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <button class="btn btn-primary w-100 py-8 mb-3 rounded-2">Send Reset Link</button>

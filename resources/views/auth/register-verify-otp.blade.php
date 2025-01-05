@@ -71,7 +71,25 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        @if (session('success'))
+            Toast.fire({
+                icon: "success",
+                title: "OTP Sended Successfully"
+            });
+        @endif
         document.querySelector('form[action="{{ route('verification.resend') }}"]').addEventListener('submit', function (e) {
             const resendButton = e.target.querySelector('button');
             resendButton.disabled = true;

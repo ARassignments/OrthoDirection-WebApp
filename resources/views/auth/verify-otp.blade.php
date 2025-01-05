@@ -22,7 +22,7 @@
                                 @endif
                                 @if ($errors->any())
                                     @foreach ($errors->all() as $error)
-                                        <div class="alert alert-danger" role="alert">
+                                        <div class="alert alert-danger mt-2" role="alert">
                                             {{ $error }}
                                         </div>
                                     @endforeach
@@ -64,9 +64,9 @@
                                             class="text-primary fw-medium ms-2 border-0 bg-white px-0">Resend</button>
                                     </form>
                                 </div>
-                             
 
-                              
+
+
                             </div>
                         </div>
                     </div>
@@ -75,8 +75,26 @@
         </div>
     </div>
 
+    <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
-           document.querySelector('form[action="{{ route('verification.resend') }}"]').addEventListener('submit', function (e) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        @if (session('success'))
+            Toast.fire({
+                icon: "success",
+                title: "OTP Sended Successfully"
+            });
+        @endif
+        document.querySelector('form[action="{{ route('verification.resend') }}"]').addEventListener('submit', function(e) {
             const resendButton = e.target.querySelector('button');
             resendButton.disabled = true;
             resendButton.textContent = 'Resending...';

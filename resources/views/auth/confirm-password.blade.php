@@ -31,7 +31,7 @@
                                     <input type="password" class="form-control" id="password" name="password"
                                     placeholder="Enter Password" autocomplete="current-password" autofocus required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <button class="btn btn-primary w-100 py-8 mb-3 rounded-2">Confirm Password</button>

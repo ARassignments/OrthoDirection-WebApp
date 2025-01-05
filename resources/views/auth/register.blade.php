@@ -28,7 +28,7 @@
                                         placeholder="Enter Your Name" :value="old('name')" autofocus
                                         autocomplete="name" required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('name')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <div class="mb-3">
@@ -37,7 +37,7 @@
                                         placeholder="Enter Email Address" :value="old('email')" autofocus
                                         autocomplete="username" required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <div class="mb-4">
@@ -45,7 +45,7 @@
                                     <input type="password" class="form-control" id="password" name="password"
                                         placeholder="Enter Password" autocomplete="new-password" required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <div class="mb-4">
@@ -54,7 +54,7 @@
                                         name="password_confirmation" placeholder="Enter Confirm Password"
                                         autocomplete="new-password" required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <div class="mb-4">
@@ -76,7 +76,7 @@
                                             for="doctor">Doctor</label>
                                     </div>
                                     <small>
-                                        <x-input-error :messages="$errors->get('roles')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('roles')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <button class="btn btn-primary w-100 py-8 mb-4 rounded-2">Create Account</button>
