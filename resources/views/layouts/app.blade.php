@@ -70,56 +70,178 @@
                         <!-- ---------------------------------- -->
                         <!-- Dashboard -->
                         <!-- ---------------------------------- -->
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('dashboard') }}" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-home"></i>
-                                </span>
-                                <span class="hide-menu">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="/admin/blogs" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-chart-donut-3"></i>
-                                </span>
-                                <span class="hide-menu">Blogs</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                                <span class="d-flex">
-                                    <i class="ti ti-users"></i>
-                                </span>
-                                <span class="hide-menu">Users</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a href="/admin/family" class="sidebar-link">
-                                        <div class="round-16 d-flex align-items-center justify-content-center">
-                                            <i class="ti ti-circle"></i>
-                                        </div>
-                                        <span class="hide-menu">Family Members</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="/admin/patients" class="sidebar-link">
-                                        <div class="round-16 d-flex align-items-center justify-content-center">
-                                            <i class="ti ti-circle"></i>
-                                        </div>
-                                        <span class="hide-menu">Patients</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="/admin/doctors" class="sidebar-link">
-                                        <div class="round-16 d-flex align-items-center justify-content-center">
-                                            <i class="ti ti-circle"></i>
-                                        </div>
-                                        <span class="hide-menu">Doctors</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (Auth::user()->role == 'admin')
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/admin" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-home"></i>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/admin/blogs" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-chart-donut-3"></i>
+                                    </span>
+                                    <span class="hide-menu">Blogs</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                    <span class="d-flex">
+                                        <i class="ti ti-users"></i>
+                                    </span>
+                                    <span class="hide-menu">Users</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item">
+                                        <a href="/admin/family" class="sidebar-link">
+                                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                                <i class="ti ti-circle"></i>
+                                            </div>
+                                            <span class="hide-menu">Family Members</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="/admin/patients" class="sidebar-link">
+                                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                                <i class="ti ti-circle"></i>
+                                            </div>
+                                            <span class="hide-menu">Patients</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="/admin/doctors" class="sidebar-link">
+                                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                                <i class="ti ti-circle"></i>
+                                            </div>
+                                            <span class="hide-menu">Doctors</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @elseif (Auth::user()->role == 'doctor')
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/doctor" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-home"></i>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/doctor/patients" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-users"></i>
+                                    </span>
+                                    <span class="hide-menu">Patients</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/doctor/appointments" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-calendar"></i>
+                                    </span>
+                                    <span class="hide-menu">Appointments</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link justify-content-between" href="/doctor/messages"
+                                    aria-expanded="false">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <span class="d-flex">
+                                            <i class="ti ti-messages"></i>
+                                        </span>
+                                        <span class="hide-menu">Messages</span>
+                                    </div>
+                                    <div class="hide-menu">
+                                        <span
+                                            class="badge rounded-circle bg-primary d-flex align-items-center justify-content-center rounded-pill fs-2">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        @elseif (Auth::user()->role == 'patient')
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/patient" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-home"></i>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/patient/tracking" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-route"></i>
+                                    </span>
+                                    <span class="hide-menu">Tracking</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/patient/appointments" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-calendar"></i>
+                                    </span>
+                                    <span class="hide-menu">Appointments</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link justify-content-between" href="/patient/messages"
+                                    aria-expanded="false">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <span class="d-flex">
+                                            <i class="ti ti-messages"></i>
+                                        </span>
+                                        <span class="hide-menu">Messages</span>
+                                    </div>
+                                    <div class="hide-menu">
+                                        <span
+                                            class="badge rounded-circle bg-primary d-flex align-items-center justify-content-center rounded-pill fs-2">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        @elseif (Auth::user()->role == 'family')
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/family" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-home"></i>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/family/tracking" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-route"></i>
+                                    </span>
+                                    <span class="hide-menu">Tracking</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/family/appointments" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-calendar"></i>
+                                    </span>
+                                    <span class="hide-menu">Appointments</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link justify-content-between" href="/family/messages"
+                                    aria-expanded="false">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <span class="d-flex">
+                                            <i class="ti ti-messages"></i>
+                                        </span>
+                                        <span class="hide-menu">Messages</span>
+                                    </div>
+                                    <div class="hide-menu">
+                                        <span
+                                            class="badge rounded-circle bg-primary d-flex align-items-center justify-content-center rounded-pill fs-2">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">account settings</span>
@@ -144,7 +266,7 @@
                                 class="rounded-circle" width="40" height="40" alt="" />
                         </div>
                         <div class="john-title">
-                            <h6 class="mb-0 fs-4 fw-semibold">{{ Auth::user()->name }}</h6>
+                            <h6 class="mb-0 fs-4 fw-semibold text-capitalize">{{ Auth::user()->name }}</h6>
                             <span class="fs-2 text-capitalize">{{ Auth::user()->role }}</span>
                         </div>
                         <a href="{{ route('logout') }}" class="border-0 bg-transparent text-primary ms-auto"
@@ -900,7 +1022,7 @@
 
             <div class="body-wrapper">
                 <div class="container-fluid">
-                    {{ $slot }}
+                    @yield('content')
                 </div>
             </div>
 
@@ -927,7 +1049,7 @@
 <script src="{{ asset('assets/dash/assets/js/sidebarmenu.js') }}"></script>
 <script src="{{ asset('assets/dash/assets/js/theme.js') }}"></script>
 
-{{-- <script src="{{ asset('assets/dash/assets/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script> --}}
+<script src="{{ asset('assets/dash/assets/libs/owl.carousel/dist/owl.carousel.min.js') }}" defer></script>
 {{-- <script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script> --}}
 
 <script src="{{ asset('assets/dash/assets/js/dashboards/dashboard.js') }}"></script>
