@@ -60,12 +60,11 @@
                                                     to
                                                     the another level with custom package and support.</div>
                                                 <div class="px-0"><a href="/payment"
-                                                        class="btn btn-outline-primary btn-block rounded-pill">Request for
-                                                        Demo</a></div>
+                                                        class="btn btn-outline-primary btn-block rounded-pill">Choose This Plan</a></div>
                                             </div>
                                             <div class="d-none d-md-block d-xl-none border-start h-100"></div>
                                             <div class="pt-4 p-md-5 p-xl-0 pt-xl-4 w-md-50 w-xl-100">
-                                                <h5 class="fw-medium pb-1">Everything in Pro, plus</h5>
+                                                <h5 class="fw-medium pb-1">Everything in Free, Plus</h5>
                                                 <ul class="list gy-3">
                                                     <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
                                                         <span>Advertisements</span>
@@ -131,13 +130,13 @@
                                                 determine what works best for you</div>
                                             <div class="px-0 pricing-toggle-content">
                                                 <div class="pricing-toggle-option"><a href="/payment"
-                                                        class="btn btn-primary btn-block rounded-pill">Get Committed</a>
+                                                        class="btn btn-primary btn-block rounded-pill">Choose This Plan</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="d-none d-md-block d-xl-none border-start h-100"></div>
                                         <div class="pt-4 p-md-5 p-xl-0 pt-xl-4 w-md-50 w-xl-100">
-                                            <h5 class="fw-medium pb-1">Everything in Free, plus</h5>
+                                            <h5 class="fw-medium pb-1">Everything in Pro, Plus</h5>
                                             <ul class="list gy-3">
                                                 <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
                                                     <span>Advertisements</span>
@@ -191,10 +190,7 @@
                                                     to
                                                     determine what works best for you</div>
                                                 <div class="px-0"><a href="/payment"
-                                                        class="btn btn-outline-primary btn-block rounded-pill">Start
-                                                        Writing
-                                                        for
-                                                        Free</a></div>
+                                                        class="btn btn-outline-primary btn-block rounded-pill">Choose This Plan</a></div>
                                             </div>
                                             <div class="d-none d-md-block d-xl-none border-start h-100"></div>
                                             <div class="pt-4 p-md-5 p-xl-0 pt-xl-4 w-md-50 w-xl-100">
@@ -261,12 +257,11 @@
                                                     to
                                                     the another level with custom package and support.</div>
                                                 <div class="px-0"><a href="/payment"
-                                                        class="btn btn-outline-primary btn-block rounded-pill">Request for
-                                                        Demo</a></div>
+                                                        class="btn btn-outline-primary btn-block rounded-pill">Choose This Plan</a></div>
                                             </div>
                                             <div class="d-none d-md-block d-xl-none border-start h-100"></div>
                                             <div class="pt-4 p-md-5 p-xl-0 pt-xl-4 w-md-50 w-xl-100">
-                                                <h5 class="fw-medium pb-1">Everything in Pro, plus</h5>
+                                                <h5 class="fw-medium pb-1">Everything in Elite, Plus</h5>
                                                 <ul class="list gy-3">
                                                     <li><em class="icon fs-4 ni ni-check-circle-fill text-primary"></em>
                                                         <span>Advertisements</span>
@@ -316,31 +311,27 @@
                                         <div class="lower-content" style="border-radius: 20px !important;">
                                             <h2>Compare Plans for OrthoDirection</h2>
                                             <p>
-                                                Welcome to OrthoDirection! Your privacy is important to us. This Privacy
-                                                Policy
-                                                explains how we collect, use, share, and protect your information when using
-                                                the
-                                                OrthoDirection platform for Dental Doctors and Patients.
+                                                OrthoDirection offers tailored plans designed to cater to the unique needs of Doctors, Patients, and Family Members. Each plan provides access to essential features such as patient management, advertisements, and AI-powered tools for cephalometric analysis, ensuring a seamless and efficient orthodontic experience. Choose the plan that best suits your role and enjoy a comprehensive, user-friendly platform built for optimal results and convenience.
                                             </p>
 
 
                                             <ul class="nav nav-pills nav-justified mb-4 gap-3" role="tablist">
                                                 <li class="nav-item" role="presentation"><button
-                                                        class="nav-link active d-flex justify-content-center"
+                                                        class="nav-link active d-flex justify-content-center rounded-pill"
                                                         data-bs-toggle="pill" data-bs-target="#pills-free" type="button"
                                                         aria-selected="true" role="tab">Free Plan</button></li>
                                                 <li class="nav-item" role="presentation"><button
-                                                        class="nav-link d-flex justify-content-center"
+                                                        class="nav-link d-flex justify-content-center rounded-pill"
                                                         data-bs-toggle="pill" data-bs-target="#pills-standard"
                                                         type="button" aria-selected="false" role="tab"
                                                         tabindex="-1">Standard Plan</button></li>
                                                 <li class="nav-item" role="presentation"><button
-                                                        class="nav-link d-flex justify-content-center"
+                                                        class="nav-link d-flex justify-content-center rounded-pill"
                                                         data-bs-toggle="pill" data-bs-target="#pills-premium"
                                                         type="button" aria-selected="false" role="tab"
                                                         tabindex="-1">Premium Plan</button></li>
                                                 <li class="nav-item" role="presentation"><button
-                                                        class="nav-link d-flex justify-content-center"
+                                                        class="nav-link d-flex justify-content-center rounded-pill"
                                                         data-bs-toggle="pill" data-bs-target="#pills-enterprise"
                                                         type="button" aria-selected="false" tabindex="-1"
                                                         role="tab">Enterprise Plan</button></li>
@@ -1138,6 +1129,9 @@
                             </div>
                         </section>
                         <style>
+                            .nav-pills .nav-link {
+                                background-color: #eeeeee;
+                            }
                             .nav-link:after {
                                 display: none !important;
                             }
