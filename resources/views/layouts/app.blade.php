@@ -81,12 +81,30 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/admin/blogs" aria-expanded="false">
-                                        <span>
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                        <span class="d-flex">
                                             <i class="ti ti-chart-donut-3"></i>
                                         </span>
                                         <span class="hide-menu">Blogs</span>
                                     </a>
+                                    <ul aria-expanded="false" class="collapse first-level">
+                                        <li class="sidebar-item">
+                                            <a href="/admin/blogs" class="sidebar-link">
+                                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                                    <i class="ti ti-circle"></i>
+                                                </div>
+                                                <span class="hide-menu">Blogs</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a href="/admin/add-blog" class="sidebar-link">
+                                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                                    <i class="ti ti-circle"></i>
+                                                </div>
+                                                <span class="hide-menu">Add Blog</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
