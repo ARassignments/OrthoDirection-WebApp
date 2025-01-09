@@ -50,18 +50,22 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::prefix('/admin/')->group(function () {
+Route::prefix('/admin')->middleware('prevent-back-history')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
-Route::prefix('/doctors/')->group(function () {
-    Route::get('/dashboard', [ProfessionalController::class, 'dashboard'])->name('doctors.dahboard');
+
+Route::prefix('/doctors')->middleware('prevent-back-history')->group(function () {
+    Route::get('/dashboard', [ProfessionalController::class, 'dashboard'])->name('doctors.dashboard');
 });
-Route::prefix('/family/')->group(function () {
-    Route::get('/dashboard', [FamilyController::class, 'dashboard'])->name('family.dahboard');
+
+Route::prefix('/family')->middleware('prevent-back-history')->group(function () {
+    Route::get('/dashboard', [FamilyController::class, 'dashboard'])->name('family.dashboard');
 });
-Route::prefix('/patient/')->group(function () {
-    Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patient.dahboard');
+
+Route::prefix('/patient')->middleware('prevent-back-history')->group(function () {
+    Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patients.dashboard');
 });
+
 
 Route::get("/logout", [AdminController::class, 'logout'])->name("logout");
 

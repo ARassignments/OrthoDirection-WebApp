@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">    
+    
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <meta name="description"
-        content="Ortho Direction - Comprehensive dental services with expert care. Learn more about our services, pricing, and team.">
+    <meta name="description" content="Ortho Direction - Comprehensive dental services with expert care. Learn more about our services, pricing, and team.">
     <meta name="keywords" content="dentist, dental care, dental services, ortho direction">
     <meta name="author" content="Ortho Direction">
     <meta name="robots" content="index, follow">
@@ -931,5 +933,15 @@
 {{-- <script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script> --}}
 
 <script src="{{ asset('assets/dash/assets/js/dashboards/dashboard.js') }}"></script>
+<script>
+    (function () {
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function () {
+                window.history.pushState(null, null, window.location.href);
+            };
+        }
+    })();
+</script>
 
 </html>

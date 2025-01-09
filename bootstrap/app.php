@@ -12,7 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'allow-unverified' => \App\Http\Middleware\AllowUnverifiedUsers::class
+            'allow-unverified' => \App\Http\Middleware\AllowUnverifiedUsers::class,
+            'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
