@@ -147,50 +147,63 @@
             <h2>We Offer For You Ortho <br />Dental Saving Smile</h2>
         </div>
         <div class="row clearfix">
-            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                <div class="service-block-one wow fadeInUp animated" data-wow-delay="00ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><a href="service-details-3.html"><img
-                                        src="{{asset('assets/images/service/service-1.jpg')}}" alt=""></a></figure>
-                            <div class="icon-box"><i class="icon-29"></i></div>
-                        </div>
-                        <div class="lower-content">
-                            <h3><a href="service-details-3.html">Dental Services</a></h3>
-                            <p>Globally harness multimedia based collaboration and idea haring with backend products.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                <div class="service-block-one wow fadeInUp animated" data-wow-delay="300ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 service-block">
+                <div class="service-block-one wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                    <div class="inner-box" data-count="1">
                         <div class="image-box">
                             <figure class="image"><a href="service-details-6.html"><img
-                                        src="{{asset('assets/images/service/service-2.jpg')}}" alt=""></a></figure>
+                                        src="assets/images/service/service-20.jpg" alt=""></a></figure>
                             <div class="icon-box"><i class="icon-16"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details-6.html">Dental Implants</a></h3>
-                            <p>Dramatically disseminate standardized metrics after resource-leveling processes.</p>
+                            <h3><a href="service-details-6.html">AI-Powered Cephalometric Analysis</a></h3>
+                            <p>
+                                Revolutionize diagnostics with cutting-edge AI technology. Upload cephalometric X-rays
+                                to get
+                                precise measurements and detailed orthodontic reports, saving time and improving
+                                diagnostic
+                                accuracy.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                <div class="service-block-one wow fadeInUp animated" data-wow-delay="600ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 service-block">
+                <div class="service-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                    <div class="inner-box" data-count="2">
                         <div class="image-box">
-                            <figure class="image"><a href="service-details.html"><img
-                                        src="assets/images/service/service-3.jpg" alt=""></a></figure>
+                            <figure class="image"><a href="service-details-2.html"><img
+                                        src="assets/images/service/service-17.jpg" alt=""></a></figure>
+                            <div class="icon-box"><i class="icon-11"></i></div>
+                        </div>
+                        <div class="lower-content">
+                            <h3><a href="service-details-2.html">AI-Driven Diagnosis & Treatment Planning</a></h3>
+                            <p>
+                                Simplify and enhance treatment planning with AI insights. Create personalized
+                                orthodontic plans
+                                for braces, Invisalign, and more, while tracking real-time progress and adjusting
+                                milestones for
+                                optimal outcomes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 service-block">
+                <div class="service-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                    <div class="inner-box" data-count="3">
+                        <div class="image-box">
+                            <figure class="image"><a href="service-details-4.html"><img
+                                        src="assets/images/service/service-16.jpg" alt=""></a></figure>
                             <div class="icon-box"><i class="icon-17"></i></div>
                         </div>
                         <div class="lower-content">
-                            <h3><a href="service-details.html">Surgery</a></h3>
-                            <p>Proactively fabricate one-to-one materials via effective e-business services processes.</p>
+                            <h3><a href="service-details-4.html">Doctor-Patient Communication Tools</a></h3>
+                            <p>
+                                Stay connected with secure messaging, virtual consultations, and appointment management.
+                                Simplify communication between doctors, patients, and families for a seamless treatment
+                                experience.
+                            </p>
                         </div>
                     </div>
                 </div>

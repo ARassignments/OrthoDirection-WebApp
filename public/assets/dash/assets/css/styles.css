@@ -100,7 +100,7 @@
 [data-bs-theme=light][data-color-theme=Blue_Theme]:root,
 [data-bs-theme=dark][data-color-theme=Blue_Theme]:root {
   --bs-primary: #1376F8;
-  --bs-primary-rgb: 93, 135, 255;
+  --bs-primary-rgb: 19, 118, 248;
   --bs-light-primary: rgba(93, 135, 255, 0.1);
   --bs-primary-bg-subtle: rgba(93, 135, 255, 0.1);
   --bs-secondary: #49beff;
@@ -16424,6 +16424,12 @@ html[data-layout=horizontal] .body-wrapper > .container-fluid, html[data-layout=
   position: fixed;
   z-index: 99999;
   background: #fff;
+  transition: all 1.0s ease;
+}
+
+.preloader.hidden {
+  opacity:0;
+  pointer-events: none;
 }
 
 .lds-ripple {

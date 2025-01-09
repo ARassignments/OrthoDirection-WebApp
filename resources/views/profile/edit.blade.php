@@ -1,4 +1,5 @@
-<x-app-layout>
+@extends('layouts.app')
+@section('content')
     <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
         <div class="card-body px-4 py-3">
             <div class="row align-items-center">
@@ -100,7 +101,7 @@
                                                 id="update_password_current_password" placeholder="●●●●●●●●●"
                                                 autocomplete="current-password">
                                             <small>
-                                                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+                                                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                             </small>
                                         </div>
                                         <div class="mb-4">
@@ -110,7 +111,7 @@
                                                 placeholder="●●●●●●●●●" id="update_password_password"
                                                 autocomplete="new-password">
                                             <small>
-                                                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+                                                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                             </small>
                                         </div>
                                         <div class="mb-4">
@@ -121,7 +122,7 @@
                                                 placeholder="●●●●●●●●●" id="update_password_password_confirmation"
                                                 autocomplete="new-password">
                                             <small>
-                                                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+                                                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                             </small>
                                         </div>
                                         <div class="col-12">
@@ -151,10 +152,10 @@
                                                         Name</label>
                                                     <input type="text" id="name" name="name"
                                                         class="form-control" placeholder="Full Name"
-                                                        :value="old('name', $user - > name)" required autofocus
+                                                        value="{{ Auth::user()->name }}" required autofocus
                                                         autocomplete="name">
                                                     <small>
-                                                        <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                                                        <x-input-error class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" :messages="$errors->get('name')" />
                                                     </small>
                                                 </div>
                                                 <div class="mb-4">
@@ -171,10 +172,10 @@
                                                     <label for="email" class="form-label fw-semibold">Email</label>
                                                     <input type="email" name="email" class="form-control"
                                                         id="email" placeholder="info@orthodirection.com"
-                                                        :value="old('email', $user - > email)" required
+                                                        value="{{ Auth::user()->email }}" required
                                                         autocomplete="username">
                                                     <small>
-                                                        <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                                                        <x-input-error class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" :messages="$errors->get('email')" />
                                                     </small>
                                                 </div>
                                             </div>
@@ -658,4 +659,4 @@
             });
         @endif
     </script>
-</x-app-layout>
+@endsection

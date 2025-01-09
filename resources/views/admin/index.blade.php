@@ -24,16 +24,17 @@
     @vite(['resources/js/app.js'])
     <link rel="preload" href="{{ asset('assets/dash/assets/css/styles.css') }}" as="style">
     <link rel="stylesheet" href="{{ asset('assets/dash/assets/css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/owl.carousel/dist/assets/owl.carousel.min.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('assets/dash/assets/libs/owl.carousel/dist/assets/owl.carousel.min.css') }}" />
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
-    <base href="{{ asset('assets/dash/assets/')}}">
+    <base href="{{ asset('assets/dash/assets/') }}">
 
 </head>
 
 <body>
 
     <div class="preloader">
-        <img src="{{ asset('assets/images/favicon.png')}}" alt="loader" class="lds-ripple img-fluid" />
+        <img src="{{ asset('assets/images/favicon.png') }}" alt="loader" class="lds-ripple img-fluid" />
     </div>
     <div id="main-wrapper">
         <!-- Sidebar Start -->
@@ -43,8 +44,10 @@
                 <!-- ---------------------------------- -->
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="/" class="text-nowrap logo-img">
-                        <img src="{{ asset('assets/images/logo.png')}}" class="dark-logo" alt="Logo-Dark" style="height: 60px;"/>
-                        <img src="{{ asset('assets/images/logo.png')}}" class="light-logo" alt="Logo-light" style="height: 60px;" />
+                        <img src="{{ asset('assets/images/logo.png') }}" class="dark-logo" alt="Logo-Dark"
+                            style="height: 60px;" />
+                        <img src="{{ asset('assets/images/logo.png') }}" class="light-logo" alt="Logo-light"
+                            style="height: 60px;" />
                     </a>
                     <a href="javascript:void(0)"
                         class="sidebartoggler ms-auto text-decoration-none fs-5 d-block d-xl-none">
@@ -60,7 +63,11 @@
                         <!-- ---------------------------------- -->
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Admin</span>
+                            <span class="hide-menu text-capitalize">
+                                @if (auth()->check())
+                                    {{ auth()->user()->role }}
+                                @endif
+                            </span>
                         </li>
                         <!-- ---------------------------------- -->
                         <!-- Dashboard -->
@@ -115,40 +122,44 @@
                                 </li>
                             </ul>
                         </li>
-                        
-                        
+
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu text-capitalize">Account Setting</span>
+                        </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="/admin/account" aria-expanded="false">
+                            <a class="sidebar-link" href="/admin/profile" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-user-circle"></i>
                                 </span>
-                                <span class="hide-menu">Account Setting</span>
+                                <span class="hide-menu">My Profile</span>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </nav>
 
                 <div class="fixed-profile p-3 mx-4 mb-2 bg-secondary-subtle rounded sidebar-ad mt-3">
                     <div class="hstack gap-3">
                         <div class="john-img">
-                            <img src="{{asset('assets/dash/assets/images/profile/user-1.jpg')}}" class="rounded-circle" width="40"
-                                height="40" alt="" />
+                            <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
+                                class="rounded-circle" width="40" height="40" alt="" />
                         </div>
                         <div class="john-title">
-                            <h6 class="mb-0 fs-4 fw-semibold">
-                                @if(auth()->check())
+                            <h6 class="mb-0 fs-4 fw-semibold text-capitalize">
+                                @if (auth()->check())
                                     {{ auth()->user()->name }}
                                 @endif
                             </h6>
-                            <span class="fs-2"> 
-                                @if(auth()->check())
+                            <span class="fs-2 text-capitalize">
+                                @if (auth()->check())
                                     {{ auth()->user()->role }}
-                                @endif</span>
+                                @endif
+                            </span>
                         </div>
-                        <a href="{{ route('logout') }}" class="border-0 bg-transparent text-primary ms-auto" tabindex="0" type="button"
-                            aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-title="logout">
+                        <a href="{{ route('logout') }}" class="border-0 bg-transparent text-primary ms-auto"
+                            tabindex="0" type="button" aria-label="logout" data-bs-toggle="tooltip"
+                            data-bs-placement="top" data-bs-title="logout">
                             <i class="ti ti-power fs-6"></i>
                         </a>
                     </div>
@@ -163,7 +174,8 @@
         <div class="page-wrapper">
             <!--  Header Start -->
             <header class="topbar">
-                <div class="with-vertical"><!-- ---------------------------------- -->
+                <div class="with-vertical">
+                    <!-- ---------------------------------- -->
                     <!-- Start Vertical Layout Header -->
                     <!-- ---------------------------------- -->
                     <nav class="navbar navbar-expand-lg p-0">
@@ -400,7 +412,7 @@
                         </ul>
 
                         <div class="d-block d-lg-none">
-                            <img src="{{ asset('assets/images/logo.png')}}" width="100" alt="" />
+                            <img src="{{ asset('assets/images/logo.png') }}" width="100" alt="" />
                         </div>
                         <a class="navbar-toggler nav-icon-hover p-0 border-0" href="javascript:void(0)"
                             data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
@@ -422,10 +434,10 @@
                                     <!-- start language Dropdown -->
                                     <!-- ------------------------------- -->
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link nav-icon-hover" href="javascript:void(0)"
-                                            id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="{{asset('assets/dash/assets/images/svgs/icon-flag-en.svg')}}" alt=""
-                                                width="20px" height="20px"
+                                        <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="{{ asset('assets/dash/assets/images/svgs/icon-flag-en.svg') }}"
+                                                alt="" width="20px" height="20px"
                                                 class="rounded-circle object-fit-cover round-20" />
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
@@ -434,7 +446,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
                                                     <div class="position-relative">
-                                                        <img src="{{asset('assets/dash/assets/images/svgs/icon-flag-en.svg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/svgs/icon-flag-en.svg') }}"
                                                             alt="" width="20px" height="20px"
                                                             class="rounded-circle object-fit-cover round-20" />
                                                     </div>
@@ -443,7 +455,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
                                                     <div class="position-relative">
-                                                        <img src="{{asset('assets/dash/assets/images/svgs/icon-flag-cn.svg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/svgs/icon-flag-cn.svg') }}"
                                                             alt="" width="20px" height="20px"
                                                             class="rounded-circle object-fit-cover round-20" />
                                                     </div>
@@ -452,7 +464,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
                                                     <div class="position-relative">
-                                                        <img src="{{asset('assets/dash/assets/images/svgs/icon-flag-fr.svg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/svgs/icon-flag-fr.svg') }}"
                                                             alt="" width="20px" height="20px"
                                                             class="rounded-circle object-fit-cover round-20" />
                                                     </div>
@@ -461,7 +473,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
                                                     <div class="position-relative">
-                                                        <img src="{{asset('assets/dash/assets/images/svgs/icon-flag-sa.svg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/svgs/icon-flag-sa.svg') }}"
                                                             alt="" width="20px" height="20px"
                                                             class="rounded-circle object-fit-cover round-20" />
                                                     </div>
@@ -478,8 +490,8 @@
                                     <!-- start notification Dropdown -->
                                     <!-- ------------------------------- -->
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link nav-icon-hover" href="javascript:void(0)"
-                                            id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="ti ti-bell-ringing"></i>
                                             <div class="notification bg-primary rounded-circle"></div>
                                         </a>
@@ -494,7 +506,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="{{asset('assets/dash/assets/images/profile/user-1.jpg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -508,7 +520,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="{{asset('assets/dash/assets/images/profile/user-2.jpg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-2.jpg') }}"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -521,7 +533,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="{{asset('assets/dash/assets/images/profile/user-3.jpg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-3.jpg') }}"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -534,7 +546,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="{{asset('assets/dash/assets/images/profile/user-4.jpg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-4.jpg') }}"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -548,7 +560,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="{{asset('assets/dash/assets/images/profile/user-5.jpg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-5.jpg') }}"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -562,7 +574,7 @@
                                                 <a href="javascript:void(0)"
                                                     class="py-6 px-7 d-flex align-items-center dropdown-item">
                                                     <span class="me-3">
-                                                        <img src="{{asset('assets/dash/assets/images/profile/user-1.jpg')}}"
+                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
                                                             alt="user" class="rounded-circle" width="48"
                                                             height="48" />
                                                     </span>
@@ -593,7 +605,7 @@
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-profile-img">
-                                                    <img src="{{asset('assets/dash/assets/images/profile/user-1.jpg')}}"
+                                                    <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
                                                         class="rounded-circle" width="35" height="35"
                                                         alt="" />
                                                 </div>
@@ -606,25 +618,25 @@
                                                     <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                                                 </div>
                                                 <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                                    <img src="{{asset('assets/dash/assets/images/profile/user-1.jpg')}}"
+                                                    <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
                                                         class="rounded-circle" width="80" height="80"
                                                         alt="" />
                                                     <div class="ms-3">
-                                                        <h5 class="mb-1 fs-3">
-                                                        @if (auth()->check())
+                                                        <h5 class="mb-1 fs-3 text-capitalize">
+                                                            @if (auth()->check())
                                                                 {{ auth()->user()->name }}
-                                                        @endif
+                                                            @endif
                                                         </h5>
-                                                        <span class="mb-1 d-block">
-                                                        @if (auth()->check())
-                                                            {{ auth()->user()->role }}
-                                                        @endif
+                                                        <span class="mb-1 d-block text-capitalize">
+                                                            @if (auth()->check())
+                                                                {{ auth()->user()->role }}
+                                                            @endif
                                                         </span>
                                                         <p class="mb-0 d-flex align-items-center gap-2">
-                                                            <i class="ti ti-mail fs-4"></i> 
-                                                        @if (auth()->check())
-                                                            {{ auth()->user()->email }}
-                                                        @endif
+                                                            <i class="ti ti-mail fs-4"></i>
+                                                            @if (auth()->check())
+                                                                {{ auth()->user()->email }}
+                                                            @endif
                                                         </p>
                                                     </div>
                                                 </div>
@@ -633,7 +645,7 @@
                                                         class="py-8 px-7 mt-8 d-flex align-items-center">
                                                         <span
                                                             class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
-                                                            <img src="{{asset('assets/dash/assets/images/svgs/icon-account.svg')}}"
+                                                            <img src="{{ asset('assets/dash/assets/images/svgs/icon-account.svg') }}"
                                                                 alt="" width="24" height="24" />
                                                         </span>
                                                         <div class="w-75 d-inline-block v-middle ps-3">
@@ -646,7 +658,7 @@
                                                         class="py-8 px-7 d-flex align-items-center">
                                                         <span
                                                             class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
-                                                            <img src="{{asset('assets/dash/assets/images/svgs/icon-inbox.svg')}}"
+                                                            <img src="{{ asset('assets/dash/assets/images/svgs/icon-inbox.svg') }}"
                                                                 alt="" width="24" height="24" />
                                                         </span>
                                                         <div class="w-75 d-inline-block v-middle ps-3">
@@ -659,7 +671,7 @@
                                                         class="py-8 px-7 d-flex align-items-center">
                                                         <span
                                                             class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
-                                                            <img src="{{asset('assets/dash/assets/images/svgs/icon-tasks.svg')}}"
+                                                            <img src="{{ asset('assets/dash/assets/images/svgs/icon-tasks.svg') }}"
                                                                 alt="" width="24" height="24" />
                                                         </span>
                                                         <div class="w-75 d-inline-block v-middle ps-3">
@@ -680,7 +692,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <div class="m-n4 unlimited-img">
-                                                                    <img src="{{asset('assets/dash/assets/images/backgrounds/unlimited-bg.png')}}"
+                                                                    <img src="{{ asset('assets/dash/assets/images/backgrounds/unlimited-bg.png') }}"
                                                                         alt="" class="w-100" />
                                                                 </div>
                                                             </div>
@@ -708,11 +720,11 @@
                     <!-- apps Dropdown in Small screen -->
                     <!-- ------------------------------- -->
                     <!--  Mobilenavbar -->
-                    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1"
-                        id="mobilenavbar" aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mobilenavbar"
+                        aria-labelledby="offcanvasWithBothOptionsLabel">
                         <nav class="sidebar-nav scroll-sidebar">
                             <div class="offcanvas-header justify-content-between">
-                                <img src="{{asset('assets/images/logo.png')}}" alt="" class="img-fluid" />
+                                <img src="{{ asset('assets/images/logo.png') }}" alt="" class="img-fluid" />
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                     aria-label="Close"></button>
                             </div>
@@ -732,9 +744,8 @@
                                                 <a href="../main/app-chat.html" class="d-flex align-items-center">
                                                     <div
                                                         class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                        <img src="images/svgs/icon-dd-chat.svg"
-                                                            alt="" class="img-fluid" width="24"
-                                                            height="24" />
+                                                        <img src="images/svgs/icon-dd-chat.svg" alt=""
+                                                            class="img-fluid" width="24" height="24" />
                                                     </div>
                                                     <div class="d-inline-block">
                                                         <h6 class="mb-1 bg-hover-primary">Chat Application</h6>
@@ -744,8 +755,7 @@
                                                 </a>
                                             </li>
                                             <li class="sidebar-item py-2">
-                                                <a href="../main/app-invoice.html"
-                                                    class="d-flex align-items-center">
+                                                <a href="../main/app-invoice.html" class="d-flex align-items-center">
                                                     <div
                                                         class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
                                                         <img src="assets/images/svgs/icon-dd-invoice.svg"
@@ -794,9 +804,8 @@
                                                     class="d-flex align-items-center">
                                                     <div
                                                         class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                        <img src="assets/images/svgs/icon-dd-cart.svg"
-                                                            alt="" class="img-fluid" width="24"
-                                                            height="24" />
+                                                        <img src="assets/images/svgs/icon-dd-cart.svg" alt=""
+                                                            class="img-fluid" width="24" height="24" />
                                                     </div>
                                                     <div class="d-inline-block">
                                                         <h6 class="mb-1 bg-hover-primary">User Profile</h6>
@@ -806,13 +815,11 @@
                                                 </a>
                                             </li>
                                             <li class="sidebar-item py-2">
-                                                <a href="../main/app-calendar.html"
-                                                    class="d-flex align-items-center">
+                                                <a href="../main/app-calendar.html" class="d-flex align-items-center">
                                                     <div
                                                         class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                        <img src="assets/images/svgs/icon-dd-date.svg"
-                                                            alt="" class="img-fluid" width="24"
-                                                            height="24" />
+                                                        <img src="assets/images/svgs/icon-dd-date.svg" alt=""
+                                                            class="img-fluid" width="24" height="24" />
                                                     </div>
                                                     <div class="d-inline-block">
                                                         <h6 class="mb-1 bg-hover-primary">Calendar App</h6>
@@ -822,8 +829,7 @@
                                                 </a>
                                             </li>
                                             <li class="sidebar-item py-2">
-                                                <a href="../main/app-contact2.html"
-                                                    class="d-flex align-items-center">
+                                                <a href="../main/app-contact2.html" class="d-flex align-items-center">
                                                     <div
                                                         class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
                                                         <img src="assets/images/svgs/icon-dd-lifebuoy.svg"
@@ -889,8 +895,7 @@
                                         </ul>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link" href="/admin"
-                                            aria-expanded="false">
+                                        <a class="sidebar-link" href="/admin" aria-expanded="false">
                                             <span>
                                                 <i class="ti ti-message-dots"></i>
                                             </span>
@@ -935,7 +940,7 @@
 <script src="{{ asset('assets/dash/assets/js/theme.js') }}"></script>
 
 <script src="{{ asset('assets/dash/assets/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script> --}}
 <script src="{{ asset('assets/dash/assets/js/dashboards/dashboard.js') }}"></script>
 
 </html>
