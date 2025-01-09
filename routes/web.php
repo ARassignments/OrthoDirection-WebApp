@@ -56,16 +56,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('/admin/')->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('admin.dashboard');
 });
 Route::prefix('/doctor/')->group(function () {
-    Route::get('/', [DoctorController::class, 'dashboard'])->name('doctors.dahboard');
+    Route::get('/', [DoctorController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('doctors.dahboard');
 });
 Route::prefix('/family/')->group(function () {
-    Route::get('/', [FamilyController::class, 'dashboard'])->name('family.dahboard');
+    Route::get('/', [FamilyController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('family.dahboard');
 });
 Route::prefix('/patient/')->group(function () {
-    Route::get('/', [PatientController::class, 'dashboard'])->name('patient.dahboard');
+    Route::get('/', [PatientController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('patient.dahboard');
 });
 
 // Role-Based Dashboards

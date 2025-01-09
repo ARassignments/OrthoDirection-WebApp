@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div>
-                <h3 class="fw-semibold">Hi, <span class="text-dark text-capitalize">{{ Auth::user()->name }}</span>
+                <h3 class="fw-semibold">Hi, <span class="text-dark text-capitalize">{{ Auth::user()?Auth::user()->name:'' }}</span>
                 </h3>
                 <span>Cheers, and happy activities - July 6 2023</span>
             </div>

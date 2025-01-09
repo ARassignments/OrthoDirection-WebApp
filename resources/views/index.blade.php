@@ -85,11 +85,20 @@
                             </div>
                             <div class="d-flex justify-content-end gap-2">
                                 @auth
+                                    @if (Auth::user()->role == 'admin')
+                                        <a href="/admin" class="theme-btn btn-two"><span>Go Dashboard</span></a>
+                                    @elseif (Auth::user()->role == 'doctor')
+                                        <a href="/doctor" class="theme-btn btn-two"><span>Go Dashboard</span></a>
+                                    @elseif (Auth::user()->role == 'patient')
+                                        <a href="/patient" class="theme-btn btn-two"><span>Go Dashboard</span></a>
+                                    @elseif (Auth::user()->role == 'family')
+                                        <a href="/family" class="theme-btn btn-two"><span>Go Dashboard</span></a>
+                                    @endif
                                     <!-- Show Logout button when the user is logged in -->
-                                    <form action="{{ route('logout') }}" method="POST">
+                                    {{-- <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="theme-btn btn-two"><span>Logout</span></button>
-                                    </form>
+                                    </form> --}}
                                 @else
                                     <!-- Show Login and Register buttons when the user is not logged in -->
                                     <div class="btn-box">
@@ -112,9 +121,8 @@
                 <div class="auto-container">
                     <div class="outer-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="/"><img
-                                        src="{{ asset('assets/images/logo.png') }}" alt="Ortho Direction Logo"
-                                        loading="lazy"></a></figure>
+                            <figure class="logo"><a href="/"><img src="{{ asset('assets/images/logo.png') }}"
+                                        alt="Ortho Direction Logo" loading="lazy"></a></figure>
                         </div>
                         <div class="menu-area">
                             <nav class="main-menu clearfix">
@@ -123,11 +131,15 @@
                         </div>
                         <div class="d-flex justify-content-end gap-2">
                             @auth
-                                <!-- Show Logout button when the user is logged in -->
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="theme-btn btn-two"><span>Logout</span></button>
-                                </form>
+                                @if (Auth::user()->role == 'admin')
+                                    <a href="/admin" class="theme-btn btn-two"><span>Go Dashboard</span></a>
+                                @elseif (Auth::user()->role == 'doctor')
+                                    <a href="/doctor" class="theme-btn btn-two"><span>Go Dashboard</span></a>
+                                @elseif (Auth::user()->role == 'patient')
+                                    <a href="/patient" class="theme-btn btn-two"><span>Go Dashboard</span></a>
+                                @elseif (Auth::user()->role == 'family')
+                                    <a href="/family" class="theme-btn btn-two"><span>Go Dashboard</span></a>
+                                @endif
                             @else
                                 <!-- Show Login and Register buttons when the user is not logged in -->
                                 <div class="btn-box">
@@ -299,10 +311,12 @@
                                 </div>
                                 <div class="row">
                                     <a href="#" class="col-md-6 pe-0">
-                                        <img src="{{asset('assets/images/badges/apple.png')}}" class="w-100" alt="">
+                                        <img src="{{ asset('assets/images/badges/apple.png') }}" class="w-100"
+                                            alt="">
                                     </a>
                                     <a href="#" class="col-md-6 pe-0">
-                                        <img src="{{asset('assets/images/badges/google.png')}}" class="w-100 h-100" alt="">
+                                        <img src="{{ asset('assets/images/badges/google.png') }}" class="w-100 h-100"
+                                            alt="">
                                     </a>
                                 </div>
                             </div>

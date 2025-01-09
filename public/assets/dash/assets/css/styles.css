@@ -16424,6 +16424,12 @@ html[data-layout=horizontal] .body-wrapper > .container-fluid, html[data-layout=
   position: fixed;
   z-index: 99999;
   background: #fff;
+  transition: all 1.0s ease;
+}
+
+.preloader.hidden {
+  opacity:0;
+  pointer-events: none;
 }
 
 .lds-ripple {
