@@ -82,10 +82,10 @@ class AuthenticatedSessionController extends Controller
         // Redirect based on user role
         if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
-        } elseif ($user->role === 'patients') {
-            return redirect()->route('patients.dashboard');
-        } elseif ($user->role === 'doctors') {
-            return redirect()->route('doctors.dahboard');
+        } elseif ($user->role === 'patient') {
+            return redirect()->route('patient.dashboard');
+        } elseif ($user->role === 'doctor') {
+            return redirect()->route('doctor.dahboard');
         }elseif ($user->role === 'family') {
             return redirect()->route('family.dahboard');
         }
