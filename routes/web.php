@@ -44,9 +44,9 @@ Route::post('/resend-otp', [RegisteredUserController::class, 'resend'])->name('v
 Route::get('/register-otp-verify', [RegisteredUserController::class, 'showOtpForm'])->name('register.otp.verify');
 Route::post('/register-otp-verify', [RegisteredUserController::class, 'verifyOtp'])->name('register.otp.check');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
@@ -57,10 +57,11 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin/')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/family', [AdminController::class, 'family'])->name('admin.family');
 });
 
 Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->group(function () {
-    Route::get('/', [DoctorController::class, 'dashboard'])->name('doctors.dashboard');
+    Route::get('/', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
 });
 
 Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->group(function () {
