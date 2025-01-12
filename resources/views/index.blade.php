@@ -216,7 +216,7 @@
                                     <div class="form-group">
                                         <div class="check-box">
                                             <input class="check" type="checkbox" id="checkbox1">
-                                            <label for="checkbox1">I agree to the <a href="index.html">Privacy
+                                            <label for="checkbox1">I agree to the <a href="/privacy-policy">Privacy
                                                     Policy.</a></label>
                                         </div>
                                     </div>

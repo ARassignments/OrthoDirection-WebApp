@@ -337,7 +337,7 @@
                                                         role="tab">Enterprise Plan</button></li>
                                             </ul>
                                             <div class="tab-content shadow-lg rounded-5 overflow-x-hidden p-4">
-                                                <div class="tab-pane fade active show" id="pills-free" role="tabpanel">
+                                                <div class="tab-pane fade active show wow fadeInUp animated" data-wow-duration="1500ms" id="pills-free" role="tabpanel">
                                                     <h3 class="mb-2">Free Plan</h3>
                                                     <p>Patients and individuals seeking basic orthodontic care and
                                                         resources.</p>

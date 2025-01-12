@@ -32,6 +32,88 @@
     <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <base href="{{ asset('assets/dash/assets/') }}">
+    <style>
+        #myTable_wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            width: calc(100% - 0rem) !important;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #myTable_wrapper::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        #myTable_wrapper::-webkit-scrollbar {
+            height: 15px;
+        }
+
+        #myTable_wrapper::-webkit-scrollbar-thumb {
+            border: 4px solid #fff;
+            border-radius: 10px;
+            background-color: rgba(108, 117, 125, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #myTable_wrapper::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(108, 117, 125, 0.5);
+            cursor: all-scroll;
+        }
+
+        #myTable_wrapper #myTable_length,
+        #myTable_wrapper #myTable_filter,
+        #myTable_wrapper #myTable_info{
+            flex-basis: 50%;
+            @media screen and (max-width: 768px) {
+                flex-basis: 100%;
+            }
+        }
+        #myTable_wrapper #myTable_length{
+            position: sticky;
+            left: 0;
+        }
+        
+        #myTable_wrapper #myTable_filter{
+            position: sticky;
+            left: 0;
+            @media screen and (max-width: 768px) {
+                padding-top: 0.5em;
+            }
+        }
+        #myTable_wrapper #myTable_info{
+            position: sticky;
+            left: 0;
+        }
+
+        #myTable_wrapper #myTable_paginate {
+            padding-top: 0.85em;
+            margin-left: auto;
+            @media screen and (max-width: 768px) {
+                position: sticky;
+                left: 0;
+                flex-basis: 100%;
+            }
+        }
+
+        #myTable_wrapper #myTable_filter input{
+            outline: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #5a6a85;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            background-clip: padding-box;
+            border: var(--bs-border-width) solid #dfe5ef;
+            border-radius: 7px;
+            box-shadow: var(--bs-box-shadow-inset);
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -288,7 +370,8 @@
                                 class="rounded-circle" width="40" height="40" alt="" />
                         </div>
                         <div class="john-title">
-                            <h6 class="mb-0 fs-4 fw-semibold text-capitalize">{{ Auth::user() ? Auth::user()->name : '' }}
+                            <h6 class="mb-0 fs-4 fw-semibold text-capitalize">
+                                {{ Auth::user() ? Auth::user()->name : '' }}
                             </h6>
                             <span class="fs-2 text-capitalize">{{ Auth::user() ? Auth::user()->role : '' }}</span>
                         </div>
