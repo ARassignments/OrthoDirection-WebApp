@@ -27,7 +27,6 @@ class AdminController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $user = User::find($id);
-
         if ($user) {
             $user->status = $request->status;
             $user->save();
