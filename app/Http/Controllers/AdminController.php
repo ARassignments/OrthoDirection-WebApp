@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     
     public function getFamilies(){
-        $users = User::where('role', 'admin')->get();
+        $users = User::where('role', 'family')->get();
         return datatables()->of($users)->make(true);
     }
     
