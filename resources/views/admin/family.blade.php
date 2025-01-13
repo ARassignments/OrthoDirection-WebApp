@@ -34,7 +34,7 @@
                             <h5 class="mb-0">Family Members</h5>
                         </div>
                         <div class="table-responsive rounded-2 mb-4">
-                            <table id="myTable" class="table border text-nowrap customize-table mb-0 align-middle">
+                            <table id="myTable" class="table border text-nowrap customize-table mb-0 align-middle w-100">
                                 <thead class="text-dark fs-4">
                                     <tr>
                                         <th>
@@ -47,17 +47,17 @@
                                             <h6 class="fs-4 fw-semibold mb-0">Project Name</h6>
                                         </th>
                                         <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Team</h6>
+                                            <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
                                         </th>
                                         <th>
                                             <h6 class="fs-4 fw-semibold mb-0">Status</h6>
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody class="w-100">
+                                    {{-- <tr>
                                         <td>
-                                            <p class="mb-0 fs-4">1</p>
+                                            <p class="mb-0">1</p>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -86,15 +86,15 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>
-                                            <div class="form-check form-switch">
+                                        <td class="text-center">
+                                            <div class="form-check form-switch d-inline-block">
                                                 <input class="form-check-input" type="checkbox" checked="">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p class="mb-0 fs-4">2</p>
+                                            <p class="mb-0">2</p>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -136,7 +136,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p class="mb-0 fs-4">3</p>
+                                            <p class="mb-0">3</p>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -168,7 +168,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p class="mb-0 fs-4">4</p>
+                                            <p class="mb-0">4</p>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -205,7 +205,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p class="mb-0 fs-4">5</p>
+                                            <p class="mb-0">5</p>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -234,7 +234,7 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                                 <tfoot class="text-dark fs-4">
                                     <tr>
@@ -248,7 +248,7 @@
                                             <h6 class="fs-4 fw-semibold mb-0">Project Name</h6>
                                         </th>
                                         <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Team</h6>
+                                            <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
                                         </th>
                                         <th>
                                             <h6 class="fs-4 fw-semibold mb-0">Status</h6>
@@ -265,9 +265,69 @@
 
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
     <script>
         // $("#myTable").DataTable();
         new DataTable('#myTable', {
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('admin.getFamilies') }}",
+                type: "GET"
+            },
+            columns: [{
+                    data: 'id',
+                    name: '#',
+                    render: function(data, type, row) {
+                        return `<p class="mb-0">${data}</p>`;
+                    }
+                },
+                {
+                    data: 'name',
+                    name: 'User',
+                    render: function(data, type, row) {
+                        return `<div class="d-flex align-items-center">
+                                    <img src="assets/images/profile/user-1.jpg" class="rounded-circle"
+                                        width="40" height="40">
+                                    <div class="ms-3">
+                                        <h6 class="fs-4 fw-semibold text-capitalize mb-0">${data}</h6>
+                                        <a href="mailto:${row.email}" class="fw-normal">${row.email}</a>
+                                    </div>
+                                </div>`;
+                    }
+                },
+                {
+                    data: 'email',
+                    name: 'Email'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at',
+                    render: function(data, type, row) {
+                        const date = new Date(data);
+                        const formattedDate = new Intl.DateTimeFormat('en-US', {
+                            weekday: 'long', // Day of the week (e.g., Monday)
+                            year: 'numeric',
+                            month: 'long', // Full month (e.g., January)
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true // 12-hour clock (AM/PM)
+                        }).format(date);
+
+                        return `<p class="mb-0">${formattedDate}</p>`;
+                    }
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    render: function(data, type, row) {
+                        return `<div class="form-check form-switch d-inline-block">
+                                <input class="form-check-input toggle-status" type="checkbox" data-id="${row.id}" ${data ? 'checked' : ''}>
+                            </div>`;
+                    }
+                }
+            ],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, "All"]
@@ -285,12 +345,58 @@
                 $('#myTable').addClass('table border text-nowrap customize-table mb-0 align-middle');
                 $('#myTable_paginate').addClass('btn-group');
                 $('#myTable_paginate span').addClass('btn-group');
-                $('#myTable_paginate .paginate_button.previous.disabled').addClass('btn bg-info-subtle text-info font-medium');
-                $('#myTable_paginate .paginate_button.next.disabled').addClass('btn bg-info-subtle text-info font-medium');
+                $('#myTable_paginate .paginate_button.previous.disabled').addClass(
+                    'btn bg-info-subtle text-info font-medium');
+                $('#myTable_paginate .paginate_button.next.disabled').addClass(
+                    'btn bg-info-subtle text-info font-medium');
                 $('#myTable_paginate .paginate_button.current').addClass('btn btn-info');
-                $('#myTable_paginate .paginate_button').not('.current').addClass('btn bg-info-subtle text-info font-medium');
+                $('#myTable_paginate .paginate_button').not('.current').addClass(
+                    'btn bg-info-subtle text-info font-medium');
                 $('#myTable_wrapper #myTable_length select').addClass('select2 form-control w-50');
             }
+        });
+
+        $('#myTable').on('change', '.toggle-status', function() {
+            var status = $(this).is(':checked') ? 1 : 0;
+            var userId = $(this).data('id');
+            const updateStatusUrl = @json(route('admin.updateStatus', ['id' => ':id']));
+            const url = updateStatusUrl.replace(':id', userId);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: {
+                    status: status,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    const Toaster = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    if (response.success) {
+                        Toaster.fire({
+                            icon: "success",
+                            title: response.message
+                        });
+                    } else {
+                        Toaster.fire({
+                            icon: "error",
+                            title: "Failed to Update Status"
+                        });
+                        alert('');
+                    }
+                },
+                error: function() {
+                    alert('An error occurred.');
+                }
+            });
         });
     </script>
 @endsection

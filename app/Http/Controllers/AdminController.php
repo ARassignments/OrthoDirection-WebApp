@@ -1,22 +1,41 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function dashboard()
-    {
-        return view('admin.dashboard');
+    
+    public function getFamilies(){
+        $users = User::where('role', 'admin')->get();
+        return datatables()->of($users)->make(true);
+    }
+    
+    public function getPatients(){
+        $users = User::where('role', 'patient')->get();
+        return datatables()->of($users)->make(true);
+    }
+    
+    public function getDoctors(){
+        $users = User::where('role', 'doctor')->get();
+        return datatables()->of($users)->make(true);
     }
 
-    public function family()
+    public function updateStatus(Request $request, $id)
     {
-        return view('admin.family');
+        $user = User::find($id);
+
+        if ($user) {
+            $user->status = $request->status;
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Status Updated Successfully']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'User not found.'], 404);
     }
     
     public function logout(Request $request)

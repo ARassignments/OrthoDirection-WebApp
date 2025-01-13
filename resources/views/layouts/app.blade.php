@@ -7,11 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">    
-    
+    <meta http-equiv="Expires" content="0">
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <meta name="description" content="Ortho Direction - Comprehensive dental services with expert care. Learn more about our services, pricing, and team.">
+    <meta name="description"
+        content="Ortho Direction - Comprehensive dental services with expert care. Learn more about our services, pricing, and team.">
     <meta name="keywords" content="dentist, dental care, dental services, ortho direction">
     <meta name="author" content="Ortho Direction">
     <meta name="robots" content="index, follow">
@@ -63,25 +64,29 @@
 
         #myTable_wrapper #myTable_length,
         #myTable_wrapper #myTable_filter,
-        #myTable_wrapper #myTable_info{
+        #myTable_wrapper #myTable_info {
             flex-basis: 50%;
+
             @media screen and (max-width: 768px) {
                 flex-basis: 100%;
             }
         }
-        #myTable_wrapper #myTable_length{
+
+        #myTable_wrapper #myTable_length {
             position: sticky;
             left: 0;
         }
-        
-        #myTable_wrapper #myTable_filter{
+
+        #myTable_wrapper #myTable_filter {
             position: sticky;
             left: 0;
+
             @media screen and (max-width: 768px) {
                 padding-top: 0.5em;
             }
         }
-        #myTable_wrapper #myTable_info{
+
+        #myTable_wrapper #myTable_info {
             position: sticky;
             left: 0;
         }
@@ -89,6 +94,7 @@
         #myTable_wrapper #myTable_paginate {
             padding-top: 0.85em;
             margin-left: auto;
+
             @media screen and (max-width: 768px) {
                 position: sticky;
                 left: 0;
@@ -96,7 +102,7 @@
             }
         }
 
-        #myTable_wrapper #myTable_filter input{
+        #myTable_wrapper #myTable_filter input {
             outline: none;
             font-size: 0.875rem;
             font-weight: 400;
@@ -112,7 +118,6 @@
             box-shadow: var(--bs-box-shadow-inset);
             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
-
     </style>
 </head>
 
@@ -191,7 +196,8 @@
                                     </ul>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                        aria-expanded="false">
                                         <span class="d-flex">
                                             <i class="ti ti-users"></i>
                                         </span>
@@ -223,6 +229,29 @@
                                             </a>
                                         </li>
                                     </ul>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="/admin/appointments" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-calendar"></i>
+                                        </span>
+                                        <span class="hide-menu">Appointments</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link justify-content-between" href="/admin/messages"
+                                        aria-expanded="false">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="d-flex">
+                                                <i class="ti ti-messages"></i>
+                                            </span>
+                                            <span class="hide-menu">Messages</span>
+                                        </div>
+                                        <div class="hide-menu">
+                                            <span
+                                                class="badge rounded-circle bg-primary d-flex align-items-center justify-content-center rounded-pill fs-2">0</span>
+                                        </div>
+                                    </a>
                                 </li>
                             @elseif (Auth::user()->role == 'doctor')
                                 <li class="sidebar-item">
@@ -375,10 +404,16 @@
                             </h6>
                             <span class="fs-2 text-capitalize">{{ Auth::user() ? Auth::user()->role : '' }}</span>
                         </div>
-                        <a href="{{ route('logout') }}" class="border-0 bg-transparent text-primary ms-auto"
+                        {{-- <a href="{{ route('logout') }}" class="border-0 bg-transparent text-primary ms-auto"
                             tabindex="0" type="button" aria-label="logout" data-bs-toggle="tooltip"
                             data-bs-placement="top" data-bs-title="logout"
                             onclick="event.preventDefault(); this.closest('form').submit();">
+                            <i class="ti ti-power fs-6"></i>
+                        </a> --}}
+                        <a class="border-0 bg-transparent text-primary ms-auto"
+                            tabindex="0" aria-label="logout" data-bs-toggle="tooltip"
+                            data-bs-placement="top" data-bs-title="logout"
+                            onclick="logout()">
                             <i class="ti ti-power fs-6"></i>
                         </a>
                     </form>
@@ -912,9 +947,9 @@
                                                     <form method="POST" action="{{ route('logout') }}"
                                                         class="w-100">
                                                         @csrf
-                                                        <a href="{{ route('logout') }}"
+                                                        <a
                                                             class="btn btn-outline-primary w-100"
-                                                            onclick="event.preventDefault(); this.closest('form').submit();">Log
+                                                            onclick="logout()">Log
                                                             Out</a>
                                                     </form>
                                                 </div>
@@ -1148,28 +1183,58 @@
 </body>
 
 
-<script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/js/app.min.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/js/app.init.js') }}" defer></script>
-<script src="{{ asset('assets/dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/dash/assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
+<script src="{{ asset('assets/dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}" defer></script>
+<script src="{{ asset('assets/dash/assets/libs/simplebar/dist/simplebar.min.js') }}" defer></script>
 
-<script src="{{ asset('assets/dash/assets/js/sidebarmenu.js') }}"></script>
-<script src="{{ asset('assets/dash/assets/js/theme.js') }}"></script>
-
+<script src="{{ asset('assets/dash/assets/js/sidebarmenu.js') }}" defer></script>
+<script src="{{ asset('assets/dash/assets/js/theme.js') }}" defer></script>
+<script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/libs/owl.carousel/dist/owl.carousel.min.js') }}" defer></script>
-{{-- <script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}" defer></script> --}}
 
-<script src="{{ asset('assets/dash/assets/js/dashboards/dashboard.js') }}"></script>
+<script src="{{ asset('assets/dash/assets/js/dashboards/dashboard.js') }}" defer></script>
 <script>
-    (function () {
+    (function() {
         if (window.history && window.history.pushState) {
             window.history.pushState(null, null, window.location.href);
-            window.onpopstate = function () {
+            window.onpopstate = function() {
                 window.history.pushState(null, null, window.location.href);
             };
         }
     })();
+
+    function logout() {
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#1376F8",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Logout!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('logout') }}";
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Logout Successfully"
+                });
+            }
+        });
+    }
 </script>
 
 </html>

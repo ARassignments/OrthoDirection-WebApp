@@ -44,9 +44,9 @@ Route::post('/resend-otp', [RegisteredUserController::class, 'resend'])->name('v
 Route::get('/register-otp-verify', [RegisteredUserController::class, 'showOtpForm'])->name('register.otp.verify');
 Route::post('/register-otp-verify', [RegisteredUserController::class, 'verifyOtp'])->name('register.otp.check');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
@@ -56,8 +56,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('/admin/')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/family', [AdminController::class, 'family'])->name('admin.family');
+    Route::view('/', 'admin.dashboard')->name('admin.dashboard');
+    Route::view('/family', 'admin.family')->name('admin.family');
+    Route::view('/patients', 'admin.patients')->name('admin.patients');
+    Route::view('/doctors', 'admin.doctors')->name('admin.doctors');
+    Route::get('/getFamilies', [AdminController::class, 'getFamilies'])->name('admin.getFamilies');
+    Route::get('/getPatients', [AdminController::class, 'getPatients'])->name('admin.getPatients');
+    Route::get('/getDoctors', [AdminController::class, 'getDoctors'])->name('admin.getDoctors');
+    Route::post('/updateStatus/{id}', [AdminController::class, 'updateStatus'])->name('admin.updateStatus');
 });
 
 Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->group(function () {
@@ -71,21 +77,6 @@ Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->grou
 Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->group(function () {
     Route::get('/', [PatientController::class, 'dashboard'])->name('patient.dashboard');
 });
-
-
-// Role-Based Dashboards
-// Route::prefix('/admin/')->middleware('role:admin')->group(function () {
-//     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-// });
-// Route::prefix('/doctor/')->middleware('role:doctor')->group(function () {
-//     Route::get('/', [DoctorController::class, 'dashboard'])->name('doctors.dashboard');
-// });
-// Route::prefix('/family/')->middleware('role:family')->group(function () {
-//     Route::get('/', [FamilyController::class, 'dashboard'])->name('family.dashboard');
-// });
-// Route::prefix('/patient/')->middleware('role:patient')->group(function () {
-//     Route::get('/', [PatientController::class, 'dashboard'])->name('patient.dashboard');
-// });
 
 // Export Route (Protected)
 Route::get('/export', function () {

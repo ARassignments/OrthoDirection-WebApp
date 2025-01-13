@@ -95,4 +95,7 @@
         </div>
     </div> --}}
 </div>
+
+<script src="{{ asset('assets/dash/assets/js/dashboards/dashboard.js') }}" defer></script>
+
 @endsection
