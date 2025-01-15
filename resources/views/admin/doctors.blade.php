@@ -93,7 +93,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('admin.getPatients') }}",
+                url: "{{ route('admin.getDoctors') }}",
                 type: "GET"
             },
             columns: [{

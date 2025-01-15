@@ -34,34 +34,7 @@
                     <span class="d-none d-md-block">Account</span>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button
-                    class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-4"
-                    id="pills-notifications-tab" data-bs-toggle="pill" data-bs-target="#pills-notifications"
-                    type="button" role="tab" aria-controls="pills-notifications" aria-selected="false"
-                    tabindex="-1" disabled>
-                    <i class="ti ti-bell me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Notifications</span>
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button
-                    class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-4"
-                    id="pills-bills-tab" data-bs-toggle="pill" data-bs-target="#pills-bills" type="button"
-                    role="tab" aria-controls="pills-bills" aria-selected="false" tabindex="-1" disabled>
-                    <i class="ti ti-article me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Bills</span>
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button
-                    class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-4"
-                    id="pills-security-tab" data-bs-toggle="pill" data-bs-target="#pills-security" type="button"
-                    role="tab" aria-controls="pills-security" aria-selected="false" tabindex="-1" disabled>
-                    <i class="ti ti-lock me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Security</span>
-                </button>
-            </li>
+           
         </ul>
         <div class="card-body">
             <div class="tab-content" id="pills-tabContent">

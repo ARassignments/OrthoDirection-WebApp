@@ -33,6 +33,7 @@ Route::prefix('/')->group(function () {
     Route::view('/appointment', 'pages.appointment')->name('appointment');
     Route::view('/payment', 'pages.payment')->name('payment');
 });
+Route::post('/send-contact',[PatientController::class,'contact_store'])->name('contact.send');
 
 // OTP and Email Verification Routes
 Route::get('email-verify', [RegisteredUserController::class, 'showVerificationNotice'])->name('verification.email');
