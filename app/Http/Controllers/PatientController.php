@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PatientController extends Controller
 {
@@ -10,5 +12,37 @@ class PatientController extends Controller
     {
         return view('patient.dashboard');
     }
-
+    public function contact_store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'fname' => ['required', 'min:3', 'max:15', 'regex:/^[a-zA-Z\s]+$/'],
+            'lname' => ['required', 'min:3', 'max:15', 'regex:/^[a-zA-Z\s]+$/'],
+            'email' => ['required', 'email', 'max:30'],
+            'phone' => ['required', 'regex:/^0[3-9][0-9]{2}[0-9]{7}$/'],
+            'subject' => ['required', 'min:3', 'max:55', 'regex:/^[a-zA-Z\s]+$/'],
+            'comment' => ['required', 'min:10'],
+        ]);
+    
+        if ($validator->passes()) {
+            $contact = new Contact();
+            $contact->fname = $request->fname ;
+            $contact->lname = $request->lname;
+            $contact->email = $request->email;
+            $contact->phone = $request->phone;
+            $contact->subject = $request->subject;
+            $contact->comment = $request->comment;
+            $contact->save();
+    
+            return response()->json([
+                'status' => true,
+                'msg' => 'Thank you! Your message has been successfully sent. We will get back to you shortly.'
+            ]);
+        }
+    
+        return response()->json([
+            'status' => false,
+            'errors' => $validator->errors()
+        ]);
+    }
+    
 }

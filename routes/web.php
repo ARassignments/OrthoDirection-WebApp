@@ -77,6 +77,7 @@ Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->grou
 Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->group(function () {
     Route::get('/', [PatientController::class, 'dashboard'])->name('patient.dashboard');
 });
+Route::post('/send-contact',[PatientController::class,'contact_store'])->name('contact.send');
 
 // Export Route (Protected)
 Route::get('/export', function () {
