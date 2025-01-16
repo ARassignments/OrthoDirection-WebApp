@@ -63,29 +63,30 @@
                         <h2>Send a Message</h2>
                     </div>
                     <form method="post" id="ContactForm" class="default-form"> 
+                        @csrf
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <input type="text" name="fname" placeholder="First Name" required="">
+                                <input type="text" name="fname" id="fname" placeholder="First Name" required="">
                                 <span class="text-danger"></span>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <input type="text" name="lname" placeholder="Last Name" required="">
+                                <input type="text" name="lname" id="lname" placeholder="Last Name" required="">
                                 <span class="text-danger"></span>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <input type="email" name="email" placeholder="Your email" required="">
+                                <input type="email" name="email" id="email" placeholder="Your email" required="">
                                 <span class="text-danger"></span>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <input type="text" name="phone" required="" placeholder="Phone">
+                                <input type="text" name="phone" id="phone" required="" placeholder="Phone">
                                 <span class="text-danger"></span>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                <input type="text" name="subject" required="" placeholder="Subject">
+                                <input type="text" name="subject" id="subject" required="" placeholder="Subject">
                                 <span class="text-danger"></span>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                <textarea name="comment" placeholder="message"></textarea>
+                                <textarea name="comment" id="comment" placeholder="message"></textarea>
                                 <span class="text-danger"></span>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
@@ -123,18 +124,18 @@
     </div>
 </section>
 <!-- google-map-section end -->
-@endsection
-@section('js')
-    <script>
-        $('#ContactForm').submit(function(event) {
-            event.preventDefault();
+<script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script>
+    $('#ContactForm').submit(function(event) {
+        // alert();
+        event.preventDefault();
             var element = $(this);
             $('button[type=submit]').prop('disabled', true)
-
+            
             $.ajax({
-                url: "{{ route('contact.send') }}",
+                url: "{{ url('send-contact') }}",
                 type: "post",
-                data: element.serializeArray(),
+                data: element.serialize() + '&_token={{ csrf_token() }}',
                 dataType: "json",
                 success: function(response) {
                     if (response['status'] == true) {
@@ -143,14 +144,14 @@
                       $('.is-invalid').removeClass('is-invalid');
                       $('span.text-danger').html('');
 
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.onmouseenter = Swal.stopTimer;
+                      const Toast = Swal.mixin({
+                          toast: true,
+                          position: "top-end",
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                              toast.onmouseenter = Swal.stopTimer;
                                 toast.onmouseleave = Swal.resumeTimer;
                             }
                         });
@@ -175,8 +176,8 @@
                             icon: "error",
                             title: response['error'],
                         });
-                       }
-                        var errors = response['errors'];
+                    }
+                    var errors = response['errors'];
                         $('.is-invalid').removeClass('is-invalid');
                         $('span.text-danger').html('');
                         $.each(errors, function(key, value) {
@@ -191,4 +192,5 @@
             })
         })
     </script>
+
 @endsection

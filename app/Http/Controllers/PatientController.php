@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PatientController extends Controller
 {
@@ -12,14 +14,6 @@ class PatientController extends Controller
     }
     public function contact_store(Request $request)
     {
-        if (!Auth::check()) {
-            return response()->json([
-                'status' => false,
-                'IsLogin' => false,
-                'error' => "Access Denied: Please log in to your account to continue"
-            ]);
-        }
-    
         $validator = Validator::make($request->all(), [
             'fname' => ['required', 'min:3', 'max:15', 'regex:/^[a-zA-Z\s]+$/'],
             'lname' => ['required', 'min:3', 'max:15', 'regex:/^[a-zA-Z\s]+$/'],
@@ -31,11 +25,11 @@ class PatientController extends Controller
     
         if ($validator->passes()) {
             $contact = new Contact();
-            $contact->user_id = Auth::user()->id;
-            $contact->name = $request->fname . ' ' . $request->lname;
+            $contact->fname = $request->fname ;
+            $contact->lname = $request->lname;
             $contact->email = $request->email;
-            $contact->subject = $request->subject;
             $contact->phone = $request->phone;
+            $contact->subject = $request->subject;
             $contact->comment = $request->comment;
             $contact->save();
     
