@@ -20,6 +20,7 @@
     <meta name="twitter:title" content="Ortho Direction | Expert Dental Care">
     <meta name="twitter:description" content="Comprehensive dental services with expert care.">
     <meta name="twitter:image" content="{{ asset('assets/images/logo.png') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.css') }}">
 
 
     @vite(['resources/js/app.js'])

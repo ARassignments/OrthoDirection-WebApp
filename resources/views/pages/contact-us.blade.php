@@ -125,13 +125,12 @@
 </section>
 <!-- google-map-section end -->
 <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script>
     $('#ContactForm').submit(function(event) {
         // alert();
         event.preventDefault();
             var element = $(this);
-            $('button[type=submit]').prop('disabled', true)
-            
             $.ajax({
                 url: "{{ url('send-contact') }}",
                 type: "post",
