@@ -32,6 +32,8 @@ Route::prefix('/')->group(function () {
     Route::view('/blog-detail', 'pages.blog-detail')->name('blog-detail');
     Route::view('/appointment', 'pages.appointment')->name('appointment');
     Route::view('/payment', 'pages.payment')->name('payment');
+    // Form Submission Routes
+    Route::post('/send-contact',[PatientController::class,'contactStore'])->name('contact.send');
 });
 
 // OTP and Email Verification Routes
@@ -57,6 +59,8 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin/')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::view('/', 'admin.dashboard')->name('admin.dashboard');
+    Route::view('/blogs', 'admin.blogs')->name('admin.blogs');
+    Route::view('/add-blog', 'admin.add-blog')->name('admin.add-blog');
     Route::view('/family', 'admin.family')->name('admin.family');
     Route::view('/patients', 'admin.patients')->name('admin.patients');
     Route::view('/doctors', 'admin.doctors')->name('admin.doctors');
@@ -77,7 +81,7 @@ Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->grou
 Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->group(function () {
     Route::get('/', [PatientController::class, 'dashboard'])->name('patient.dashboard');
 });
-Route::post('/send-contact',[PatientController::class,'contact_store'])->name('contact.send');
+
 
 // Export Route (Protected)
 Route::get('/export', function () {

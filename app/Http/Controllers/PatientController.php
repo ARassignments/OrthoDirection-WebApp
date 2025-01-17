@@ -12,7 +12,7 @@ class PatientController extends Controller
     {
         return view('patient.dashboard');
     }
-    public function contact_store(Request $request)
+    public function contactStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'fname' => ['required', 'min:3', 'max:15', 'regex:/^[a-zA-Z\s]+$/'],
@@ -35,7 +35,7 @@ class PatientController extends Controller
     
             return response()->json([
                 'status' => true,
-                'msg' => 'Thank you! Your message has been successfully sent. We will get back to you shortly.'
+                'msg' => 'Thank you! Your message has been successfully sent.'
             ]);
         }
     
