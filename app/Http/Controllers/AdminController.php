@@ -50,13 +50,22 @@ class AdminController extends Controller
     }
 
     // CRUD Blogs
+    public function blogDetail($id)
+    {
+        $blog = Blog::find($id);
+        if (!$blog) {
+            return response()->json(['error' => 'Blog not found!'], 404);
+        }
+        return view('admin.blogs.detail',compact(['blog'=>'blog']));
+    }
+
     public function blogStore(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:500|min:5|regex:/^[a-zA-Z\s]+$/',
+            'title' => 'required|string|max:500|min:5|regex:/^[a-zA-Z:\s]+$/',
             'thumbnail' => 'required|image|mimes:jpg,png,jpeg|max:2000',
-            'short_description' => 'required|string|max:300|min:10',
-            'description' => 'required|string|max:1000|min:10',
+            'short_description' => 'required|string|max:400|min:10',
+            'description' => 'required|string|max:5000|min:10',
             'tags' => 'required|array',
             'author' => 'required|string|max:15|min:3|regex:/^[a-zA-Z\s]+$/',
         ]);
@@ -97,18 +106,16 @@ class AdminController extends Controller
         if (!$blog) {
             return response()->json(['error' => 'Blog not found!'], 404);
         }
-        // $blog['tags'] = json_decode($blog['tags'], true);
-        // return response()->json($blog);
         return view('admin.blogs.edit-blog',compact(['blog'=>'blog']));
     }
 
     public function blogUpdate(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string|max:500|min:5|regex:/^[a-zA-Z\s]+$/',
+            'title' => 'required|string|max:500|min:5|regex:/^[a-zA-Z:\s]+$/',
             'thumbnail' => 'nullable|image|mimes:jpg,png,jpeg|max:2000',
-            'short_description' => 'required|string|max:300|min:10',
-            'description' => 'required|string|max:1000|min:10',
+            'short_description' => 'required|string|max:400|min:10',
+            'description' => 'required|string|max:5000|min:10',
             'tags' => 'required|array',
             'author' => 'required|string|max:15|min:3|regex:/^[a-zA-Z\s]+$/',
         ]);

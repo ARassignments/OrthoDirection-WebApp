@@ -62,6 +62,7 @@ Route::prefix('/admin/')->middleware(['auth', 'verified', 'role:admin'])->group(
     Route::view('/blogs', 'admin.blogs.blogs')->name('admin.blogs');
     Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
     Route::prefix('/blogs')->group(function () {
+        Route::get('/blogDetail/{id}', [AdminController::class, 'blogDetail'])->name('blogs.detail');
         Route::get('/blogFetch', [AdminController::class, 'blogFetch'])->name('blogs.fetch');
         Route::post('/blogStore', [AdminController::class, 'blogStore'])->name('blogs.store');
         Route::get('/blogEdit/{id}', [AdminController::class, 'blogEdit'])->name('blogs.edit');
