@@ -57,10 +57,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('/admin/')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
+Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::view('/', 'admin.dashboard')->name('admin.dashboard');
-    Route::view('/blogs', 'admin.blogs.blogs')->name('admin.blogs');
-    Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
+    Route::view('/blogs', 'admin.blogs')->name('admin.blogs');
+    Route::view('/add-blog', 'admin.add-blog')->name('admin.add-blog');
+    Route::get('/services', [AdminController::class,'show_service'])->name('admin.services');
+    Route::get('/add-service', [AdminController::class,'create_service'])->name('admin.add-service');
+    Route::post('/store-service', [AdminController::class,'store_service'])->name('admin.store-service');
+    Route::get('/search-service', [AdminController::class, 'search'])->name('admin.search-service');
     Route::prefix('/blogs')->group(function () {
         Route::get('/blogDetail/{id}', [AdminController::class, 'blogDetail'])->name('blogs.detail');
         Route::get('/blogFetch', [AdminController::class, 'blogFetch'])->name('blogs.fetch');

@@ -1,29 +1,32 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use App\Models\Blog;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
-    
-    public function getFamilies(){
+
+    public function getFamilies()
+    {
         $users = User::where('role', 'family')->get();
         return datatables()->of($users)->make(true);
     }
-    
-    public function getPatients(){
+
+    public function getPatients()
+    {
         $users = User::where('role', 'patient')->get();
         return datatables()->of($users)->make(true);
     }
-    
-    public function getDoctors(){
+
+    public function getDoctors()
+    {
         $users = User::where('role', 'doctor')->get();
         return datatables()->of($users)->make(true);
     }
@@ -40,7 +43,7 @@ class AdminController extends Controller
 
         return response()->json(['success' => false, 'message' => 'User not found.'], 404);
     }
-    
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -171,25 +174,49 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create_service()
     {
-        //
+        return view('admin.add-service');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store_service(Request $request)
     {
-        //
+        $service                    = new Service();
+        $service->title             = $request->title;
+        $service->short_description = $request->short_description;
+        $service->description       = $request->description;
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailPath = time() . '-' . $request->thumbnail->getClientOriginalName();
+            $request->thumbnail->move(public_path('services/thumbnails/'), $thumbnailPath);
+            $service->thumbnail = 'services/thumbnails/' . $thumbnailPath;
+        }
+        $service->icon_img = $request->icon;
+        $service->save();
+        return redirect()->route('admin.services');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show_service()
     {
-        //
+        $services = Service::all();
+        return view('admin.services', compact('services'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->query('query');
+
+        if (! $query) {
+            return response()->json([], 200);
+        }
+        $services = Service::where('title', 'LIKE', '%' . $query . '%')->get();
+        return response()->json($services);
     }
 
     /**
