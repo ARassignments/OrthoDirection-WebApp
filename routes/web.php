@@ -33,7 +33,7 @@ Route::prefix('/')->group(function () {
     Route::view('/appointment', 'pages.appointment')->name('appointment');
     Route::view('/payment', 'pages.payment')->name('payment');
     // Form Submission Routes
-    Route::post('/send-contact',[PatientController::class,'contactStore'])->name('contact.send');
+    Route::post('/send-contact', [PatientController::class, 'contactStore'])->name('contact.send');
 });
 
 // OTP and Email Verification Routes
@@ -65,6 +65,17 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
     Route::get('/add-service', [AdminController::class,'create_service'])->name('admin.add-service');
     Route::post('/store-service', [AdminController::class,'store_service'])->name('admin.store-service');
     Route::get('/search-service', [AdminController::class, 'search'])->name('admin.search-service');
+    Route::prefix('/blogs')->group(function () {
+        Route::get('/blogFetch', [AdminController::class, 'blogFetch'])->name('blogs.fetch');
+        Route::post('/blogStore', [AdminController::class, 'blogStore'])->name('blogs.store');
+        Route::get('/blogEdit/{id}', [AdminController::class, 'blogEdit'])->name('blogs.edit');
+        Route::post('/blogUpdate/{id}', [AdminController::class, 'blogUpdate'])->name('blogs.update');
+        Route::get('/blogDestroy/{id}', [AdminController::class, 'blogDestroy'])->name('blogs.destroy');
+        Route::get('/blogToggleStatus/{id}', [AdminController::class, 'blogToggleStatus'])->name('blogs.toggleStatus');
+    });
+    Route::view('/messages', 'admin.messages.messages')->name('admin.messages');
+    Route::view('/faqs', 'admin.faqs.faqs')->name('admin.faqs');
+    Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
     Route::view('/family', 'admin.family')->name('admin.family');
     Route::view('/patients', 'admin.patients')->name('admin.patients');
     Route::view('/doctors', 'admin.doctors')->name('admin.doctors');
