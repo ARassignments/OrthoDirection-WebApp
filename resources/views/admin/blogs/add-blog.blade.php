@@ -45,7 +45,7 @@
                                     <p class="card-subtitle mb-4">Choose your thumbnail picture from here</p>
                                     <div class="text-center">
                                         <img id="thumbnailPreview" src="assets/images/profile/user-1.jpg" alt=""
-                                            class="img-fluid rounded-5" width="320" height="220">
+                                            class="img-fluid rounded-5" width="500" height="220">
                                         <div class="d-flex align-items-center justify-content-center my-4 gap-3">
                                             <input type="file" name="thumbnail" id="thumbnail" class="d-none"
                                                 accept=".png,.jpg,.jpeg">

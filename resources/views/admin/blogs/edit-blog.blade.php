@@ -45,7 +45,7 @@
                                     <p class="card-subtitle mb-4">Change your thumbnail picture from here</p>
                                     <div class="text-center">
                                         <img id="thumbnailPreview"
-                                            src="{{ asset('admin/blogs/thumbnails/' . $blog['thumbnail']) }}" alt=""
+                                            src="{{ asset('admins_blogs_thumbnails/' . $blog['thumbnail']) }}" alt=""
                                             class="img-fluid rounded-5" width="500" height="220">
                                         <div class="d-flex align-items-center justify-content-center my-4 gap-3">
                                             <input type="file" name="thumbnail" id="thumbnail" class="d-none"
@@ -225,7 +225,7 @@
             $('#resetThumbnailBtn').click(function() {
                 $('#thumbnail').val('');
                 $('#thumbnailPreview').attr('src',
-                    "{{ asset('admin/blogs/thumbnails/' . $blog['thumbnail']) }}");
+                    "{{ asset('admins_blogs_thumbnails/' . $blog['thumbnail']) }}");
             });
 
             $('#status').on('change', function() {

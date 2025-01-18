@@ -73,7 +73,7 @@ class AdminController extends Controller
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
             $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('admin/blogs/thumbnails'), $filename);
+            $file->move(public_path('admins_blogs_thumbnails'), $filename);
             $blog->thumbnail = $filename;
         }
         $blog->save();
@@ -125,12 +125,12 @@ class AdminController extends Controller
         $blog->author = $request->author;
 
         if ($request->hasFile('thumbnail')) {
-            if ($blog->thumbnail && File::exists(public_path('admin/blogs/thumbnails/' . $blog->thumbnail))) {
-                File::delete(public_path('admin/blogs/thumbnails/' . $blog->thumbnail));
+            if ($blog->thumbnail && File::exists(public_path('admins_blogs_thumbnails/' . $blog->thumbnail))) {
+                File::delete(public_path('admins_blogs_thumbnails/' . $blog->thumbnail));
             }
             $file = $request->file('thumbnail');
             $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('admin/blogs/thumbnails'), $filename);
+            $file->move(public_path('admins_blogs_thumbnails'), $filename);
             $blog->thumbnail = $filename;
         }
         $blog->save();
@@ -143,8 +143,8 @@ class AdminController extends Controller
         if (!$blog) {
             return response()->json(['error' => 'Blog not found!'], 404);
         }
-        if ($blog->thumbnail && File::exists(public_path('admin/blogs/thumbnails/' . $blog->thumbnail))) {
-            File::delete(public_path('admin/blogs/thumbnails/' . $blog->thumbnail));
+        if ($blog->thumbnail && File::exists(public_path('admins_blogs_thumbnails/' . $blog->thumbnail))) {
+            File::delete(public_path('admins_blogs_thumbnails/' . $blog->thumbnail));
         }
         $blog->delete();
         return response()->json(['success' => 'Blog Deleted Successfully!']);

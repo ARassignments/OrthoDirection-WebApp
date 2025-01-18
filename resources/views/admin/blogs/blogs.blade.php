@@ -28,7 +28,7 @@
 
         <ul class="nav nav-pills p-3 mb-4 rounded align-items-center card flex-row gap-3">
             <form class="position-relative input-group flex-grow-1 w-auto">
-                <input type="text" class="form-control search-chat py-2 ps-5" id="search" placeholder="Search Blog" onkeyup="fetchBlogs(this.value)">
+                <input type="text" class="form-control search-chat py-2 ps-5" id="search" placeholder="Search Blog" onkeyup="fetchBlogs(this.value)" maxlength="50">
                 <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                 <button class="btn bg-primary-subtle text-primary font-medium" id="searchBtn" type="button"
                     onclick="fetchBlogs(document.querySelector('#search').value)">Search</button>
@@ -114,7 +114,6 @@
                     $('#searchBtn').prop('disabled', true).text('Loading...');
                     $('#blogContainer').hide();
                     $('#loader').fadeIn(500).show();
-                    document.querySelector("#blogContainer").innerHTML = "";
                 },
                 complete: function() {
                     $('#searchBtn').prop('disabled', false).text('Search');
@@ -124,6 +123,25 @@
                     }, 550);
                 },
                 success: function(blogs) {
+                    document.querySelector("#blogContainer").innerHTML = "";
+                    if (blogs.length === 0) {
+                        document.querySelector("#blogContainer").innerHTML = `
+                        <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                            <div class="row justify-content-center w-100">
+                                <div class="col-lg-8">
+                                    <div class="text-center">
+                                        <img src="{{ asset('assets/dash/assets/images/backgrounds/nodata_bg.svg') }}" alt=""
+                                            class="img-fluid w-100">
+                                        <h3 class="fw-semibold mb-3">Blogs Not Found!!!</h3>
+                                        <p class="fw-normal mb-7 fs-4">It looks like there are no blogs here. Explore other sections or try again later.</p>
+                                        <a class="btn btn-primary" href="javascript:void()" onclick="window.location.reload()" role="button">Try Again...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                        return;
+                    }
                     blogs.forEach(blog => {
                         const differenceInMs = new Date() - new Date(`${blog.date}T${blog.time}`)
                         const days = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
@@ -157,7 +175,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="card rounded-2 overflow-hidden hover-img">
                                 <div class="position-relative">
-                                    <a href="javascript:void(0)"><img src="{{ asset('admin/blogs/thumbnails/${blog.thumbnail}') }}"
+                                    <a href="javascript:void(0)"><img src="{{ asset('admins_blogs_thumbnails/${blog.thumbnail}') }}"
                                             class="card-img-top img-fluid rounded-0" style="height:230px; object-fit:cover; object-position:top;" alt="..." loading="lazy"></a>
                                     <span
                                         class="badge text-bg-light fs-2 rounded-4 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">${timeAgo}</span>
@@ -198,21 +216,6 @@
                             </div>
                         </div>
                         `;
-                        // tableRows += `
-                    //     <tr>
-                    //         <td>${blog.title}</td>
-                    //         <td>${blog.author}</td>
-                    //         <td><img src="admin/blogs/thumbnails/${blog.thumbnail}" width="100" alt="Thumbnail"></td>
-                    //         <td>${blog.short_description}</td>
-                    //         <td>
-                    //             <button onclick="editBlog(${blog.id})" class="btn btn-warning btn-sm">Edit</button>
-                    //             <button onclick="deleteBlog(${blog.id})" class="btn btn-danger btn-sm">Delete</button>
-                    //             <button onclick="toggleStatus(${blog.id})" class="btn btn-info btn-sm">
-                    //                 ${blog.status ? 'Deactivate' : 'Activate'}
-                    //             </button>
-                    //         </td>
-                    //     </tr>
-                    // `;
                     });
                 },
                 error: function() {

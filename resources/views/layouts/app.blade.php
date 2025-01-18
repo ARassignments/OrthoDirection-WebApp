@@ -239,7 +239,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link justify-content-between" href="/admin/messages"
+                                    <a class="sidebar-link justify-content-between" href="{{ route('admin.messages') }}"
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center gap-3">
                                             <span class="d-flex">
@@ -251,6 +251,22 @@
                                             <span
                                                 class="badge rounded-circle bg-primary d-flex align-items-center justify-content-center rounded-pill fs-2">0</span>
                                         </div>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('admin.newsletter') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-mailbox"></i>
+                                        </span>
+                                        <span class="hide-menu">Newsletter</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('admin.faqs') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-help"></i>
+                                        </span>
+                                        <span class="hide-menu">FAQs</span>
                                     </a>
                                 </li>
                             @elseif (Auth::user()->role == 'doctor')

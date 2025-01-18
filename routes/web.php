@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin/')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::view('/', 'admin.dashboard')->name('admin.dashboard');
-    Route::view('/blog', 'admin.blogs.blogs')->name('admin.blogs');
+    Route::view('/blogs', 'admin.blogs.blogs')->name('admin.blogs');
     Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
     Route::prefix('/blogs')->group(function () {
         Route::get('/blogFetch', [AdminController::class, 'blogFetch'])->name('blogs.fetch');
@@ -69,6 +69,9 @@ Route::prefix('/admin/')->middleware(['auth', 'verified', 'role:admin'])->group(
         Route::get('/blogDestroy/{id}', [AdminController::class, 'blogDestroy'])->name('blogs.destroy');
         Route::get('/blogToggleStatus/{id}', [AdminController::class, 'blogToggleStatus'])->name('blogs.toggleStatus');
     });
+    Route::view('/messages', 'admin.messages.messages')->name('admin.messages');
+    Route::view('/faqs', 'admin.faqs.faqs')->name('admin.faqs');
+    Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
     Route::view('/family', 'admin.family')->name('admin.family');
     Route::view('/patients', 'admin.patients')->name('admin.patients');
     Route::view('/doctors', 'admin.doctors')->name('admin.doctors');
