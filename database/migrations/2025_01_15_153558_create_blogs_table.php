@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->text('short_description');
             $table->text('description');
-            $table->text('tags');
-            $table->date('date');
-            $table->time('time');
+            $table->string('tags');
+            $table->date('date')->default(now());
+            $table->time('time')->default(now());
             $table->string('author');
-            $table->integer('status')->default(0);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

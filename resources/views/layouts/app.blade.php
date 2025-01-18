@@ -178,7 +178,7 @@
                                     </a>
                                     <ul aria-expanded="false" class="collapse first-level">
                                         <li class="sidebar-item">
-                                            <a href="/admin/blogs" class="sidebar-link">
+                                            <a href="{{ route('admin.blogs') }}" class="sidebar-link">
                                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                                     <i class="ti ti-circle"></i>
                                                 </div>
@@ -186,7 +186,7 @@
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
-                                            <a href="/admin/add-blog" class="sidebar-link">
+                                            <a href="{{ route('admin.add-blog') }}" class="sidebar-link">
                                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                                     <i class="ti ti-circle"></i>
                                                 </div>
