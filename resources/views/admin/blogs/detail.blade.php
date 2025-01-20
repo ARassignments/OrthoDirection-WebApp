@@ -65,7 +65,7 @@
                     <span class="badge bg-primary-subtle text-primary fs-4 fw-semibold px-6 py-8 rounded">1</span>
                 </div>
                 <div class="position-relative">
-                    <div class="p-4 rounded-2 text-bg-light mb-3">
+                    <div class="p-4 rounded-2 text-bg-light mb-3 d-none">
                         <div class="d-flex align-items-center gap-3">
                             <img src="assets/images/profile/user-2.jpg" alt="" class="rounded-circle" width="33"
                                 height="33">
@@ -81,6 +81,17 @@
                                 data-bs-title="Reply">
                                 <i class="ti ti-arrow-back-up"></i>
                             </a>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center w-100">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <img src="{{ asset('assets/dash/assets/images/backgrounds/nodata_bg.svg') }}"
+                                    alt="" class="img-fluid col-lg-5">
+                                <h3 class="fw-semibold mb-3">Comments Not Found!!!</h3>
+                                <p class="fw-normal fs-4">It looks like there are no comments here. Explore other
+                                    sections or try again later.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
