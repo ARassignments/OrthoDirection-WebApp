@@ -175,7 +175,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="card rounded-2 overflow-hidden hover-img">
                                 <div class="position-relative">
-                                    <a href="javascript:void(0)"><img src="{{ asset('admins_blogs_thumbnails/${blog.thumbnail}') }}"
+                                    <a href="{{ url('admin/blogs/blogDetail') }}/${blog.id}"><img src="{{ asset('admins_blogs_thumbnails/${blog.thumbnail}') }}"
                                             class="card-img-top img-fluid rounded-0" style="height:230px; object-fit:cover; object-position:top;" alt="..." loading="lazy"></a>
                                     <span
                                         class="badge text-bg-light fs-2 rounded-4 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">${timeAgo}</span>
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="card-body p-4">
                                     ${tags}
-                                    <a class="d-block my-4 fs-5 text-dark fw-semibold" href="">${blog.title}</a>
+                                    <a class="d-block my-4 fs-5 text-dark fw-semibold" href="{{ url('admin/blogs/blogDetail') }}/${blog.id}">${blog.title}</a>
                                     <div class="d-flex align-items-center gap-4">
                                         <div class="d-flex align-items-center gap-2"><i class="ti ti-eye text-dark fs-5"></i>9,125
                                         </div>
