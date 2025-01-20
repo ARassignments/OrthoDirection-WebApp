@@ -185,12 +185,26 @@
                                                 <i class="ti ti-trash"></i>
                                             </a>
                                         </div>
+                                         <img src="assets/images/profile/user-1.jpg" alt=""
+                                class="img-fluid rounded-circle position-absolute bottom-0 start-0 mb-n9 ms-9"
+                                width="40" height="40" data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-title="Admin">
                                     </div>
                                     <div class="card-body p-4">
-                                        <span class="badge text-bg-light fs-2 rounded-4 py-1 px-2 lh-sm mt-3">${service.icon}</span>
+                                        <span class="badge text-bg-light fs-2 rounded-4 py-1 px-2 lh-sm mt-3">${service.icon_img}</span>
                                         <a class="d-block my-4 fs-5 text-dark fw-semibold" href="">${service.title}</a>
                                         <p>${service.short_description}</p>
                                         <p>${service.description}</p>
+                                          <div class="d-flex align-items-center gap-4">
+                                <div class="d-flex align-items-center gap-2"><i class="ti ti-eye text-dark fs-5"></i>9,125
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><i class="ti ti-message-2 text-dark fs-5"></i>3
+                                </div>
+                                <div class="d-flex align-items-center fs-2 ms-auto"><i
+                                        class="ti ti-point text-dark"></i>Mon,
+                                    Jan 16
+                                </div>
+                            </div>
                                     </div>
                                 </div>
                             </div>
