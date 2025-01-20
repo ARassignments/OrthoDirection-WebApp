@@ -215,7 +215,11 @@ class AdminController extends Controller
         if (! $query) {
             return response()->json([], 200);
         }
-        $services = Service::where('title', 'LIKE', '%' . $query . '%')->get();
+        $services = Service::where('title', 'LIKE', '%' . $query . '%')->get()
+            ->map(function ($service) {
+            $service->thumbnail = asset($service->thumbnail);
+            return $service;
+        });
         return response()->json($services);
     }
 
