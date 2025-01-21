@@ -24,7 +24,7 @@
                                     This is a secure area of the application. Please confirm your password before continuing.
                                 </p>
                             </div>
-                            <form method="POST" action="{{ route('password.confirm') }}">
+                            <form method="POST" action="{{ route('password.confirm') }}" id="confirmForm">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
@@ -34,7 +34,7 @@
                                         <x-input-error :messages="$errors->get('password')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
-                                <button class="btn btn-primary w-100 py-8 mb-3 rounded-2">Confirm Password</button>
+                                <button class="btn btn-primary w-100 py-8 mb-3 rounded-2" id="confirmBtn">Confirm Password</button>
                                 <a href="{{ route('login') }}" class="btn bg-primary-subtle text-primary w-100 py-8">Back to Login</a>
                             </form>
                         </div>
@@ -43,5 +43,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.querySelector("#confirmForm").onsubmit = () => {
+            document.querySelector("#confirmBtn").disabled = true;
+            document.querySelector("#confirmBtn").innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Loading...
+            `;
+        }
+    </script>
 
 </x-guest-layout>

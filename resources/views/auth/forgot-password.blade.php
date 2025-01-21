@@ -26,7 +26,7 @@
                                 </p>
                             </div>
                             <x-auth-session-status class="mb-4" :status="session('status')" />
-                            <form method="POST" action="{{ route('password.email') }}">
+                            <form method="POST" action="{{ route('password.email') }}" id="forgotForm">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email Address</label>
@@ -36,7 +36,7 @@
                                         <x-input-error :messages="$errors->get('email')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
-                                <button class="btn btn-primary w-100 py-8 mb-3 rounded-2">Send Reset Link</button>
+                                <button class="btn btn-primary w-100 py-8 mb-3 rounded-2" id="sendLinkBtn">Send Reset Link</button>
                                 <a href="{{ route('login') }}" class="btn bg-primary-subtle text-primary w-100 py-8">Back to Login</a>
                             </form>
                         </div>
@@ -45,4 +45,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.querySelector("#forgotForm").onsubmit = () => {
+            document.querySelector("#sendLinkBtn").disabled = true;
+            document.querySelector("#sendLinkBtn").innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Loading...
+            `;
+        }
+    </script>
 </x-guest-layout>

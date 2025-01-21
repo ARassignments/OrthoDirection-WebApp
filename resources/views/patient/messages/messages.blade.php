@@ -4,13 +4,13 @@
         <div class="card-body px-4 py-3">
             <div class="row align-items-center">
                 <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Newsletter</h4>
+                    <h4 class="fw-semibold mb-8">Messages</h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="{{ route('admin.dashboard') }}">Home</a>
+                                <a class="text-muted text-decoration-none" href="{{ route('patient.dashboard') }}">Home</a>
                             </li>
-                            <li class="breadcrumb-item" aria-current="page">Newsletter</li>
+                            <li class="breadcrumb-item" aria-current="page">Messages</li>
                         </ol>
                     </nav>
                 </div>
@@ -27,11 +27,11 @@
         <div class="row justify-content-center w-100">
             <div class="col-lg-8">
                 <div class="text-center">
-                    <img src="{{ asset('assets/dash/assets/images/backgrounds/newsletter_bg.svg') }}" alt=""
+                    <img src="{{ asset('assets/dash/assets/images/backgrounds/messages_bg.svg') }}" alt=""
                         class="img-fluid w-100">
-                    <h3 class="fw-semibold mb-3">Newsletter Not Found!!!</h3>
-                    <p class="fw-normal mb-7 fs-4">It seems the newsletter you’re looking for is unavailable. Please check back later or explore other content.</p>
-                    <a class="btn btn-primary" href="javascript:void()" onclick="window.location.reload()" role="button">Try Again...</a>
+                    <h3 class="fw-semibold mb-3">Messages Not Found!!!</h3>
+                    <p class="fw-normal mb-7 fs-4">Let's begin a conversation with our users to better engage and understand their needs.</p>
+                    <a class="btn btn-primary" href="javascript:void()" role="button">Let's Start Chat</a>
                 </div>
             </div>
         </div>

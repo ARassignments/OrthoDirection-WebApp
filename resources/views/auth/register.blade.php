@@ -20,7 +20,7 @@
                         class="authentication-login min-vh-100 bg-body row justify-content-center align-items-center p-4">
                         <div class="col-sm-8 col-md-6 col-xl-9">
                             <h2 class="mb-4 fs-7 fw-bolder">Create an account</h2>
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST" action="{{ route('register') }}" id="registerForm">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Full Name</label>
@@ -79,7 +79,7 @@
                                         <x-input-error :messages="$errors->get('roles')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
-                                <button class="btn btn-primary w-100 py-8 mb-4 rounded-2">Create Account</button>
+                                <button class="btn btn-primary w-100 py-8 mb-4 rounded-2" id="registerBtn">Create Account</button>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <p class="fs-4 mb-0 fw-medium">Already have an account?</p>
                                     <a class="text-primary fw-medium ms-2" href="{{ route('login') }}">Login</a>
@@ -91,5 +91,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.querySelector("#registerForm").onsubmit = () => {
+            document.querySelector("#registerBtn").disabled = true;
+            document.querySelector("#registerBtn").innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Loading...
+            `;
+        }
+    </script>
 
 </x-guest-layout>

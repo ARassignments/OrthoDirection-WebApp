@@ -80,6 +80,9 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
     Route::view('/family', 'admin.family')->name('admin.family');
     Route::view('/patients', 'admin.patients')->name('admin.patients');
     Route::view('/doctors', 'admin.doctors')->name('admin.doctors');
+    Route::get('/profile', [AdminController::class, 'getProfileDetails'])->name('admin.profile');
+    Route::get('/edit-profile', [AdminController::class, 'getProfile'])->name('admin.profile.edit');
+    Route::post('/profileUpload', [AdminController::class, 'profileUpload'])->name('admin.profile.update');
     Route::get('/getFamilies', [AdminController::class, 'getFamilies'])->name('admin.getFamilies');
     Route::get('/getPatients', [AdminController::class, 'getPatients'])->name('admin.getPatients');
     Route::get('/getDoctors', [AdminController::class, 'getDoctors'])->name('admin.getDoctors');
@@ -91,11 +94,19 @@ Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->grou
 });
 
 Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->group(function () {
-    Route::get('/', [FamilyController::class, 'dashboard'])->name('family.dashboard');
+    Route::view('/', 'family.dashboard')->name('family.dashboard');
+    Route::view('/messages', 'family.messages.messages')->name('family.messages');
+    Route::get('/profile', [FamilyController::class, 'getProfileDetails'])->name('family.profile');
+    Route::get('/edit-profile', [FamilyController::class, 'getProfile'])->name('family.profile.edit');
+    Route::post('/profileUpload', [FamilyController::class, 'profileUpload'])->name('family.profile.update');
 });
 
 Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->group(function () {
-    Route::get('/', [PatientController::class, 'dashboard'])->name('patient.dashboard');
+    Route::view('/', 'patient.dashboard')->name('patient.dashboard');
+    Route::view('/messages', 'patient.messages.messages')->name('patient.messages');
+    Route::get('/profile', [PatientController::class, 'getProfileDetails'])->name('patient.profile');
+    Route::get('/edit-profile', [PatientController::class, 'getProfile'])->name('patient.profile.edit');
+    Route::post('/profileUpload', [PatientController::class, 'profileUpload'])->name('patient.profile.update');
 });
 
 
