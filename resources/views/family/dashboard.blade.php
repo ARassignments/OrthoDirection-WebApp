@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center gap-4 mb-4">
             <div class="position-relative">
                 <div class="border border-2 border-primary rounded-circle">
-                    <img src="assets/images/profile/user-1.jpg" class="rounded-circle m-1" alt="user1"
+                    <img src="{{ $globalProfileImage }}" class="rounded-circle m-1" alt="user1"
                         width="60">
                 </div>
             </div>

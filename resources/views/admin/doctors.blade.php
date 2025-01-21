@@ -44,7 +44,7 @@
                                             <h6 class="fs-4 fw-semibold mb-0">User</h6>
                                         </th>
                                         <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Project Name</h6>
+                                            <h6 class="fs-4 fw-semibold mb-0">Email Address</h6>
                                         </th>
                                         <th>
                                             <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
@@ -66,7 +66,7 @@
                                             <h6 class="fs-4 fw-semibold mb-0">User</h6>
                                         </th>
                                         <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Project Name</h6>
+                                            <h6 class="fs-4 fw-semibold mb-0">Email Address</h6>
                                         </th>
                                         <th>
                                             <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
@@ -158,8 +158,32 @@
                 [0, 'asc']
             ],
             language: {
-                emptyTable: '<span class="badge w-100 py-3 fs-5 bg-danger-subtle text-danger text-capitalize">No data found</span>',
-                zeroRecords: '<span class="badge w-100 py-3 fs-5 bg-danger-subtle text-danger text-capitalize">No matching records found</span>',
+                emptyTable: `
+                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                    <div class="row justify-content-center w-100">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <img src="{{ asset('assets/dash/assets/images/backgrounds/nodata_bg.svg') }}" alt=""
+                                    class="img-fluid col-lg-6">
+                                <h3 class="fw-semibold mb-3">No Data Found!!!</h3>
+                                <p class="fw-normal fs-4">It looks like there are no doctors here. Explore other sections or try again later.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                zeroRecords: `
+                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                    <div class="row justify-content-center w-100">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <img src="{{ asset('assets/dash/assets/images/backgrounds/search_bg.svg') }}" alt=""
+                                    class="img-fluid col-lg-6">
+                                <h3 class="fw-semibold mb-3">No Matching Records Found!!!</h3>
+                                <p class="fw-normal fs-4">We couldn't find any results matching your search. Try refining your filters or keywords!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
             },
             drawCallback: function(settings) {
                 // Add custom classes dynamically to pagination elements

@@ -162,7 +162,7 @@
                             <!-- ---------------------------------- -->
                             @if (Auth::user()->role == 'admin')
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/admin" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('admin.dashboard') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-home"></i>
                                         </span>
@@ -295,6 +295,14 @@
                                         <span class="hide-menu">FAQs</span>
                                     </a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('admin.profile') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-user-circle"></i>
+                                        </span>
+                                        <span class="hide-menu">My Profile</span>
+                                    </a>
+                                </li>
                             @elseif (Auth::user()->role == 'doctor')
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="/doctor" aria-expanded="false">
@@ -337,7 +345,7 @@
                                 </li>
                             @elseif (Auth::user()->role == 'patient')
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/patient" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('patient.dashboard') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-home"></i>
                                         </span>
@@ -361,7 +369,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link justify-content-between" href="/patient/messages"
+                                    <a class="sidebar-link justify-content-between" href="{{ route('patient.messages') }}"
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center gap-3">
                                             <span class="d-flex">
@@ -375,9 +383,17 @@
                                         </div>
                                     </a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('patient.profile') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-user-circle"></i>
+                                        </span>
+                                        <span class="hide-menu">My Profile</span>
+                                    </a>
+                                </li>
                             @elseif (Auth::user()->role == 'family')
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/family" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{route('family.dashboard')}}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-home"></i>
                                         </span>
@@ -401,7 +417,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link justify-content-between" href="/family/messages"
+                                    <a class="sidebar-link justify-content-between" href="{{ route('family.messages') }}"
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center gap-3">
                                             <span class="d-flex">
@@ -415,6 +431,14 @@
                                         </div>
                                     </a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('family.profile') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-user-circle"></i>
+                                        </span>
+                                        <span class="hide-menu">My Profile</span>
+                                    </a>
+                                </li>
                             @endif
                         @endif
                         <li class="nav-small-cap">
@@ -424,9 +448,9 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('profile.edit') }}" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-user-circle"></i>
+                                    <i class="ti ti-settings"></i>
                                 </span>
-                                <span class="hide-menu">My Profile</span>
+                                <span class="hide-menu">My Account</span>
                             </a>
                         </li>
 
@@ -437,7 +461,7 @@
                     <form class="hstack gap-3" method="POST" action="{{ route('logout') }}">
                         @csrf
                         <div class="john-img">
-                            <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
+                            <img src="{{ $globalProfileImage }}"
                                 class="rounded-circle" width="40" height="40" alt="" />
                         </div>
                         <div class="john-title">
@@ -900,7 +924,7 @@
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-profile-img">
-                                                    <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
+                                                    <img src="{{ $globalProfileImage }}"
                                                         class="rounded-circle" width="35" height="35"
                                                         alt="" />
                                                 </div>
@@ -913,7 +937,7 @@
                                                     <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                                                 </div>
                                                 <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                                    <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
+                                                    <img src="{{ $globalProfileImage }}"
                                                         class="rounded-circle" width="80" height="80"
                                                         alt="" />
                                                     <div class="ms-3">

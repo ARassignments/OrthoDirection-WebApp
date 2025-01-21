@@ -4,14 +4,15 @@
         <div class="position-relative z-index-5">
             <div class="row">
                 <div class="col-xl-7 col-xxl-8">
-                    <a href="/" class="text-nowrap logo-img d-block px-4 py-9 w-100"  style="position: relative; z-index:12;">
+                    <a href="/" class="text-nowrap logo-img d-block px-4 py-9 w-100"
+                        style="position: relative; z-index:12;">
                         <img src="{{ asset('assets/images/logo.png') }}" class="dark-logo" alt="Logo-Dark" />
                         <img src="{{ asset('assets/images/logo.png') }}" class="light-logo" alt="Logo-light" />
                     </a>
                     <div class="d-none d-xl-flex align-items-center justify-content-center"
                         style="height: calc(100vh - 110px);">
-                        <img src="{{ asset('assets/dash/assets/images/backgrounds/login_bg.svg') }}"
-                            alt="" class="img-fluid" width="100%">
+                        <img src="{{ asset('assets/dash/assets/images/backgrounds/login_bg.svg') }}" alt=""
+                            class="img-fluid" width="100%">
                     </div>
                 </div>
                 <div class="col-xl-5 col-xxl-4">
@@ -54,7 +55,7 @@
                                 </div>
                             @endif
 
-                            <form method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('login') }}" id="loginForm">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email or Username</label>
@@ -62,7 +63,8 @@
                                         placeholder="Enter Email or Username" :value="old('email')" autofocus
                                         autocomplete="username" required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('email')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"/>
+                                        <x-input-error :messages="$errors->get('email')"
+                                            class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <div class="mb-4">
@@ -70,7 +72,8 @@
                                     <input type="password" class="form-control" id="password" name="password"
                                         placeholder="Enter Password" autocomplete="current-password" required>
                                     <small>
-                                        <x-input-error :messages="$errors->get('password')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"/>
+                                        <x-input-error :messages="$errors->get('password')"
+                                            class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
@@ -86,7 +89,7 @@
                                             Password ?</a>
                                     @endif
                                 </div>
-                                <button class="btn btn-primary w-100 py-8 mb-4 rounded-2">Login</button>
+                                <button class="btn btn-primary w-100 py-8 mb-4 rounded-2" id="loginBtn">Login</button>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <p class="fs-4 mb-0 fw-medium">Don't have an account?</p>
                                     <a class="text-primary fw-medium ms-2" href="{{ route('register') }}">Register</a>
@@ -100,6 +103,13 @@
     </div>
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
+        document.querySelector("#loginForm").onsubmit = () => {
+            document.querySelector("#loginBtn").disabled = true;
+            document.querySelector("#loginBtn").innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Loading...
+            `;
+        }
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",

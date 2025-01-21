@@ -25,7 +25,7 @@
 
                             </div>
                             <div>
-                                <form method="POST" action="">
+                                <form method="POST" action="" id="otpForm">
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label fw-semibold">Type your 4
                                             digits
@@ -41,7 +41,7 @@
                                                 maxlength="1" inputmode="numeric" pattern="[0-9]" required>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary w-100 py-8 mb-4">Verify My
+                                    <button class="btn btn-primary w-100 py-8 mb-4" id="verifyBtn">Verify My
                                         Account</button>
                                 </form>
                                 <div class="d-flex align-items-center">
@@ -67,6 +67,13 @@
     </div>
 
     <script>
+        document.querySelector("#otpForm").onsubmit = () => {
+            document.querySelector("#verifyBtn").disabled = true;
+            document.querySelector("#verifyBtn").innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Verifying...
+            `;
+        }
         document.addEventListener('DOMContentLoaded', () => {
             const inputs = document.querySelectorAll('.otp-input');
             

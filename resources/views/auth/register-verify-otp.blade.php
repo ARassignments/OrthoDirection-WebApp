@@ -30,7 +30,7 @@
 
                             </div>
                             <div>
-                                <form method="POST" action="{{ route('register.otp.check') }}">
+                                <form method="POST" action="{{ route('register.otp.check') }}" id="otpForm">
                                     @csrf
                                     <input type="hidden" name="email" value="{{ session('email') }}">
                                     <input type="hidden" name="otp" id="otp">
@@ -53,7 +53,7 @@
                                                 required>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary w-100 py-8 mb-4">Verify My
+                                    <button class="btn btn-primary w-100 py-8 mb-4" id="verifyBtn">Verify My
                                         Account</button>
                                 </form>
                                 <div class="d-flex align-items-center">
@@ -73,6 +73,13 @@
     </div>
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
+        document.querySelector("#otpForm").onsubmit = () => {
+            document.querySelector("#verifyBtn").disabled = true;
+            document.querySelector("#verifyBtn").innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Verifying...
+            `;
+        }
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",

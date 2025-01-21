@@ -44,7 +44,7 @@
                                             <h6 class="fs-4 fw-semibold mb-0">User</h6>
                                         </th>
                                         <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Project Name</h6>
+                                            <h6 class="fs-4 fw-semibold mb-0">Email Address</h6>
                                         </th>
                                         <th>
                                             <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
@@ -55,186 +55,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="w-100">
-                                    {{-- <tr>
-                                        <td>
-                                            <p class="mb-0">1</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/images/profile/user-1.jpg" class="rounded-circle"
-                                                    width="40" height="40">
-                                                <div class="ms-3">
-                                                    <h6 class="fs-4 fw-semibold mb-0">Sunil Joshi</h6>
-                                                    <a href="mailto:admin@gmail.com" class="fw-normal">admin@gmail.com</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="mb-0 fw-normal fs-4">Elite Admin</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <a href="#"
-                                                    class="text-bg-secondary text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    S
-                                                </a>
-                                                <a href="#"
-                                                    class="text-bg-danger text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    D
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-check form-switch d-inline-block">
-                                                <input class="form-check-input" type="checkbox" checked="">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p class="mb-0">2</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/images/profile/user-2.jpg" class="rounded-circle"
-                                                    width="40" height="40">
-                                                <div class="ms-3">
-                                                    <h6 class="fs-4 fw-semibold mb-0">Andrew McDownland</h6>
-                                                    <span class="fw-normal">Project Manager</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="mb-0 fw-normal fs-4">Real Homes WP Theme</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <a href="#"
-                                                    class="text-bg-primary text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    A
-                                                </a>
-                                                <a href="#"
-                                                    class="text-bg-warning text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    X
-                                                </a>
-                                                <a href="#"
-                                                    class="text-bg-secondary text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    N
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p class="mb-0">3</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/images/profile/user-3.jpg" class="rounded-circle"
-                                                    width="40" height="40">
-                                                <div class="ms-3">
-                                                    <h6 class="fs-4 fw-semibold mb-0">Christopher Jamil</h6>
-                                                    <span class="fw-normal">Project Manager</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="mb-0 fw-normal fs-4">MedicalPro WP Theme</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <a href="#"
-                                                    class="text-bg-danger text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    X
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p class="mb-0">4</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/images/profile/user-4.jpg" class="rounded-circle"
-                                                    width="40" height="40">
-                                                <div class="ms-3">
-                                                    <h6 class="fs-4 fw-semibold mb-0">Nirav Joshi</h6>
-                                                    <span class="fw-normal">Frontend Engineer</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="mb-0 fw-normal fs-4">Hosting Press HTML</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <a href="#"
-                                                    class="text-bg-primary text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    Y
-                                                </a>
-                                                <a href="#"
-                                                    class="text-bg-danger text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    X
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p class="mb-0">5</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/images/profile/user-5.jpg" class="rounded-circle"
-                                                    width="40" height="40">
-                                                <div class="ms-3">
-                                                    <h6 class="fs-4 fw-semibold mb-0">Micheal Doe</h6>
-                                                    <span class="fw-normal">Content Writer</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="mb-0 fw-normal fs-4">Hosting Press HTML</p>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <a href="#"
-                                                    class="text-bg-secondary text-white fs-6 rounded-circle me-n2 card-hover border border-2 border-white d-flex align-items-center justify-content-center"
-                                                    style="width: 39px; height: 39px;">
-                                                    S
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </td>
-                                    </tr> --}}
                                 </tbody>
                                 <tfoot class="text-dark fs-4">
                                     <tr>
@@ -245,7 +65,7 @@
                                             <h6 class="fs-4 fw-semibold mb-0">User</h6>
                                         </th>
                                         <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Project Name</h6>
+                                            <h6 class="fs-4 fw-semibold mb-0">Email Address</h6>
                                         </th>
                                         <th>
                                             <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
@@ -306,13 +126,13 @@
                     render: function(data, type, row) {
                         const date = new Date(data);
                         const formattedDate = new Intl.DateTimeFormat('en-US', {
-                            weekday: 'long', // Day of the week (e.g., Monday)
+                            weekday: 'long',
                             year: 'numeric',
-                            month: 'long', // Full month (e.g., January)
+                            month: 'long',
                             day: 'numeric',
                             hour: '2-digit',
                             minute: '2-digit',
-                            hour12: true // 12-hour clock (AM/PM)
+                            hour12: true
                         }).format(date);
 
                         return `<p class="mb-0">${formattedDate}</p>`;
@@ -337,8 +157,32 @@
                 [0, 'asc']
             ],
             language: {
-                emptyTable: '<span class="badge w-100 py-3 fs-5 bg-danger-subtle text-danger text-capitalize">No data found</span>',
-                zeroRecords: '<span class="badge w-100 py-3 fs-5 bg-danger-subtle text-danger text-capitalize">No matching records found</span>',
+                emptyTable: `
+                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                    <div class="row justify-content-center w-100">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <img src="{{ asset('assets/dash/assets/images/backgrounds/nodata_bg.svg') }}" alt=""
+                                    class="img-fluid col-lg-6">
+                                <h3 class="fw-semibold mb-3">No Data Found!!!</h3>
+                                <p class="fw-normal fs-4">It looks like there are no family members here. Explore other sections or try again later.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                zeroRecords: `
+                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                    <div class="row justify-content-center w-100">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <img src="{{ asset('assets/dash/assets/images/backgrounds/search_bg.svg') }}" alt=""
+                                    class="img-fluid col-lg-6">
+                                <h3 class="fw-semibold mb-3">No Matching Records Found!!!</h3>
+                                <p class="fw-normal fs-4">We couldn't find any results matching your search. Try refining your filters or keywords!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
             },
             drawCallback: function(settings) {
                 // Add custom classes dynamically to pagination elements
