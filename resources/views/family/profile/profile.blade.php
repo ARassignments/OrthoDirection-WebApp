@@ -70,7 +70,7 @@
                         <li class="position-relative">
                             @if ($profile&&$profile->facebook)
                                 <a class="d-flex align-items-center justify-content-center text-bg-primary p-2 fs-4 rounded-circle"
-                                    href="{{ $profile ? $profile->facebook : '' }}" width="30" height="30">
+                                    href="{{ $profile ? $profile->facebook : '' }}" width="30" height="30" target="_blank">
                                     <i class="ti ti-brand-facebook"></i>
                                 </a>
                             @else
@@ -83,7 +83,7 @@
                         <li class="position-relative">
                             @if ($profile&&$profile->twitter)
                                 <a class="d-flex align-items-center justify-content-center text-bg-secondary p-2 fs-4 rounded-circle"
-                                    href="{{ $profile ? $profile->twitter : '' }}" width="30" height="30">
+                                    href="{{ $profile ? $profile->twitter : '' }}" width="30" height="30" target="_blank">
                                     <i class="ti ti-brand-twitter"></i>
                                 </a>
                             @else
@@ -96,7 +96,7 @@
                         <li class="position-relative">
                             @if ($profile&&$profile->instagram)
                                 <a class="d-flex align-items-center justify-content-center text-bg-danger p-2 fs-4 rounded-circle"
-                                    href="{{ $profile ? $profile->instagram : '' }}" width="30" height="30">
+                                    href="{{ $profile ? $profile->instagram : '' }}" width="30" height="30" target="_blank">
                                     <i class="ti ti-brand-instagram"></i>
                                 </a>
                             @else
