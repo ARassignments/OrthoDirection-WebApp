@@ -46,6 +46,7 @@ Route::post('/resend-otp', [RegisteredUserController::class, 'resend'])->name('v
 Route::get('/register-otp-verify', [RegisteredUserController::class, 'showOtpForm'])->name('register.otp.verify');
 Route::post('/register-otp-verify', [RegisteredUserController::class, 'verifyOtp'])->name('register.otp.check');
 
+Route::post('/store-newsletter', [AdminController::class,'storeNewsletter'])->name('admin.newsletter.store');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -60,6 +61,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::view('/', 'admin.dashboard')->name('admin.dashboard');
     Route::view('/blogs', 'admin.blogs.blogs')->name('admin.blogs');
+    Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
     Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
     Route::get('/services', [AdminController::class,'show_service'])->name('admin.services');
     Route::get('/add-service', [AdminController::class,'create_service'])->name('admin.add-service');
@@ -76,7 +78,6 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
     });
     Route::view('/messages', 'admin.messages.messages')->name('admin.messages');
     Route::view('/faqs', 'admin.faqs.faqs')->name('admin.faqs');
-    Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
     Route::view('/family', 'admin.family')->name('admin.family');
     Route::view('/patients', 'admin.patients')->name('admin.patients');
     Route::view('/doctors', 'admin.doctors')->name('admin.doctors');

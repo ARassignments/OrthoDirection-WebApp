@@ -207,7 +207,8 @@
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 form-column">
                             <div class="form-inner">
-                                <form method="post" action="https://azim.hostlin.com/Medimart/contact.html">
+                                <form id="newsletterForm" method="post" action="{{route('admin.newsletter.store')}}">
+                                    @csrf
                                     <div class="form-group">
                                         <input type="email" name="email" placeholder="Enter Your Email Address"
                                             required>
@@ -216,7 +217,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="check-box">
-                                            <input class="check" type="checkbox" id="checkbox1">
+                                            <input class="check" name="agree" type="checkbox" id="checkbox1">
                                             <label for="checkbox1">I agree to the <a href="/privacy-policy">Privacy
                                                     Policy.</a></label>
                                         </div>
@@ -389,7 +390,52 @@
           "url": "https://www.orthodirection.com"
         }
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('newsletterForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+    
+            const form = e.target;
+            const formData = new FormData(form);
+    
+            fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Accept': 'application/json',
+                },
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        // Show success message
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sucessfully Subscribed!',
+                            text: data.msg,
+                        });
+                        form.reset(); // Optional: Reset the form fields
+                    } else {
+                        // Show error message
+                        let errors = Object.values(data.errors).join('\n');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Subscription Failed',
+                            text: errors,
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An unexpected error occurred. Please try again.',
+                    });
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </body>
 {{-- <script src="{{ asset('assets/dashboard/assets/js/bundle6572.js?v1.5.0') }}"></script>
 <script src="{{ asset('assets/dashboard/assets/js/scripts6572.js?v1.5.0') }}"></script> --}}

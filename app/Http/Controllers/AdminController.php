@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use App\Mail\NewsletterMail;
+use App\Models\Newsletter; 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -178,7 +182,7 @@ class AdminController extends Controller
     {
         return view('admin.add-service');
     }
-
+   
     /**
      * Store a newly created resource in storage.
      */
@@ -223,6 +227,33 @@ class AdminController extends Controller
         return response()->json($services);
     }
 
+    public function storeNewsletter(Request $request)
+    {
+        // Validate the email
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'email', 'unique:newsletters,email'],
+            'agree' => ['required']
+        ]);
+
+        if ($validator->passes()) {
+            $newsletter = Newsletter::updateOrCreate(
+                ['email' => $request->email]
+            );
+
+            Mail::to($request->email)->send(new NewsletterMail($request->email));
+
+            return response()->json([
+                'status' => true,
+                'msg' => "Thank you for subscribing! You've successfully joined our newsletter. Stay tuned for updates and exclusive courses!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors(),
+            ]);
+        }
+    }
+    
     /**
      * Show the form for editing the specified resource.
      */
