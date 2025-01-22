@@ -62,12 +62,18 @@ Route::middleware('auth')->group(function () {
 Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::view('/', 'admin.dashboard')->name('admin.dashboard');
     Route::view('/blogs', 'admin.blogs.blogs')->name('admin.blogs');
-    Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
     Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
-    Route::get('/services', [AdminController::class,'show_service'])->name('admin.services');
-    Route::get('/add-service', [AdminController::class,'create_service'])->name('admin.add-service');
-    Route::post('/store-service', [AdminController::class,'store_service'])->name('admin.store-service');
-    Route::get('/search-service', [AdminController::class, 'search'])->name('admin.search-service');
+    Route::view('/services', 'admin.services.services')->name('admin.services');
+    Route::view('/add-service', 'admin.services.add-service')->name('admin.add-service');
+    Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
+    Route::prefix('/services')->group(function () {
+        Route::get('/serviceFetch', [AdminController::class, 'serviceFetch'])->name('service.fetch');
+        Route::post('/serviceStore', [AdminController::class, 'serviceStore'])->name('service.store');
+        Route::get('/serviceEdit/{id}', [AdminController::class, 'serviceEdit'])->name('service.edit');
+        Route::post('/serviceUpdate/{id}', [AdminController::class, 'serviceUpdate'])->name('service.update');
+        Route::get('/serviceDestroy/{id}', [AdminController::class, 'serviceDestroy'])->name('service.destroy');
+        Route::get('/serviceToggleStatus/{id}', [AdminController::class, 'serviceToggleStatus'])->name('service.toggleStatus');
+    });
     Route::prefix('/blogs')->group(function () {
         Route::get('/blogDetail/{id}', [AdminController::class, 'blogDetail'])->name('blogs.detail');
         Route::get('/blogFetch', [AdminController::class, 'blogFetch'])->name('blogs.fetch');

@@ -4,16 +4,16 @@
         <div class="card-body px-4 py-3">
             <div class="row align-items-center">
                 <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Add Blog</h4>
+                    <h4 class="fw-semibold mb-8">Add Service</h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a class="text-muted text-decoration-none" href="{{ route('admin.dashboard') }}">Home</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="{{ route('admin.blogs') }}">Blogs</a>
+                                <a class="text-muted text-decoration-none" href="{{ route('admin.services') }}">Services</a>
                             </li>
-                            <li class="breadcrumb-item" aria-current="page">Add Blog</li>
+                            <li class="breadcrumb-item" aria-current="page">Add Service</li>
                         </ol>
                     </nav>
                 </div>
@@ -28,17 +28,17 @@
 
     <div class="card">
         <div class="card-body">
-            <h5>Add Blog</h5>
+            <h5>Add Service</h5>
             <p class="card-subtitle mb-3">
                 All fields are required *
             </p>
-            <form id="blogForm">
+            <form id="serviceForm">
                 @csrf
                 <div class="row">
                     <div class="col-md-12 mb-3 px-lg-2 px-md-2 px-0">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title fw-semibold">Blog Thumbnail</h5>
+                                <h5 class="card-title fw-semibold">Service Thumbnail</h5>
                                 <p class="card-subtitle mb-4">Choose your thumbnail picture from here</p>
                                 <div class="text-center">
                                     <img id="thumbnailPreview" src="assets/images/profile/user-1.jpg" alt=""
@@ -50,7 +50,7 @@
                                         <button class="btn btn-outline-danger" type="button"
                                             id="resetThumbnailBtn">Reset</button>
                                     </div>
-                                    <p class="mb-0">Allowed JPG, GIF or PNG. Max size of 2000K</p>
+                                    <p class="mb-0">Allowed JPG, JPEG or PNG. Max size of 2000K</p>
                                     <span id="thumbnailError"
                                         class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                                 </div>
@@ -67,49 +67,28 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="author" name="author" placeholder=""
-                                required>
-                            <label for="author">Author Name</label>
+                            <select class="form-control" id="icon_img" name="icon_img" required>
+                                <option selected disabled>Select Icon</option>
+                                @php
+                                    $icons = ['user', 'cart'];
+                                @endphp
+                                @foreach ($icons as $icon)
+                                    <option value="{{ $icon }}" class="text-capitalize">
+                                        {{ $icon }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label for="icon_img">Service Icon</label>
                         </div>
-                        <span id="authorError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
+                        <span id="icon_imgError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>
-                    <div class="tags-repeater col-md-12 mb-3">
-                        <div id="repeater-group">
-                            <div class="row mb-3 repeater-item">
-                                <div class="col-md-11 col-9 pe-0">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" name="tags[]" placeholder="Tag Name"
-                                            required>
-                                        <label>Tag Name</label>
-                                    </div>
-                                    <span class="tagError mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
-                                </div>
-                                <div class="col-md-1 col-3">
-                                    <button
-                                        class="btn w-100 bg-danger-subtle text-danger waves-effect waves-light d-flex justify-content-center align-items-center h-100 delete-btn"
-                                        type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        data-bs-title="Delete" disabled>
-                                        <i class="ti ti-circle-x fs-5"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <button id="add-tag-btn" type="button" class="btn btn-primary waves-effect waves-light">
-                            <div class="d-flex align-items-center">
-                                Add Tag
-                                <i class="ti ti-circle-plus ms-1 fs-5"></i>
-                            </div>
-                        </button>
-                    </div>
-
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
                             <textarea class="form-control h-auto" id="short_description" name="short_description" rows="5" placeholder=""
                                 required></textarea>
                             <label for="short_description">Short Description</label>
                         </div>
-                        <span id="short_descriptionError"
-                            class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
+                        <span id="short_descriptionError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
@@ -123,7 +102,7 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="status" id="status"
                                     value="0">
-                                <label class="form-check-label" for="status">Default Blog Visible</label>
+                                <label class="form-check-label" for="status">Default Service Visible</label>
                             </div>
                             <div class="ms-auto mt-3 mt-md-0">
                                 <button type="submit" class="btn btn-primary font-medium rounded-pill px-4">
@@ -144,76 +123,6 @@
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
     <script>
         $(document).ready(function() {
-            const repeaterGroup = document.getElementById("repeater-group");
-            const addTagBtn = document.getElementById("add-tag-btn");
-            const MAX_ROWS = 4;
-
-            function addTagRow() {
-                const rows = repeaterGroup.querySelectorAll(".repeater-item");
-                if (rows.length >= MAX_ROWS) {
-                    alert("You can add a maximum of 5 tags.");
-                    return;
-                }
-
-                const newRow = document.createElement("div");
-                newRow.className = "row mb-3 repeater-item";
-                newRow.innerHTML = `
-                    <div class="col-md-11 col-9 pe-0">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" name="tags[]" placeholder="Tag Name" required>
-                            <label>Tag Name</label>
-                        </div>
-                        <span class="tagError mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
-                    </div>
-                    <div class="col-md-1 col-3">
-                        <button class="btn w-100 bg-danger-subtle text-danger waves-effect waves-light d-flex justify-content-center align-items-center h-100 delete-btn" data-bs-toggle="tooltip" data-bs-placement="left" title="Delete">
-                            <i class="ti ti-circle-x fs-5"></i>
-                        </button>
-                    </div>
-                `;
-                repeaterGroup.appendChild(newRow);
-                initializeTooltips();
-                updateDeleteButtonsState();
-            }
-
-            function handleDeleteRow(row) {
-                const rows = repeaterGroup.querySelectorAll(".repeater-item");
-                if (rows.length > 1) {
-                    row.remove();
-                    updateDeleteButtonsState();
-                }
-            }
-
-            function updateDeleteButtonsState() {
-                const rows = repeaterGroup.querySelectorAll(".repeater-item");
-                const deleteButtons = repeaterGroup.querySelectorAll(".delete-btn");
-                deleteButtons.forEach((button) => {
-                    button.disabled = rows.length === 1;
-                });
-                addTagBtn.disabled = rows.length >= MAX_ROWS;
-            }
-
-            function initializeTooltips() {
-                const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-                tooltipTriggerList.map(function(tooltipTriggerEl) {
-                    return new bootstrap.Tooltip(tooltipTriggerEl);
-                });
-            }
-
-            addTagBtn.addEventListener("click", addTagRow);
-            repeaterGroup.addEventListener("click", function(e) {
-                if (e.target.closest(".delete-btn")) {
-                    const row = e.target.closest(".repeater-item");
-                    handleDeleteRow(row);
-                }
-            });
-
-            if (repeaterGroup.children.length === 0) {
-                addTagRow();
-            }
-            initializeTooltips();
-
-            // Forms Validation
             $('#thumbnail').change(function() {
                 const file = this.files[0];
                 if (file) {
@@ -238,14 +147,14 @@
                 }
             });
 
-            $('#blogForm').on('submit', function(e) {
+            $('#serviceForm').on('submit', function(e) {
                 e.preventDefault();
                 $('.badge.text-danger').text('');
                 let formData = new FormData(this);
                 formData.append('_token', '{{ csrf_token() }}');
 
                 $.ajax({
-                    url: "{{ route('blogs.store') }}",
+                    url: "{{ route('service.store') }}",
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -261,7 +170,7 @@
                     },
                     success: function(response) {
                         if (response.success) {
-                            $('#blogForm')[0].reset();
+                            $('#serviceForm')[0].reset();
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: "top-end",
@@ -274,7 +183,7 @@
                                 },
                                 didClose: () => {
                                     window.location.href =
-                                        "{{ route('admin.blogs') }}";
+                                        "{{ route('admin.services') }}";
                                 }
                             });
                             Toast.fire({

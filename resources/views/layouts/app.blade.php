@@ -198,7 +198,7 @@
                                 <li class="sidebar-item">
                                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                         <span class="d-flex">
-                                            <i class="ti ti-chart-donut-3"></i>
+                                            <i class="ti ti-category"></i>
                                         </span>
                                         <span class="hide-menu">Services</span>
                                     </a>
