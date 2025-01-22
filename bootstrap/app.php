@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'allow-unverified' => \App\Http\Middleware\AllowUnverifiedUsers::class,
             'role' => \App\Http\Middleware\RoleMiddleware::class,
+            'web' => \App\Http\Middleware\LogDevice::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

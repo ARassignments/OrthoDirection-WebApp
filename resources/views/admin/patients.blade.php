@@ -55,7 +55,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="w-100">
-                                    
+
                                 </tbody>
                                 <tfoot class="text-dark fs-4">
                                     <tr>
@@ -97,15 +97,15 @@
                 type: "GET"
             },
             columns: [{
-                    data: 'id',
+                    data: null,
                     name: '#',
-                    render: function(data, type, row) {
-                        return `<p class="mb-0">${data}</p>`;
+                    render: function(data, type, row, meta) {
+                        return `<p class="mb-0 text-body">${meta.row + 1}</p>`;
                     }
                 },
                 {
                     data: 'name',
-                    name: 'User',
+                    name: 'name',
                     render: function(data, type, row) {
                         return `<div class="d-flex align-items-center">
                                     <img src="assets/images/profile/user-1.jpg" class="rounded-circle"
@@ -119,7 +119,10 @@
                 },
                 {
                     data: 'email',
-                    name: 'Email'
+                    name: 'email',
+                    render: function(data, type, row) {
+                        return `<p class="mb-0 text-body">${data}</p>`;
+                    }
                 },
                 {
                     data: 'created_at',
@@ -127,16 +130,16 @@
                     render: function(data, type, row) {
                         const date = new Date(data);
                         const formattedDate = new Intl.DateTimeFormat('en-US', {
-                            weekday: 'long', // Day of the week (e.g., Monday)
+                            weekday: 'long',
                             year: 'numeric',
-                            month: 'long', // Full month (e.g., January)
+                            month: 'long',
                             day: 'numeric',
                             hour: '2-digit',
                             minute: '2-digit',
-                            hour12: true // 12-hour clock (AM/PM)
+                            hour12: true
                         }).format(date);
 
-                        return `<p class="mb-0">${formattedDate}</p>`;
+                        return `<p class="mb-0 text-body">${formattedDate}</p>`;
                     }
                 },
                 {
@@ -159,34 +162,34 @@
             ],
             language: {
                 emptyTable: `
-                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                <div class="d-flex align-items-center justify-content-center w-100" id="noDataErr">
                     <div class="row justify-content-center w-100">
                         <div class="col-lg-12">
                             <div class="text-center">
                                 <img src="{{ asset('assets/dash/assets/images/backgrounds/nodata_bg.svg') }}" alt=""
-                                    class="img-fluid col-lg-6">
-                                <h3 class="fw-semibold mb-3">No Data Found!!!</h3>
-                                <p class="fw-normal fs-4">It looks like there are no patients here. Explore other sections or try again later.</p>
+                                    class="img-fluid col-lg-8">
+                                <h3 class="fw-semibold mb-3 text-dark">No Data Found!!!</h3>
+                                <p class="fw-normal mb-7 fs-4 text-body">It looks like there are no patients here. Explore other sections or try again later.</p>
+                                <a class="btn btn-primary mb-7" href="javascript:void()" onclick="window.location.reload()" role="button">Try Again...</a>
                             </div>
                         </div>
                     </div>
                 </div>`,
                 zeroRecords: `
-                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                <div class="d-flex align-items-center justify-content-center w-100">
                     <div class="row justify-content-center w-100">
                         <div class="col-lg-12">
                             <div class="text-center">
                                 <img src="{{ asset('assets/dash/assets/images/backgrounds/search_bg.svg') }}" alt=""
-                                    class="img-fluid col-lg-6">
-                                <h3 class="fw-semibold mb-3">No Matching Records Found!!!</h3>
-                                <p class="fw-normal fs-4">We couldn't find any results matching your search. Try refining your filters or keywords!</p>
+                                    class="img-fluid col-lg-8">
+                                <h3 class="fw-semibold mb-3 text-dark">No Matching Records Found!!!</h3>
+                                <p class="fw-normal fs-4 text-body">We couldn't find any results matching your search. Try refining your filters or keywords!</p>
                             </div>
                         </div>
                     </div>
                 </div>`,
             },
             drawCallback: function(settings) {
-                // Add custom classes dynamically to pagination elements
                 $('#myTable').addClass('table border text-nowrap customize-table mb-0 align-middle');
                 $('#myTable_paginate').addClass('btn-group');
                 $('#myTable_paginate span').addClass('btn-group');
@@ -198,6 +201,23 @@
                 $('#myTable_paginate .paginate_button').not('.current').addClass(
                     'btn bg-info-subtle text-info font-medium');
                 $('#myTable_wrapper #myTable_length select').addClass('select2 form-control w-50');
+
+                let noDataMessage = $(".dataTables_empty").length > 0;
+                if (noDataMessage) {
+                    $('#myTable thead, #myTable tfoot, #myTable_paginate, #myTable_info, #myTable_length').hide();
+                    $('.table-responsive:has(#noDataErr) #myTable_filter').hide();
+                    $('#myTable').removeClass('border');
+                    $('.dataTables_empty').addClass('border-0 p-0');
+                    $('.table-responsive').removeClass('mb-4');
+                    $('#myTable_filter').addClass('flex-grow-1');
+                } else {
+                    $('#myTable thead, #myTable tfoot, #myTable_paginate, #myTable_info, #myTable_length').show();
+                    $('.table-responsive:has(#noDataErr) #myTable_filter').show();
+                    $('#myTable').addClass('border');
+                    $('.dataTables_empty').removeClass('border-0 p-0');
+                    $('.table-responsive').addClass('mb-4');
+                    $('#myTable_filter').removeClass('flex-grow-1');
+                }
             }
         });
 

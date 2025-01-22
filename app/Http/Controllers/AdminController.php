@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\AdminProfile;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use App\Mail\NewsletterMail;
-use App\Models\Newsletter; 
+use App\Models\DeviceLog;
+use App\Models\Newsletter;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
@@ -21,7 +23,7 @@ class AdminController extends Controller
 
     public function getFamilies()
     {
-        $users = User::where('role', 'family')->get();
+        $users = User::where('role', 'admin')->get();
         return datatables()->of($users)->make(true);
     }
 
@@ -52,6 +54,10 @@ class AdminController extends Controller
 
     public function logout(Request $request)
     {
+        $device = DeviceLog::where('user_id', Auth::user()->id)->first();
+        if ($device) {
+            $device->update(['logged_out_at' => now()]);
+        }
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -65,7 +71,7 @@ class AdminController extends Controller
         if (!$blog) {
             return response()->json(['error' => 'Blog not found!'], 404);
         }
-        return view('admin.blogs.detail',compact(['blog'=>'blog']));
+        return view('admin.blogs.detail', compact(['blog' => 'blog']));
     }
 
     public function blogStore(Request $request)
@@ -115,7 +121,7 @@ class AdminController extends Controller
         if (!$blog) {
             return response()->json(['error' => 'Blog not found!'], 404);
         }
-        return view('admin.blogs.edit-blog',compact(['blog'=>'blog']));
+        return view('admin.blogs.edit-blog', compact(['blog' => 'blog']));
     }
 
     public function blogUpdate(Request $request, $id)
@@ -246,7 +252,7 @@ class AdminController extends Controller
     {
         return view('admin.add-service');
     }
-   
+
     /**
      * Store a newly created resource in storage.
      */
@@ -285,9 +291,9 @@ class AdminController extends Controller
         }
         $services = Service::where('title', 'LIKE', '%' . $query . '%')->get()
             ->map(function ($service) {
-            $service->thumbnail = asset($service->thumbnail);
-            return $service;
-        });
+                $service->thumbnail = asset($service->thumbnail);
+                return $service;
+            });
         return response()->json($services);
     }
 
@@ -317,7 +323,7 @@ class AdminController extends Controller
             ]);
         }
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */

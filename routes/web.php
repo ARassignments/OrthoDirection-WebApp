@@ -8,6 +8,7 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DeviceLogController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -108,6 +109,13 @@ Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->gr
     Route::get('/profile', [PatientController::class, 'getProfileDetails'])->name('patient.profile');
     Route::get('/edit-profile', [PatientController::class, 'getProfile'])->name('patient.profile.edit');
     Route::post('/profileUpload', [PatientController::class, 'profileUpload'])->name('patient.profile.update');
+});
+
+// Devices Login Logs
+Route::prefix('/devices/')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [DeviceLogController::class, 'getDevices'])->name('devices.getDevices');
+    Route::post('/logout/{id}', [DeviceLogController::class, 'logoutDevice'])->name('devices.logout');
+    Route::post('/logout-all', [DeviceLogController::class, 'logoutAllDevices'])->name('devices.logout.all');
 });
 
 
