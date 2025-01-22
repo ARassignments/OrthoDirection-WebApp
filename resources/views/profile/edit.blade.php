@@ -203,19 +203,17 @@
                                 <div class="card-body p-4">
                                     <h4 class="fw-semibold mb-3">Notification Preferences</h4>
                                     <p>
-                                        Select the notificaitons ou would like to receive via email. Please note that you
-                                        cannot opt
-                                        out of receving service
-                                        messages, such as payment, security or legal notifications.
+                                        Select the notifications you would like to receive via email. Please note that you
+                                        cannot opt out of receiving service messages, such as payment, security, or legal
+                                        notifications.
                                     </p>
-                                    <form class="mb-7">
-                                        <label for="exampleInputtext5" class="form-label fw-semibold">Email
-                                            Address*</label>
-                                        <input type="text" class="form-control" id="exampleInputtext5" placeholder=""
-                                            required="">
-                                        <p class="mb-0">Required for notificaitons.</p>
+                                    <form id="notification-form" class="mb-7">
+                                        <label for="email" class="form-label fw-semibold">Email Address*</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            value="{{ auth()->user()->email ?? '' }}" required>
+                                        <p class="mb-0">Required for notifications.</p>
                                     </form>
-                                    <div class="">
+                                    <div>
                                         <div class="d-flex align-items-center justify-content-between mb-4">
                                             <div class="d-flex align-items-center gap-3">
                                                 <div
@@ -229,61 +227,9 @@
                                                 </div>
                                             </div>
                                             <div class="form-check form-switch mb-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    id="flexSwitchCheckChecked">
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="d-flex align-items-center gap-3">
-                                                <div
-                                                    class="text-bg-light rounded-1 p-6 d-flex align-items-center justify-content-center">
-                                                    <i class="ti ti-checkbox text-dark d-block fs-7" width="22"
-                                                        height="22"></i>
-                                                </div>
-                                                <div>
-                                                    <h5 class="fs-4 fw-semibold">Order Confirmation</h5>
-                                                    <p class="mb-0">You will be notified when customer order any product
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="form-check form-switch mb-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    id="flexSwitchCheckChecked1" checked="">
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="d-flex align-items-center gap-3">
-                                                <div
-                                                    class="text-bg-light rounded-1 p-6 d-flex align-items-center justify-content-center">
-                                                    <i class="ti ti-clock-hour-4 text-dark d-block fs-7" width="22"
-                                                        height="22"></i>
-                                                </div>
-                                                <div>
-                                                    <h5 class="fs-4 fw-semibold">Order Status Changed</h5>
-                                                    <p class="mb-0">You will be notified when customer make changes to
-                                                        the order</p>
-                                                </div>
-                                            </div>
-                                            <div class="form-check form-switch mb-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    id="flexSwitchCheckChecked2" checked="">
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="d-flex align-items-center gap-3">
-                                                <div
-                                                    class="text-bg-light rounded-1 p-6 d-flex align-items-center justify-content-center">
-                                                    <i class="ti ti-truck-delivery text-dark d-block fs-7" width="22"
-                                                        height="22"></i>
-                                                </div>
-                                                <div>
-                                                    <h5 class="fs-4 fw-semibold">Order Delivered</h5>
-                                                    <p class="mb-0">You will be notified once the order is delivered</p>
-                                                </div>
-                                            </div>
-                                            <div class="form-check form-switch mb-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    id="flexSwitchCheckChecked3">
+                                                <input class="form-check-input notification-switch" type="checkbox"
+                                                    id="newsletterSwitch" data-type="newsletter"
+                                                    {{ auth()->user()->newsletter ? 'checked' : '' }}>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
@@ -295,13 +241,14 @@
                                                 </div>
                                                 <div>
                                                     <h5 class="fs-4 fw-semibold">Email Notification</h5>
-                                                    <p class="mb-0">Turn on email notificaiton to get updates through
+                                                    <p class="mb-0">Turn on email notification to get updates through
                                                         email</p>
                                                 </div>
                                             </div>
                                             <div class="form-check form-switch mb-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    id="flexSwitchCheckChecked4" checked="">
+                                                <input class="form-check-input notification-switch" type="checkbox"
+                                                    id="emailSwitch" data-type="email_notification"
+                                                    {{ auth()->user()->email_notification ? 'checked' : '' }}>
                                             </div>
                                         </div>
                                     </div>
@@ -322,14 +269,10 @@
                                             </div>
                                             <div>
                                                 <p class="mb-0">Time zone</p>
-                                                <h5 class="fs-4 fw-semibold">(UTC + 02:00) Athens, Bucharet</h5>
+                                                <h5 class="fs-4 fw-semibold" id="user-timezone">(UTC + 02:00) Athens,
+                                                    Bucharet</h5>
                                             </div>
                                         </div>
-                                        <a class="text-dark fs-6 d-flex align-items-center justify-content-center bg-transparent p-2 fs-4 rounded-circle"
-                                            href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            data-bs-title="Download">
-                                            <i class="ti ti-download"></i>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -351,17 +294,12 @@
                                             </div>
                                         </div>
                                         <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="flexSwitchCheckChecked5">
+                                            <input class="form-check-input ignore-tracking-switch" type="checkbox"
+                                                role="switch" id="ignoreTrackingSwitch"
+                                                {{ session('ignore_tracking') ? 'checked' : '' }}>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center justify-content-end gap-3">
-                                <button class="btn btn-primary">Save</button>
-                                <button class="btn bg-danger-subtle text-danger">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -574,12 +512,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center justify-content-end gap-3">
-                                <button class="btn btn-primary">Save</button>
-                                <button class="btn bg-danger-subtle text-danger">Cancel</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -769,6 +701,73 @@
                             }
                         });
                     }
+                });
+            });
+
+            let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById('user-timezone').innerText =
+                `(UTC ${new Date().toLocaleTimeString('en-us',{timeZoneName:'short'}).split(' ')[2]}) ${timezone}`;
+
+            document.getElementById('ignoreTrackingSwitch').addEventListener('change', function() {
+                let ignoreTracking = this.checked ? 1 : 0;
+                fetch("{{ route('tracking.ignore') }}", {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            ignore_tracking: ignoreTracking
+                        })
+                    }).then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Toast.fire({
+                                icon: "success",
+                                title: data.message
+                            });
+                        } else {
+                            Toast.fire({
+                                icon: "error",
+                                title: "Error updating setting"
+                            });
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+
+            document.querySelectorAll('.notification-switch').forEach(item => {
+                item.addEventListener('change', function() {
+                    let notificationType = this.getAttribute('data-type');
+                    let isChecked = this.checked ? 1 : 0;
+
+                    fetch("{{ route('notifications.update') }}", {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                type: notificationType,
+                                status: isChecked
+                            })
+                        }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Toast.fire({
+                                    icon: "success",
+                                    title: data.message
+                                });
+                            } else {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: "Error updating notification preference"
+                                });
+                            }
+                        }).catch(error => {
+                            console.error('Error:', error);
+                        });
                 });
             });
         });

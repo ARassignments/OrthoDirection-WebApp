@@ -38,7 +38,7 @@
                     <div class="col-md-12 mb-3 px-lg-2 px-md-2 px-0">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title fw-semibold">Blog Thumbnail</h5>
+                                <h5 class="card-title fw-semibold">Blog Thumbnail*</h5>
                                 <p class="card-subtitle mb-4">Choose your thumbnail picture from here</p>
                                 <div class="text-center">
                                     <img id="thumbnailPreview" src="assets/images/profile/user-1.jpg" alt=""
@@ -50,7 +50,7 @@
                                         <button class="btn btn-outline-danger" type="button"
                                             id="resetThumbnailBtn">Reset</button>
                                     </div>
-                                    <p class="mb-0">Allowed JPG, GIF or PNG. Max size of 2000K</p>
+                                    <p class="mb-0">Allowed JPG, JPEG or PNG. Max size of 2000K</p>
                                     <span id="thumbnailError"
                                         class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                                 </div>
@@ -61,7 +61,7 @@
                         <div class="form-floating">
                             <input type="text" class="form-control" id="title" name="title" placeholder=""
                                 required>
-                            <label for="title">Title</label>
+                            <label for="title">Title*</label>
                         </div>
                         <span id="titleError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>
@@ -69,7 +69,7 @@
                         <div class="form-floating">
                             <input type="text" class="form-control" id="author" name="author" placeholder=""
                                 required>
-                            <label for="author">Author Name</label>
+                            <label for="author">Author Name*</label>
                         </div>
                         <span id="authorError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>
@@ -80,7 +80,7 @@
                                     <div class="form-floating">
                                         <input type="text" class="form-control" name="tags[]" placeholder="Tag Name"
                                             required>
-                                        <label>Tag Name</label>
+                                        <label>Tag Name*</label>
                                     </div>
                                     <span class="tagError mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                                 </div>
@@ -106,7 +106,7 @@
                         <div class="form-floating">
                             <textarea class="form-control h-auto" id="short_description" name="short_description" rows="5" placeholder=""
                                 required></textarea>
-                            <label for="short_description">Short Description</label>
+                            <label for="short_description">Short Description*</label>
                         </div>
                         <span id="short_descriptionError"
                             class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
@@ -114,7 +114,7 @@
                     <div class="col-md-6">
                         <div class="form-floating">
                             <textarea class="form-control h-auto" id="description" name="description" rows="5" placeholder="" required></textarea>
-                            <label for="description">Description</label>
+                            <label for="description">Description*</label>
                         </div>
                         <span id="descriptionError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>

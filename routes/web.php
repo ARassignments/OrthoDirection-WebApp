@@ -11,6 +11,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DeviceLogController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Laravel\Fortify\Features;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -122,8 +125,9 @@ Route::prefix('/devices/')->middleware(['auth', 'verified'])->group(function () 
     Route::get('/', [DeviceLogController::class, 'getDevices'])->name('devices.getDevices');
     Route::post('/logout/{id}', [DeviceLogController::class, 'logoutDevice'])->name('devices.logout');
     Route::post('/logout-all', [DeviceLogController::class, 'logoutAllDevices'])->name('devices.logout.all');
+    Route::post('/tracking/ignore', [DeviceLogController::class, 'ignoreTracking'])->name('tracking.ignore');
+    Route::post('/notifications/update', [DeviceLogController::class, 'updateNotification'])->name('notifications.update');
 });
-
 
 // Export Route (Protected)
 Route::get('/export', function () {

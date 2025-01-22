@@ -38,7 +38,7 @@
                     <div class="col-md-12 mb-3 px-lg-2 px-md-2 px-0">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title fw-semibold">Service Thumbnail</h5>
+                                <h5 class="card-title fw-semibold">Service Thumbnail*</h5>
                                 <p class="card-subtitle mb-4">Change your thumbnail picture from here</p>
                                 <div class="text-center">
                                     <img id="thumbnailPreview"
@@ -62,7 +62,7 @@
                         <div class="form-floating">
                             <input type="text" class="form-control" id="title" name="title" placeholder=""
                                 value="{{ $service['title'] }}" required>
-                            <label for="title">Title</label>
+                            <label for="title">Title*</label>
                         </div>
                         <span id="titleError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>
@@ -80,7 +80,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <label for="icon_img">Service Icon</label>
+                            <label for="icon_img">Service Icon*</label>
                         </div>
                         <span id="icon_imgError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>
@@ -88,14 +88,14 @@
                         <div class="form-floating">
                             <textarea class="form-control h-auto" id="short_description" name="short_description" rows="5" placeholder=""
                                 required>{{ $service['short_description'] }}</textarea>
-                            <label for="short_description">Short Description</label>
+                            <label for="short_description">Short Description*</label>
                         </div>
                         <span id="short_descriptionError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
                             <textarea class="form-control h-auto" id="description" name="description" rows="5" placeholder="" required>{{ $service['description'] }}</textarea>
-                            <label for="description">Description</label>
+                            <label for="description">Description*</label>
                         </div>
                         <span id="descriptionError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                     </div>
