@@ -296,6 +296,14 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('admin.contact') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-list-details"></i>
+                                        </span>
+                                        <span class="hide-menu">Contact List</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('admin.profile') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-user-circle"></i>

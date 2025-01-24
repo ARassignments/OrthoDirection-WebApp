@@ -49,7 +49,7 @@ Route::post('/resend-otp', [RegisteredUserController::class, 'resend'])->name('v
 Route::get('/register-otp-verify', [RegisteredUserController::class, 'showOtpForm'])->name('register.otp.verify');
 Route::post('/register-otp-verify', [RegisteredUserController::class, 'verifyOtp'])->name('register.otp.check');
 
-Route::post('/store-newsletter', [AdminController::class,'storeNewsletter'])->name('admin.newsletter.store');
+Route::post('/store-newsletter', [AdminController::class, 'storeNewsletter'])->name('admin.newsletter.store');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -63,12 +63,10 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::view('/', 'admin.dashboard')->name('admin.dashboard');
-    Route::view('/blogs', 'admin.blogs.blogs')->name('admin.blogs');
-    Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
-    Route::view('/services', 'admin.services.services')->name('admin.services');
-    Route::view('/add-service', 'admin.services.add-service')->name('admin.add-service');
     Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
     Route::prefix('/services')->group(function () {
+        Route::view('/', 'admin.services.services')->name('admin.services');
+        Route::view('/add-service', 'admin.services.add-service')->name('admin.add-service');
         Route::get('/serviceFetch', [AdminController::class, 'serviceFetch'])->name('service.fetch');
         Route::post('/serviceStore', [AdminController::class, 'serviceStore'])->name('service.store');
         Route::get('/serviceEdit/{id}', [AdminController::class, 'serviceEdit'])->name('service.edit');
@@ -77,6 +75,8 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
         Route::get('/serviceToggleStatus/{id}', [AdminController::class, 'serviceToggleStatus'])->name('service.toggleStatus');
     });
     Route::prefix('/blogs')->group(function () {
+        Route::view('/', 'admin.blogs.blogs')->name('admin.blogs');
+        Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
         Route::get('/blogDetail/{id}', [AdminController::class, 'blogDetail'])->name('blogs.detail');
         Route::get('/blogFetch', [AdminController::class, 'blogFetch'])->name('blogs.fetch');
         Route::post('/blogStore', [AdminController::class, 'blogStore'])->name('blogs.store');
@@ -90,6 +90,10 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
     Route::view('/family', 'admin.family')->name('admin.family');
     Route::view('/patients', 'admin.patients')->name('admin.patients');
     Route::view('/doctors', 'admin.doctors')->name('admin.doctors');
+    Route::prefix('/contact')->group(function () {
+        Route::view('/', 'admin.contact.contact')->name('admin.contact');
+        Route::get('/contactFetch', [AdminController::class, 'contactFetch'])->name('contact.fetch');
+    });
     Route::get('/profile', [AdminController::class, 'getProfileDetails'])->name('admin.profile');
     Route::get('/edit-profile', [AdminController::class, 'getProfile'])->name('admin.profile.edit');
     Route::post('/profileUpload', [AdminController::class, 'profileUpload'])->name('admin.profile.update');

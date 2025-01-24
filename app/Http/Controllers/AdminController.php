@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use App\Mail\NewsletterMail;
 use App\Models\DeviceLog;
 use App\Models\Newsletter;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
@@ -347,6 +348,17 @@ class AdminController extends Controller
     {
         $profile = AdminProfile::where('user_id', Auth::id())->first();
         return view('admin.profile.profile', compact('profile'));
+    }
+
+    public function contactFetch(Request $request)
+    {
+        $query = Contact::query();
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('fname', 'like', '%' . $request->search . '%')
+                ->orWhere('lname', 'like', '%' . $request->search . '%');
+        }
+        $contacts = $query->orderBy('created_at', 'desc')->get();
+        return response()->json($contacts);
     }
 
     public function storeNewsletter(Request $request)
