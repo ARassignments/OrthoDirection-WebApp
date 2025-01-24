@@ -38,8 +38,7 @@
                         <div class="px-4 pt-9 pb-6 d-none d-lg-block">
                             <form class="position-relative">
                                 <input type="text" class="form-control search-chat py-2 ps-5"
-                                    placeholder="Search Contact" id="searchInput2"
-                                    maxlength="50" />
+                                    placeholder="Search Contact" id="searchInput2" maxlength="50" />
                                 <i
                                     class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                             </form>
@@ -104,6 +103,7 @@
                                                                             <div>
                                                                                 <h6 class="fw-semibold fs-4 mb-0 text-capitalize"
                                                                                     id="contactName">N/A</h6>
+                                                                                <p class="mb-0" id="contactDate"></p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -225,7 +225,7 @@
                             document.querySelector("#contactContainer").innerHTML += `
                             <li>
                                 <a href="javascript:void(0)"
-                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-center chat-user" data-name="${contact.fname} ${contact.lname}" data-email="${contact.email}" data-phone="${contact.phone}" data-subject="${contact.subject}" data-comment="${contact.comment}">
+                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-center chat-user" data-name="${contact.fname} ${contact.lname}" data-email="${contact.email}" data-phone="${contact.phone}" data-subject="${contact.subject}" data-comment="${contact.comment}" data-date="${contact.created_at}">
                                     <span class="position-relative">
                                         <img src="assets/images/profile/user-1.jpg" alt="user-4" width="40"
                                             height="40" class="rounded-circle">
@@ -253,14 +253,14 @@
             }
             fetchContact();
 
-            document.querySelector("#searchInput").onkeyup = ()=>{
+            document.querySelector("#searchInput").onkeyup = () => {
                 fetchContact(document.querySelector("#searchInput").value);
             }
-            
-            document.querySelector("#searchInput2").onkeyup = ()=>{
+
+            document.querySelector("#searchInput2").onkeyup = () => {
                 fetchContact(document.querySelector("#searchInput2").value);
             }
-    
+
             $("#backBtn").click(function() {
                 $("#contactDetailContainer").addClass("d-none d-lg-block");
             });
@@ -272,11 +272,23 @@
                 let email = $(this).data("email");
                 let subject = $(this).data("subject");
                 let comment = $(this).data("comment");
+                let dateformat = $(this).data("date");
+                let date = new Date(dateformat);
+                let options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true,
+                    timeZone: 'UTC'
+                };
                 document.querySelector("#contactDetailContainer #contactName").innerHTML = name;
                 document.querySelector("#contactDetailContainer #contactPhone").innerHTML = phone;
                 document.querySelector("#contactDetailContainer #contactEmail").innerHTML = email;
                 document.querySelector("#contactDetailContainer #contactSubject").innerHTML = subject;
                 document.querySelector("#contactDetailContainer #contactComment").innerHTML = comment;
+                document.querySelector("#contactDetailContainer #contactDate").innerHTML = date.toLocaleString('en-US', options);
                 document.querySelector("#contactDetailContainer #callBtn").href = `tel:${phone}`;
                 document.querySelector("#contactDetailContainer #mailBtn").href = `mailto:${email}`;
             });
