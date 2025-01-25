@@ -455,11 +455,11 @@
                 @if (Auth::user())
                     @if (Auth::user()->role == 'admin')
                         let url = "{{ route('admin.profile.update') }}";
-                    @elseif (Auth::user()->role == 'family') <
+                    @elseif (Auth::user()->role == 'family')
                         let url = "{{ route('family.profile.update') }}";
-                    @elseif (Auth::user()->role == 'patient') <
+                    @elseif (Auth::user()->role == 'patient')
                         let url = "{{ route('patient.profile.update') }}";
-                    @elseif (Auth::user()->role == 'doctor') <
+                    @elseif (Auth::user()->role == 'doctor')
                         let url = "{{ route('doctor.profile.update') }}";
                     @endif
                 @endif

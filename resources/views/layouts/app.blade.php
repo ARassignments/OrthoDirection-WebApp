@@ -124,6 +124,9 @@
 <body>
 
     <div class="preloader">
+        <div class="spinner-border text-primary" style="width: 4.5rem; height: 4.5rem" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
         <img src="{{ asset('assets/images/favicon.png') }}" alt="loader" class="lds-ripple img-fluid" />
     </div>
 
@@ -351,6 +354,14 @@
                                         </div>
                                     </a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('doctor.profile') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-user-circle"></i>
+                                        </span>
+                                        <span class="hide-menu">My Profile</span>
+                                    </a>
+                                </li>
                             @elseif (Auth::user()->role == 'patient')
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('patient.dashboard') }}" aria-expanded="false">
@@ -374,6 +385,14 @@
                                             <i class="ti ti-calendar"></i>
                                         </span>
                                         <span class="hide-menu">Appointments</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('patient.doctors') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-stethoscope"></i>
+                                        </span>
+                                        <span class="hide-menu">Doctors</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">

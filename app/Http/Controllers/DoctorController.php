@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DoctorWorkingTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
@@ -13,56 +15,52 @@ class DoctorController extends Controller
     {
         return view('doctor.dashboard');
     }
-    public function index()
+
+    public function slotFetch()
     {
-        //
+        $workingTimes = DoctorWorkingTime::where('doctor_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        return response()->json($workingTimes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function slotStore(Request $request)
     {
-        //
+        $request->validate([
+            'available_time' => 'required|date_format:H:i',
+        ]);
+
+        $workingTimes = new DoctorWorkingTime();
+        $workingTimes->doctor_id = Auth::user()->id;
+        $workingTimes->available_time = $request->available_time;
+        $workingTimes->save();
+
+        return response()->json(['success' => 'Time Slot Added Successfully!']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function slotUpdate(Request $request, $id)
     {
-        //
+        $request->validate([
+            'available_time' => 'required|date_format:H:i',
+        ]);
+
+        $workingTime = DoctorWorkingTime::findOrFail($id);
+        $workingTime->update($request->all());
+
+        return response()->json(['success' => 'Time Slot Updated Successfully!']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function slotDestroy($id)
     {
-        //
+        DoctorWorkingTime::findOrFail($id)->delete();
+
+        return response()->json(['success' => 'Time Slot Deleted Successfully!']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function slotStatusUpdate(Request $request, $id)
     {
-        //
-    }
+        $workingTime = DoctorWorkingTime::findOrFail($id);
+        $workingTime->status = $request->status;
+        $workingTime->save();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json(['success' => 'Slot Status Updated Successfully!']);
     }
 }

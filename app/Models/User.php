@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\AdminProfile;
+use App\Models\DoctorWorkingTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -58,5 +61,15 @@ class User extends Authenticatable
         $this->save();
 
         $this->notify(new CustomVerifyEmail($otp)); // Send the notification
+    }
+
+    public function adminProfile()
+    {
+        return $this->hasOne(AdminProfile::class, 'user_id');
+    }
+
+    public function doctorWorkingTimes()
+    {
+        return $this->hasMany(DoctorWorkingTime::class, 'doctor_id');
     }
 }

@@ -100,6 +100,9 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
         Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('admin.profile.edit');
         Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('admin.profile.update');
     });
+    Route::prefix('/appointments')->group(function () {
+        Route::view('/', 'admin.appointments.appointments')->name('admin.appointments');
+    });
     Route::get('/getFamilies', [AdminController::class, 'getFamilies'])->name('admin.getFamilies');
     Route::get('/getPatients', [AdminController::class, 'getPatients'])->name('admin.getPatients');
     Route::get('/getDoctors', [AdminController::class, 'getDoctors'])->name('admin.getDoctors');
@@ -108,6 +111,18 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
 
 Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->group(function () {
     Route::view('/', 'general.dashboard')->name('doctor.dashboard');
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('doctor.profile');
+        Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('doctor.profile.edit');
+        Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('doctor.profile.update');
+    });
+    Route::prefix('slots')->group(function () {
+        Route::get('/slotFetch', [DoctorController::class, 'slotFetch'])->name('doctor.slots');
+        Route::post('/slotStore', [DoctorController::class, 'slotStore'])->name('doctor.slots.store');
+        Route::post('/slotUpdate/{id}', [DoctorController::class, 'slotUpdate'])->name('doctor.slots.update');
+        Route::delete('/slotDestroy/{id}', [DoctorController::class, 'slotDestroy'])->name('doctor.slots.destroy');
+        Route::post('/slotStatusUpdate/{id}', [DoctorController::class, 'slotStatusUpdate'])->name('doctor.slots.status');
+    });
 });
 
 Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->group(function () {
@@ -127,6 +142,14 @@ Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->gr
         Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('patient.profile');
         Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('patient.profile.edit');
         Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('patient.profile.update');
+    });
+    Route::prefix('/appointments')->group(function () {
+        Route::view('/', 'patient.appointments.appointments')->name('patient.appointments');
+    });
+    Route::prefix('/doctors')->group(function () {
+        Route::view('/', 'patient.doctors.doctors')->name('patient.doctors');
+        Route::get('/doctorFetch', [PatientController::class, 'doctorFetch'])->name('patient.doctors.fetch');
+        Route::get('/doctorDetail/{id}', [PatientController::class, 'doctorDetail'])->name('patient.doctors.detail');
     });
 });
 

@@ -16,17 +16,17 @@
                                 @elseif (Auth::user()->role == 'family')
                                     <li class="breadcrumb-item">
                                         <a class="text-muted text-decoration-none"
-                                            href="{{ route('admin.family') }}">Home</a>
+                                            href="{{ route('family.dashboard') }}">Home</a>
                                     </li>
                                 @elseif (Auth::user()->role == 'patient')
                                     <li class="breadcrumb-item">
                                         <a class="text-muted text-decoration-none"
-                                            href="{{ route('admin.patient') }}">Home</a>
+                                            href="{{ route('patient.dashboard') }}">Home</a>
                                     </li>
                                 @elseif (Auth::user()->role == 'doctor')
                                     <li class="breadcrumb-item">
                                         <a class="text-muted text-decoration-none"
-                                            href="{{ route('admin.doctor') }}">Home</a>
+                                            href="{{ route('doctor.dashboard') }}">Home</a>
                                     </li>
                                 @endif
                             @endif

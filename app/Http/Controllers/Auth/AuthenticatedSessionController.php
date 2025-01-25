@@ -113,9 +113,9 @@ class AuthenticatedSessionController extends Controller
         } elseif ($user->role === 'patient') {
             return redirect()->route('patient.dashboard');
         } elseif ($user->role === 'doctor') {
-            return redirect()->route('doctor.dahboard');
+            return redirect()->route('doctor.dashboard');
         }elseif ($user->role === 'family') {
-            return redirect()->route('family.dahboard');
+            return redirect()->route('family.dashboard');
         }
     
         return redirect('/');

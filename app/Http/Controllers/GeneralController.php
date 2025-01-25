@@ -77,7 +77,6 @@ class GeneralController extends Controller
     }
 
     // Device Logs
-
     public function getDevices()
     {
         $devices = DeviceLog::where('user_id', Auth::id())->latest()->get();
