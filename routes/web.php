@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DeviceLogController;
+use App\Http\Controllers\GeneralController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -62,7 +63,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::view('/', 'admin.dashboard')->name('admin.dashboard');
+    Route::view('/', 'general.dashboard')->name('admin.dashboard');
     Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
     Route::prefix('/services')->group(function () {
         Route::view('/', 'admin.services.services')->name('admin.services');
@@ -94,9 +95,11 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
         Route::view('/', 'admin.contact.contact')->name('admin.contact');
         Route::get('/contactFetch', [AdminController::class, 'contactFetch'])->name('contact.fetch');
     });
-    Route::get('/profile', [AdminController::class, 'getProfileDetails'])->name('admin.profile');
-    Route::get('/edit-profile', [AdminController::class, 'getProfile'])->name('admin.profile.edit');
-    Route::post('/profileUpload', [AdminController::class, 'profileUpload'])->name('admin.profile.update');
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('admin.profile');
+        Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('admin.profile.edit');
+        Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('admin.profile.update');
+    });
     Route::get('/getFamilies', [AdminController::class, 'getFamilies'])->name('admin.getFamilies');
     Route::get('/getPatients', [AdminController::class, 'getPatients'])->name('admin.getPatients');
     Route::get('/getDoctors', [AdminController::class, 'getDoctors'])->name('admin.getDoctors');
@@ -104,32 +107,36 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
 });
 
 Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->group(function () {
-    Route::get('/', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
+    Route::view('/', 'general.dashboard')->name('doctor.dashboard');
 });
 
 Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->group(function () {
-    Route::view('/', 'family.dashboard')->name('family.dashboard');
+    Route::view('/', 'general.dashboard')->name('family.dashboard');
     Route::view('/messages', 'family.messages.messages')->name('family.messages');
-    Route::get('/profile', [FamilyController::class, 'getProfileDetails'])->name('family.profile');
-    Route::get('/edit-profile', [FamilyController::class, 'getProfile'])->name('family.profile.edit');
-    Route::post('/profileUpload', [FamilyController::class, 'profileUpload'])->name('family.profile.update');
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('family.profile');
+        Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('family.profile.edit');
+        Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('family.profile.update');
+    });
 });
 
 Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->group(function () {
-    Route::view('/', 'patient.dashboard')->name('patient.dashboard');
+    Route::view('/', 'general.dashboard')->name('patient.dashboard');
     Route::view('/messages', 'patient.messages.messages')->name('patient.messages');
-    Route::get('/profile', [PatientController::class, 'getProfileDetails'])->name('patient.profile');
-    Route::get('/edit-profile', [PatientController::class, 'getProfile'])->name('patient.profile.edit');
-    Route::post('/profileUpload', [PatientController::class, 'profileUpload'])->name('patient.profile.update');
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('patient.profile');
+        Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('patient.profile.edit');
+        Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('patient.profile.update');
+    });
 });
 
 // Devices Login Logs
 Route::prefix('/devices/')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', [DeviceLogController::class, 'getDevices'])->name('devices.getDevices');
-    Route::post('/logout/{id}', [DeviceLogController::class, 'logoutDevice'])->name('devices.logout');
-    Route::post('/logout-all', [DeviceLogController::class, 'logoutAllDevices'])->name('devices.logout.all');
-    Route::post('/tracking/ignore', [DeviceLogController::class, 'ignoreTracking'])->name('tracking.ignore');
-    Route::post('/notifications/update', [DeviceLogController::class, 'updateNotification'])->name('notifications.update');
+    Route::get('/', [GeneralController::class, 'getDevices'])->name('devices.getDevices');
+    Route::post('/logout/{id}', [GeneralController::class, 'logoutDevice'])->name('devices.logout');
+    Route::post('/logout-all', [GeneralController::class, 'logoutAllDevices'])->name('devices.logout.all');
+    Route::post('/tracking/ignore', [GeneralController::class, 'ignoreTracking'])->name('tracking.ignore');
+    Route::post('/notifications/update', [GeneralController::class, 'updateNotification'])->name('notifications.update');
 });
 
 // Export Route (Protected)

@@ -7,9 +7,30 @@
                     <h4 class="fw-semibold mb-8">My Account</h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="{{ route('dashboard') }}">Home</a>
-                            </li>
+                            @if (Auth::user())
+                                @if (Auth::user()->role == 'admin')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('admin.dashboard') }}">Home</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 'family')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('admin.family') }}">Home</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 'patient')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('admin.patient') }}">Home</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 'doctor')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('admin.doctor') }}">Home</a>
+                                    </li>
+                                @endif
+                            @endif
+
                             <li class="breadcrumb-item" aria-current="page">My Account</li>
                         </ol>
                     </nav>

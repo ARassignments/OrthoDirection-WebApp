@@ -23,6 +23,18 @@
         </div>
     </div>
 
+    <div class="col-12 position-relative" style="z-index: 20;">
+        <div class="position-absolute top-0 left-0 w-100 bg-white" id="loader">
+            <div class="d-flex align-items-center justify-content-center" style="height: 60vh;">
+                <div class="spinner-border text-primary" style="width: 4rem; height: 4rem" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                    <img src="{{ asset('assets/images/favicon.png') }}" class="w-100 h-100 p-2" style="object-fit: cover"
+                        alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card overflow-hidden chat-application">
         <div class="d-flex align-items-center justify-content-between gap-3 m-3 d-lg-none">
             <form class="position-relative w-100">
@@ -183,16 +195,10 @@
                         search
                     },
                     beforeSend: function() {
-                        $('#searchBtn').prop('disabled', true).text('Loading...');
-                        $('#blogContainer').hide();
                         $('#loader').fadeIn(500).show();
                     },
                     complete: function() {
-                        $('#searchBtn').prop('disabled', false).text('Search');
                         $('#loader').fadeOut(500);
-                        setTimeout(() => {
-                            $('#blogContainer').fadeIn(500).show()
-                        }, 550);
                     },
                     success: function(contacts) {
                         document.querySelector("#contactContainer").innerHTML = "";
