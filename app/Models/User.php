@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\CustomVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -56,11 +57,11 @@ class User extends Authenticatable
 
     public function sendEmailVerificationNotification()
     {
-        $otp = random_int(1000, 9999); // Generate OTP
-        $this->otp_code = $otp;       // Save OTP in the database if needed
+        $otp = random_int(1000, 9999); 
+        $this->otp_code = $otp;
         $this->save();
 
-        $this->notify(new CustomVerifyEmail($otp)); // Send the notification
+        $this->notify(new CustomVerifyEmail($otp));
     }
 
     public function adminProfile()
@@ -71,5 +72,15 @@ class User extends Authenticatable
     public function doctorWorkingTimes()
     {
         return $this->hasMany(DoctorWorkingTime::class, 'doctor_id');
+    }
+
+    public function doctorAppointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class, 'doctor_id');
+    }
+
+    public function patientAppointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class, 'patient_id');
     }
 }

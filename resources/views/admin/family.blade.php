@@ -96,8 +96,8 @@
                 type: "GET"
             },
             columns: [{
-                    data: null,
-                    name: '#',
+                    data: 'id',
+                    name: 'id',
                     render: function(data, type, row, meta) {
                         return `<p class="mb-0 text-body">${meta.row + 1}</p>`;
                     }

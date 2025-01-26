@@ -145,6 +145,9 @@ Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->gr
     });
     Route::prefix('/appointments')->group(function () {
         Route::view('/', 'patient.appointments.appointments')->name('patient.appointments');
+        Route::post('/appointmentStore', [PatientController::class, 'appointmentStore'])->name('patient.appointments.store');
+        Route::get('/appointmentFetch', [PatientController::class, 'appointmentFetch'])->name('patient.appointments.fetch');
+        Route::post('/appointmentCancel/{id}', [PatientController::class, 'appointmentCancel'])->name('patient.appointments.cancel');
     });
     Route::prefix('/doctors')->group(function () {
         Route::view('/', 'patient.doctors.doctors')->name('patient.doctors');

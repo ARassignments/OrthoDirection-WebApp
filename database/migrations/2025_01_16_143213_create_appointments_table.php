@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreignId('patient_id')->constrained('users')->onDelete('cascade');
             $table->date('date');
             $table->string('day');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->enum('user_cancelled',['cancelled','pending'])->default('pending');
+            $table->time('slot');
+            $table->string('treatment_type')->nullable();
+            $table->enum('user_cancelled', ['cancelled', 'pending'])->default('pending');
             $table->text('user_cancellation_reason')->nullable();
-            $table->enum('status',['pending','approved','rejected','cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'completed', 'rejected', 'cancelled'])->default('pending');
             $table->text('doctor_cancellation_reason')->nullable();
             $table->timestamps();
         });

@@ -55,7 +55,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="w-100">
-                                    
+
                                 </tbody>
                                 <tfoot class="text-dark fs-4">
                                     <tr>
@@ -97,8 +97,8 @@
                 type: "GET"
             },
             columns: [{
-                    data: null,
-                    name: '#',
+                    data: 'id',
+                    name: 'id',
                     render: function(data, type, row, meta) {
                         return `<p class="mb-0 text-body">${meta.row + 1}</p>`;
                     }
@@ -204,14 +204,16 @@
 
                 let noDataMessage = $(".dataTables_empty").length > 0;
                 if (noDataMessage) {
-                    $('#myTable thead, #myTable tfoot, #myTable_paginate, #myTable_info, #myTable_length').hide();
+                    $('#myTable thead, #myTable tfoot, #myTable_paginate, #myTable_info, #myTable_length')
+                    .hide();
                     $('.table-responsive:has(#noDataErr) #myTable_filter').hide();
                     $('#myTable').removeClass('border');
                     $('.dataTables_empty').addClass('border-0 p-0');
                     $('.table-responsive').removeClass('mb-4');
                     $('#myTable_filter').addClass('flex-grow-1');
                 } else {
-                    $('#myTable thead, #myTable tfoot, #myTable_paginate, #myTable_info, #myTable_length').show();
+                    $('#myTable thead, #myTable tfoot, #myTable_paginate, #myTable_info, #myTable_length')
+                    .show();
                     $('.table-responsive:has(#noDataErr) #myTable_filter').show();
                     $('#myTable').addClass('border');
                     $('.dataTables_empty').removeClass('border-0 p-0');

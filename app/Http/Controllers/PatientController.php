@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminProfile;
+use App\Models\Appointment;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -81,12 +82,95 @@ class PatientController extends Controller
                 'adminProfile',
                 'doctorWorkingTimes' => function ($query) {
                     $query->where('status', 1);
+                },
+                'doctorAppointments' => function ($query) use ($id) {
+                    $query->where('doctor_id', $id)
+                        ->where('patient_id', Auth::user()->id)
+                        // ->where('status', '!=', 'cancelled')
+                        ->select('doctor_id', 'patient_id', 'date', 'slot', 'status');
                 }
             ])
             ->findOrFail($id);
+
         if (!$doctor) {
             return response()->json(['error' => 'Doctor not found!'], 404);
         }
-        return view('patient.doctors.doctor-detail', compact(['doctor' => 'doctor']));
+
+        return view('patient.doctors.doctor-detail', [
+            'doctor' => $doctor,
+            'appointments' => $doctor->doctorAppointments
+        ]);
+    }
+
+    public function appointmentStore(Request $request)
+    {
+        $request->validate([
+            'doctor_id' => 'required|exists:users,id',
+            'date' => 'required|date',
+            'day' => 'required|string',
+            'slot' => 'required',
+            'treatment_type' => 'required|string',
+        ]);
+
+        $existingAppointment = Appointment::where('doctor_id', $request->doctor_id)
+            ->where('patient_id', Auth::user()->id)
+            ->where('date', $request->date)
+            ->where('slot', $request->slot)
+            ->exists();
+
+        if ($existingAppointment) {
+            return response()->json(['error' => 'An appointment already exists for the selected date and time.']);
+        }
+
+        $appointment = new Appointment();
+        $appointment->doctor_id = $request->doctor_id;
+        $appointment->patient_id = Auth::user()->id;
+        $appointment->date = $request->date;
+        $appointment->day = $request->day;
+        $appointment->slot = $request->slot;
+        $appointment->treatment_type = $request->treatment_type;
+        $appointment->save();
+        return response()->json(['success' => 'Appointment Created Successfully!']);
+    }
+
+    public function appointmentFetch()
+    {
+        $patientId = Auth::user()->id;
+
+        $doctor = Appointment::where('patient_id', $patientId)
+            // ->where('status', '!=', 'cancelled')
+            ->with([
+                'doctor' => function ($query) {
+                    $query->select('id', 'name', 'email')
+                        ->with([
+                            'adminProfile' => function ($adminQuery) {
+                                $adminQuery->select('user_id', 'profile_img');
+                            }
+                        ]);
+                }
+            ])
+            ->select('id', 'doctor_id', 'treatment_type', 'user_cancellation_reason', 'patient_id', 'date', 'slot', 'status')
+            ->get();
+        // dd($doctor); die();
+        return datatables()->of($doctor)->make(true);
+    }
+
+    public function appointmentCancel(Request $request, $id)
+    {
+        $request->validate([
+            'user_cancellation_reason' => 'required|string|max:255',
+        ]);
+        $appointment = Appointment::find($id);
+        if ($appointment->status == 'cancelled') {
+            return response()->json(['error' => 'This appointment is already cancelled.']);
+        }
+
+        $appointment->update([
+            'status' => 'cancelled',
+            'user_cancelled' => 'cancelled',
+            'user_cancellation_reason' => $request->user_cancellation_reason
+        ]);
+
+        return response()->json(['success' => 'Appointment cancelled successfully.']);
     }
 }
