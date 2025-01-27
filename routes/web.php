@@ -123,6 +123,16 @@ Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->grou
         Route::delete('/slotDestroy/{id}', [DoctorController::class, 'slotDestroy'])->name('doctor.slots.destroy');
         Route::post('/slotStatusUpdate/{id}', [DoctorController::class, 'slotStatusUpdate'])->name('doctor.slots.status');
     });
+    Route::prefix('/appointments')->group(function () {
+        Route::view('/', 'doctor.appointments.appointments')->name('doctor.appointments');
+        Route::get('/appointmentFetch', [DoctorController::class, 'appointmentFetch'])->name('doctor.appointments.fetch');
+        Route::post('/appointmentCancel/{id}', [DoctorController::class, 'appointmentCancel'])->name('doctor.appointments.cancel');
+    });
+    Route::prefix('/patients')->group(function () {
+        Route::view('/', 'doctor.patients.patients')->name('doctor.patients');
+        Route::get('/patientFetch', [DoctorController::class, 'patientFetch'])->name('doctor.patients.fetch');
+        Route::get('/patientDetail/{id}', [PatientController::class, 'patientDetail'])->name('doctor.patients.detail');
+    });
 });
 
 Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->group(function () {

@@ -11,7 +11,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
                                     <a class="text-muted text-decoration-none"
-                                        href="{{ route('patient.dashboard') }}">Home</a>
+                                        href="{{ route('doctor.dashboard') }}">Home</a>
                                 </li>
                                 <li class="breadcrumb-item" aria-current="page">Appointments</li>
                             </ol>
@@ -34,7 +34,7 @@
                             <h6 class="fs-4 fw-semibold mb-0">#</h6>
                         </th>
                         <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Doctor</h6>
+                            <h6 class="fs-4 fw-semibold mb-0">Patient</h6>
                         </th>
                         <th>
                             <h6 class="fs-4 fw-semibold mb-0">Treatment Type</h6>
@@ -59,7 +59,7 @@
                             <h6 class="fs-4 fw-semibold mb-0">#</h6>
                         </th>
                         <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Doctor</h6>
+                            <h6 class="fs-4 fw-semibold mb-0">Patient</h6>
                         </th>
                         <th>
                             <h6 class="fs-4 fw-semibold mb-0">Treatment Type</h6>
@@ -87,7 +87,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('patient.appointments.fetch') }}",
+                url: "{{ route('doctor.appointments.fetch') }}",
                 type: "GET"
             },
             columns: [{
@@ -98,17 +98,17 @@
                     }
                 },
                 {
-                    data: 'doctor.name',
-                    name: 'doctor.name',
+                    data: 'patient.name',
+                    name: 'patient.name',
                     render: function(data, type, row) {
-                        let profileImg = row.doctor.admin_profile.profile_img ?
-                            `{{ asset('profile_images/${row.doctor.admin_profile.profile_img}') }}` :
+                        let profileImg = row.patient.admin_profile.profile_img ?
+                            `{{ asset('profile_images/${row.patient.admin_profile.profile_img}') }}` :
                             'assets/images/profile/user-1.jpg';
                         return `<div class="d-flex align-items-center">
                                     <img src="${profileImg}" class="rounded-circle"
                                         width="40" height="40">
                                     <div class="ms-3">
-                                        <a href="{{ url('patient/doctors/doctorDetail') }}/${row.doctor.id}"> <h6 class="fs-4 fw-semibold text-capitalize mb-0">${data}</h6></a>
+                                        <a href="{{ url('doctor/doctors/doctorDetail') }}/${row.patient.id}"> <h6 class="fs-4 fw-semibold text-capitalize mb-0">${data}</h6></a>
                                     </div>
                                 </div>`;
                     }
@@ -144,7 +144,7 @@
                     data: 'status',
                     name: 'status',
                     render: function(data, type, row) {
-                        let cancelReasonTitle = row.user_cancelled == 'cancelled' ? '' : '(By Doctor)';
+                        let cancelReasonTitle = row.user_cancelled == 'cancelled' ? '(By Patient)' : '';
                         let cancelReason = row.user_cancelled == 'cancelled' ? row
                             .user_cancellation_reason : row.doctor_cancellation_reason;
                         return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
@@ -154,7 +154,7 @@
                           </a>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
                             <li>
-                              <a class="dropdown-item d-flex align-items-center gap-3" href="{{ url('patient/doctors/doctorDetail') }}/${row.doctor.id}"><i class="fs-4 ti ti-eye"></i>View More</a>
+                              <a class="dropdown-item d-flex align-items-center gap-3" href="{{ url('doctor/doctors/doctorDetail') }}/${row.patient.id}"><i class="fs-4 ti ti-eye"></i>View More</a>
                             </li>
                             ${data == 'pending'?
                                 '<li><a href="javascript:void(0)" class="dropdown-item d-flex align-items-center gap-3 text-danger cancel-appointment" data-id="'+row.id+'"><i class="fs-4 ti ti-circle-x"></i>Cancel Appointment</a></li>':''
@@ -326,11 +326,11 @@
                 if (result.isConfirmed) {
                     let reason = result.value;
                     $.ajax({
-                        url: `{{ url('patient/appointments/appointmentCancel') }}/${appointmentId}`,
+                        url: `{{ url('doctor/appointments/appointmentCancel') }}/${appointmentId}`,
                         type: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}',
-                            user_cancellation_reason: reason
+                            doctor_cancellation_reason: reason
                         },
                         success: function(response) {
                             if (response.success) {

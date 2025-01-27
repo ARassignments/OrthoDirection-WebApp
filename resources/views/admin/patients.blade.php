@@ -25,62 +25,50 @@
                 </div>
             </div>
         </div>
-        <!-- basic table -->
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="mb-2">
-                            <h5 class="mb-0">Patients</h5>
-                        </div>
-                        <div class="table-responsive rounded-2 mb-4">
-                            <table id="myTable" class="table border text-nowrap customize-table mb-0 align-middle w-100">
-                                <thead class="text-dark fs-4">
-                                    <tr>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">#</h6>
-                                        </th>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">User</h6>
-                                        </th>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Email Address</h6>
-                                        </th>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
-                                        </th>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Status</h6>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="w-100">
+        <div class="table-responsive rounded-2 mb-4">
+            <table id="myTable" class="table border text-nowrap customize-table mb-0 align-middle w-100">
+                <thead class="text-dark fs-4">
+                    <tr>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">#</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">User</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">Email Address</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">Status</h6>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="w-100">
 
-                                </tbody>
-                                <tfoot class="text-dark fs-4">
-                                    <tr>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">#</h6>
-                                        </th>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">User</h6>
-                                        </th>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Email Address</h6>
-                                        </th>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
-                                        </th>
-                                        <th>
-                                            <h6 class="fs-4 fw-semibold mb-0">Status</h6>
-                                        </th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </tbody>
+                <tfoot class="text-dark fs-4">
+                    <tr>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">#</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">User</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">Email Address</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">Created On</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">Status</h6>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 
@@ -205,7 +193,7 @@
                 let noDataMessage = $(".dataTables_empty").length > 0;
                 if (noDataMessage) {
                     $('#myTable thead, #myTable tfoot, #myTable_paginate, #myTable_info, #myTable_length')
-                    .hide();
+                        .hide();
                     $('.table-responsive:has(#noDataErr) #myTable_filter').hide();
                     $('#myTable').removeClass('border');
                     $('.dataTables_empty').addClass('border-0 p-0');
@@ -213,7 +201,7 @@
                     $('#myTable_filter').addClass('flex-grow-1');
                 } else {
                     $('#myTable thead, #myTable tfoot, #myTable_paginate, #myTable_info, #myTable_length')
-                    .show();
+                        .show();
                     $('.table-responsive:has(#noDataErr) #myTable_filter').show();
                     $('#myTable').addClass('border');
                     $('.dataTables_empty').removeClass('border-0 p-0');

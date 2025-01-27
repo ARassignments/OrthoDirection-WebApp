@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\DoctorWorkingTime;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,5 +64,65 @@ class DoctorController extends Controller
         $workingTime->save();
 
         return response()->json(['success' => 'Slot Status Updated Successfully!']);
+    }
+
+    // Appointments
+    public function appointmentFetch()
+    {
+        $doctorId = Auth::user()->id;
+
+        $doctor = Appointment::where('doctor_id', $doctorId)
+            // ->where('status', '!=', 'cancelled')
+            ->with([
+                'patient' => function ($query) {
+                    $query->select('id', 'name', 'email')
+                        ->with([
+                            'adminProfile' => function ($adminQuery) {
+                                $adminQuery->select('user_id', 'profile_img');
+                            }
+                        ]);
+                }
+            ])
+            ->select('id', 'doctor_id', 'treatment_type', 'user_cancellation_reason', 'doctor_cancellation_reason', 'user_cancelled', 'patient_id', 'date', 'slot', 'status')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return datatables()->of($doctor)->make(true);
+    }
+
+    public function appointmentCancel(Request $request, $id)
+    {
+        $request->validate([
+            'doctor_cancellation_reason' => 'required|string|max:255',
+        ]);
+        $appointment = Appointment::find($id);
+        if ($appointment->status == 'cancelled') {
+            return response()->json(['error' => 'This appointment is already cancelled.']);
+        }
+
+        $appointment->update([
+            'status' => 'cancelled',
+            'doctor_cancellation_reason' => $request->doctor_cancellation_reason
+        ]);
+
+        return response()->json(['success' => 'Appointment cancelled successfully.']);
+    }
+
+    // Patients
+    public function patientFetch(Request $request)
+    {
+        $query = User::where('role', 'patient')
+            ->whereHas('adminProfile', function ($query) {
+                $query->where('status', 1);
+            });
+
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $patients = $query->with(['adminProfile' => function ($query) {
+            $query->where('status', 1);
+        }])->get();
+
+        return response()->json($patients);
     }
 }

@@ -324,7 +324,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/doctor/patients" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('doctor.patients') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-users"></i>
                                         </span>
@@ -332,7 +332,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/doctor/appointments" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('doctor.appointments') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-calendar"></i>
                                         </span>
@@ -380,7 +380,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/patient/appointments" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('patient.appointments') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-calendar"></i>
                                         </span>

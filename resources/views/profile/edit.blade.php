@@ -156,9 +156,11 @@
                                             <label for="update_password_current_password"
                                                 class="form-label fw-semibold">Current
                                                 Password</label>
-                                            <input type="password" name="current_password" class="form-control"
-                                                id="update_password_current_password" placeholder="●●●●●●●●●"
-                                                autocomplete="current-password">
+                                            <div class="input-wrap">
+                                                <input type="password" name="current_password" class="form-control"
+                                                    id="update_password_current_password" placeholder="●●●●●●●●●"
+                                                    autocomplete="current-password">
+                                            </div>
                                             <small>
                                                 <x-input-error :messages="$errors->updatePassword->get('current_password')"
                                                     class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
@@ -167,9 +169,11 @@
                                         <div class="mb-4">
                                             <label for="update_password_password" class="form-label fw-semibold">New
                                                 Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                placeholder="●●●●●●●●●" id="update_password_password"
-                                                autocomplete="new-password">
+                                            <div class="input-wrap">
+                                                <input type="password" name="password" class="form-control"
+                                                    placeholder="●●●●●●●●●" id="update_password_password"
+                                                    autocomplete="new-password">
+                                            </div>
                                             <small>
                                                 <x-input-error :messages="$errors->updatePassword->get('password')"
                                                     class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
@@ -179,9 +183,11 @@
                                             <label for="update_password_password_confirmation"
                                                 class="form-label fw-semibold">Confirm
                                                 Password</label>
-                                            <input type="password" name="password_confirmation" class="form-control"
-                                                placeholder="●●●●●●●●●" id="update_password_password_confirmation"
-                                                autocomplete="new-password">
+                                            <div class="input-wrap">
+                                                <input type="password" name="password_confirmation" class="form-control"
+                                                    placeholder="●●●●●●●●●" id="update_password_password_confirmation"
+                                                    autocomplete="new-password">
+                                            </div>
                                             <small>
                                                 <x-input-error :messages="$errors->updatePassword->get('password_confirmation')"
                                                     class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />

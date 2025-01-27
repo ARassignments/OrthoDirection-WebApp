@@ -112,6 +112,14 @@ class PatientController extends Controller
             'treatment_type' => 'required|string',
         ]);
 
+        $adminProfileExists = AdminProfile::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->exists();
+
+        if (!$adminProfileExists) {
+            return response()->json(['error' => 'Your profile does not exist or is currently inactive.']);
+        }
+
         $existingAppointment = Appointment::where('doctor_id', $request->doctor_id)
             ->where('patient_id', Auth::user()->id)
             ->where('date', $request->date)
@@ -149,9 +157,9 @@ class PatientController extends Controller
                         ]);
                 }
             ])
-            ->select('id', 'doctor_id', 'treatment_type', 'user_cancellation_reason', 'patient_id', 'date', 'slot', 'status')
+            ->select('id', 'doctor_id', 'treatment_type', 'user_cancellation_reason', 'doctor_cancellation_reason', 'user_cancelled', 'patient_id', 'date', 'slot', 'status')
+            ->orderBy('created_at', 'desc')
             ->get();
-        // dd($doctor); die();
         return datatables()->of($doctor)->make(true);
     }
 

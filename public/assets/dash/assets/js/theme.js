@@ -46,4 +46,25 @@ $(function () {
             $(".topbar").removeClass("shadow-sm");
         }
     });
+
+    // Password Toggler
+    $('.input-wrap').each(function() {
+        if (!$(this).find('.toggler').length) {
+            $(this).append(`
+            <div class="toggler text-muted">
+                <i class="ti ti-eye fs-4 mb-0"></i>
+                <i class="ti ti-eye-off fs-4 mb-0"></i>
+            </div>
+        `);
+        }
+    });
+
+    $(document).on('click', '.toggler', function() {
+        const input = $(this).siblings('input');
+        if (input.attr('type') === 'password') {
+            input.attr('type', 'text');
+        } else {
+            input.attr('type', 'password');
+        }
+    });
 });
