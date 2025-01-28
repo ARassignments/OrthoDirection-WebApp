@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\AdminProfile;
@@ -11,7 +12,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use App\Mail\NewsletterMail;
-use App\Models\Newsletter; 
+use App\Models\DeviceLog;
+use App\Models\Newsletter;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
@@ -21,7 +24,7 @@ class AdminController extends Controller
 
     public function getFamilies()
     {
-        $users = User::where('role', 'family')->get();
+        $users = User::where('role', 'admin')->get();
         return datatables()->of($users)->make(true);
     }
 
@@ -58,6 +61,10 @@ class AdminController extends Controller
 
     public function logout(Request $request)
     {
+        $device = DeviceLog::where('user_id', Auth::user()->id)->first();
+        if ($device) {
+            $device->update(['logged_out_at' => now()]);
+        }
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -71,7 +78,7 @@ class AdminController extends Controller
         if (!$blog) {
             return response()->json(['error' => 'Blog not found!'], 404);
         }
-        return view('admin.blogs.detail',compact(['blog'=>'blog']));
+        return view('admin.blogs.detail', compact(['blog' => 'blog']));
     }
 
     public function blogStore(Request $request)
@@ -121,7 +128,7 @@ class AdminController extends Controller
         if (!$blog) {
             return response()->json(['error' => 'Blog not found!'], 404);
         }
-        return view('admin.blogs.edit-blog',compact(['blog'=>'blog']));
+        return view('admin.blogs.edit-blog', compact(['blog' => 'blog']));
     }
 
     public function blogUpdate(Request $request, $id)
@@ -183,123 +190,123 @@ class AdminController extends Controller
         return response()->json(['success' => 'Blog Status Updated!', 'status' => $blog->status]);
     }
 
-
-    // Profile
-    public function profileUpload(Request $request)
+    // CRUD Services
+    public function serviceStore(Request $request)
     {
         $request->validate([
-            'bio' => 'nullable|string|max:255',
-            'gender' => ['nullable', Rule::in(['male', 'female'])],
-            'country' => 'nullable|string|max:50',
-            'city' => 'nullable|string|max:50',
-            'contact' => 'nullable|string|max:15|min:11',
-            'date_of_birth' => 'nullable|date|before_or_equal:today',
-            'profile_img' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'facebook' => 'nullable|url',
-            'instagram' => 'nullable|url',
-            'twitter' => 'nullable|url',
-            'age' => 'nullable|integer|min:18|max:70',
-            'address' => 'nullable|string|max:255',
-            'status' => 'nullable|boolean'
+            'title' => 'required|string|max:500|min:5|regex:/^[a-zA-Z:\s]+$/',
+            'thumbnail' => 'required|image|mimes:jpg,png,jpeg|max:2000',
+            'short_description' => 'required|string|max:400|min:10',
+            'description' => 'required|string|max:5000|min:10',
+            'icon_img' => 'required|string',
         ]);
 
-        $profile = AdminProfile::updateOrCreate(
-            ['user_id' => Auth::id()],
-            [
-                'bio' => $request->bio,
-                'gender' => $request->gender,
-                'country' => $request->country,
-                'city' => $request->city,
-                'contact' => $request->contact,
-                'date_of_birth' => $request->date_of_birth,
-                'facebook' => $request->facebook,
-                'instagram' => $request->instagram,
-                'twitter' => $request->twitter,
-                'age' => $request->age,
-                'address' => $request->address,
-                'status' => $request->status ? 1 : 0,
-            ]
-        );
-
-        if ($request->hasFile('profile_img')) {
-            if ($profile->profile_img && File::exists(public_path('profile_images/' . $profile->profile_img))) {
-                File::delete(public_path('profile_images/' . $profile->profile_img));
-            }
-            $file = $request->file('profile_img');
-            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('profile_images'), $filename);
-            $profile->update(['profile_img' => $filename]);
-        }
-
-        return response()->json(['success' => 'Profile saved successfully!']);
-    }
-
-    public function getProfile()
-    {
-        $profile = AdminProfile::where('user_id', Auth::id())->first();
-        return view('admin.profile.edit-profile', compact('profile'));
-    }
-    public function getProfileDetails()
-    {
-        $profile = AdminProfile::where('user_id', Auth::id())->first();
-        return view('admin.profile.profile', compact('profile'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create_service()
-    {
-        return view('admin.add-service');
-    }
-   
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store_service(Request $request)
-    {
-        $service                    = new Service();
-        $service->title             = $request->title;
-        $service->short_description = $request->short_description;
-        $service->description       = $request->description;
+        $blog = new Service();
+        $blog->title = $request->title;
+        $blog->short_description = $request->short_description;
+        $blog->description = $request->description;
+        $blog->icon_img = $request->icon_img;
 
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = time() . '-' . $request->thumbnail->getClientOriginalName();
-            $request->thumbnail->move(public_path('services/thumbnails/'), $thumbnailPath);
-            $service->thumbnail = 'services/thumbnails/' . $thumbnailPath;
+            $file = $request->file('thumbnail');
+            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('admins_services_thumbnails'), $filename);
+            $blog->thumbnail = $filename;
         }
-        $service->icon_img = $request->icon;
-        $service->save();
-        return redirect()->route('admin.services');
+        $blog->save();
+        return response()->json(['success' => 'Service Created Successfully!']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show_service()
+    public function serviceFetch(Request $request)
     {
-        $services = Service::all();
-        return view('admin.services', compact('services'));
-    }
-
-    public function search(Request $request)
-    {
-        $query = $request->query('query');
-
-        if (! $query) {
-            return response()->json([], 200);
+        $query = Service::query();
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('title', 'like', '%' . $request->search . '%');
         }
-        $services = Service::where('title', 'LIKE', '%' . $query . '%')->get()
-            ->map(function ($service) {
-            $service->thumbnail = asset($service->thumbnail);
-            return $service;
-        });
+        $services = $query->orderBy('created_at', 'desc')->get();
         return response()->json($services);
+    }
+
+    public function serviceEdit($id)
+    {
+        $service = Service::find($id);
+        if (!$service) {
+            return response()->json(['error' => 'Service not found!'], 404);
+        }
+        return view('admin.services.edit-service', compact(['service' => 'service']));
+    }
+
+    public function serviceUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:500|min:5|regex:/^[a-zA-Z:\s]+$/',
+            'thumbnail' => 'nullable|image|mimes:jpg,png,jpeg|max:2000',
+            'short_description' => 'required|string|max:400|min:10',
+            'description' => 'required|string|max:5000|min:10',
+            'icon_img' => 'required|string',
+        ]);
+
+        $service = Service::find($id);
+        if (!$service) {
+            return response()->json(['error' => 'Service not found!'], 404);
+        }
+
+        $service->title = $request->title;
+        $service->short_description = $request->short_description;
+        $service->description = $request->description;
+        $service->icon_img = $request->icon_img;
+
+        if ($request->hasFile('thumbnail')) {
+            if ($service->thumbnail && File::exists(public_path('admins_services_thumbnails/' . $service->thumbnail))) {
+                File::delete(public_path('admins_services_thumbnails/' . $service->thumbnail));
+            }
+            $file = $request->file('thumbnail');
+            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('admins_services_thumbnails'), $filename);
+            $service->thumbnail = $filename;
+        }
+        $service->save();
+        return response()->json(['success' => 'Service Updated Successfully!']);
+    }
+
+    public function serviceDestroy($id)
+    {
+        $service = Service::find($id);
+        if (!$service) {
+            return response()->json(['error' => 'Service not found!'], 404);
+        }
+        if ($service->thumbnail && File::exists(public_path('admins_services_thumbnails/' . $service->thumbnail))) {
+            File::delete(public_path('admins_services_thumbnails/' . $service->thumbnail));
+        }
+        $service->delete();
+        return response()->json(['success' => 'Service Deleted Successfully!']);
+    }
+
+    public function serviceToggleStatus($id)
+    {
+        $service = Service::find($id);
+        if (!$service) {
+            return response()->json(['error' => 'Service not found!'], 404);
+        }
+        $service->status = !$service->status;
+        $service->save();
+        return response()->json(['success' => 'Service Status Updated!', 'status' => $service->status]);
+    }
+
+
+    public function contactFetch(Request $request)
+    {
+        $query = Contact::query();
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('fname', 'like', '%' . $request->search . '%')
+                ->orWhere('lname', 'like', '%' . $request->search . '%');
+        }
+        $contacts = $query->orderBy('created_at', 'desc')->get();
+        return response()->json($contacts);
     }
 
     public function storeNewsletter(Request $request)
     {
-        // Validate the email
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'email', 'unique:newsletters,email'],
             'agree' => ['required']
@@ -309,9 +316,7 @@ class AdminController extends Controller
             $newsletter = Newsletter::updateOrCreate(
                 ['email' => $request->email]
             );
-
             Mail::to($request->email)->send(new NewsletterMail($request->email));
-
             return response()->json([
                 'status' => true,
                 'msg' => "Thank you for subscribing! You've successfully joined our newsletter. Stay tuned for updates and exclusive courses!"
@@ -322,21 +327,5 @@ class AdminController extends Controller
                 'errors' => $validator->errors(),
             ]);
         }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

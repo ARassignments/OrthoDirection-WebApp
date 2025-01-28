@@ -35,6 +35,9 @@
 <body>
     <!-- Preloader -->
     <div class="preloader">
+        <div class="spinner-border text-primary" style="width: 4.5rem; height: 4.5rem" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
         <img src="{{ asset('assets/images/favicon.png')}}" alt="loader" class="lds-ripple img-fluid" />
     </div>
     <div id="main-wrapper">

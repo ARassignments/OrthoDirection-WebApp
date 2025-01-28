@@ -8,8 +8,12 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DeviceLogController;
+use App\Http\Controllers\GeneralController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -46,7 +50,7 @@ Route::post('/resend-otp', [RegisteredUserController::class, 'resend'])->name('v
 Route::get('/register-otp-verify', [RegisteredUserController::class, 'showOtpForm'])->name('register.otp.verify');
 Route::post('/register-otp-verify', [RegisteredUserController::class, 'verifyOtp'])->name('register.otp.check');
 
-Route::post('/store-newsletter', [AdminController::class,'storeNewsletter'])->name('admin.newsletter.store');
+Route::post('/store-newsletter', [AdminController::class, 'storeNewsletter'])->name('admin.newsletter.store');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -59,15 +63,21 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::view('/', 'admin.dashboard')->name('admin.dashboard');
-    Route::view('/blogs', 'admin.blogs.blogs')->name('admin.blogs');
+    Route::view('/', 'general.dashboard')->name('admin.dashboard');
     Route::view('/newsletter', 'admin.newsletter')->name('admin.newsletter');
-    Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
-    Route::get('/services', [AdminController::class,'show_service'])->name('admin.services');
-    Route::get('/add-service', [AdminController::class,'create_service'])->name('admin.add-service');
-    Route::post('/store-service', [AdminController::class,'store_service'])->name('admin.store-service');
-    Route::get('/search-service', [AdminController::class, 'search'])->name('admin.search-service');
+    Route::prefix('/services')->group(function () {
+        Route::view('/', 'admin.services.services')->name('admin.services');
+        Route::view('/add-service', 'admin.services.add-service')->name('admin.add-service');
+        Route::get('/serviceFetch', [AdminController::class, 'serviceFetch'])->name('service.fetch');
+        Route::post('/serviceStore', [AdminController::class, 'serviceStore'])->name('service.store');
+        Route::get('/serviceEdit/{id}', [AdminController::class, 'serviceEdit'])->name('service.edit');
+        Route::post('/serviceUpdate/{id}', [AdminController::class, 'serviceUpdate'])->name('service.update');
+        Route::get('/serviceDestroy/{id}', [AdminController::class, 'serviceDestroy'])->name('service.destroy');
+        Route::get('/serviceToggleStatus/{id}', [AdminController::class, 'serviceToggleStatus'])->name('service.toggleStatus');
+    });
     Route::prefix('/blogs')->group(function () {
+        Route::view('/', 'admin.blogs.blogs')->name('admin.blogs');
+        Route::view('/add-blog', 'admin.blogs.add-blog')->name('admin.add-blog');
         Route::get('/blogDetail/{id}', [AdminController::class, 'blogDetail'])->name('blogs.detail');
         Route::get('/blogFetch', [AdminController::class, 'blogFetch'])->name('blogs.fetch');
         Route::post('/blogStore', [AdminController::class, 'blogStore'])->name('blogs.store');
@@ -81,9 +91,18 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
     Route::view('/family', 'admin.family')->name('admin.family');
     Route::view('/patients', 'admin.patients')->name('admin.patients');
     Route::view('/doctors', 'admin.doctors')->name('admin.doctors');
-    Route::get('/profile', [AdminController::class, 'getProfileDetails'])->name('admin.profile');
-    Route::get('/edit-profile', [AdminController::class, 'getProfile'])->name('admin.profile.edit');
-    Route::post('/profileUpload', [AdminController::class, 'profileUpload'])->name('admin.profile.update');
+    Route::prefix('/contact')->group(function () {
+        Route::view('/', 'admin.contact.contact')->name('admin.contact');
+        Route::get('/contactFetch', [AdminController::class, 'contactFetch'])->name('contact.fetch');
+    });
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('admin.profile');
+        Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('admin.profile.edit');
+        Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('admin.profile.update');
+    });
+    Route::prefix('/appointments')->group(function () {
+        Route::view('/', 'admin.appointments.appointments')->name('admin.appointments');
+    });
     Route::get('/getFamilies', [AdminController::class, 'getFamilies'])->name('admin.getFamilies');
     Route::get('/getPatients', [AdminController::class, 'getPatients'])->name('admin.getPatients');
     Route::get('/getDoctors', [AdminController::class, 'getDoctors'])->name('admin.getDoctors');
@@ -92,25 +111,70 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
 });
 
 Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->group(function () {
-    Route::get('/', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
+    Route::view('/', 'general.dashboard')->name('doctor.dashboard');
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('doctor.profile');
+        Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('doctor.profile.edit');
+        Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('doctor.profile.update');
+    });
+    Route::prefix('slots')->group(function () {
+        Route::get('/slotFetch', [DoctorController::class, 'slotFetch'])->name('doctor.slots');
+        Route::post('/slotStore', [DoctorController::class, 'slotStore'])->name('doctor.slots.store');
+        Route::post('/slotUpdate/{id}', [DoctorController::class, 'slotUpdate'])->name('doctor.slots.update');
+        Route::delete('/slotDestroy/{id}', [DoctorController::class, 'slotDestroy'])->name('doctor.slots.destroy');
+        Route::post('/slotStatusUpdate/{id}', [DoctorController::class, 'slotStatusUpdate'])->name('doctor.slots.status');
+    });
+    Route::prefix('/appointments')->group(function () {
+        Route::view('/', 'doctor.appointments.appointments')->name('doctor.appointments');
+        Route::get('/appointmentFetch', [DoctorController::class, 'appointmentFetch'])->name('doctor.appointments.fetch');
+        Route::post('/appointmentCancel/{id}', [DoctorController::class, 'appointmentCancel'])->name('doctor.appointments.cancel');
+    });
+    Route::prefix('/patients')->group(function () {
+        Route::view('/', 'doctor.patients.patients')->name('doctor.patients');
+        Route::get('/patientFetch', [DoctorController::class, 'patientFetch'])->name('doctor.patients.fetch');
+        Route::get('/patientDetail/{id}', [PatientController::class, 'patientDetail'])->name('doctor.patients.detail');
+    });
 });
 
 Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->group(function () {
-    Route::view('/', 'family.dashboard')->name('family.dashboard');
+    Route::view('/', 'general.dashboard')->name('family.dashboard');
     Route::view('/messages', 'family.messages.messages')->name('family.messages');
-    Route::get('/profile', [FamilyController::class, 'getProfileDetails'])->name('family.profile');
-    Route::get('/edit-profile', [FamilyController::class, 'getProfile'])->name('family.profile.edit');
-    Route::post('/profileUpload', [FamilyController::class, 'profileUpload'])->name('family.profile.update');
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('family.profile');
+        Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('family.profile.edit');
+        Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('family.profile.update');
+    });
 });
 
 Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->group(function () {
-    Route::view('/', 'patient.dashboard')->name('patient.dashboard');
+    Route::view('/', 'general.dashboard')->name('patient.dashboard');
     Route::view('/messages', 'patient.messages.messages')->name('patient.messages');
-    Route::get('/profile', [PatientController::class, 'getProfileDetails'])->name('patient.profile');
-    Route::get('/edit-profile', [PatientController::class, 'getProfile'])->name('patient.profile.edit');
-    Route::post('/profileUpload', [PatientController::class, 'profileUpload'])->name('patient.profile.update');
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('patient.profile');
+        Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('patient.profile.edit');
+        Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('patient.profile.update');
+    });
+    Route::prefix('/appointments')->group(function () {
+        Route::view('/', 'patient.appointments.appointments')->name('patient.appointments');
+        Route::post('/appointmentStore', [PatientController::class, 'appointmentStore'])->name('patient.appointments.store');
+        Route::get('/appointmentFetch', [PatientController::class, 'appointmentFetch'])->name('patient.appointments.fetch');
+        Route::post('/appointmentCancel/{id}', [PatientController::class, 'appointmentCancel'])->name('patient.appointments.cancel');
+    });
+    Route::prefix('/doctors')->group(function () {
+        Route::view('/', 'patient.doctors.doctors')->name('patient.doctors');
+        Route::get('/doctorFetch', [PatientController::class, 'doctorFetch'])->name('patient.doctors.fetch');
+        Route::get('/doctorDetail/{id}', [PatientController::class, 'doctorDetail'])->name('patient.doctors.detail');
+    });
 });
 
+// Devices Login Logs
+Route::prefix('/devices/')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [GeneralController::class, 'getDevices'])->name('devices.getDevices');
+    Route::post('/logout/{id}', [GeneralController::class, 'logoutDevice'])->name('devices.logout');
+    Route::post('/logout-all', [GeneralController::class, 'logoutAllDevices'])->name('devices.logout.all');
+    Route::post('/tracking/ignore', [GeneralController::class, 'ignoreTracking'])->name('tracking.ignore');
+    Route::post('/notifications/update', [GeneralController::class, 'updateNotification'])->name('notifications.update');
+});
 
 // Export Route (Protected)
 Route::get('/export', function () {

@@ -25,7 +25,13 @@
                                     link to reset your password.
                                 </p>
                             </div>
+
                             <x-auth-session-status class="mb-4" :status="session('status')" />
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <form method="POST" action="{{ route('password.email') }}" id="forgotForm">
                                 @csrf
                                 <div class="mb-3">

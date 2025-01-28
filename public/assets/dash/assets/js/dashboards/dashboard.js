@@ -110,9 +110,12 @@ $(function () {
       theme: "dark",
     },
   };
+  
+  if(document.querySelector("#chart")){
+    var chart = new ApexCharts(document.querySelector("#chart"), chart);
+    chart.render();
+  }
 
-  var chart = new ApexCharts(document.querySelector("#chart"), chart);
-  chart.render();
 
   // =====================================
   // Breakup
@@ -165,8 +168,11 @@ $(function () {
     },
   };
 
-  var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
-  chart.render();
+
+  if(document.querySelector("#breakup")){
+    var chart = new ApexCharts(document.querySelector("#breakup"), chart);
+    chart.render();
+  }
 
   // =====================================
   // Earning
@@ -220,7 +226,9 @@ $(function () {
       },
     },
   };
-  new ApexCharts(document.querySelector("#earning"), earning).render();
+  if(document.querySelector("#earning")){
+    new ApexCharts(document.querySelector("#earning"), earning).render();
+  }
 
   // =====================================
   // Salary
@@ -296,8 +304,10 @@ $(function () {
     },
   };
 
-  var chart = new ApexCharts(document.querySelector("#salary"), salary);
-  chart.render();
+  if(document.querySelector("#salary")){
+    var chart = new ApexCharts(document.querySelector("#salary"), chart);
+    chart.render();
+  }
 
   // =====================================
   // Customers
@@ -350,7 +360,10 @@ $(function () {
       },
     },
   };
-  new ApexCharts(document.querySelector("#customers"), customers).render();
+
+  if(document.querySelector("#customers")){
+    new ApexCharts(document.querySelector("#customers"), customers).render();
+  }
 
   // =====================================
   // Projects
@@ -434,11 +447,14 @@ $(function () {
     },
   };
 
-  var chart_column_basic = new ApexCharts(
-    document.querySelector("#projects"),
-    projects
-  );
-  chart_column_basic.render();
+  if(document.querySelector("#projects")){
+    var chart_column_basic = new ApexCharts(
+      document.querySelector("#projects"),
+      projects
+    );
+    chart_column_basic.render();
+  }
+  
 
   // =====================================
   // Stats
@@ -491,5 +507,8 @@ $(function () {
       },
     },
   };
-  new ApexCharts(document.querySelector("#stats"), stats).render();
+
+  if(document.querySelector("#stats")){
+    new ApexCharts(document.querySelector("#stats"), stats).render();
+  }
 });

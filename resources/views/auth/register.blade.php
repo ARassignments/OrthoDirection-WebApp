@@ -42,17 +42,21 @@
                                 </div>
                                 <div class="mb-4">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password"
-                                        placeholder="Enter Password" autocomplete="new-password" required>
+                                    <div class="input-wrap">
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="Enter Password" autocomplete="new-password" required>
+                                    </div>
                                     <small>
                                         <x-input-error :messages="$errors->get('password')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
                                 <div class="mb-4">
                                     <label for="password_confirmation" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="password_confirmation"
-                                        name="password_confirmation" placeholder="Enter Confirm Password"
-                                        autocomplete="new-password" required>
+                                    <div class="input-wrap">
+                                        <input type="password" class="form-control" id="password_confirmation"
+                                            name="password_confirmation" placeholder="Enter Confirm Password"
+                                            autocomplete="new-password" required>
+                                    </div>
                                     <small>
                                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>

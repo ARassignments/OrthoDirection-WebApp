@@ -124,6 +124,9 @@
 <body>
 
     <div class="preloader">
+        <div class="spinner-border text-primary" style="width: 4.5rem; height: 4.5rem" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
         <img src="{{ asset('assets/images/favicon.png') }}" alt="loader" class="lds-ripple img-fluid" />
     </div>
 
@@ -198,7 +201,7 @@
                                 <li class="sidebar-item">
                                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                         <span class="d-flex">
-                                            <i class="ti ti-chart-donut-3"></i>
+                                            <i class="ti ti-category"></i>
                                         </span>
                                         <span class="hide-menu">Services</span>
                                     </a>
@@ -296,6 +299,14 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('admin.contact') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-list-details"></i>
+                                        </span>
+                                        <span class="hide-menu">Contact List</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('admin.profile') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-user-circle"></i>
@@ -313,7 +324,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/doctor/patients" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('doctor.patients') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-users"></i>
                                         </span>
@@ -321,7 +332,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/doctor/appointments" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('doctor.appointments') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-calendar"></i>
                                         </span>
@@ -343,6 +354,14 @@
                                         </div>
                                     </a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('doctor.profile') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-user-circle"></i>
+                                        </span>
+                                        <span class="hide-menu">My Profile</span>
+                                    </a>
+                                </li>
                             @elseif (Auth::user()->role == 'patient')
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('patient.dashboard') }}" aria-expanded="false">
@@ -361,11 +380,19 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/patient/appointments" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('patient.appointments') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-calendar"></i>
                                         </span>
                                         <span class="hide-menu">Appointments</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('patient.doctors') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-stethoscope"></i>
+                                        </span>
+                                        <span class="hide-menu">Doctors</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">

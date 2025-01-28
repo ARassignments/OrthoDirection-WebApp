@@ -1,106 +1,102 @@
 @extends('layouts.app')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
-    <div class="datatables">
-        <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
-            <div class="card-body px-4 py-3">
-                <div class="row align-items-center">
-                    <div class="col-9">
-                        <h4 class="fw-semibold mb-8">Blogs</h4>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a class="text-muted text-decoration-none"
-                                        href="{{ route('admin.dashboard') }}">Home</a>
-                                </li>
-                                <li class="breadcrumb-item" aria-current="page">Blogs</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <div class="col-3">
-                        <div class="text-center mb-n5">
-                            <img src="assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
-                        </div>
+    <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+        <div class="card-body px-4 py-3">
+            <div class="row align-items-center">
+                <div class="col-9">
+                    <h4 class="fw-semibold mb-8">Blogs</h4>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a class="text-muted text-decoration-none" href="{{ route('admin.dashboard') }}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item" aria-current="page">Blogs</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-3">
+                    <div class="text-center mb-n5">
+                        <img src="assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
                     </div>
                 </div>
             </div>
         </div>
-
-        <ul class="nav nav-pills p-3 mb-4 rounded align-items-center card flex-row gap-3">
-            <form class="position-relative input-group flex-grow-1 w-auto">
-                <input type="text" class="form-control search-chat py-2 ps-5" id="search" placeholder="Search Blog" onkeyup="fetchBlogs(this.value)" maxlength="50">
-                <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
-                <button class="btn bg-primary-subtle text-primary font-medium" id="searchBtn" type="button"
-                    onclick="fetchBlogs(document.querySelector('#search').value)">Search</button>
-            </form>
-            <li class="nav-item ms-auto">
-                <a href="{{ route('admin.add-blog') }}" class="btn btn-primary d-flex align-items-center px-3">
-                    <i class="ti ti-list-details me-0 me-md-1 fs-4"></i>
-                    <span class="d-none d-md-block font-weight-medium fs-3">Add Blog</span>
-                </a>
-            </li>
-        </ul>
-
-        <div class="col-12 position-relative">
-            <div class="position-absolute top-0 left-0 w-100" id="loader">
-                <div class="d-flex align-items-center justify-content-center" style="height: 60vh;">
-                    <div class="spinner-border text-primary" style="width: 4rem; height: 4rem" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                        <img src="{{ asset('assets/images/favicon.png') }}" class="w-100 h-100 p-2"
-                            style="object-fit: cover" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row" id="blogContainer">
-        </div>
-
-        <nav aria-label="..." class="d-none">
-            <ul class="pagination justify-content-center mb-5 mt-4">
-                <li class="page-item">
-                    <a class="page-link border-0 rounded-circle text-dark round-32 d-flex align-items-center justify-content-center"
-                        href="#"><i class="ti ti-chevron-left"></i></a>
-                </li>
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link border-0 rounded-circle round-32 mx-1 d-flex align-items-center justify-content-center"
-                        href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
-                        href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
-                        href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
-                        href="#">4</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
-                        href="#">5</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
-                        href="#">...</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
-                        href="#">10</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link border-0 rounded-circle text-dark round-32 d-flex align-items-center justify-content-center"
-                        href="#"><i class="ti ti-chevron-right"></i></a>
-                </li>
-            </ul>
-        </nav>
     </div>
 
+    <ul class="nav nav-pills p-3 mb-4 rounded align-items-center card flex-row gap-3">
+        <form class="position-relative input-group flex-grow-1 w-auto">
+            <input type="text" class="form-control search-chat py-2 ps-5" id="search" placeholder="Search Blog"
+                onkeyup="fetchBlogs(this.value)" maxlength="50">
+            <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+            <button class="btn bg-primary-subtle text-primary font-medium" id="searchBtn" type="button"
+                onclick="fetchBlogs(document.querySelector('#search').value)">Search</button>
+        </form>
+        <li class="nav-item ms-auto">
+            <a href="{{ route('admin.add-blog') }}" class="btn btn-primary d-flex align-items-center px-3">
+                <i class="ti ti-list-details me-0 me-md-1 fs-4"></i>
+                <span class="d-none d-md-block font-weight-medium fs-3">Add Blog</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="col-12 position-relative">
+        <div class="position-absolute top-0 left-0 w-100" id="loader">
+            <div class="d-flex align-items-center justify-content-center" style="height: 60vh;">
+                <div class="spinner-border text-primary" style="width: 4rem; height: 4rem" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                    <img src="{{ asset('assets/images/favicon.png') }}" class="w-100 h-100 p-2" style="object-fit: cover"
+                        alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" id="blogContainer">
+    </div>
+
+    <nav aria-label="..." class="d-none">
+        <ul class="pagination justify-content-center mb-5 mt-4">
+            <li class="page-item">
+                <a class="page-link border-0 rounded-circle text-dark round-32 d-flex align-items-center justify-content-center"
+                    href="#"><i class="ti ti-chevron-left"></i></a>
+            </li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link border-0 rounded-circle round-32 mx-1 d-flex align-items-center justify-content-center"
+                    href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
+                    href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
+                    href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
+                    href="#">4</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
+                    href="#">5</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
+                    href="#">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link border-0 rounded-circle text-dark round-32 mx-1 d-flex align-items-center justify-content-center"
+                    href="#">10</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link border-0 rounded-circle text-dark round-32 d-flex align-items-center justify-content-center"
+                    href="#"><i class="ti ti-chevron-right"></i></a>
+            </li>
+        </ul>
+    </nav>
+
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/dash/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
     <script>
         function fetchBlogs(search = '') {
@@ -130,7 +126,7 @@
                             <div class="row justify-content-center w-100">
                                 <div class="col-lg-8">
                                     <div class="text-center">
-                                        <img src="{{ asset('assets/dash/assets/images/backgrounds/nodata_bg.svg') }}" alt=""
+                                        <img src="{{ asset('assets/dash/assets/images/backgrounds/blogs_bg.svg') }}" alt=""
                                             class="img-fluid w-100">
                                         <h3 class="fw-semibold mb-3">Blogs Not Found!!!</h3>
                                         <p class="fw-normal mb-7 fs-4">It looks like there are no blogs here. Explore other sections or try again later.</p>

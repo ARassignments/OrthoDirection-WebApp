@@ -1,152 +1,146 @@
 @extends('layouts.app')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
-    <div class="datatables">
-        <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
-            <div class="card-body px-4 py-3">
-                <div class="row align-items-center">
-                    <div class="col-9">
-                        <h4 class="fw-semibold mb-8">Add Blog</h4>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a class="text-muted text-decoration-none"
-                                        href="{{ route('admin.dashboard') }}">Home</a>
-                                </li>
-                                <li class="breadcrumb-item">
-                                    <a class="text-muted text-decoration-none" href="{{ route('admin.blogs') }}">Blogs</a>
-                                </li>
-                                <li class="breadcrumb-item" aria-current="page">Add Blog</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <div class="col-3">
-                        <div class="text-center mb-n5">
-                            <img src="assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
-                        </div>
+    <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+        <div class="card-body px-4 py-3">
+            <div class="row align-items-center">
+                <div class="col-9">
+                    <h4 class="fw-semibold mb-8">Add Blog</h4>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a class="text-muted text-decoration-none" href="{{ route('admin.dashboard') }}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="text-muted text-decoration-none" href="{{ route('admin.blogs') }}">Blogs</a>
+                            </li>
+                            <li class="breadcrumb-item" aria-current="page">Add Blog</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-3">
+                    <div class="text-center mb-n5">
+                        <img src="assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="card">
-            <div class="card-body">
-                <h5>Add Blog</h5>
-                <p class="card-subtitle mb-3">
-                    All fields are required *
-                </p>
-                <form id="blogForm">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-12 mb-3 px-lg-2 px-md-2 px-0">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-semibold">Blog Thumbnail</h5>
-                                    <p class="card-subtitle mb-4">Choose your thumbnail picture from here</p>
-                                    <div class="text-center">
-                                        <img id="thumbnailPreview" src="assets/images/profile/user-1.jpg" alt=""
-                                            class="img-fluid rounded-5" width="500" height="220">
-                                        <div class="d-flex align-items-center justify-content-center my-4 gap-3">
-                                            <input type="file" name="thumbnail" id="thumbnail" class="d-none"
-                                                accept=".png,.jpg,.jpeg">
-                                            <label for="thumbnail" class="btn btn-primary">Upload</label>
-                                            <button class="btn btn-outline-danger" type="button"
-                                                id="resetThumbnailBtn">Reset</button>
-                                        </div>
-                                        <p class="mb-0">Allowed JPG, GIF or PNG. Max size of 2000K</p>
-                                        <span id="thumbnailError"
-                                            class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
+    <div class="card">
+        <div class="card-body">
+            <h5>Add Blog</h5>
+            <p class="card-subtitle mb-3">
+                All fields are required *
+            </p>
+            <form id="blogForm">
+                @csrf
+                <div class="row">
+                    <div class="col-md-12 mb-3 px-lg-2 px-md-2 px-0">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title fw-semibold">Blog Thumbnail*</h5>
+                                <p class="card-subtitle mb-4">Choose your thumbnail picture from here</p>
+                                <div class="text-center">
+                                    <img id="thumbnailPreview" src="assets/images/profile/user-1.jpg" alt=""
+                                        class="img-fluid rounded-5" width="500" height="220">
+                                    <div class="d-flex align-items-center justify-content-center my-4 gap-3">
+                                        <input type="file" name="thumbnail" id="thumbnail" class="d-none"
+                                            accept=".png,.jpg,.jpeg">
+                                        <label for="thumbnail" class="btn btn-primary">Upload</label>
+                                        <button class="btn btn-outline-danger" type="button"
+                                            id="resetThumbnailBtn">Reset</button>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="title" name="title" placeholder=""
-                                    required>
-                                <label for="title">Title</label>
-                            </div>
-                            <span id="titleError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="author" name="author" placeholder=""
-                                    required>
-                                <label for="author">Author Name</label>
-                            </div>
-                            <span id="authorError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
-                        </div>
-                        <div class="tags-repeater col-md-12 mb-3">
-                            <div id="repeater-group">
-                                <div class="row mb-3 repeater-item">
-                                    <div class="col-md-11 col-9 pe-0">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" name="tags[]" placeholder="Tag Name"
-                                                required>
-                                            <label>Tag Name</label>
-                                        </div>
-                                        <span class="tagError mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
-                                    </div>
-                                    <div class="col-md-1 col-3">
-                                        <button
-                                            class="btn w-100 bg-danger-subtle text-danger waves-effect waves-light d-flex justify-content-center align-items-center h-100 delete-btn"
-                                            type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                                            data-bs-title="Delete" disabled>
-                                            <i class="ti ti-circle-x fs-5"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <button id="add-tag-btn" type="button" class="btn btn-primary waves-effect waves-light">
-                                <div class="d-flex align-items-center">
-                                    Add Tag
-                                    <i class="ti ti-circle-plus ms-1 fs-5"></i>
-                                </div>
-                            </button>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <div class="form-floating">
-                                <textarea class="form-control h-auto" id="short_description" name="short_description" rows="5" placeholder=""
-                                    required></textarea>
-                                <label for="short_description">Short Description</label>
-                            </div>
-                            <span id="short_descriptionError"
-                                class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <textarea class="form-control h-auto" id="description" name="description" rows="5" placeholder="" required></textarea>
-                                <label for="description">Description</label>
-                            </div>
-                            <span id="descriptionError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-md-flex align-items-center mt-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="status" id="status"
-                                        value="0">
-                                    <label class="form-check-label" for="status">Default Blog Visible</label>
-                                </div>
-                                <div class="ms-auto mt-3 mt-md-0">
-                                    <button type="submit" class="btn btn-primary font-medium rounded-pill px-4">
-                                        <div class="d-flex align-items-center">
-                                            <i class="ti ti-send me-2 fs-4"></i>
-                                            Submit
-                                        </div>
-                                    </button>
+                                    <p class="mb-0">Allowed JPG, JPEG or PNG. Max size of 2000K</p>
+                                    <span id="thumbnailError"
+                                        class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="title" name="title" placeholder=""
+                                required>
+                            <label for="title">Title*</label>
+                        </div>
+                        <span id="titleError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="author" name="author" placeholder=""
+                                required>
+                            <label for="author">Author Name*</label>
+                        </div>
+                        <span id="authorError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
+                    </div>
+                    <div class="tags-repeater col-md-12 mb-3">
+                        <div id="repeater-group">
+                            <div class="row mb-3 repeater-item">
+                                <div class="col-md-11 col-9 pe-0">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="tags[]" placeholder="Tag Name"
+                                            required>
+                                        <label>Tag Name*</label>
+                                    </div>
+                                    <span class="tagError mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
+                                </div>
+                                <div class="col-md-1 col-3">
+                                    <button
+                                        class="btn w-100 bg-danger-subtle text-danger waves-effect waves-light d-flex justify-content-center align-items-center h-100 delete-btn"
+                                        type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                                        data-bs-title="Delete" disabled>
+                                        <i class="ti ti-circle-x fs-5"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="add-tag-btn" type="button" class="btn btn-primary waves-effect waves-light">
+                            <div class="d-flex align-items-center">
+                                Add Tag
+                                <i class="ti ti-circle-plus ms-1 fs-5"></i>
+                            </div>
+                        </button>
+                    </div>
 
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <textarea class="form-control h-auto" id="short_description" name="short_description" rows="5" placeholder=""
+                                required></textarea>
+                            <label for="short_description">Short Description*</label>
+                        </div>
+                        <span id="short_descriptionError"
+                            class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <textarea class="form-control h-auto" id="description" name="description" rows="5" placeholder="" required></textarea>
+                            <label for="description">Description*</label>
+                        </div>
+                        <span id="descriptionError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-md-flex align-items-center mt-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="status" id="status"
+                                    value="0">
+                                <label class="form-check-label" for="status">Default Blog Visible</label>
+                            </div>
+                            <div class="ms-auto mt-3 mt-md-0">
+                                <button type="submit" class="btn btn-primary font-medium rounded-pill px-4">
+                                    <div class="d-flex align-items-center">
+                                        <i class="ti ti-send me-2 fs-4"></i>
+                                        Submit
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/dash/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
     <script>
         $(document).ready(function() {
@@ -279,7 +273,8 @@
                                     toast.onmouseleave = Swal.resumeTimer;
                                 },
                                 didClose: () => {
-                                    window.location.href = "{{ route('admin.blogs') }}";
+                                    window.location.href =
+                                        "{{ route('admin.blogs') }}";
                                 }
                             });
                             Toast.fire({

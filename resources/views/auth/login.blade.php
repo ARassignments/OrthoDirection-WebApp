@@ -67,10 +67,15 @@
                                             class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
                                     </small>
                                 </div>
+                                <style>
+                                    
+                                </style>
                                 <div class="mb-4">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password"
-                                        placeholder="Enter Password" autocomplete="current-password" required>
+                                    <div class="input-wrap">
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="Enter Password" autocomplete="current-password" required>
+                                    </div>
                                     <small>
                                         <x-input-error :messages="$errors->get('password')"
                                             class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger" />
@@ -103,6 +108,7 @@
     </div>
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
+        
         document.querySelector("#loginForm").onsubmit = () => {
             document.querySelector("#loginBtn").disabled = true;
             document.querySelector("#loginBtn").innerHTML = `

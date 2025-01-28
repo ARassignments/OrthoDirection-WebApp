@@ -7,13 +7,46 @@
                     <h4 class="fw-semibold mb-8">Edit Profile</h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="{{ route('family.dashboard') }}">Home</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="{{ route('family.profile') }}">My
-                                    Profile</a>
-                            </li>
+                            @if (Auth::user())
+                                @if (Auth::user()->role == 'admin')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('admin.dashboard') }}">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none" href="{{ route('admin.profile') }}">My
+                                            Profile</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 'family')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('family.dashboard') }}">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none" href="{{ route('family.profile') }}">My
+                                            Profile</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 'patient')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('patient.dashboard') }}">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none" href="{{ route('patient.profile') }}">My
+                                            Profile</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 'doctor')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('doctor.dashboard') }}">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none" href="{{ route('doctor.profile') }}">My
+                                            Profile</a>
+                                    </li>
+                                @endif
+                            @endif
+
                             <li class="breadcrumb-item" aria-current="page">Edit Profile</li>
                         </ol>
                     </nav>
@@ -358,8 +391,22 @@
                                 <div class="ms-auto mt-3 mt-md-0">
                                     <div class="d-flex align-items-center justify-content-end gap-3">
                                         <button class="btn btn-primary" type="submit">Save Changes</button>
-                                        <a class="btn bg-danger-subtle text-danger"
-                                            href="{{ route('patient.profile') }}">Cancel</a>
+                                        @if (Auth::user())
+                                            @if (Auth::user()->role == 'admin')
+                                                <a class="btn bg-danger-subtle text-danger"
+                                                    href="{{ route('admin.profile') }}">Cancel</a>
+                                            @elseif (Auth::user()->role == 'family')
+                                                <a class="btn bg-danger-subtle text-danger"
+                                                    href="{{ route('family.profile') }}">Cancel</a>
+                                            @elseif (Auth::user()->role == 'patient')
+                                                <a class="btn bg-danger-subtle text-danger"
+                                                    href="{{ route('patient.profile') }}">Cancel</a>
+                                            @elseif (Auth::user()->role == 'doctor')
+                                                <a class="btn bg-danger-subtle text-danger"
+                                                    href="{{ route('doctor.profile') }}">Cancel</a>
+                                            @endif
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -388,7 +435,8 @@
             $('#resetProfileImgBtn').click(function() {
                 $('#profile_img').val('');
                 $('#profileImgPreview').attr('src',
-                    "{{ $profile && $profile->profile_img ? asset('profile_images/' . $profile->profile_img) : 'assets/images/profile/user-1.jpg' }}");
+                    "{{ $profile && $profile->profile_img ? asset('profile_images/' . $profile->profile_img) : 'assets/images/profile/user-1.jpg' }}"
+                );
             });
 
             $('#status').on('change', function() {
@@ -404,9 +452,20 @@
                 $('.badge.text-danger').text('');
                 let formData = new FormData(this);
                 formData.append('_token', '{{ csrf_token() }}');
+                @if (Auth::user())
+                    @if (Auth::user()->role == 'admin')
+                        let url = "{{ route('admin.profile.update') }}";
+                    @elseif (Auth::user()->role == 'family')
+                        let url = "{{ route('family.profile.update') }}";
+                    @elseif (Auth::user()->role == 'patient')
+                        let url = "{{ route('patient.profile.update') }}";
+                    @elseif (Auth::user()->role == 'doctor')
+                        let url = "{{ route('doctor.profile.update') }}";
+                    @endif
+                @endif
 
                 $.ajax({
-                    url: `{{ route('family.profile.update') }}`,
+                    url: url,
                     type: 'POST',
                     data: formData,
                     processData: false,

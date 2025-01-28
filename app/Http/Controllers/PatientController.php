@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\AdminProfile;
+use App\Models\Appointment;
 use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -26,88 +29,156 @@ class PatientController extends Controller
             'subject' => ['required', 'min:3', 'max:55', 'regex:/^[a-zA-Z\s]+$/'],
             'comment' => ['required', 'min:10'],
         ]);
-    
+
         if ($validator->passes()) {
             $contact = new Contact();
-            $contact->fname = $request->fname ;
+            $contact->fname = $request->fname;
             $contact->lname = $request->lname;
             $contact->email = $request->email;
             $contact->phone = $request->phone;
             $contact->subject = $request->subject;
             $contact->comment = $request->comment;
             $contact->save();
-    
+
             return response()->json([
                 'status' => true,
                 'msg' => 'Thank you! Your message has been successfully sent.'
             ]);
         }
-    
+
         return response()->json([
             'status' => false,
             'errors' => $validator->errors()
         ]);
     }
 
-    // Profile
-    public function profileUpload(Request $request)
+    public function doctorFetch(Request $request)
     {
-        $request->validate([
-            'bio' => 'nullable|string|max:255',
-            'gender' => ['nullable', Rule::in(['male', 'female'])],
-            'country' => 'nullable|string|max:50',
-            'city' => 'nullable|string|max:50',
-            'contact' => 'nullable|string|max:15|min:11',
-            'date_of_birth' => 'nullable|date|before_or_equal:today',
-            'profile_img' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'facebook' => 'nullable|url',
-            'instagram' => 'nullable|url',
-            'twitter' => 'nullable|url',
-            'age' => 'nullable|integer|min:18|max:70',
-            'address' => 'nullable|string|max:255',
-            'status' => 'nullable|boolean'
-        ]);
+        $query = User::where('role', 'doctor')
+            ->whereHas('adminProfile', function ($query) {
+                $query->where('status', 1);
+            })
+            ->whereHas('doctorWorkingTimes', function ($query) {
+                $query->where('status', 1);
+            });
 
-        $profile = AdminProfile::updateOrCreate(
-            ['user_id' => Auth::id()],
-            [
-                'bio' => $request->bio,
-                'gender' => $request->gender,
-                'country' => $request->country,
-                'city' => $request->city,
-                'contact' => $request->contact,
-                'date_of_birth' => $request->date_of_birth,
-                'facebook' => $request->facebook,
-                'instagram' => $request->instagram,
-                'twitter' => $request->twitter,
-                'age' => $request->age,
-                'address' => $request->address,
-                'status' => $request->status ? 1 : 0,
-            ]
-        );
-
-        if ($request->hasFile('profile_img')) {
-            if ($profile->profile_img && File::exists(public_path('profile_images/' . $profile->profile_img))) {
-                File::delete(public_path('profile_images/' . $profile->profile_img));
-            }
-            $file = $request->file('profile_img');
-            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('profile_images'), $filename);
-            $profile->update(['profile_img' => $filename]);
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        return response()->json(['success' => 'Profile saved successfully!']);
+        $doctors = $query->with(['adminProfile' => function ($query) {
+            $query->where('status', 1);
+        }, 'doctorWorkingTimes' => function ($query) {
+            $query->where('status', 1);
+        }])->get();
+
+        return response()->json($doctors);
     }
 
-    public function getProfile()
+    public function doctorDetail($id)
     {
-        $profile = AdminProfile::where('user_id', Auth::id())->first();
-        return view('patient.profile.edit-profile', compact('profile'));
+        $doctor = User::where('role', 'doctor')
+            ->with([
+                'adminProfile',
+                'doctorWorkingTimes' => function ($query) {
+                    $query->where('status', 1);
+                },
+                'doctorAppointments' => function ($query) use ($id) {
+                    $query->where('doctor_id', $id)
+                        ->where('patient_id', Auth::user()->id)
+                        // ->where('status', '!=', 'cancelled')
+                        ->select('doctor_id', 'patient_id', 'date', 'slot', 'status');
+                }
+            ])
+            ->findOrFail($id);
+
+        if (!$doctor) {
+            return response()->json(['error' => 'Doctor not found!'], 404);
+        }
+
+        return view('patient.doctors.doctor-detail', [
+            'doctor' => $doctor,
+            'appointments' => $doctor->doctorAppointments
+        ]);
     }
-    public function getProfileDetails()
+
+    public function appointmentStore(Request $request)
     {
-        $profile = AdminProfile::where('user_id', Auth::id())->first();
-        return view('patient.profile.profile', compact('profile'));
+        $request->validate([
+            'doctor_id' => 'required|exists:users,id',
+            'date' => 'required|date',
+            'day' => 'required|string',
+            'slot' => 'required',
+            'treatment_type' => 'required|string',
+        ]);
+
+        $adminProfileExists = AdminProfile::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->exists();
+
+        if (!$adminProfileExists) {
+            return response()->json(['error' => 'Your profile does not exist or is currently inactive.']);
+        }
+
+        $existingAppointment = Appointment::where('doctor_id', $request->doctor_id)
+            ->where('patient_id', Auth::user()->id)
+            ->where('date', $request->date)
+            ->where('slot', $request->slot)
+            ->exists();
+
+        if ($existingAppointment) {
+            return response()->json(['error' => 'An appointment already exists for the selected date and time.']);
+        }
+
+        $appointment = new Appointment();
+        $appointment->doctor_id = $request->doctor_id;
+        $appointment->patient_id = Auth::user()->id;
+        $appointment->date = $request->date;
+        $appointment->day = $request->day;
+        $appointment->slot = $request->slot;
+        $appointment->treatment_type = $request->treatment_type;
+        $appointment->save();
+        return response()->json(['success' => 'Appointment Created Successfully!']);
     }
-    
+
+    public function appointmentFetch()
+    {
+        $patientId = Auth::user()->id;
+
+        $doctor = Appointment::where('patient_id', $patientId)
+            // ->where('status', '!=', 'cancelled')
+            ->with([
+                'doctor' => function ($query) {
+                    $query->select('id', 'name', 'email')
+                        ->with([
+                            'adminProfile' => function ($adminQuery) {
+                                $adminQuery->select('user_id', 'profile_img');
+                            }
+                        ]);
+                }
+            ])
+            ->select('id', 'doctor_id', 'treatment_type', 'user_cancellation_reason', 'doctor_cancellation_reason', 'user_cancelled', 'patient_id', 'date', 'slot', 'status')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return datatables()->of($doctor)->make(true);
+    }
+
+    public function appointmentCancel(Request $request, $id)
+    {
+        $request->validate([
+            'user_cancellation_reason' => 'required|string|max:255',
+        ]);
+        $appointment = Appointment::find($id);
+        if ($appointment->status == 'cancelled') {
+            return response()->json(['error' => 'This appointment is already cancelled.']);
+        }
+
+        $appointment->update([
+            'status' => 'cancelled',
+            'user_cancelled' => 'cancelled',
+            'user_cancellation_reason' => $request->user_cancellation_reason
+        ]);
+
+        return response()->json(['success' => 'Appointment cancelled successfully.']);
+    }
 }

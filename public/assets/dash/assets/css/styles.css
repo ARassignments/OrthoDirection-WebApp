@@ -18983,15 +18983,44 @@ html[data-layout=horizontal] .body-wrapper>.container-fluid, html[data-layout=ho
   pointer-events: none;
 }
 
+.preloader .spinner-border {
+  display: inline-block;
+  position: relative;
+  position: absolute;
+  top: calc(50% - 10.5px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
 .lds-ripple {
   display: inline-block;
   position: relative;
-  width: 40px;
+  width: 60px;
   position: absolute;
   top: calc(50% - 3.5px);
   left: 0;
   right: 0;
   margin: 0 auto;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap .toggler {
+  position: absolute;
+  right: 0.8rem;
+  top: 52%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.input-wrap:has(input[type="password"]) .toggler i:nth-child(2) {
+  display: none;
+}
+
+.input-wrap:has(input[type="text"]) .toggler i:nth-child(1) {
+  display: none;
 }
 
 .btn.bg-primary-subtle:hover {

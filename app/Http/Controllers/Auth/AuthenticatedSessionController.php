@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\DeviceLog;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Stevebauman\Location\Facades\Location;
 use Illuminate\View\View;
+use Jenssegers\Agent\Agent;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -78,6 +81,31 @@ class AuthenticatedSessionController extends Controller
     
         // Log the user in
         Auth::login($user);
+
+        if (Auth::check()) {
+            $agent = new Agent();
+            $deviceName = $agent->device();
+            $browser = $agent->browser();
+            $platform = $agent->platform();
+            $ip = $request->ip() == '127.0.0.1' ? '8.8.8.8' : $request->ip();
+            $location = Location::get($ip);
+    
+            $locationString = $location ? "{$location->cityName}, {$location->countryName}" : "Unknown";
+    
+            DeviceLog::updateOrCreate(
+                [
+                    'user_id' => Auth::id(),
+                    'ip_address' => $ip,
+                ],
+                [
+                    'device_name' => $deviceName,
+                    'browser' => $browser,
+                    'platform' => $platform,
+                    'logged_in_at' => now(),
+                    'location' => $locationString,
+                ]
+            );
+        }
     
         // Redirect based on user role
         if ($user->role === 'admin') {
