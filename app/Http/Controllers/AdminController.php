@@ -37,6 +37,12 @@ class AdminController extends Controller
         return datatables()->of($users)->make(true);
     }
 
+    public function getNewsletter()
+    {
+        $newsletter = Newsletter::all();
+        return datatables()->of($newsletter)->make(true);
+    }
+
     public function updateStatus(Request $request, $id)
     {
         $user = User::find($id);
@@ -316,14 +322,6 @@ class AdminController extends Controller
                 'errors' => $validator->errors(),
             ]);
         }
-    }
-    
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

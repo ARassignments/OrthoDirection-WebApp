@@ -1,3 +1,4 @@
+
 <x-guest-layout>
 
     <div class="position-relative overflow-hidden radial-gradient min-vh-100 w-100">

@@ -87,6 +87,7 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
     Route::get('/getFamilies', [AdminController::class, 'getFamilies'])->name('admin.getFamilies');
     Route::get('/getPatients', [AdminController::class, 'getPatients'])->name('admin.getPatients');
     Route::get('/getDoctors', [AdminController::class, 'getDoctors'])->name('admin.getDoctors');
+    Route::get('/getNewsletter', [AdminController::class, 'getNewsletter'])->name('admin.getNewsletter');
     Route::post('/updateStatus/{id}', [AdminController::class, 'updateStatus'])->name('admin.updateStatus');
 });
 
