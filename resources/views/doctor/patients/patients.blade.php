@@ -64,7 +64,6 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('assets/dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
     <script>

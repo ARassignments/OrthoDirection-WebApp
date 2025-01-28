@@ -78,7 +78,7 @@
             </table>
         </div>
     </div>
-    <script src="{{ asset('assets/dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
@@ -266,29 +266,27 @@
             return `${formattedHour}:${minute} ${period}`;
         }
 
-        $("#myTable").on('click', function(event) {
+        $('#myTable').on('click', '.dropdown-toggle', function(event) {
+            event.stopPropagation();
+            let currentDropdown = bootstrap.Dropdown.getOrCreateInstance(this);
             $('.dropdown.show').each(function() {
-                if (!$(this).is(event.target) && $(this).has(event.target).length === 0) {
+                if (this !== event.currentTarget.parentElement) {
                     let otherDropdown = bootstrap.Dropdown.getInstance(this);
                     if (otherDropdown) {
                         otherDropdown.hide();
                     }
                 }
             });
+            currentDropdown.toggle();
         });
 
-        $('#myTable').on('click', '.dropdown', function(event) {
-            event.stopPropagation();
+        $('#myTable').on('click', function() {
             $('.dropdown.show').each(function() {
-                if (this !== event.currentTarget) {
-                    let otherDropdown = bootstrap.Dropdown.getInstance(this);
-                    if (otherDropdown) {
-                        otherDropdown.hide();
-                    }
+                let dropdownInstance = bootstrap.Dropdown.getInstance(this);
+                if (dropdownInstance) {
+                    dropdownInstance.hide();
                 }
             });
-            let dropdown = new bootstrap.Dropdown(this);
-            dropdown.toggle();
         });
 
         $('#myTable').on('click', '.cancel-appointment', function(e) {
