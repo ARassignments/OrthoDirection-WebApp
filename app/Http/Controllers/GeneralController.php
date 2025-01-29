@@ -19,18 +19,18 @@ class GeneralController extends Controller
     public function profileUpload(Request $request)
     {
         $request->validate([
-            'bio' => 'nullable|string|max:255',
-            'gender' => ['nullable', Rule::in(['male', 'female'])],
-            'country' => 'nullable|string|max:50',
-            'city' => 'nullable|string|max:50',
-            'contact' => 'nullable|string|max:15|min:11',
-            'date_of_birth' => 'nullable|date|before_or_equal:today',
+            'bio' => 'required|string|max:255',
+            'gender' => ['required', Rule::in(['male', 'female'])],
+            'country' => 'required|string|max:50',
+            'city' => 'required|string|max:50',
+            'contact' => 'required|string|max:15|min:11',
+            'date_of_birth' => 'required|date|before_or_equal:today',
             'profile_img' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'facebook' => 'nullable|url',
             'instagram' => 'nullable|url',
             'twitter' => 'nullable|url',
-            'age' => 'nullable|integer|min:18|max:70',
-            'address' => 'nullable|string|max:255',
+            'age' => 'required|integer|min:18|max:70',
+            'address' => 'required|string|max:255',
             'status' => 'nullable|boolean'
         ]);
 

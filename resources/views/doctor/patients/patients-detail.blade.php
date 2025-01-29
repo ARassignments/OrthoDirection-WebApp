@@ -72,7 +72,7 @@
                         <div class="text-center">
                             <h5 class="fs-5 mb-0 fw-semibold text-capitalize">{{ $patient->name }}
                             </h5>
-                            <p class="mb-0 fs-4 text-capitalize">{{ $patient->role }}</p>
+                            {{-- <p class="mb-0 fs-4 text-capitalize">{{ $patient->role }}</p> --}}
                         </div>
                     </div>
                 </div>
@@ -159,18 +159,18 @@
                 role="tablist">
                 <li class="nav-item" role="presentation">
                     <button
-                        class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6 active"
+                        class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
                         id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button"
-                        role="tab" aria-controls="pills-profile" aria-selected="true">
+                        role="tab" aria-controls="pills-profile" aria-selected="false">
                         <i class="ti ti-user-circle me-2 fs-6"></i>
                         <span class="d-none d-md-block">Profile</span>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button
-                        class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
+                        class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6 active"
                         id="pills-appointments-tab" data-bs-toggle="pill" data-bs-target="#pills-appointments"
-                        type="button" role="tab" aria-controls="pills-appointments" aria-selected="false"
+                        type="button" role="tab" aria-controls="pills-appointments" aria-selected="true"
                         tabindex="-1">
                         <i class="ti ti-calendar me-2 fs-6"></i>
                         <span class="d-none d-md-block">Appointments</span>
@@ -181,7 +181,7 @@
     </div>
 
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade active show" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
             tabindex="0">
             <div class="row">
                 <div class="col-lg-12">
@@ -208,35 +208,98 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-12">
+                    <div class="card shadow-none border">
+                        <div class="card-body">
+                            <h4 class="fw-semibold mb-3">Person Info</h4>
+                            <hr class="mt-0 mb-4">
+                            <div class="card-body py-0 pb-4">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <h6 class="fs-4 fw-semibold mb-0 text-end col-md-3">Gender:</h6>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static text-capitalize">{{ $patient->adminProfile->gender }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <h6 class="fs-4 fw-semibold mb-0 text-end col-md-4">Date of Birth:</h6>
+                                            <div class="col-md-8">
+                                                <p class="form-control-static text-capitalize">{{ $patient->adminProfile->date_of_birth }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="fw-semibold mb-3">Address</h4>
+                            <hr class="mt-0 mb-4">
+                            <div class="card-body py-0">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <h6 class="fs-4 fw-semibold mb-0 text-end col-md-3">Address:</h6>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    {{ $patient->adminProfile->address }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <h6 class="fs-4 fw-semibold mb-0 text-end col-md-3">Country:</h6>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static text-capitalize">{{ $patient->adminProfile->country }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <h6 class="fs-4 fw-semibold mb-0 text-end col-md-4">City:</h6>
+                                            <div class="col-md-8">
+                                                <p class="form-control-static text-capitalize">{{ $patient->adminProfile->city }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="tab-pane fade calendarBtn" id="pills-appointments" role="tabpanel"
+        <div class="tab-pane fade  active show" id="pills-appointments" role="tabpanel"
             aria-labelledby="pills-appointments-tab" tabindex="0">
             <div class="card">
                 <ul class="nav nav-pills user-profile-tab" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button
                             class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-4"
-                            id="pills-tabular-tab" data-bs-toggle="pill" data-bs-target="#pills-tabular" type="button"
-                            role="tab" aria-controls="pills-tabular" aria-selected="true">
-                            <i class="ti ti-table me-2 fs-6"></i>
-                            <span class="d-none d-md-block">Tabular View</span>
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-4"
                             id="pills-calander-tab" data-bs-toggle="pill" data-bs-target="#pills-calander"
-                            type="button" role="tab" aria-controls="pills-calander" aria-selected="false"
+                            type="button" role="tab" aria-controls="pills-calander" aria-selected="true"
                             tabindex="-1">
                             <i class="ti ti-calendar-event me-2 fs-6"></i>
                             <span class="d-none d-md-block">Calander View</span>
                         </button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-4"
+                            id="pills-tabular-tab" data-bs-toggle="pill" data-bs-target="#pills-tabular" type="button"
+                            role="tab" aria-controls="pills-tabular" aria-selected="false">
+                            <i class="ti ti-table me-2 fs-6"></i>
+                            <span class="d-none d-md-block">Tabular View</span>
+                        </button>
+                    </li>
+
                 </ul>
                 <div class="card-body">
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-tabular" role="tabpanel"
+                        <div class="tab-pane fade" id="pills-tabular" role="tabpanel"
                             aria-labelledby="pills-tabular-tab" tabindex="0">
                             <link rel="stylesheet"
                                 href="{{ asset('assets/dash/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
@@ -289,7 +352,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-calander" role="tabpanel"
+                        <div class="tab-pane fade show active" id="pills-calander" role="tabpanel"
                             aria-labelledby="pills-calander-tab" tabindex="0">
                             <div class="card">
                                 <div class="card-body">
@@ -384,7 +447,7 @@
         });
 
         let myTable = new DataTable('#myTable', {
-            processing: true,
+            processing: false,
             serverSide: true,
             ajax: {
                 url: "{{ url('doctor/appointments/patientAppointmentFetch/' . $patient->id) }}",
@@ -431,7 +494,7 @@
                         let cancelReasonTitle = row.user_cancelled == 'cancelled' ? '(By Patient)' : '';
                         let cancelReason = row.user_cancelled == 'cancelled' ? row
                             .user_cancellation_reason : row.doctor_cancellation_reason;
-                        return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
+                        return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+': '+cancelReason+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
                             ${data == 'pending'?
                                 '<div class="dropdown dropstart d-inline-block ms-3"><a href="#" class="text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti ti-dots-vertical fs-3"></i></a><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style=""><li><a href="javascript:void(0)" class="dropdown-item d-flex align-items-center gap-3 text-danger cancel-appointment" data-id="'+row.id+'"><i class="fs-4 ti ti-circle-x"></i>Cancel Appointment</a></li></ul></div>':''
                             }
@@ -477,10 +540,14 @@
                 </div>`,
             },
             drawCallback: function(settings) {
-                $('[data-bs-toggle="popover"]').popover({
-                    trigger: 'hover',
-                    container: 'body'
+                $('[data-bs-toggle="tooltip"]').tooltip({
+                    trigger: "hover",
+                    container: "body"
                 });
+                // $('[data-bs-toggle="popover"]').popover({
+                //     trigger: 'hover',
+                //     container: 'body'
+                // });
                 $('#myTable').addClass('table border text-nowrap customize-table mb-0 align-middle');
                 $('#myTable_paginate').addClass('btn-group');
                 $('#myTable_paginate span').addClass('btn-group');
@@ -602,7 +669,7 @@
                         type: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}',
-                            user_cancellation_reason: reason
+                            doctor_cancellation_reason: reason
                         },
                         success: function(response) {
                             if (response.success) {

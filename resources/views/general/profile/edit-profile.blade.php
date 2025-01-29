@@ -92,13 +92,13 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-4">
-                                <label for="bio" class="form-label fw-semibold">Biography</label>
+                                <label for="bio" class="form-label fw-semibold">Biography*</label>
                                 <input type="text" id="bio" name="bio" class="form-control"
                                     placeholder="Biography here" value="{{ $profile ? $profile->bio : '' }}">
                                 <span id="bioError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                             </div>
                             <div class="mb-4">
-                                <label for="gender" class="form-label fw-semibold">Gender</label>
+                                <label for="gender" class="form-label fw-semibold">Gender*</label>
                                 <select class="select2 form-control" id="gender" name="gender">
                                     <option selected disabled>Select Gender</option>
                                     <option value="male"
@@ -111,7 +111,7 @@
                                 <span id="genderError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                             </div>
                             <div class="mb-4">
-                                <label for="country" class="form-label fw-semibold">Country</label>
+                                <label for="country" class="form-label fw-semibold">Country*</label>
                                 <select class="select2 form-control" id="country" name="country">
                                     <option selected disabled>Select Country</option>
                                     @php
@@ -322,7 +322,7 @@
                                 <span id="countryError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                             </div>
                             <div class="mb-4">
-                                <label for="date_of_birth" class="form-label fw-semibold">Date Of Birth</label>
+                                <label for="date_of_birth" class="form-label fw-semibold">Date Of Birth*</label>
                                 <input type="date" id="date_of_birth" name="date_of_birth" class="form-control"
                                     placeholder="" max="{{ now()->format('Y-m-d') }}"
                                     value="{{ old('date_of_birth', $profile && $profile->date_of_birth ? $profile->date_of_birth : '') }}">
@@ -340,20 +340,20 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-4">
-                                <label for="contact" class="form-label fw-semibold">Contact No</label>
+                                <label for="contact" class="form-label fw-semibold">Contact No*</label>
                                 <input type="tel" class="form-control" id="contact" name="contact"
                                     placeholder="Contact here" value="{{ old('contact', $profile->contact ?? '') }}">
                                 <span id="contactError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                             </div>
                             <div class="mb-4">
-                                <label for="age" class="form-label fw-semibold">Age</label>
+                                <label for="age" class="form-label fw-semibold">Age*</label>
                                 <input type="number" id="age" name="age" class="form-control"
                                     placeholder="Age here" min="18" max="70"
                                     value="{{ old('age', $profile->age ?? '') }}">
                                 <span id="ageError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
                             </div>
                             <div class="mb-4">
-                                <label for="city" class="form-label fw-semibold">City</label>
+                                <label for="city" class="form-label fw-semibold">City*</label>
                                 <input type="text" class="form-control" id="city" name="city" maxlength="30"
                                     placeholder="City here" value="{{ old('city', $profile->city ?? '') }}">
                                 <span id="cityError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
@@ -375,7 +375,7 @@
                         </div>
                         <div class="col-12">
                             <div class="">
-                                <label for="address" class="form-label fw-semibold">Address</label>
+                                <label for="address" class="form-label fw-semibold">Address*</label>
                                 <textarea type="text" class="form-control" rows="4" id="address" name="address"
                                     placeholder="814 Howard Street, 120065, USA">{{ old('address', $profile->address ?? '') }}</textarea>
                                 <span id="addressError" class="mt-2 mb-0 badge fs-2 bg-danger-subtle text-danger"></span>
