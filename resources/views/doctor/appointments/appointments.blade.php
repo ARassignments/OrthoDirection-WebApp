@@ -202,10 +202,12 @@
                 </div>`,
             },
             drawCallback: function(settings) {
-                $('[data-bs-toggle="popover"]').popover({
-                    trigger: 'hover',
-                    container: 'body'
-                });
+                reinitializePopovers();
+                // $('[data-bs-toggle="popover"]').popover('dispose');
+                // $('[data-bs-toggle="popover"]').popover({
+                //     trigger: 'hover',
+                //     container: 'body'
+                // });
                 $('#myTable').addClass('table border text-nowrap customize-table mb-0 align-middle');
                 $('#myTable_paginate').addClass('btn-group');
                 $('#myTable_paginate span').addClass('btn-group');
@@ -288,6 +290,13 @@
             });
         });
 
+        function reinitializePopovers() {
+            $('[data-bs-toggle="popover"]').popover('dispose');
+            $('[data-bs-toggle="popover"]').popover({
+                trigger: 'hover',
+                container: 'body'
+            });
+        }
         $('#myTable').on('click', '.cancel-appointment', function(e) {
             e.preventDefault();
             let appointmentId = $(this).data('id');
