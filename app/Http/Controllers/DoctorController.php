@@ -107,6 +107,18 @@ class DoctorController extends Controller
         return response()->json(['success' => 'Appointment cancelled successfully.']);
     }
 
+    public function patientAppointmentFetch($id)
+    {
+        $doctorId = Auth::user()->id;
+
+        $doctor = Appointment::where('doctor_id', $doctorId)
+            ->where('patient_id', $id)
+            ->select('id', 'doctor_id', 'treatment_type', 'user_cancellation_reason', 'doctor_cancellation_reason', 'user_cancelled', 'patient_id', 'date', 'slot', 'status')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return datatables()->of($doctor)->make(true);
+    }
+
     // Patients
     public function patientFetch(Request $request)
     {
@@ -124,5 +136,28 @@ class DoctorController extends Controller
         }])->get();
 
         return response()->json($patients);
+    }
+
+    public function patientDetail($id)
+    {
+        $patient = User::where('role', 'patient')
+            ->with([
+                'adminProfile',
+                'patientAppointments' => function ($query) use ($id) {
+                    $query->where('doctor_id', Auth::user()->id)
+                        ->where('patient_id', $id)
+                        ->select('doctor_id', 'patient_id', 'date', 'slot', 'status');
+                }
+            ])
+            ->findOrFail($id);
+
+        if (!$patient) {
+            return response()->json(['error' => 'Patient not found!']);
+        }
+
+        return view('doctor.patients.patients-detail', [
+            'patient' => $patient,
+            'appointments' => $patient->patientAppointments
+        ]);
     }
 }

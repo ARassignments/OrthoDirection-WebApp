@@ -11,7 +11,7 @@
                                 <a class="text-muted text-decoration-none" href="{{ route('patient.dashboard') }}">Home</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="{{ route('patient.doctors') }}">Home</a>
+                                <a class="text-muted text-decoration-none" href="{{ route('patient.doctors') }}">Doctors</a>
                             </li>
                             <li class="breadcrumb-item" aria-current="page">{{ $doctor->name }}</li>
                         </ol>

@@ -128,11 +128,12 @@ Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->grou
         Route::view('/', 'doctor.appointments.appointments')->name('doctor.appointments');
         Route::get('/appointmentFetch', [DoctorController::class, 'appointmentFetch'])->name('doctor.appointments.fetch');
         Route::post('/appointmentCancel/{id}', [DoctorController::class, 'appointmentCancel'])->name('doctor.appointments.cancel');
+        Route::get('/patientAppointmentFetch/{id}', [DoctorController::class, 'patientAppointmentFetch'])->name('patient.appointments.fetch');
     });
     Route::prefix('/patients')->group(function () {
         Route::view('/', 'doctor.patients.patients')->name('doctor.patients');
         Route::get('/patientFetch', [DoctorController::class, 'patientFetch'])->name('doctor.patients.fetch');
-        Route::get('/patientDetail/{id}', [PatientController::class, 'patientDetail'])->name('doctor.patients.detail');
+        Route::get('/patientDetail/{id}', [DoctorController::class, 'patientDetail'])->name('doctor.patients.detail');
     });
 });
 

@@ -147,7 +147,7 @@
                         let cancelReasonTitle = row.user_cancelled == 'cancelled' ? '' : '(By Doctor)';
                         let cancelReason = row.user_cancelled == 'cancelled' ? row
                             .user_cancellation_reason : row.doctor_cancellation_reason;
-                        return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
+                        return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+': '+cancelReason+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
                         <div class="dropdown dropstart d-inline-block ms-3">
                           <a href="#" class="text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="ti ti-dots-vertical fs-3"></i>
@@ -203,10 +203,14 @@
                 </div>`,
             },
             drawCallback: function(settings) {
-                $('[data-bs-toggle="popover"]').popover({
-                    trigger: 'hover',
-                    container: 'body'
+                $('[data-bs-toggle="tooltip"]').tooltip({
+                    trigger: "hover",
+                    container: "body"
                 });
+                // $('[data-bs-toggle="popover"]').popover({
+                //     trigger: 'hover',
+                //     container: 'body'
+                // });
                 $('#myTable').addClass('table border text-nowrap customize-table mb-0 align-middle');
                 $('#myTable_paginate').addClass('btn-group');
                 $('#myTable_paginate span').addClass('btn-group');
