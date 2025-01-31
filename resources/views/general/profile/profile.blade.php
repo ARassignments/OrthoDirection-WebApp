@@ -178,7 +178,7 @@
                                 class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
                                 id="pills-slots-tab" data-bs-toggle="pill" data-bs-target="#pills-slots" type="button"
                                 role="tab" aria-controls="pills-slots" aria-selected="false" tabindex="-1">
-                                <i class="ti ti-click me-2 fs-6"></i>
+                                <i class="ti ti-clock me-2 fs-6"></i>
                                 <span class="d-none d-md-block">My Slots</span>
                             </button>
                         </li>
@@ -209,11 +209,13 @@
                                     <i class="ti ti-mail text-dark fs-6"></i>
                                     <h6 class="fs-4 fw-semibold mb-0">{{ Auth::user() ? Auth::user()->email : '' }}</h6>
                                 </li>
-                                <li class="d-flex align-items-center gap-3 mb-4">
-                                    <i class="ti ti-map-pin text-dark fs-6"></i>
-                                    <h6 class="fs-4 fw-semibold mb-0">{{ $profile ? $profile->city : '' }},
-                                        {{ $profile ? $profile->country : '' }}</h6>
-                                </li>
+                                @if ($profile)
+                                    <li class="d-flex align-items-center gap-3 mb-4">
+                                        <i class="ti ti-map-pin text-dark fs-6"></i>
+                                        <h6 class="fs-4 fw-semibold mb-0">{{ $profile ? $profile->city : '' }},
+                                            {{ $profile ? $profile->country : '' }}</h6>
+                                    </li>
+                                @endif
                                 <li class="d-flex align-items-center gap-3 mb-2">
                                     <i class="ti ti-device-desktop text-dark fs-6"></i>
                                     <h6 class="fs-4 fw-semibold mb-0">{{ Auth::user() ? Auth::user()->created_at : '' }}
@@ -223,6 +225,78 @@
                         </div>
                     </div>
                 </div>
+                @if ($profile)
+                    <div class="col-lg-12">
+                        <div class="card shadow-none border">
+                            <div class="card-body">
+                                <h4 class="fw-semibold mb-3">Person Info</h4>
+                                <hr class="mt-0 mb-4">
+                                <div class="card-body py-0 pb-4">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <h6 class="fs-4 fw-semibold mb-0 text-end col-md-3">Gender:</h6>
+                                                <div class="col-md-9">
+                                                    <p class="form-control-static text-capitalize">
+                                                        {{ $profile ? $profile->gender : '' }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <h6 class="fs-4 fw-semibold mb-0 text-end col-md-4">Date of Birth:</h6>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static text-capitalize">
+                                                        {{ $profile ? $profile->date_of_birth : '' }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4 class="fw-semibold mb-3">Address</h4>
+                                <hr class="mt-0 mb-4">
+                                <div class="card-body py-0">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <h6 class="fs-4 fw-semibold mb-0 text-end col-md-3">Address:</h6>
+                                                <div class="col-md-9">
+                                                    <p class="form-control-static">
+                                                        {{ $profile ? $profile->address : '' }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <h6 class="fs-4 fw-semibold mb-0 text-end col-md-3">Country:</h6>
+                                                <div class="col-md-9">
+                                                    <p class="form-control-static text-capitalize">
+                                                        {{ $profile ? $profile->country : '' }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <h6 class="fs-4 fw-semibold mb-0 text-end col-md-4">City:</h6>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static text-capitalize">
+                                                        {{ $profile ? $profile->city : '' }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="tab-pane fade" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab" tabindex="0">
