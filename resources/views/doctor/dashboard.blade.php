@@ -1,83 +1,66 @@
-@extends('layouts.app')
-@section('content')
-    <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
-    <div class="datatables">
-        <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
-            <div class="card-body px-4 py-3">
-                <div class="row align-items-center">
-                    <div class="col-9">
-                        <h4 class="fw-semibold mb-8">Appointments</h4>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a class="text-muted text-decoration-none"
-                                        href="{{ route('doctor.dashboard') }}">Home</a>
-                                </li>
-                                <li class="breadcrumb-item" aria-current="page">Appointments</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <div class="col-3">
-                        <div class="text-center mb-n5">
-                            <img src="assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
-                        </div>
-                    </div>
+@extends('general.dashboard')
+@section('dashboard')
+    <div class="card w-100">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold">Today's Appointments</h5>
+            <p class="card-subtitle">Latest record of Today's Appointments</p>
+            <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
+            <div class="datatables mt-9">
+                <div class="table-responsive rounded-2 mb-4">
+                    <table id="myTable" class="table border text-nowrap customize-table mb-0 align-middle w-100">
+                        <thead class="text-dark fs-4">
+                            <tr>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">#</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Patient</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Treatment Type</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Date</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Slot</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Status</h6>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="w-100">
+        
+                        </tbody>
+                        <tfoot class="text-dark fs-4">
+                            <tr>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">#</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Patient</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Treatment Type</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Date</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Slot</h6>
+                                </th>
+                                <th>
+                                    <h6 class="fs-4 fw-semibold mb-0">Status</h6>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
-
-        <div class="table-responsive rounded-2 mb-4">
-            <table id="myTable" class="table border text-nowrap customize-table mb-0 align-middle w-100">
-                <thead class="text-dark fs-4">
-                    <tr>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">#</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Patient</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Treatment Type</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Date</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Slot</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Status</h6>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="w-100">
-
-                </tbody>
-                <tfoot class="text-dark fs-4">
-                    <tr>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">#</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Patient</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Treatment Type</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Date</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Slot</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Status</h6>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
     </div>
+
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
@@ -86,7 +69,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('doctor.appointments.fetch') }}",
+                url: "{{ route('doctor.appointments.fetch.today') }}",
                 type: "GET"
             },
             columns: [{
@@ -192,7 +175,7 @@
                             <div class="text-center">
                                 <img src="{{ asset('assets/dash/assets/images/backgrounds/appointments_bg.svg') }}" alt=""
                                     class="img-fluid col-lg-8">
-                                <h3 class="fw-semibold mb-3 text-dark">Appointments Not Found!!!</h3>
+                                <h3 class="fw-semibold mb-3 text-dark">Today's Appointments Not Found!!!</h3>
                                 <p class="fw-normal mb-7 fs-4 text-body">It seems the appointments you’re looking for is unavailable. Please check back later or explore other content.</p>
                                 <a class="btn btn-primary mb-7" href="javascript:void()" onclick="window.location.reload()" role="button">Try Again...</a>
                             </div>

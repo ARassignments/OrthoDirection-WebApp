@@ -110,7 +110,7 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
 });
 
 Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->group(function () {
-    Route::view('/', 'general.dashboard')->name('doctor.dashboard');
+    Route::view('/', 'doctor.dashboard')->name('doctor.dashboard');
     Route::prefix('/profile')->group(function () {
         Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('doctor.profile');
         Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('doctor.profile.edit');
@@ -126,7 +126,9 @@ Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->grou
     Route::prefix('/appointments')->group(function () {
         Route::view('/', 'doctor.appointments.appointments')->name('doctor.appointments');
         Route::get('/appointmentFetch', [DoctorController::class, 'appointmentFetch'])->name('doctor.appointments.fetch');
+        Route::get('/appointmentFetchToday', [DoctorController::class, 'appointmentFetchToday'])->name('doctor.appointments.fetch.today');
         Route::post('/appointmentCancel/{id}', [DoctorController::class, 'appointmentCancel'])->name('doctor.appointments.cancel');
+        Route::post('/appointmentStatusUpdate/{id}', [DoctorController::class, 'appointmentStatusUpdate'])->name('doctor.appointments.status');
         Route::get('/patientAppointmentFetch/{id}', [DoctorController::class, 'patientAppointmentFetch'])->name('patient.appointments.fetch');
     });
     Route::prefix('/patients')->group(function () {
