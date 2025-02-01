@@ -96,4 +96,6 @@
     </div> --}}
 </div>
 
+@yield('dashboard')
+
 @endsection

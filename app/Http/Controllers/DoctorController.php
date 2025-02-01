@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Appointment;
 use App\Models\DoctorWorkingTime;
 use App\Models\User;
@@ -89,6 +90,28 @@ class DoctorController extends Controller
         return datatables()->of($doctor)->make(true);
     }
 
+    public function appointmentFetchToday()
+    {
+        $doctorId = Auth::user()->id;
+
+        $doctor = Appointment::where('doctor_id', $doctorId)
+            ->whereDate('created_at', Carbon::today())
+            ->with([
+                'patient' => function ($query) {
+                    $query->select('id', 'name', 'email')
+                        ->with([
+                            'adminProfile' => function ($adminQuery) {
+                                $adminQuery->select('user_id', 'profile_img');
+                            }
+                        ]);
+                }
+            ])
+            ->select('id', 'doctor_id', 'treatment_type', 'user_cancellation_reason', 'doctor_cancellation_reason', 'user_cancelled', 'patient_id', 'date', 'slot', 'status')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return datatables()->of($doctor)->make(true);
+    }
+
     public function appointmentCancel(Request $request, $id)
     {
         $request->validate([
@@ -105,6 +128,17 @@ class DoctorController extends Controller
         ]);
 
         return response()->json(['success' => 'Appointment cancelled successfully.']);
+    }
+
+    public function appointmentStatusUpdate(Request $request, $id)
+    {
+        $appointment = Appointment::find($id);
+
+        $appointment->update([
+            'status' => $request->appointment_status
+        ]);
+
+        return response()->json(['success' => 'Appointment updated successfully.']);
     }
 
     public function patientAppointmentFetch($id)

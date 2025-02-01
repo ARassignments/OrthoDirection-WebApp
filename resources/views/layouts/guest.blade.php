@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Ortho Direction</title>
 
     <meta name="description"
         content="Ortho Direction - Comprehensive dental services with expert care. Learn more about our services, pricing, and team.">

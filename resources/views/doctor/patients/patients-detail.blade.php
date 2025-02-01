@@ -591,6 +591,8 @@
                     return 'bg-warning-subtle text-warning';
                 case 'approved':
                     return 'bg-success-subtle text-success';
+                case 'completed':
+                    return 'bg-success-subtle text-success';
                 case 'rejected':
                     return 'bg-danger-subtle text-danger';
                 case 'cancelled':
