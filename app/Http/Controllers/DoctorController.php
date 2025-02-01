@@ -8,6 +8,8 @@ use App\Models\DoctorWorkingTime;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\AppointmentCancelled;
+use Illuminate\Support\Facades\Mail;
 
 class DoctorController extends Controller
 {
@@ -126,7 +128,7 @@ class DoctorController extends Controller
             'status' => 'cancelled',
             'doctor_cancellation_reason' => $request->doctor_cancellation_reason
         ]);
-
+        Mail::to($appointment->patient->email)->send(new AppointmentCancelled($appointment));
         return response()->json(['success' => 'Appointment cancelled successfully.']);
     }
 
