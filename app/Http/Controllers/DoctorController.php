@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\AppointmentCancelled;
+use App\Notifications\AppointmentNotification;
 use Illuminate\Support\Facades\Mail;
 
 class DoctorController extends Controller
@@ -129,6 +130,17 @@ class DoctorController extends Controller
             'doctor_cancellation_reason' => $request->doctor_cancellation_reason
         ]);
         Mail::to($appointment->patient->email)->send(new AppointmentCancelled($appointment));
+
+        $patient = User::find($appointment->patient_id);
+        if ($patient) {
+            $patient->notify(new AppointmentNotification($appointment, 'updated'));
+        }
+
+        $doctor = User::find($appointment->doctor_id);
+        if ($doctor) {
+            $doctor->notify(new AppointmentNotification($appointment, 'updated'));
+        }
+
         return response()->json(['success' => 'Appointment cancelled successfully.']);
     }
 
@@ -139,6 +151,16 @@ class DoctorController extends Controller
         $appointment->update([
             'status' => $request->appointment_status
         ]);
+
+        $patient = User::find($appointment->patient_id);
+        if ($patient) {
+            $patient->notify(new AppointmentNotification($appointment, 'updated'));
+        }
+
+        $doctor = User::find($appointment->doctor_id);
+        if ($doctor) {
+            $doctor->notify(new AppointmentNotification($appointment, 'updated'));
+        }
 
         return response()->json(['success' => 'Appointment updated successfully.']);
     }

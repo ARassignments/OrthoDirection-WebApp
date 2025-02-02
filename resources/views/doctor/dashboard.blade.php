@@ -4,7 +4,8 @@
         <div class="card-body">
             <h5 class="card-title fw-semibold">Today's Appointments</h5>
             <p class="card-subtitle">Latest record of Today's Appointments</p>
-            <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
+            <link rel="stylesheet"
+                href="{{ asset('assets/dash/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
             <div class="datatables mt-9">
                 <div class="table-responsive rounded-2 mb-4">
                     <table id="myTable" class="table border text-nowrap customize-table mb-0 align-middle w-100">
@@ -31,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody class="w-100">
-        
+
                         </tbody>
                         <tfoot class="text-dark fs-4">
                             <tr>
@@ -197,10 +198,7 @@
                 </div>`,
             },
             drawCallback: function(settings) {
-                $('[data-bs-toggle="tooltip"]').tooltip({
-                    trigger: "hover",
-                    container: "body"
-                });
+
                 // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
                 // popoverTriggerList.map(function(popoverTriggerEl) {
                 //     return new bootstrap.Popover(popoverTriggerEl);
@@ -234,6 +232,10 @@
                     $('.dataTables_empty').removeClass('border-0 p-0');
                     $('.table-responsive').addClass('mb-4');
                     $('#myTable_filter').removeClass('flex-grow-1');
+                    $('[data-bs-toggle="tooltip"]').tooltip({
+                        trigger: "hover",
+                        container: "body"
+                    });
                 }
             }
         });

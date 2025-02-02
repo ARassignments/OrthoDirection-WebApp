@@ -494,10 +494,37 @@
                         let cancelReasonTitle = row.user_cancelled == 'cancelled' ? '(By Patient)' : '';
                         let cancelReason = row.user_cancelled == 'cancelled' ? row
                             .user_cancellation_reason : row.doctor_cancellation_reason;
+                        let appointmentStatusItem = "";
+                        if (data == "pending") {
+                            appointmentStatusItem =
+                                `
+                                <div class="dropdown dropstart d-inline-block ms-3">
+                                    <a href="#" class="text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="ti ti-dots-vertical fs-3"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+                                        <li><a href="javascript:void(0)" class="dropdown-item d-flex align-items-center gap-3 text-success approve-appointment" data-id="${row.id}"><i class="fs-4 ti ti-circle-check"></i>Approve Appointment</a></li>
+                                        <li><a href="javascript:void(0)" class="dropdown-item d-flex align-items-center gap-3 text-danger reject-appointment" data-id="${row.id}"><i class="fs-4 ti ti-circle-x"></i>Reject Appointment</a></li>
+                                    </ul>
+                                </div>`;
+                        } else if (data == "approved") {
+                            appointmentStatusItem =
+                                `
+                                <div class="dropdown dropstart d-inline-block ms-3">
+                                    <a href="#" class="text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="ti ti-dots-vertical fs-3"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+                                        <li><a href="javascript:void(0)" class="dropdown-item d-flex align-items-center gap-3 text-success complete-appointment" data-id="${row.id}"><i class="fs-4 ti ti-circle-check"></i>Complete Appointment</a></li>
+                                        <li><a href="javascript:void(0)" class="dropdown-item d-flex align-items-center gap-3 text-danger cancel-appointment" data-id="${row.id}"><i class="fs-4 ti ti-circle-x"></i>Cancel Appointment</a></li>
+                                    </ul>
+                                </div>
+                                `;
+                        } else if (data == "completed" || data == "rejected" || data == "cancelled") {
+                            appointmentStatusItem = "";
+                        }
                         return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+': '+cancelReason+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
-                            ${data == 'pending'?
-                                '<div class="dropdown dropstart d-inline-block ms-3"><a href="#" class="text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti ti-dots-vertical fs-3"></i></a><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style=""><li><a href="javascript:void(0)" class="dropdown-item d-flex align-items-center gap-3 text-danger cancel-appointment" data-id="'+row.id+'"><i class="fs-4 ti ti-circle-x"></i>Cancel Appointment</a></li></ul></div>':''
-                            }
+                        ${appointmentStatusItem}
                         `;
                     }
                 }
@@ -540,14 +567,6 @@
                 </div>`,
             },
             drawCallback: function(settings) {
-                $('[data-bs-toggle="tooltip"]').tooltip({
-                    trigger: "hover",
-                    container: "body"
-                });
-                // $('[data-bs-toggle="popover"]').popover({
-                //     trigger: 'hover',
-                //     container: 'body'
-                // });
                 $('#myTable').addClass('table border text-nowrap customize-table mb-0 align-middle');
                 $('#myTable_paginate').addClass('btn-group');
                 $('#myTable_paginate span').addClass('btn-group');
@@ -577,6 +596,10 @@
                     $('.dataTables_empty').removeClass('border-0 p-0');
                     $('.table-responsive').addClass('mb-4');
                     $('#myTable_filter').removeClass('flex-grow-1');
+                    $('[data-bs-toggle="tooltip"]').tooltip({
+                        trigger: "hover",
+                        container: "body"
+                    });
                 }
             }
         });
@@ -672,6 +695,174 @@
                         data: {
                             _token: '{{ csrf_token() }}',
                             doctor_cancellation_reason: reason
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Toast.fire({
+                                    icon: "success",
+                                    title: response.success,
+                                });
+                                myTable.ajax.reload(null, false);
+                            } else {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: response.error,
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Toast.fire({
+                                icon: "error",
+                                title: "Something went wrong. Please try again later.",
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#myTable').on('click', '.approve-appointment', function(e) {
+            e.preventDefault();
+            let appointmentId = $(this).data('id');
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Approve it!',
+                cancelButtonText: 'Close',
+                confirmButtonColor: "#1376F8",
+                cancelButtonColor: "#d33",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            appointment_status: 'approved'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Toast.fire({
+                                    icon: "success",
+                                    title: response.success,
+                                });
+                                myTable.ajax.reload(null, false);
+                            } else {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: response.error,
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Toast.fire({
+                                icon: "error",
+                                title: "Something went wrong. Please try again later.",
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#myTable').on('click', '.reject-appointment', function(e) {
+            e.preventDefault();
+            let appointmentId = $(this).data('id');
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Reject it!',
+                cancelButtonText: 'Close',
+                confirmButtonColor: "#1376F8",
+                cancelButtonColor: "#d33",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            appointment_status: 'rejected'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Toast.fire({
+                                    icon: "success",
+                                    title: response.success,
+                                });
+                                myTable.ajax.reload(null, false);
+                            } else {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: response.error,
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Toast.fire({
+                                icon: "error",
+                                title: "Something went wrong. Please try again later.",
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#myTable').on('click', '.complete-appointment', function(e) {
+            e.preventDefault();
+            let appointmentId = $(this).data('id');
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Complete it!',
+                cancelButtonText: 'Close',
+                confirmButtonColor: "#1376F8",
+                cancelButtonColor: "#d33",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            appointment_status: 'completed'
                         },
                         success: function(response) {
                             if (response.success) {

@@ -214,10 +214,6 @@
                 </div>`,
             },
             drawCallback: function(settings) {
-                $('[data-bs-toggle="tooltip"]').tooltip({
-                    trigger: "hover",
-                    container: "body"
-                });
                 // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
                 // popoverTriggerList.map(function(popoverTriggerEl) {
                 //     return new bootstrap.Popover(popoverTriggerEl);
@@ -251,6 +247,10 @@
                     $('.dataTables_empty').removeClass('border-0 p-0');
                     $('.table-responsive').addClass('mb-4');
                     $('#myTable_filter').removeClass('flex-grow-1');
+                    $('[data-bs-toggle="tooltip"]').tooltip({
+                        trigger: "hover",
+                        container: "body"
+                    });
                 }
             }
         });

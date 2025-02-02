@@ -6,6 +6,7 @@ use App\Models\AdminProfile;
 use App\Models\Appointment;
 use App\Models\Contact;
 use App\Models\User;
+use App\Notifications\AppointmentNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -138,6 +139,16 @@ class PatientController extends Controller
         $appointment->slot = $request->slot;
         $appointment->treatment_type = $request->treatment_type;
         $appointment->save();
+
+        $patient = User::find(Auth::user()->id);
+        $doctor = User::find($request->doctor_id);
+        if ($patient) {
+            $patient->notify(new AppointmentNotification($appointment, 'created'));
+        }
+        if ($doctor) {
+            $doctor->notify(new AppointmentNotification($appointment, 'created'));
+        }
+
         return response()->json(['success' => 'Appointment Created Successfully!']);
     }
 
@@ -178,6 +189,11 @@ class PatientController extends Controller
             'user_cancelled' => 'cancelled',
             'user_cancellation_reason' => $request->user_cancellation_reason
         ]);
+
+        $patient = User::find($appointment->user_id);
+        if ($patient) {
+            $patient->notify(new AppointmentNotification($appointment, 'updated'));
+        }
 
         return response()->json(['success' => 'Appointment cancelled successfully.']);
     }

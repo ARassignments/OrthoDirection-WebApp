@@ -165,7 +165,8 @@
                             <!-- ---------------------------------- -->
                             @if (Auth::user()->role == 'admin')
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('admin.dashboard') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('admin.dashboard') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-home"></i>
                                         </span>
@@ -199,7 +200,8 @@
                                     </ul>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                        aria-expanded="false">
                                         <span class="d-flex">
                                             <i class="ti ti-category"></i>
                                         </span>
@@ -268,8 +270,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link justify-content-between" href="{{ route('admin.messages') }}"
-                                        aria-expanded="false">
+                                    <a class="sidebar-link justify-content-between"
+                                        href="{{ route('admin.messages') }}" aria-expanded="false">
                                         <div class="d-flex align-items-center gap-3">
                                             <span class="d-flex">
                                                 <i class="ti ti-messages"></i>
@@ -283,7 +285,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('admin.newsletter') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('admin.newsletter') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-mailbox"></i>
                                         </span>
@@ -299,7 +302,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('admin.contact') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('admin.contact') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-list-details"></i>
                                         </span>
@@ -307,7 +311,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('admin.profile') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('admin.profile') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-user-circle"></i>
                                         </span>
@@ -324,7 +329,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('doctor.patients') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('doctor.patients') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-users"></i>
                                         </span>
@@ -332,7 +338,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('doctor.appointments') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('doctor.appointments') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-calendar"></i>
                                         </span>
@@ -355,7 +362,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('doctor.profile') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('doctor.profile') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-user-circle"></i>
                                         </span>
@@ -364,7 +372,8 @@
                                 </li>
                             @elseif (Auth::user()->role == 'patient')
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('patient.dashboard') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('patient.dashboard') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-home"></i>
                                         </span>
@@ -380,7 +389,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('patient.appointments') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('patient.appointments') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-calendar"></i>
                                         </span>
@@ -388,7 +398,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('patient.doctors') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('patient.doctors') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-stethoscope"></i>
                                         </span>
@@ -396,8 +407,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link justify-content-between" href="{{ route('patient.messages') }}"
-                                        aria-expanded="false">
+                                    <a class="sidebar-link justify-content-between"
+                                        href="{{ route('patient.messages') }}" aria-expanded="false">
                                         <div class="d-flex align-items-center gap-3">
                                             <span class="d-flex">
                                                 <i class="ti ti-messages"></i>
@@ -411,7 +422,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('patient.profile') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('patient.profile') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-user-circle"></i>
                                         </span>
@@ -420,7 +432,8 @@
                                 </li>
                             @elseif (Auth::user()->role == 'family')
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{route('family.dashboard')}}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('family.dashboard') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-home"></i>
                                         </span>
@@ -444,8 +457,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link justify-content-between" href="{{ route('family.messages') }}"
-                                        aria-expanded="false">
+                                    <a class="sidebar-link justify-content-between"
+                                        href="{{ route('family.messages') }}" aria-expanded="false">
                                         <div class="d-flex align-items-center gap-3">
                                             <span class="d-flex">
                                                 <i class="ti ti-messages"></i>
@@ -459,7 +472,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('family.profile') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('family.profile') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-user-circle"></i>
                                         </span>
@@ -488,8 +502,8 @@
                     <form class="hstack gap-3" method="POST" action="{{ route('logout') }}">
                         @csrf
                         <div class="john-img">
-                            <img src="{{ $globalProfileImage }}"
-                                class="rounded-circle" width="40" height="40" alt="" />
+                            <img src="{{ $globalProfileImage }}" class="rounded-circle" width="40"
+                                height="40" alt="" />
                         </div>
                         <div class="john-title">
                             <h6 class="mb-0 fs-4 fw-semibold text-capitalize">
@@ -503,9 +517,8 @@
                             onclick="event.preventDefault(); this.closest('form').submit();">
                             <i class="ti ti-power fs-6"></i>
                         </a> --}}
-                        <a class="border-0 bg-transparent text-primary ms-auto"
-                            tabindex="0" aria-label="logout" data-bs-toggle="tooltip"
-                            data-bs-placement="top" data-bs-title="logout"
+                        <a class="border-0 bg-transparent text-primary ms-auto" tabindex="0" aria-label="logout"
+                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="logout"
                             onclick="logout()">
                             <i class="ti ti-power fs-6"></i>
                         </a>
@@ -839,98 +852,52 @@
                                         <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="ti ti-bell-ringing"></i>
-                                            <div class="notification bg-primary rounded-circle"></div>
+                                            @if (auth()->user()->unreadNotifications->count())
+                                                <div class="notification bg-primary rounded-circle"></div>
+                                            @endif
                                         </a>
                                         <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up"
                                             aria-labelledby="drop2">
                                             <div class="d-flex align-items-center justify-content-between py-3 px-7">
                                                 <h5 class="mb-0 fs-5 fw-semibold">Notifications</h5>
-                                                <span class="badge text-bg-primary rounded-4 px-3 py-1 lh-sm">5
+                                                <span
+                                                    class="badge text-bg-primary rounded-4 px-3 py-1 lh-sm">{{ auth()->user()->unreadNotifications->count() }}
                                                     new</span>
                                             </div>
                                             <div class="message-body" data-simplebar>
-                                                <a href="javascript:void(0)"
-                                                    class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                    <span class="me-3">
-                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
-                                                            alt="user" class="rounded-circle" width="48"
-                                                            height="48" />
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle">
-                                                        <h6 class="mb-1 fw-semibold lh-base">Roman Joined the Team!
-                                                        </h6>
-                                                        <span class="fs-2 d-block text-body-secondary">Congratulate
-                                                            him</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)"
-                                                    class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                    <span class="me-3">
-                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-2.jpg') }}"
-                                                            alt="user" class="rounded-circle" width="48"
-                                                            height="48" />
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle">
-                                                        <h6 class="mb-1 fw-semibold lh-base">New message</h6>
-                                                        <span class="fs-2 d-block text-body-secondary">Salma sent you
-                                                            new message</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)"
-                                                    class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                    <span class="me-3">
-                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-3.jpg') }}"
-                                                            alt="user" class="rounded-circle" width="48"
-                                                            height="48" />
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle">
-                                                        <h6 class="mb-1 fw-semibold lh-base">Bianca sent payment</h6>
-                                                        <span class="fs-2 d-block text-body-secondary">Check your
-                                                            earnings</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)"
-                                                    class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                    <span class="me-3">
-                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-4.jpg') }}"
-                                                            alt="user" class="rounded-circle" width="48"
-                                                            height="48" />
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle">
-                                                        <h6 class="mb-1 fw-semibold lh-base">Jolly completed tasks
-                                                        </h6>
-                                                        <span class="fs-2 d-block text-body-secondary">Assign her new
-                                                            tasks</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)"
-                                                    class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                    <span class="me-3">
-                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-5.jpg') }}"
-                                                            alt="user" class="rounded-circle" width="48"
-                                                            height="48" />
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle">
-                                                        <h6 class="mb-1 fw-semibold lh-base">John received payment
-                                                        </h6>
-                                                        <span class="fs-2 d-block text-body-secondary">$230 deducted
-                                                            from account</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)"
-                                                    class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                    <span class="me-3">
-                                                        <img src="{{ asset('assets/dash/assets/images/profile/user-1.jpg') }}"
-                                                            alt="user" class="rounded-circle" width="48"
-                                                            height="48" />
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle">
-                                                        <h6 class="mb-1 fw-semibold lh-base">Roman Joined the Team!
-                                                        </h6>
-                                                        <span class="fs-2 d-block text-body-secondary">Congratulate
-                                                            him</span>
-                                                    </div>
-                                                </a>
+                                                @foreach (auth()->user()->unreadNotifications as $notification)
+                                                    <a href="javascript:void(0)"
+                                                        class="py-6 px-7 d-flex align-items-center dropdown-item">
+                                                        <span class="me-3">
+                                                            <img src="{{ $notification->data['profile_img'] ? asset('profile_images/' . $notification->data['profile_img']) : 'assets/dash/assets/images/profile/user-1.jpg' }} "
+                                                                alt="user" class="rounded-circle" width="48"
+                                                                height="48"
+                                                                data-sam="{{ $notification->data['profile_img'] }}" />
+                                                        </span>
+                                                        <div class="w-75 d-inline-block v-middle">
+                                                            <h6 class="mb-1 fw-semibold lh-base">
+                                                                {{ $notification->data['message'] }}</h6>
+                                                            <span
+                                                                class="fs-2 me-1 text-body-secondary">{{ $notification->created_at->diffForHumans() }}</span>
+                                                            @if ($notification->data['status'] == 'pending')
+                                                                <span
+                                                                    class="fs-1 badge fw-semibold bg-warning-subtle text-warning text-capitalize">{{ $notification->data['status'] }}</span>
+                                                            @elseif ($notification->data['status'] == 'approved')
+                                                                <span
+                                                                    class="fs-1 badge fw-semibold bg-success-subtle text-success text-capitalize">{{ $notification->data['status'] }}</span>
+                                                            @elseif ($notification->data['status'] == 'completed')
+                                                                <span
+                                                                    class="fs-1 badge fw-semibold bg-success-subtle text-success text-capitalize">{{ $notification->data['status'] }}</span>
+                                                            @elseif ($notification->data['status'] == 'rejected')
+                                                                <span
+                                                                    class="fs-1 badge fw-semibold bg-danger-subtle text-danger text-capitalize">{{ $notification->data['status'] }}</span>
+                                                            @elseif ($notification->data['status'] == 'cancelled')
+                                                                <span
+                                                                    class="fs-1 badge fw-semibold bg-danger-subtle text-danger text-capitalize">{{ $notification->data['status'] }}</span>
+                                                            @endif
+                                                        </div>
+                                                    </a>
+                                                @endforeach
                                             </div>
                                             <div class="py-6 px-7 mb-1">
                                                 <button class="btn btn-outline-primary w-100">See All
@@ -951,9 +918,8 @@
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-profile-img">
-                                                    <img src="{{ $globalProfileImage }}"
-                                                        class="rounded-circle" width="35" height="35"
-                                                        alt="" />
+                                                    <img src="{{ $globalProfileImage }}" class="rounded-circle"
+                                                        width="35" height="35" alt="" />
                                                 </div>
                                             </div>
                                         </a>
@@ -964,9 +930,8 @@
                                                     <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                                                 </div>
                                                 <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                                    <img src="{{ $globalProfileImage }}"
-                                                        class="rounded-circle" width="80" height="80"
-                                                        alt="" />
+                                                    <img src="{{ $globalProfileImage }}" class="rounded-circle"
+                                                        width="80" height="80" alt="" />
                                                     <div class="ms-3">
                                                         <h5 class="mb-1 fs-3 text-capitalize">
                                                             {{ Auth::user() ? Auth::user()->name : '' }}
@@ -1040,8 +1005,7 @@
                                                     <form method="POST" action="{{ route('logout') }}"
                                                         class="w-100">
                                                         @csrf
-                                                        <a
-                                                            class="btn btn-outline-primary w-100"
+                                                        <a class="btn btn-outline-primary w-100"
                                                             onclick="logout()">Log
                                                             Out</a>
                                                     </form>
@@ -1328,6 +1292,32 @@
             }
         });
     }
+
+    // window.Echo.private('notifications.' + {{ Auth::id() }})
+    //     .listen('.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (event) => {
+    //         let data = event.notification;
+
+    //         let notificationHtml = `
+    //             <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
+    //                 <span class="me-3">
+    //                     <img src="${data.profile_img ? '/profile_images/' + data.profile_img : 'assets/dash/assets/images/profile/user-1.jpg'}"
+    //                         alt="user" class="rounded-circle" width="48" height="48" />
+    //                 </span>
+    //                 <div class="w-75 d-inline-block v-middle">
+    //                     <h6 class="mb-1 fw-semibold lh-base">${data.message}</h6>
+    //                     <span class="fs-2 d-block text-body-secondary">Just now</span>
+    //                     <span class="fs-1 badge fw-semibold bg-${data.status == 'approved' || data.status == 'completed' ? 'success' : 'warning'}-subtle text-${data.status == 'approved' || data.status == 'completed' ? 'success' : 'warning'} text-capitalize">${data.status}</span>
+    //                 </div>
+    //             </a>
+    //         `;
+
+    //         document.querySelector('.message-body').insertAdjacentHTML('afterbegin', notificationHtml);
+
+    //         // Update notification count
+    //         let notificationCount = document.getElementById('notificationCount');
+    //         let currentCount = parseInt(notificationCount.textContent) || 0;
+    //         notificationCount.textContent = currentCount + 1;
+    //     });
 </script>
 
 </html>
