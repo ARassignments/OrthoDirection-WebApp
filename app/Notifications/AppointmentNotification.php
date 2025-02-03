@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\AdminProfile;
 use App\Models\Appointment;
+use App\Models\User;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\BroadcastMessage;
@@ -34,7 +35,8 @@ class AppointmentNotification extends Notification implements ShouldBroadcastNow
      */
     public function via($notifiable)
     {
-        return ['database', 'mail', 'broadcast'];
+        // return ['database', 'mail', 'broadcast'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -61,14 +63,17 @@ class AppointmentNotification extends Notification implements ShouldBroadcastNow
      */
     public function toArray($notifiable)
     {
+        $patient = User::find($this->appointment->patient_id);
         $profileImg = AdminProfile::where('user_id', $this->appointment->patient_id)
         ->select('profile_img')
         ->first();
         return [
             'notification_type' => 'appointment',
             'appointment_id' => $this->appointment->id,
+            'patient_id' => $this->appointment->patient_id,
             'profile_img' => $profileImg->profile_img,
             'status' => $this->appointment->status,
+            'user_name' => $patient ? $patient->name : 'Unknown User',
             'message' => $this->type == 'created'
                 ? "Appointment has been created"
                 : "Appointment has been ".$this->appointment->status,

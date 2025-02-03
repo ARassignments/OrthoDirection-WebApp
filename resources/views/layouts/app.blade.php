@@ -25,6 +25,9 @@
     <meta name="twitter:description" content="Comprehensive dental services with expert care.">
     <meta name="twitter:image" content="{{ asset('assets/images/logo.png') }}">
 
+    <script>
+        var userId = "{{ Auth::id() }}";
+    </script>
     @vite(['resources/js/app.js'])
     <link rel="preload" href="{{ asset('assets/dash/assets/css/styles.css') }}" as="style">
     <link rel="stylesheet" href="{{ asset('assets/dash/assets/css/styles.css') }}">
@@ -482,6 +485,21 @@
                                 </li>
                             @endif
                         @endif
+                        <li class="sidebar-item">
+                            <a class="sidebar-link justify-content-between" href="{{ route('notifications') }}"
+                                aria-expanded="false">
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="d-flex">
+                                        <i class="ti ti-inbox"></i>
+                                    </span>
+                                    <span class="hide-menu">Notifications</span>
+                                </div>
+                                <div class="hide-menu">
+                                    <span
+                                        class="badge rounded-circle bg-primary d-flex align-items-center justify-content-center rounded-pill fs-2 d-none" id="notifyCount">0</span>
+                                </div>
+                            </a>
+                        </li>
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">account settings</span>
@@ -848,60 +866,80 @@
                                     <!-- ------------------------------- -->
                                     <!-- start notification Dropdown -->
                                     <!-- ------------------------------- -->
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown" id="dropNotification" data-bs-toggle="tooltip"
+                                        data-bs-placement="left"
+                                        data-bs-original-title="You have no unread notifications">
                                         <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="ti ti-bell-ringing"></i>
-                                            @if (auth()->user()->unreadNotifications->count())
-                                                <div class="notification bg-primary rounded-circle"></div>
-                                            @endif
+                                            <div class="notification bg-primary rounded-circle"
+                                                id="notification-badge" style="display:none;"></div>
                                         </a>
                                         <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up"
                                             aria-labelledby="drop2">
                                             <div class="d-flex align-items-center justify-content-between py-3 px-7">
                                                 <h5 class="mb-0 fs-5 fw-semibold">Notifications</h5>
-                                                <span
-                                                    class="badge text-bg-primary rounded-4 px-3 py-1 lh-sm">{{ auth()->user()->unreadNotifications->count() }}
-                                                    new</span>
+                                                <span class="badge text-bg-primary rounded-4 px-3 py-1 lh-sm"
+                                                    id="notification-count" style="display: none;"></span>
                                             </div>
-                                            <div class="message-body" data-simplebar>
-                                                @foreach (auth()->user()->unreadNotifications as $notification)
-                                                    <a href="javascript:void(0)"
-                                                        class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                        <span class="me-3">
-                                                            <img src="{{ $notification->data['profile_img'] ? asset('profile_images/' . $notification->data['profile_img']) : 'assets/dash/assets/images/profile/user-1.jpg' }} "
-                                                                alt="user" class="rounded-circle" width="48"
-                                                                height="48"
-                                                                data-sam="{{ $notification->data['profile_img'] }}" />
-                                                        </span>
-                                                        <div class="w-75 d-inline-block v-middle">
-                                                            <h6 class="mb-1 fw-semibold lh-base">
-                                                                {{ $notification->data['message'] }}</h6>
-                                                            <span
-                                                                class="fs-2 me-1 text-body-secondary">{{ $notification->created_at->diffForHumans() }}</span>
-                                                            @if ($notification->data['status'] == 'pending')
+                                            <div class="message-body" id="notification-list" data-simplebar>
+                                                @if (auth()->user()->unreadNotifications->count() > 0)
+                                                    @foreach (auth()->user()->unreadNotifications as $notification)
+                                                        <a href="javascript:void(0)"
+                                                            class="py-6 px-7 d-flex align-items-center dropdown-item">
+                                                            <span class="me-3">
+                                                                <img src="{{ $notification->data['profile_img'] ? asset('profile_images/' . $notification->data['profile_img']) : 'assets/dash/assets/images/profile/user-1.jpg' }} "
+                                                                    alt="user" class="rounded-circle"
+                                                                    width="48" height="48"
+                                                                    data-sam="{{ $notification->data['profile_img'] }}" />
+                                                            </span>
+                                                            <div class="w-75 d-inline-block v-middle">
+                                                                <h6 class="mb-1 fw-semibold lh-base">
+                                                                    {{ $notification->data['message'] }}</h6>
                                                                 <span
-                                                                    class="fs-1 badge fw-semibold bg-warning-subtle text-warning text-capitalize">{{ $notification->data['status'] }}</span>
-                                                            @elseif ($notification->data['status'] == 'approved')
-                                                                <span
-                                                                    class="fs-1 badge fw-semibold bg-success-subtle text-success text-capitalize">{{ $notification->data['status'] }}</span>
-                                                            @elseif ($notification->data['status'] == 'completed')
-                                                                <span
-                                                                    class="fs-1 badge fw-semibold bg-success-subtle text-success text-capitalize">{{ $notification->data['status'] }}</span>
-                                                            @elseif ($notification->data['status'] == 'rejected')
-                                                                <span
-                                                                    class="fs-1 badge fw-semibold bg-danger-subtle text-danger text-capitalize">{{ $notification->data['status'] }}</span>
-                                                            @elseif ($notification->data['status'] == 'cancelled')
-                                                                <span
-                                                                    class="fs-1 badge fw-semibold bg-danger-subtle text-danger text-capitalize">{{ $notification->data['status'] }}</span>
-                                                            @endif
+                                                                    class="fs-2 me-1 text-body-secondary">{{ $notification->created_at->diffForHumans() }}</span>
+                                                                @if ($notification->data['status'] == 'pending')
+                                                                    <span
+                                                                        class="fs-1 badge fw-semibold bg-warning-subtle text-warning text-capitalize">{{ $notification->data['status'] }}</span>
+                                                                @elseif ($notification->data['status'] == 'approved')
+                                                                    <span
+                                                                        class="fs-1 badge fw-semibold bg-success-subtle text-success text-capitalize">{{ $notification->data['status'] }}</span>
+                                                                @elseif ($notification->data['status'] == 'completed')
+                                                                    <span
+                                                                        class="fs-1 badge fw-semibold bg-success-subtle text-success text-capitalize">{{ $notification->data['status'] }}</span>
+                                                                @elseif ($notification->data['status'] == 'rejected')
+                                                                    <span
+                                                                        class="fs-1 badge fw-semibold bg-danger-subtle text-danger text-capitalize">{{ $notification->data['status'] }}</span>
+                                                                @elseif ($notification->data['status'] == 'cancelled')
+                                                                    <span
+                                                                        class="fs-1 badge fw-semibold bg-danger-subtle text-danger text-capitalize">{{ $notification->data['status'] }}</span>
+                                                                @endif
+                                                            </div>
+                                                        </a>
+                                                    @endforeach
+                                                @else
+                                                    <div class="d-flex align-items-center justify-content-center w-100"
+                                                        id="noDataErr">
+                                                        <div class="row justify-content-center w-100">
+                                                            <div class="col-lg-12">
+                                                                <div class="text-center">
+                                                                    <img src="{{ asset('assets/dash/assets/images/backgrounds/notification_bg.svg') }}"
+                                                                        alt="" class="img-fluid col-lg-8">
+                                                                    <h3 class="fw-semibold mb-3 text-dark fs-6">
+                                                                        Notifications Not Found!!!</h3>
+                                                                    <p class="fw-normal mb-7 fs-3 text-body">It seems
+                                                                        the
+                                                                        notifications you’re looking for is unavailable
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </a>
-                                                @endforeach
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="py-6 px-7 mb-1">
-                                                <button class="btn btn-outline-primary w-100">See All
-                                                    Notifications</button>
+                                                <a href="{{ route('notifications') }}" class="btn btn-outline-primary w-100">See All
+                                                    Notifications</a>
                                             </div>
 
                                         </div>
@@ -1243,13 +1281,14 @@
 <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/js/app.min.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/js/app.init.js') }}" defer></script>
-<script src="{{ asset('assets/dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}" defer></script>
-<script src="{{ asset('assets/dash/assets/libs/simplebar/dist/simplebar.min.js') }}" defer></script>
+<script src="{{ asset('assets/dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/dash/assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
 
 <script src="{{ asset('assets/dash/assets/js/sidebarmenu.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/js/theme.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/libs/owl.carousel/dist/owl.carousel.min.js') }}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 {{-- <script src="{{ asset('assets/dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}" defer></script> --}}
 
 <script src="{{ asset('assets/dash/assets/js/dashboards/dashboard.js') }}" defer></script>
@@ -1292,6 +1331,148 @@
             }
         });
     }
+
+    function fetchNotifications() {
+        $.ajax({
+            url: "{{ route('notifications.fetch.notify') }}",
+            type: "GET",
+            success: function(response) {
+                let notifications = response.notifications;
+                let unreadCount = response.unread_count;
+                let notificationList = $("#notification-list");
+                notificationList.empty();
+
+                if (notifications.length > 0) {
+                    notifications.forEach(notification => {
+                        let statusBadge = getStatusBadge(notification.data.status);
+
+                        notificationList.append(`
+                            <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item notification-item" data-id="${notification.id}">
+                                <span class="me-3">
+                                    <img src="${notification.data.profile_img ? '/profile_images/' + notification.data.profile_img : 'assets/dash/assets/images/profile/user-1.jpg'}" 
+                                        alt="user" class="rounded-circle" width="48" height="48" />
+                                </span>
+                                <div class="w-75 d-inline-block v-middle">
+                                    <h6 class="mb-1 fw-semibold lh-base">${notification.data.message}</h6>
+                                    <span class="fs-2 me-1 text-body-secondary">${moment(notification.created_at).fromNow()}</span>
+                                    ${statusBadge}
+                                </div>
+                            </a>
+                        `);
+                    });
+
+                    $("#notification-badge").show();
+                    $("#notification-count").text(`${unreadCount} new`).show();
+                    $("#notifyCount").removeClass('d-none');
+                    $("#notifyCount").text(`${unreadCount}`);
+                    document.querySelector("#dropNotification").setAttribute("data-bs-original-title",
+                        "");
+                } else {
+                    $("#notification-list").html(`
+                            <div class="d-flex align-items-center justify-content-center w-100">
+                                <div class="row justify-content-center w-100">
+                                    <div class="col-lg-12">
+                                        <div class="text-center">
+                                            <img src="{{ asset('assets/dash/assets/images/backgrounds/notification_bg.svg') }}"
+                                                alt="" class="img-fluid col-lg-8">
+                                            <h3 class="fw-semibold mb-3 text-dark fs-6">
+                                                Notifications Not Found!!!</h3>
+                                            <p class="fw-normal mb-7 fs-3 text-body">It seems
+                                                the
+                                                notifications you’re looking for is unavailable
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    $("#notification-badge").hide();
+                    $("#notification-count").hide();
+                    $("#notifyCount").addClass('d-none');
+                    document.querySelector("#dropNotification").setAttribute("data-bs-original-title",
+                        "You have no unread notifications");
+                }
+
+                let simpleBarInstance = document.querySelector('#notification-list');
+                if (simpleBarInstance) {
+                    new SimpleBar(simpleBarInstance).recalculate();
+                }
+            }
+        });
+    }
+
+    function getStatusBadge(status) {
+        let badgeClass = "";
+        if (status === "pending") badgeClass = "bg-warning-subtle text-warning";
+        else if (status === "approved" || status === "completed") badgeClass =
+            "bg-success-subtle text-success";
+        else if (status === "rejected" || status === "cancelled") badgeClass =
+            "bg-danger-subtle text-danger";
+        return `<span class="fs-1 badge fw-semibold ${badgeClass} text-capitalize">${status}</span>`;
+    }
+
+    // $("#mark-as-read").click(function() {
+    //     $.ajax({
+    //         url: "",
+    //         type: "POST",
+    //         data: {
+    //             _token: "{{ csrf_token() }}"
+    //         },
+    //         success: function() {
+    //             fetchNotifications();
+    //         }
+    //     });
+    // });
+
+    $("#dropNotification").on("click", function() {
+        fetchNotifications();
+        reinitSimpleBar();
+        $('[data-bs-toggle="tooltip"]').tooltip({
+            trigger: "hover",
+            container: "body"
+        });
+    });
+
+    function reinitSimpleBar() {
+        let simpleBarInstance = document.querySelector('#notification-list');
+        if (simpleBarInstance) {
+            let simpleBar = SimpleBar.instances.get(simpleBarInstance);
+            if (simpleBar) {
+                simpleBar.unMount();
+            }
+            new SimpleBar(simpleBarInstance);
+        }
+    }
+
+    fetchNotifications();
+    reinitSimpleBar();
+
+    function globalNotificationsTriggered() {
+        fetchNotifications();
+        reinitSimpleBar();
+    }
+
+    $(document).on("click", ".dropdown-item.notification-item", function() {
+        let notificationId = $(this).data("id");
+        $.ajax({
+            url: "{{ route('notifications.read') }}",
+            type: "POST",
+            data: {
+                id: notificationId,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                if (response.success) {
+                    globalNotificationsTriggered();
+                }
+            },
+            error: function(error) {
+                console.error("Error marking notification as read:", error);
+            }
+        });
+    });
+
+
 
     // window.Echo.private('notifications.' + {{ Auth::id() }})
     //     .listen('.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (event) => {

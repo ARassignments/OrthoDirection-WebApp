@@ -176,7 +176,13 @@ Route::prefix('/devices/')->middleware(['auth', 'verified'])->group(function () 
     Route::post('/logout/{id}', [GeneralController::class, 'logoutDevice'])->name('devices.logout');
     Route::post('/logout-all', [GeneralController::class, 'logoutAllDevices'])->name('devices.logout.all');
     Route::post('/tracking/ignore', [GeneralController::class, 'ignoreTracking'])->name('tracking.ignore');
-    Route::post('/notifications/update', [GeneralController::class, 'updateNotification'])->name('notifications.update');
+    Route::prefix('/notifications')->group(function () {
+        Route::view('/', 'general.notifications.notifications')->name('notifications');
+        Route::post('/update', [GeneralController::class, 'updateNotification'])->name('notifications.update');
+        Route::get('/fetchNotify', [GeneralController::class, 'fetchNotificationsNotify'])->name('notifications.fetch.notify');
+        Route::post('/read', [GeneralController::class, 'readNotifications'])->name('notifications.read');
+        Route::get('/fetch', [GeneralController::class, 'fetchNotifications'])->name('notifications.fetch');
+    });
 });
 
 // Export Route (Protected)

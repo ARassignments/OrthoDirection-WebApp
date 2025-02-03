@@ -6,6 +6,7 @@ use App\Models\AdminProfile;
 use App\Models\DeviceLog;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
@@ -123,7 +124,7 @@ class GeneralController extends Controller
         ]);
 
         $user = User::find(Auth::user()->id);
-        
+
         if ($request->type === 'newsletter') {
             $user->newsletter = $request->status;
         } elseif ($request->type === 'email_notification') {
@@ -135,6 +136,55 @@ class GeneralController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Notification preferences updated successfully.',
+        ]);
+    }
+
+    public function fetchNotificationsNotify()
+    {
+        $user = auth()->user();
+        $notifications = $user->unreadNotifications()->latest()->limit(10)->get();
+        return response()->json([
+            'notifications' => $notifications,
+            'unread_count' => $user->unreadNotifications->count()
+        ]);
+    }
+
+    public function readNotifications(Request $request)
+    {
+        $notification = DatabaseNotification::find($request->id);
+        if ($notification) {
+            $notification->markAsRead();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false, 'message' => 'Notification not found']);
+    }
+
+    public function fetchNotifications(Request $request)
+    {
+        $user = auth()->user();
+        $query = $user->notifications()->latest();
+
+        // Apply filter (All or Unread)
+        if ($request->has('filter') && !empty($request->filter)) {
+            if ($request->filter === "unread") {
+                $query = $user->unreadNotifications()->latest();
+            }
+        }
+
+        // Apply search filter on notifications
+        if ($request->has('search') && !empty($request->search)) {
+            $search = strtolower($request->search);
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(JSON_UNQUOTE(JSON_EXTRACT(data, "$.message"))) LIKE ?', ["%{$search}%"])
+                ->orWhereRaw('LOWER(JSON_UNQUOTE(JSON_EXTRACT(data, "$.user_name"))) LIKE ?', ["%{$search}%"]);
+            });
+        }
+
+        $notifications = $query->get();
+
+        return response()->json([
+            'notifications' => $notifications,
+            'unread_count' => $user->unreadNotifications()->count()
         ]);
     }
 }

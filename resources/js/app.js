@@ -15,6 +15,54 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+window.Echo.private(`notifications.${userId}`)
+    .listen(".Illuminate\\Notifications\\Events\\BroadcastNotificationCreated", (e) => {
+        console.log("New Notification Received:", e);
+        updateNotifications(e.notification);
+    });
+
+function updateNotifications(notification) {
+    let notificationsContainer = document.querySelector(".message-body");
+    let unreadCount = document.querySelector(".notification.bg-primary");
+
+    let newNotification = `
+        <a href="javascript:void(0)"
+            class="py-6 px-7 d-flex align-items-center dropdown-item">
+            <span class="me-3">
+                <img src="${notification.profile_img ? '/profile_images/' + notification.profile_img : '/assets/dash/assets/images/profile/user-1.jpg'}"
+                    alt="user" class="rounded-circle" width="48" height="48" />
+            </span>
+            <div class="w-75 d-inline-block v-middle">
+                <h6 class="mb-1 fw-semibold lh-base">${notification.message}</h6>
+                <span class="fs-2 me-1 text-body-secondary">Just now</span>
+                <span class="fs-1 badge fw-semibold bg-${getStatusColor(notification.status)} text-capitalize">${notification.status}</span>
+            </div>
+        </a>
+    `;
+
+    notificationsContainer.insertAdjacentHTML("afterbegin", newNotification);
+
+    if (unreadCount) {
+        unreadCount.style.display = "block";
+    }
+}
+
+function getStatusColor(status) {
+    switch (status) {
+        case "pending":
+            return "warning-subtle text-warning";
+        case "approved":
+        case "completed":
+            return "success-subtle text-success";
+        case "rejected":
+        case "cancelled":
+            return "danger-subtle text-danger";
+        default:
+            return "secondary";
+    }
+}
+
+
 
 // document.addEventListener("DOMContentLoaded", () => {
 //     const errorDiv = `<!-- error-section -->

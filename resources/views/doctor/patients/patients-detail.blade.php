@@ -369,7 +369,6 @@
     </div>
 
 
-
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/dash/assets/libs/fullcalendar/index.global.min.js') }}"></script>
@@ -523,7 +522,7 @@
                         } else if (data == "completed" || data == "rejected" || data == "cancelled") {
                             appointmentStatusItem = "";
                         }
-                        return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+': '+cancelReason+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
+                        return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-custom-class="custom-popover" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
                         ${appointmentStatusItem}
                         `;
                     }
@@ -596,9 +595,15 @@
                     $('.dataTables_empty').removeClass('border-0 p-0');
                     $('.table-responsive').addClass('mb-4');
                     $('#myTable_filter').removeClass('flex-grow-1');
-                    $('[data-bs-toggle="tooltip"]').tooltip({
-                        trigger: "hover",
-                        container: "body"
+                    // $('[data-bs-toggle="tooltip"]').tooltip({
+                    //     trigger: "hover",
+                    //     container: "body"
+                    // });
+                    reinitializePopovers();
+                    var popoverTriggerList = [].slice.call(document.querySelectorAll(
+                        '[data-bs-toggle="popover"]'));
+                    popoverTriggerList.map(function(popoverTriggerEl) {
+                        return new bootstrap.Popover(popoverTriggerEl);
                     });
                 }
             }
@@ -655,6 +660,14 @@
             });
         });
 
+        function reinitializePopovers() {
+            $('[data-bs-toggle="popover"]').popover('dispose');
+            $('[data-bs-toggle="popover"]').popover({
+                trigger: 'hover',
+                container: 'body'
+            });
+        }
+
         $('#myTable').on('click', '.cancel-appointment', function(e) {
             e.preventDefault();
             let appointmentId = $(this).data('id');
@@ -703,6 +716,7 @@
                                     title: response.success,
                                 });
                                 myTable.ajax.reload(null, false);
+                                globalNotificationsTriggered();
                             } else {
                                 Toast.fire({
                                     icon: "error",
@@ -759,6 +773,7 @@
                                     title: response.success,
                                 });
                                 myTable.ajax.reload(null, false);
+                                globalNotificationsTriggered();
                             } else {
                                 Toast.fire({
                                     icon: "error",
@@ -815,6 +830,7 @@
                                     title: response.success,
                                 });
                                 myTable.ajax.reload(null, false);
+                                globalNotificationsTriggered();
                             } else {
                                 Toast.fire({
                                     icon: "error",
@@ -871,6 +887,7 @@
                                     title: response.success,
                                 });
                                 myTable.ajax.reload(null, false);
+                                globalNotificationsTriggered();
                             } else {
                                 Toast.fire({
                                     icon: "error",

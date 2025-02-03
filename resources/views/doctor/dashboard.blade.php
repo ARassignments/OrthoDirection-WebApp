@@ -144,7 +144,7 @@
                         } else if (data == "completed" || data == "rejected" || data == "cancelled") {
                             appointmentStatusItem = "";
                         }
-                        return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+': '+cancelReason+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
+                        return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-custom-class="custom-popover" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
                         <div class="dropdown dropstart d-inline-block ms-3">
                           <a href="#" class="text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="ti ti-dots-vertical fs-3"></i>
@@ -198,11 +198,6 @@
                 </div>`,
             },
             drawCallback: function(settings) {
-
-                // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-                // popoverTriggerList.map(function(popoverTriggerEl) {
-                //     return new bootstrap.Popover(popoverTriggerEl);
-                // });
                 $('#myTable').addClass('table border text-nowrap customize-table mb-0 align-middle');
                 $('#myTable_paginate').addClass('btn-group');
                 $('#myTable_paginate span').addClass('btn-group');
@@ -232,9 +227,15 @@
                     $('.dataTables_empty').removeClass('border-0 p-0');
                     $('.table-responsive').addClass('mb-4');
                     $('#myTable_filter').removeClass('flex-grow-1');
-                    $('[data-bs-toggle="tooltip"]').tooltip({
-                        trigger: "hover",
-                        container: "body"
+                    // $('[data-bs-toggle="tooltip"]').tooltip({
+                    //     trigger: "hover",
+                    //     container: "body"
+                    // });
+                    reinitializePopovers();
+                    var popoverTriggerList = [].slice.call(document.querySelectorAll(
+                        '[data-bs-toggle="popover"]'));
+                    popoverTriggerList.map(function(popoverTriggerEl) {
+                        return new bootstrap.Popover(popoverTriggerEl);
                     });
                 }
             }
@@ -346,6 +347,7 @@
                                     title: response.success,
                                 });
                                 myTable.ajax.reload(null, false);
+                                globalNotificationsTriggered();
                             } else {
                                 Toast.fire({
                                     icon: "error",
@@ -402,6 +404,7 @@
                                     title: response.success,
                                 });
                                 myTable.ajax.reload(null, false);
+                                globalNotificationsTriggered();
                             } else {
                                 Toast.fire({
                                     icon: "error",
@@ -458,6 +461,7 @@
                                     title: response.success,
                                 });
                                 myTable.ajax.reload(null, false);
+                                globalNotificationsTriggered();
                             } else {
                                 Toast.fire({
                                     icon: "error",
@@ -514,6 +518,7 @@
                                     title: response.success,
                                 });
                                 myTable.ajax.reload(null, false);
+                                globalNotificationsTriggered();
                             } else {
                                 Toast.fire({
                                     icon: "error",
