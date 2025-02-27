@@ -129,16 +129,29 @@ class DoctorController extends Controller
             'status' => 'cancelled',
             'doctor_cancellation_reason' => $request->doctor_cancellation_reason
         ]);
-        Mail::to($appointment->patient->email)->send(new AppointmentCancelled($appointment));
 
         $patient = User::find($appointment->patient_id);
+        $doctor = User::find($appointment->doctor_id);
+
         if ($patient) {
-            $patient->notify(new AppointmentNotification($appointment, 'updated'));
+            $patient->notify(new AppointmentNotification($appointment, 'updated', 'patient'));
         }
 
-        $doctor = User::find($appointment->doctor_id);
         if ($doctor) {
-            $doctor->notify(new AppointmentNotification($appointment, 'updated'));
+            $doctor->notify(new AppointmentNotification($appointment, 'updated', 'doctor'));
+        }
+
+        $familyMembers = $patient->familyMembers()->whereHas('adminProfile', function ($query) {
+            $query->where('status', 1);
+        })->get();
+
+        foreach ($familyMembers as $familyMember) {
+            $familyMember->notify(new AppointmentNotification($appointment, 'updated', 'family_member'));
+        }
+
+        $admins = User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new AppointmentNotification($appointment, 'updated', 'admin'));
         }
 
         return response()->json(['success' => 'Appointment cancelled successfully.']);
@@ -147,19 +160,32 @@ class DoctorController extends Controller
     public function appointmentStatusUpdate(Request $request, $id)
     {
         $appointment = Appointment::find($id);
-
         $appointment->update([
             'status' => $request->appointment_status
         ]);
 
         $patient = User::find($appointment->patient_id);
+        $doctor = User::find($appointment->doctor_id);
+
         if ($patient) {
-            $patient->notify(new AppointmentNotification($appointment, 'updated'));
+            $patient->notify(new AppointmentNotification($appointment, 'updated', 'patient'));
         }
 
-        $doctor = User::find($appointment->doctor_id);
         if ($doctor) {
-            $doctor->notify(new AppointmentNotification($appointment, 'updated'));
+            $doctor->notify(new AppointmentNotification($appointment, 'updated', 'doctor'));
+        }
+
+        $familyMembers = $patient->familyMembers()->whereHas('adminProfile', function ($query) {
+            $query->where('status', 1);
+        })->get();
+
+        foreach ($familyMembers as $familyMember) {
+            $familyMember->notify(new AppointmentNotification($appointment, 'updated', 'family_member'));
+        }
+
+        $admins = User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new AppointmentNotification($appointment, 'updated', 'admin'));
         }
 
         return response()->json(['success' => 'Appointment updated successfully.']);
@@ -189,9 +215,16 @@ class DoctorController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        $patients = $query->with(['adminProfile' => function ($query) {
-            $query->where('status', 1);
-        }])->get();
+        $patients = $query->with([
+            'adminProfile' => function ($query) {
+                $query->where('status', 1);
+            },
+            'familyMembers' => function ($query) {
+                $query->with('adminProfile')->whereHas('adminProfile', function ($q) {
+                    $q->where('status', 1);
+                });
+            }
+        ])->get();
 
         return response()->json($patients);
     }
@@ -216,6 +249,86 @@ class DoctorController extends Controller
         return view('doctor.patients.patients-detail', [
             'patient' => $patient,
             'appointments' => $patient->patientAppointments
+        ]);
+    }
+
+    public function familyMemberPatientFetch(Request $request, $familyId)
+    {
+        $patient = User::with([
+            'patients' => function ($query) {
+                $query->whereHas('adminProfile', function ($q) {
+                    $q->where('status', 1);
+                })->with('adminProfile');
+            }
+        ])->findOrFail($familyId);
+
+        if ($request->has('search') && !empty($request->search)) {
+            $filteredFamilyMembers = $patient->patients->filter(function ($patients) use ($request) {
+                return stripos($patients->name, $request->search) !== false;
+            })->values();
+
+            return response()->json($filteredFamilyMembers);
+        }
+
+        return response()->json($patient->patients);
+    }
+
+    // Family
+    public function patientFamilyMemberFetch(Request $request, $patientId)
+    {
+        $patient = User::with([
+            'familyMembers' => function ($query) {
+                $query->whereHas('adminProfile', function ($q) {
+                    $q->where('status', 1);
+                })->with('adminProfile');
+            }
+        ])->findOrFail($patientId);
+
+        if ($request->has('search') && !empty($request->search)) {
+            $filteredFamilyMembers = $patient->familyMembers->filter(function ($familyMember) use ($request) {
+                return stripos($familyMember->name, $request->search) !== false;
+            })->values();
+
+            return response()->json($filteredFamilyMembers);
+        }
+
+        return response()->json($patient->familyMembers);
+    }
+    public function familyMemberFetchAll(Request $request)
+    {
+        $query = User::where('role', 'family')
+            ->whereHas('adminProfile', function ($query) {
+                $query->where('status', 1);
+            });
+
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $patients = $query->with([
+            'adminProfile' => function ($query) {
+                $query->where('status', 1);
+            },
+            'patients'
+        ])->get();
+
+        return response()->json($patients);
+    }
+
+    public function familyDetail($id)
+    {
+        $family = User::where('role', 'family')
+            ->with([
+                'adminProfile'
+            ])
+            ->findOrFail($id);
+
+        if (!$family) {
+            return response()->json(['error' => 'Family Member not found!']);
+        }
+
+        return view('doctor.family.family-detail', [
+            'family' => $family
         ]);
     }
 }

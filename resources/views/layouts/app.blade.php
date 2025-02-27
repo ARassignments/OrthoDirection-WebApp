@@ -30,11 +30,13 @@
     </script>
     @vite(['resources/js/app.js'])
     <link rel="preload" href="{{ asset('assets/dash/assets/css/styles.css') }}" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" as="style">
     <link rel="stylesheet" href="{{ asset('assets/dash/assets/css/styles.css') }}">
     <link rel="stylesheet"
         href="{{ asset('assets/dash/assets/libs/owl.carousel/dist/assets/owl.carousel.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
     <base href="{{ asset('assets/dash/assets/') }}">
     <style>
         #myTable_wrapper {
@@ -212,7 +214,7 @@
                                     </a>
                                     <ul aria-expanded="false" class="collapse first-level">
                                         <li class="sidebar-item">
-                                            <a href="/admin/services" class="sidebar-link">
+                                            <a href="{{ route('admin.services') }}" class="sidebar-link">
                                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                                     <i class="ti ti-circle"></i>
                                                 </div>
@@ -220,7 +222,7 @@
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
-                                            <a href="/admin/add-service" class="sidebar-link">
+                                            <a href="{{ route('admin.add-service') }}" class="sidebar-link">
                                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                                     <i class="ti ti-circle"></i>
                                                 </div>
@@ -314,6 +316,15 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('admin.plans') }}"
+                                        aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-timeline-event"></i>
+                                        </span>
+                                        <span class="hide-menu">Pricing Plans</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('admin.profile') }}"
                                         aria-expanded="false">
                                         <span>
@@ -365,6 +376,15 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('user.plans') }}"
+                                        aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-timeline-event"></i>
+                                        </span>
+                                        <span class="hide-menu">Pricing Plans</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('doctor.profile') }}"
                                         aria-expanded="false">
                                         <span>
@@ -384,7 +404,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/patient/tracking" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('patient.tracking') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-route"></i>
                                         </span>
@@ -444,7 +464,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/family/tracking" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('family.tracking') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-route"></i>
                                         </span>
@@ -452,7 +472,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/family/appointments" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('family.appointments') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-calendar"></i>
                                         </span>
@@ -1278,7 +1298,7 @@
 </body>
 
 
-<script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}" defer></script>
+<script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/dash/assets/js/app.min.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/js/app.init.js') }}" defer></script>
 <script src="{{ asset('assets/dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -1424,14 +1444,16 @@
     //     });
     // });
 
-    $("#dropNotification").on("click", function() {
-        fetchNotifications();
-        reinitSimpleBar();
-        $('[data-bs-toggle="tooltip"]').tooltip({
-            trigger: "hover",
-            container: "body"
+    if(document.querySelector("#dropNotification")){
+        $("#dropNotification").on("click", function() {
+            fetchNotifications();
+            reinitSimpleBar();
+            $('[data-bs-toggle="tooltip"]').tooltip({
+                trigger: "hover",
+                container: "body"
+            });
         });
-    });
+    }
 
     function reinitSimpleBar() {
         let simpleBarInstance = document.querySelector('#notification-list');

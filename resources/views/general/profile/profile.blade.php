@@ -162,15 +162,6 @@
                         <span class="d-none d-md-block">Profile</span>
                     </button>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button
-                        class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
-                        id="pills-users-tab" data-bs-toggle="pill" data-bs-target="#pills-users" type="button"
-                        role="tab" aria-controls="pills-users" aria-selected="false" tabindex="-1">
-                        <i class="ti ti-user-check me-2 fs-6"></i>
-                        <span class="d-none d-md-block">Users</span>
-                    </button>
-                </li>
                 @if (Auth::user())
                     @if (Auth::user()->role == 'doctor')
                         <li class="nav-item" role="presentation">
@@ -180,6 +171,17 @@
                                 role="tab" aria-controls="pills-slots" aria-selected="false" tabindex="-1">
                                 <i class="ti ti-clock me-2 fs-6"></i>
                                 <span class="d-none d-md-block">My Slots</span>
+                            </button>
+                        </li>
+                    @elseif (Auth::user()->role == 'patient'||Auth::user()->role == 'family')
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
+                                id="pills-familymember-tab" data-bs-toggle="pill" data-bs-target="#pills-familymember"
+                                type="button" role="tab" aria-controls="pills-familymember" aria-selected="true"
+                                tabindex="-1">
+                                <i class="ti ti-users-group me-2 fs-6"></i>
+                                <span class="d-none d-md-block">My Family Members</span>
                             </button>
                         </li>
                     @endif
@@ -248,7 +250,7 @@
                                                 <h6 class="fs-4 fw-semibold mb-0 text-end col-md-4">Date of Birth:</h6>
                                                 <div class="col-md-8">
                                                     <p class="form-control-static text-capitalize">
-                                                        {{ $profile ? $profile->date_of_birth : '' }}
+                                                        {{ $profile ? \Carbon\Carbon::parse($profile->date_of_birth)->format('F d, Y') : '' }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -299,49 +301,6 @@
                 @endif
             </div>
         </div>
-        <div class="tab-pane fade" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab" tabindex="0">
-            <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Users <span
-                        class="badge text-bg-primary fs-2 rounded-4 py-1 px-2 ms-2">01</span></h3>
-                <form class="position-relative">
-                    <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh"
-                        placeholder="Search Users">
-                    <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
-                </form>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card hover-img">
-                        <div class="card-body p-4 text-center border-bottom">
-                            <img src="assets/images/profile/user-1.jpg" alt="" class="rounded-circle mb-3"
-                                width="80" height="80">
-                            <h5 class="fw-semibold mb-0">Betty Adams</h5>
-                            <span class="text-dark fs-2">Medical Secretary</span>
-                        </div>
-                        <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                            <li class="position-relative">
-                                <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold"
-                                    href="javascript:void(0)">
-                                    <i class="ti ti-brand-facebook"></i>
-                                </a>
-                            </li>
-                            <li class="position-relative">
-                                <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold "
-                                    href="javascript:void(0)">
-                                    <i class="ti ti-brand-instagram"></i>
-                                </a>
-                            </li>
-                            <li class="position-relative">
-                                <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold "
-                                    href="javascript:void(0)">
-                                    <i class="ti ti-brand-twitter"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
         @if (Auth::user())
             @if (Auth::user()->role == 'doctor')
                 <div class="tab-pane fade mb-5" id="pills-slots" role="tabpanel" aria-labelledby="pills-slots-tab"
@@ -351,6 +310,54 @@
                                 class="badge text-bg-primary fs-2 rounded-4 py-1 px-2 ms-2" id="slotCount">01</span></h3>
                     </div>
                     <div class="row" id="slotContainer">
+                    </div>
+                </div>
+            @elseif (Auth::user()->role == 'patient'||Auth::user()->role == 'family')
+                <div class="tab-pane fade" id="pills-familymember" role="tabpanel"
+                    aria-labelledby="pills-familymember-tab" tabindex="0">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mt-3 mb-4">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between flex-grow-1">
+                            <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">My Family Members <span
+                                    class="badge text-bg-primary fs-2 rounded-4 py-1 px-2 ms-2" id="count">0</span>
+                            </h3>
+                        </div>
+
+                        <form class="position-relative flex-lg-grow-0 flex-grow-1" id="topContainer">
+                            <input type="text" class="form-control search-chat py-2 ps-5" id="search"
+                                placeholder="Search Family Member">
+                            <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
+                        </form>
+                    </div>
+                    <div class="col-12 position-relative" style="z-index: 20;">
+                        <div class="position-absolute top-0 left-0 w-100 bg-white" id="loader">
+                            <div class="d-flex align-items-center justify-content-center" style="height: 60vh;">
+                                <div class="spinner-border text-primary" style="width: 4rem; height: 4rem"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                    <img src="{{ asset('assets/images/favicon.png') }}" class="w-100 h-100 p-2"
+                                        style="object-fit: cover" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="familyContainer">
+                        <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                            <div class="row justify-content-center w-100">
+                                <div class="col-lg-8">
+                                    <div class="text-center">
+                                        <img src="{{ asset('assets/dash/assets/images/backgrounds/family_bg.svg') }}"
+                                            alt="" class="img-fluid w-100">
+                                        <h3 class="fw-semibold mb-3">Family Member Not Found!!!</h3>
+                                        <p class="fw-normal mb-7 fs-4">It seems the family members you’re looking for is
+                                            unavailable. Please
+                                            check
+                                            back later or explore other content.</p>
+                                        <a class="btn btn-primary" href="javascript:void()"
+                                            onclick="window.location.reload()" role="button">Try Again...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endif
@@ -554,8 +561,184 @@
                         hours = hours.toString().padStart(2, '0');
                         return `${hours}:${minutes} ${period}`;
                     }
+                @elseif (Auth::user()->role == 'patient')
+                    function fetchFamilyMembers(search = '') {
+                        $.ajax({
+                            url: `{{ url(Auth::user()->role . '/family/familyFetch/' . Auth::user()->id) }}`,
+                            type: 'GET',
+                            data: {
+                                search: search
+                            },
+                            beforeSend: function() {
+                                $('#loader').fadeIn(500).show();
+                            },
+                            complete: function() {
+                                $('#loader').fadeOut(500);
+                            },
+                            success: function(response) {
+                                let doctorHTML = '';
+                                if (response.length === 0) {
+                                    document.querySelector("#count").innerText = 0;
+                                    if (search.trim() !== '') {
+                                        $("#topContainer, #count").removeClass("d-none");
+                                    } else {
+                                        $("#topContainer, #count").addClass("d-none");
+                                    }
+                                    document.querySelector("#familyContainer").innerHTML = `
+                                    <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                                        <div class="row justify-content-center w-100">
+                                            <div class="col-lg-8">
+                                                <div class="text-center">
+                                                    <img src="{{ asset('assets/dash/assets/images/backgrounds/family_bg.svg') }}" alt=""
+                                                        class="img-fluid w-100">
+                                                    <h3 class="fw-semibold mb-3">Family Members Not Found!!!</h3>
+                                                    <p class="fw-normal mb-7 fs-4">It seems the family members you’re looking for is unavailable. Please check
+                                                        back later or explore other content.</p>
+                                                    <a class="btn btn-primary" href="javascript:void()" onclick="window.location.reload()"
+                                                        role="button">Try Again...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `;
+                                    return;
+                                }
+                                response.forEach(doctor => {
+                                    let profileImage = doctor.admin_profile.profile_img ?
+                                        `{{ asset('profile_images/${doctor.admin_profile.profile_img}') }}` :
+                                        `assets/images/profile/user-1.jpg`;
+                                    doctorHTML += `
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body p-4 text-center">
+                                                <div class="profile-pic d-flex flex-column align-items-center">
+                                                    <img src="${profileImage}" alt="" class="rounded-circle" width="80" height="80">
+                                                    <span class="badge text-bg-primary rounded-pill text-uppercase fs-1 mt-n2 mb-3" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Family Relation" data-bs-original-title="Family Relation">${doctor.pivot.relation}</span>
+                                                    <h5 class="fw-semibold mb-0">${doctor.name}</h5>
+                                                    <span class="text-dark fs-2">${doctor.admin_profile.bio ?? 'No bio available'}</span>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 border-top">
+                                                <div class="row text-center">
+                                                    <div class="col-6 border-end">
+                                                        <a href="#" class="link text-dark d-flex align-items-center justify-content-center font-weight-medium"><i class="ti ti-message me-1 fs-6"></i>Message</a>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <a href="{{ url(Auth::user()->role . '/family/familyDetail') }}/${doctor.id}" class="link text-dark d-flex align-items-center justify-content-center font-weight-medium"><i class="ti ti-artboard me-1 fs-6"></i>Family Profile</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                                });
+                                document.querySelector("#familyContainer").innerHTML = doctorHTML;
+                                document.querySelector("#count").innerText = response.length.toString()
+                                    .padStart(2, '0');
+                                var tooltipTriggerList = [].slice.call(document.querySelectorAll(
+                                    '[data-bs-toggle="tooltip"]'));
+                                tooltipTriggerList.map(function(tooltipTriggerEl) {
+                                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                                });
+                            }
+                        });
+                    }
+
+                    fetchFamilyMembers();
+                    $('#search').on('keyup', function() {
+                        let searchValue = $(this).val();
+                        fetchFamilyMembers(searchValue);
+                    });
+                @elseif (Auth::user()->role == 'family')
+                    function fetchFamilyMembers(search = '') {
+                        $.ajax({
+                            url: `{{ url(Auth::user()->role . '/patients/patientFetch/' . Auth::user()->id) }}`,
+                            type: 'GET',
+                            data: {
+                                search: search
+                            },
+                            beforeSend: function() {
+                                $('#loader').fadeIn(500).show();
+                            },
+                            complete: function() {
+                                $('#loader').fadeOut(500);
+                            },
+                            success: function(response) {
+                                let doctorHTML = '';
+                                if (response.length === 0) {
+                                    document.querySelector("#count").innerText = 0;
+                                    if (search.trim() !== '') {
+                                        $("#topContainer, #count").removeClass("d-none");
+                                    } else {
+                                        $("#topContainer, #count").addClass("d-none");
+                                    }
+                                    document.querySelector("#familyContainer").innerHTML = `
+                                    <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                                        <div class="row justify-content-center w-100">
+                                            <div class="col-lg-8">
+                                                <div class="text-center">
+                                                    <img src="{{ asset('assets/dash/assets/images/backgrounds/family_bg.svg') }}" alt=""
+                                                        class="img-fluid w-100">
+                                                    <h3 class="fw-semibold mb-3">Family Members Not Found!!!</h3>
+                                                    <p class="fw-normal mb-7 fs-4">It seems the family members you’re looking for is unavailable. Please check
+                                                        back later or explore other content.</p>
+                                                    <a class="btn btn-primary" href="javascript:void()" onclick="window.location.reload()"
+                                                        role="button">Try Again...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `;
+                                    return;
+                                }
+                                response.forEach(doctor => {
+                                    let profileImage = doctor.admin_profile.profile_img ?
+                                        `{{ asset('profile_images/${doctor.admin_profile.profile_img}') }}` :
+                                        `assets/images/profile/user-1.jpg`;
+                                    doctorHTML += `
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body p-4 text-center">
+                                                <div class="profile-pic d-flex flex-column align-items-center">
+                                                    <img src="${profileImage}" alt="" class="rounded-circle" width="80" height="80">
+                                                    <span class="badge text-bg-primary rounded-pill text-uppercase fs-1 mt-n2 mb-3" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Family Relation" data-bs-original-title="Family Relation">${doctor.pivot.relation}</span>
+                                                    <h5 class="fw-semibold mb-0">${doctor.name}</h5>
+                                                    <span class="text-dark fs-2">${doctor.admin_profile.bio ?? 'No bio available'}</span>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 border-top">
+                                                <div class="row text-center">
+                                                    <div class="col-6 border-end">
+                                                        <a href="#" class="link text-dark d-flex align-items-center justify-content-center font-weight-medium"><i class="ti ti-message me-1 fs-6"></i>Message</a>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <a href="{{ url(Auth::user()->role . '/patients/patientDetail') }}/${doctor.id}" class="link text-dark d-flex align-items-center justify-content-center font-weight-medium"><i class="ti ti-artboard me-1 fs-6"></i>Family Profile</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                                });
+                                document.querySelector("#familyContainer").innerHTML = doctorHTML;
+                                document.querySelector("#count").innerText = response.length.toString()
+                                    .padStart(2, '0');
+                                var tooltipTriggerList = [].slice.call(document.querySelectorAll(
+                                    '[data-bs-toggle="tooltip"]'));
+                                tooltipTriggerList.map(function(tooltipTriggerEl) {
+                                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                                });
+                            }
+                        });
+                    }
+
+                    fetchFamilyMembers();
+                    $('#search').on('keyup', function() {
+                        let searchValue = $(this).val();
+                        fetchFamilyMembers(searchValue);
+                    });
                 @endif
             @endif
+
+
         });
     </script>
 

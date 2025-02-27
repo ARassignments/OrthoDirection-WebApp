@@ -149,7 +149,7 @@
                                         <a class="btn mb-1 waves-effect waves-light bg-primary-subtle text-primary d-flex align-items-center justify-content-center p-2 fs-4 rounded-circle"
                                             href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="left"
                                             data-bs-title="Show/Hide" onclick="toggleStatus(${service.id})">
-                                            ${service.status ? '<i class="ti ti-eye"></i>' : '<i class="ti ti-eye-off"></i>'}
+                                            ${service.status ? '<i class="ti ti-eye"></i>' : '<i class="ti ti-eye-closed"></i>'}
                                         </a>
                                         <a class="btn mb-1 waves-effect waves-light bg-secondary-subtle text-secondary d-flex align-items-center justify-content-center p-2 fs-4 rounded-circle"
                                             href="{{ url('admin/services/serviceEdit') }}/${service.id}" data-bs-toggle="tooltip" data-bs-placement="left"

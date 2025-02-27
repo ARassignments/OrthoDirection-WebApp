@@ -52,8 +52,8 @@ $(function () {
         if (!$(this).find('.toggler').length) {
             $(this).append(`
             <div class="toggler text-muted">
+                <i class="ti ti-eye-closed fs-4 mb-0"></i>
                 <i class="ti ti-eye fs-4 mb-0"></i>
-                <i class="ti ti-eye-off fs-4 mb-0"></i>
             </div>
         `);
         }

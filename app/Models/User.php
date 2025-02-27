@@ -88,4 +88,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Appointment::class, 'patient_id');
     }
+
+    public function familyMembers()
+    {
+        return $this->belongsToMany(User::class, 'family_relationships', 'patient_id', 'family_member_id')
+                    ->withPivot('relation')
+                    ->withTimestamps();
+    }
+
+    public function patients()
+    {
+        return $this->belongsToMany(User::class, 'family_relationships', 'family_member_id', 'patient_id')
+                    ->withPivot('relation')
+                    ->withTimestamps();
+    }
 }

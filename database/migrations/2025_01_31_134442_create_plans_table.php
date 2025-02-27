@@ -20,6 +20,9 @@ return new class extends Migration
             $table->enum('plan_type', ['free', 'paid'])->default('free');
             $table->integer('plan_popular')->default(0);
             $table->integer('status')->default(0);
+            $table->string('stripe_product_id')->nullable();
+            $table->string('stripe_price_id_monthly')->nullable();
+            $table->string('stripe_price_id_yearly')->nullable();
             $table->timestamps();
         });
     }

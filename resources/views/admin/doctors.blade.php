@@ -95,8 +95,14 @@
                     data: 'name',
                     name: 'name',
                     render: function(data, type, row) {
+                        let profileImg = "assets/images/profile/user-1.jpg";
+                        if(row.admin_profile != null){
+                            profileImg = row.admin_profile.profile_img ?
+                            `{{ asset('profile_images/${row.admin_profile.profile_img}') }}` :
+                            'assets/images/profile/user-1.jpg';
+                        }
                         return `<div class="d-flex align-items-center">
-                                    <img src="assets/images/profile/user-1.jpg" class="rounded-circle"
+                                    <img src="${profileImg}" class="rounded-circle"
                                         width="40" height="40">
                                     <div class="ms-3">
                                         <h6 class="fs-4 fw-semibold text-capitalize mb-0">${data}</h6>
@@ -154,9 +160,9 @@
                     <div class="row justify-content-center w-100">
                         <div class="col-lg-12">
                             <div class="text-center">
-                                <img src="{{ asset('assets/dash/assets/images/backgrounds/nodata_bg.svg') }}" alt=""
+                                <img src="{{ asset('assets/dash/assets/images/backgrounds/doctors_bg.svg') }}" alt=""
                                     class="img-fluid col-lg-8">
-                                <h3 class="fw-semibold mb-3 text-dark">No Data Found!!!</h3>
+                                <h3 class="fw-semibold mb-3 text-dark">Doctors Not Found!!!</h3>
                                 <p class="fw-normal mb-7 fs-4 text-body">It looks like there are no doctors here. Explore other sections or try again later.</p>
                                 <a class="btn btn-primary mb-7" href="javascript:void()" onclick="window.location.reload()" role="button">Try Again...</a>
                             </div>

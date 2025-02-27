@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <div class="row mb-5" id="notificationContainer">
+    <div class="row" id="notificationContainer">
     </div>
 
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
@@ -121,10 +121,10 @@
                         notificationList.empty();
                         if (notifications.length > 0) {
                             notifications.forEach(notification => {
-                                let statusBadge = getStatusBadge(notification.data.status);
-                                @if (Auth::user()->role == 'doctor')
+                                let statusBadge = notification.data.status?getStatusBadge(notification.data.status):'';
+                                @if (Auth::user()->role == 'doctor'||Auth::user()->role == 'family'||Auth::user()->role == 'admin')
                                     let notificationNavigate =
-                                        `{{ url('doctor/patients/patientDetail') }}/${notification.data.patient_id}`;
+                                        `{{ url(Auth::user()->role.'/patients/patientDetail') }}/${notification.data.patient_id}`;
                                 @elseif (Auth::user()->role == 'patient')
                                     let notificationNavigate =
                                         `{{ route('patient.appointments') }}`;
@@ -132,6 +132,11 @@
                                 let notificationStatus = notification.read_at ?
                                     `` :
                                     `<div class="notification ms-1 d-inline-block position-static bg-primary rounded-circle"></div>`;
+                                let longMessage = notification.data.long_message?`
+                                    <div class="card shadow-none mt-2 p-2">
+                                        <p class="mb-0 text-muted">${notification.data.long_message}</p>
+                                    </div>
+                                `:``;
                                 notificationList.append(`
                                 <div class="col-md-12">
                                     <div class="py-6 px-6 ${notification.read_at?'':'bg-primary-subtle'} rounded-2 d-flex flex-row align-items-center mb-3 list notification-item" data-id="${notification.id}">
@@ -146,8 +151,9 @@
                                             </h6>
                                             <span class="fs-2 me-1 text-body-secondary">${moment(notification.created_at).fromNow()}</span>
                                             ${statusBadge}
+                                            ${longMessage}
                                         </div>
-                                        <a href="${notificationNavigate}" class="btn btn-sm bg-primary-subtle text-primary">View</a>
+                                        <a href="${notificationNavigate}" class="btn btn-sm bg-primary-subtle text-primary ms-2 align-self-start">View</a>
                                     </div>
                                 </div>
                                 `);

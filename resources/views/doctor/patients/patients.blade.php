@@ -36,7 +36,7 @@
     </div>
 
     <div>
-        <div class="d-flex align-items-center justify-content-between mt-3 mb-4" id="topContainer">
+        <div class="d-flex align-items-center justify-content-between gap-3 mt-3 mb-4" id="topContainer">
             <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Patients <span
                     class="badge text-bg-primary fs-2 rounded-4 py-1 px-2 ms-2" id="count">0</span></h3>
             <form class="position-relative">
@@ -70,7 +70,7 @@
         $(document).ready(function() {
             function fetchPatients(search = '') {
                 $.ajax({
-                    url: "{{ route('doctor.patients.fetch') }}", // Your Laravel route
+                    url: "{{ route('doctor.patients.fetch') }}",
                     type: 'GET',
                     data: {
                         search: search
@@ -110,9 +110,33 @@
                             return;
                         }
                         response.forEach(doctor => {
+                            let familyMembers = "";
+                            let familyMembersExtra = ``;
                             let profileImage = doctor.admin_profile.profile_img ?
                                 `{{ asset('profile_images/${doctor.admin_profile.profile_img}') }}` :
                                 `assets/images/profile/user-1.jpg`;
+                            let familyMembersCount = "";
+                            if (doctor.family_members.length == 0) {
+                                familyMembersCount = `<p class="mb-0 flex-grow-1">No Family Member</p>`;
+                            } else {
+                                let countMember = 0;
+                                doctor.family_members.forEach(member => {
+                                    console.log(member);
+                                    countMember++; 
+                                    let familyProfileImage = member.admin_profile
+                                        .profile_img ?
+                                        `{{ asset('profile_images/${member.admin_profile.profile_img}') }}` :
+                                        `assets/images/profile/user-1.jpg`;
+                                    familyMembers += `<a href="{{ url(Auth::user()->role . '/family/familyDetail') }}/${member.id}">
+                                                    <img src="${familyProfileImage}" class="rounded-circle me-n2 card-hover border border-white" width="32" height="32" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="${member.name}" data-bs-original-title="${member.name}">
+                                                </a>`;
+                                });
+                                familyMembersExtra = doctor.family_members.length>5?`<a href="#">
+                                                    <div class="btn p-0 d-inline-flex align-items-center justify-content-center bg-primary-subtle rounded-circle me-n2 card-hover border border-primary text-primary" style="width:32px;height:32px;">${doctor.family_members.length-countMember}+</div>
+                                                </a>`:'';
+                                familyMembersCount =
+                                    `<p class="mb-0 ms-4">${doctor.family_members.length} ${doctor.family_members.length>1?'Family Members':'Family Member'}</p>`;
+                            }
                             doctorHTML += `
                             <div class="col-sm-6 col-lg-4">
                                 <div class="card">
@@ -122,19 +146,12 @@
                                             <h5 class="fw-semibold mb-0">${doctor.name}</h5>
                                             <span class="text-dark fs-2">${doctor.admin_profile.bio ?? 'No bio available'}</span>
                                         </div>
-                                        <div class="d-flex align-items-center gap-4 mt-2">
+                                        <div class="d-flex align-items-center mt-2">
                                             <div class="d-flex align-items-center">
-                                                <a href="#">
-                                                    <img src="assets/images/profile/user-1.jpg" class="rounded-circle me-n2 card-hover border border-white" width="32" height="32" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Melinda" data-bs-original-title="Melinda">
-                                                </a>
-                                                <a href="#">
-                                                    <img src="assets/images/profile/user-2.jpg" class="rounded-circle me-n2 card-hover border border-white" width="32" height="32" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Melinda" data-bs-original-title="Melinda">
-                                                </a>
-                                                <a href="#">
-                                                    <img src="assets/images/profile/user-3.jpg" class="rounded-circle me-n2 card-hover border border-white" width="32" height="32" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Melinda" data-bs-original-title="Melinda">
-                                                </a>
+                                                ${familyMembers}
+                                                ${familyMembersExtra}
                                             </div>
-                                            <p class="mb-0">3 family members</p>
+                                            ${familyMembersCount}
                                         </div>
                                     </div>
                                     <div class="p-4 border-top">

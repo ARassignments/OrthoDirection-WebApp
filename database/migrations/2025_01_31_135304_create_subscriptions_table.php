@@ -17,7 +17,10 @@ return new class extends Migration
             $table->foreignId('plan_id')->constrained('plans')->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
+            $table->enum('billing_cycle', ['monthly', 'yearly']);
             $table->enum('status', ['active', 'expired', 'cancelled'])->default('active');
+            $table->timestamp('cancelled_at')->nullable();
+            $table->string('stripe_subscription_id')->nullable();
             $table->timestamps();
         });
     }

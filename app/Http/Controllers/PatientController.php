@@ -143,10 +143,22 @@ class PatientController extends Controller
         $patient = User::find(Auth::user()->id);
         $doctor = User::find($request->doctor_id);
         if ($patient) {
-            $patient->notify(new AppointmentNotification($appointment, 'created'));
+            $patient->notify(new AppointmentNotification($appointment, 'created', 'patient'));
         }
         if ($doctor) {
-            $doctor->notify(new AppointmentNotification($appointment, 'created'));
+            $doctor->notify(new AppointmentNotification($appointment, 'created', 'doctor'));
+        }
+        $familyMembers = $patient->familyMembers()->whereHas('adminProfile', function ($query) {
+            $query->where('status', 1);
+        })->get();
+
+        foreach ($familyMembers as $familyMember) {
+            $familyMember->notify(new AppointmentNotification($appointment, 'created', 'family_member'));
+        }
+
+        $admins = User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new AppointmentNotification($appointment, 'created', 'admin'));
         }
 
         return response()->json(['success' => 'Appointment Created Successfully!']);
@@ -190,9 +202,28 @@ class PatientController extends Controller
             'user_cancellation_reason' => $request->user_cancellation_reason
         ]);
 
-        $patient = User::find($appointment->user_id);
+        $patient = User::find($appointment->patient_id);
+        $doctor = User::find($appointment->doctor_id);
+
         if ($patient) {
-            $patient->notify(new AppointmentNotification($appointment, 'updated'));
+            $patient->notify(new AppointmentNotification($appointment, 'updated', 'patient'));
+        }
+
+        if ($doctor) {
+            $doctor->notify(new AppointmentNotification($appointment, 'updated', 'doctor'));
+        }
+
+        $familyMembers = $patient->familyMembers()->whereHas('adminProfile', function ($query) {
+            $query->where('status', 1);
+        })->get();
+
+        foreach ($familyMembers as $familyMember) {
+            $familyMember->notify(new AppointmentNotification($appointment, 'updated', 'family_member'));
+        }
+
+        $admins = User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new AppointmentNotification($appointment, 'updated', 'admin'));
         }
 
         return response()->json(['success' => 'Appointment cancelled successfully.']);
