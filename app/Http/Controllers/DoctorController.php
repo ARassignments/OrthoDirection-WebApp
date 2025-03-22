@@ -129,7 +129,7 @@ class DoctorController extends Controller
             'status' => 'cancelled',
             'doctor_cancellation_reason' => $request->doctor_cancellation_reason
         ]);
-        Mail::to($appointment->patient->email)->send(new AppointmentCancelled($appointment));
+        // Mail::to($appointment->patient->email)->send(new AppointmentCancelled($appointment));
 
         $patient = User::find($appointment->patient_id);
         if ($patient) {
