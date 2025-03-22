@@ -143,6 +143,7 @@
                 <!-- ---------------------------------- -->
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="/" class="text-nowrap logo-img">
+                        
                         <img src="{{ asset('assets/images/logo.png') }}" class="dark-logo" alt="Logo-Dark"
                             style="height: 60px;" />
                         <img src="{{ asset('assets/images/logo.png') }}" class="light-logo" alt="Logo-light"
