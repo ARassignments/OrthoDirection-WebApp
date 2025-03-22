@@ -103,7 +103,7 @@
     <script>
         const textareaContent = `{{ $blog['description'] }}`;
         document.getElementById("description").innerHTML = textareaContent.replace(/\n/g, "<br>");
-
+        const blogDateTime =  new Date(`{{ $blog['date'] }}T{{ $blog['time'] }}`);
         const differenceInMs = new Date() - new Date(`{{ $blog['date'] }}T{{ $blog['time'] }}`)
         const days = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
         const hours = Math.floor(differenceInMs / (1000 * 60 * 60));

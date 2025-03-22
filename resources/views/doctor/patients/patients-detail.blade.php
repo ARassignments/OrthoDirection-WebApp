@@ -7,13 +7,35 @@
                     <h4 class="fw-semibold mb-8">{{ $patient->name }}</h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="{{ route('doctor.dashboard') }}">Home</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none"
-                                    href="{{ route('doctor.patients') }}">Patients</a>
-                            </li>
+                            @if (Auth::user())
+                                @if (Auth::user()->role == 'admin')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('admin.dashboard') }}">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('admin.patients') }}">Patients</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 'doctor')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('doctor.dashboard') }}">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('doctor.patients') }}">Patients</a>
+                                    </li>
+                                @elseif (Auth::user()->role == 'family')
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none"
+                                            href="{{ route('family.dashboard') }}">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a class="text-muted text-decoration-none" href="javascript:void(0)">Patients</a>
+                                    </li>
+                                @endif
+                            @endif
                             <li class="breadcrumb-item" aria-current="page">{{ $patient->name }}</li>
                         </ol>
                     </nav>
@@ -176,6 +198,20 @@
                         <span class="d-none d-md-block">Appointments</span>
                     </button>
                 </li>
+                @if (Auth::user())
+                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'doctor')
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
+                                id="pills-familymember-tab" data-bs-toggle="pill" data-bs-target="#pills-familymember"
+                                type="button" role="tab" aria-controls="pills-familymember" aria-selected="true"
+                                tabindex="-1">
+                                <i class="ti ti-users-group me-2 fs-6"></i>
+                                <span class="d-none d-md-block">Family Members</span>
+                            </button>
+                        </li>
+                    @endif
+                @endif
             </ul>
         </div>
     </div>
@@ -219,7 +255,8 @@
                                         <div class="form-group row">
                                             <h6 class="fs-4 fw-semibold mb-0 text-end col-md-3">Gender:</h6>
                                             <div class="col-md-9">
-                                                <p class="form-control-static text-capitalize">{{ $patient->adminProfile->gender }}</p>
+                                                <p class="form-control-static text-capitalize">
+                                                    {{ $patient->adminProfile->gender }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -227,7 +264,9 @@
                                         <div class="form-group row">
                                             <h6 class="fs-4 fw-semibold mb-0 text-end col-md-4">Date of Birth:</h6>
                                             <div class="col-md-8">
-                                                <p class="form-control-static text-capitalize">{{ $patient->adminProfile->date_of_birth }}</p>
+                                                <p class="form-control-static text-capitalize">
+                                                    {{ \Carbon\Carbon::parse($patient->adminProfile->date_of_birth)->format('F d, Y') }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -253,7 +292,8 @@
                                         <div class="form-group row">
                                             <h6 class="fs-4 fw-semibold mb-0 text-end col-md-3">Country:</h6>
                                             <div class="col-md-9">
-                                                <p class="form-control-static text-capitalize">{{ $patient->adminProfile->country }}</p>
+                                                <p class="form-control-static text-capitalize">
+                                                    {{ $patient->adminProfile->country }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +301,8 @@
                                         <div class="form-group row">
                                             <h6 class="fs-4 fw-semibold mb-0 text-end col-md-4">City:</h6>
                                             <div class="col-md-8">
-                                                <p class="form-control-static text-capitalize">{{ $patient->adminProfile->city }}</p>
+                                                <p class="form-control-static text-capitalize">
+                                                    {{ $patient->adminProfile->city }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -272,7 +313,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade  active show" id="pills-appointments" role="tabpanel"
+        <div class="tab-pane fade active show" id="pills-appointments" role="tabpanel"
             aria-labelledby="pills-appointments-tab" tabindex="0">
             <div class="card">
                 <ul class="nav nav-pills user-profile-tab" id="pills-tab" role="tablist">
@@ -366,7 +407,134 @@
                 </div>
             </div>
         </div>
+        @if (Auth::user())
+            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'doctor')
+                <div class="tab-pane fade" id="pills-familymember" role="tabpanel"
+                    aria-labelledby="pills-familymember-tab" tabindex="0">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mt-3 mb-4">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between flex-grow-1">
+                            <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Family Members <span
+                                    class="badge text-bg-primary fs-2 rounded-4 py-1 px-2 ms-2" id="count">0</span>
+                            </h3>
+                            @if (Auth::user()->role == 'admin')
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#familyMembers"><i class="ti ti-circles-relation fs-4 me-2"></i>Link
+                                    Family
+                                    Member</button>
+                            @endif
+                        </div>
+
+                        <form class="position-relative flex-lg-grow-0 flex-grow-1" id="topContainer">
+                            <input type="text" class="form-control search-chat py-2 ps-5" id="search"
+                                placeholder="Search Family Member">
+                            <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
+                        </form>
+                    </div>
+                    <div class="col-12 position-relative" style="z-index: 20;">
+                        <div class="position-absolute top-0 left-0 w-100 bg-white" id="loader">
+                            <div class="d-flex align-items-center justify-content-center" style="height: 60vh;">
+                                <div class="spinner-border text-primary" style="width: 4rem; height: 4rem"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                    <img src="{{ asset('assets/images/favicon.png') }}" class="w-100 h-100 p-2"
+                                        style="object-fit: cover" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="familyContainer">
+                        <div class="d-flex align-items-center justify-content-center w-100">
+                            <div class="row justify-content-center w-100">
+                                <div class="col-lg-8">
+                                    <div class="text-center">
+                                        <img src="{{ asset('assets/dash/assets/images/backgrounds/family_bg.svg') }}"
+                                            alt="" class="img-fluid w-100">
+                                        <h3 class="fw-semibold mb-3">Family Member Not Found!!!</h3>
+                                        <p class="fw-normal mb-7 fs-4">It seems the family members you’re looking for is
+                                            unavailable. Please
+                                            check
+                                            back later or explore other content.</p>
+                                        <a class="btn btn-primary" href="javascript:void()"
+                                            onclick="window.location.reload()" role="button">Try Again...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endif
     </div>
+
+    @if (Auth::user())
+        @if (Auth::user()->role == 'admin')
+            <div class="modal fade" id="familyMembers" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="bs-example-modal-lg" aria-hidden="false">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div
+                            class="modal-header align-items-start align-items-lg-center align-items-md-center align-items-sm-start gap-2">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 flex-grow-1">
+                                <h3 class="modal-title fw-semibold d-flex align-items-center">
+                                    All Family Members
+                                    <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2 ms-2"
+                                        id="familyCount">0</span>
+                                </h3>
+                                <form class="position-relative" id="topContainerAll">
+                                    <input type="text" class="form-control search-chat py-2 ps-5" id="searchFamily"
+                                        placeholder="Search Family Member">
+                                    <i
+                                        class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
+                                </form>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12 position-relative" style="z-index: 20;">
+                                <div class="position-absolute top-0 left-0 w-100 bg-white" id="loader2">
+                                    <div class="d-flex align-items-center justify-content-center" style="height: 60vh;">
+                                        <div class="spinner-border text-primary" style="width: 4rem; height: 4rem"
+                                            role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                            <img src="{{ asset('assets/images/favicon.png') }}" class="w-100 h-100 p-2"
+                                                style="object-fit: cover" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="allFamilyMembersContainer">
+                                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                                    <div class="row justify-content-center w-100">
+                                        <div class="col-lg-8">
+                                            <div class="text-center">
+                                                <img src="{{ asset('assets/dash/assets/images/backgrounds/family_bg.svg') }}"
+                                                    alt="" class="img-fluid w-100">
+                                                <h3 class="fw-semibold mb-3">Family Member Not Found!!!</h3>
+                                                <p class="fw-normal mb-7 fs-4">It seems the family members you’re looking
+                                                    for is
+                                                    unavailable. Please
+                                                    check
+                                                    back later or explore other content.</p>
+                                                <a class="btn btn-primary" href="javascript:void()"
+                                                    onclick="window.location.reload()" role="button">Try Again...</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn bg-danger-subtle text-danger font-medium"
+                                data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endif
 
 
     <script src="{{ asset('assets/dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
@@ -449,7 +617,7 @@
             processing: false,
             serverSide: true,
             ajax: {
-                url: "{{ url('doctor/appointments/patientAppointmentFetch/' . $patient->id) }}",
+                url: "{{ url(Auth::user()->role . '/appointments/patientAppointmentFetch/' . $patient->id) }}",
                 type: "GET"
             },
             columns: [{
@@ -494,9 +662,11 @@
                         let cancelReason = row.user_cancelled == 'cancelled' ? row
                             .user_cancellation_reason : row.doctor_cancellation_reason;
                         let appointmentStatusItem = "";
-                        if (data == "pending") {
-                            appointmentStatusItem =
-                                `
+                        let role = "{{ Auth::user()->role }}";
+                        if (role == 'doctor') {
+                            if (data == "pending") {
+                                appointmentStatusItem =
+                                    `
                                 <div class="dropdown dropstart d-inline-block ms-3">
                                     <a href="#" class="text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ti ti-dots-vertical fs-3"></i>
@@ -506,9 +676,9 @@
                                         <li><a href="javascript:void(0)" class="dropdown-item d-flex align-items-center gap-3 text-danger reject-appointment" data-id="${row.id}"><i class="fs-4 ti ti-circle-x"></i>Reject Appointment</a></li>
                                     </ul>
                                 </div>`;
-                        } else if (data == "approved") {
-                            appointmentStatusItem =
-                                `
+                            } else if (data == "approved") {
+                                appointmentStatusItem =
+                                    `
                                 <div class="dropdown dropstart d-inline-block ms-3">
                                     <a href="#" class="text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ti ti-dots-vertical fs-3"></i>
@@ -519,8 +689,11 @@
                                     </ul>
                                 </div>
                                 `;
-                        } else if (data == "completed" || data == "rejected" || data == "cancelled") {
-                            appointmentStatusItem = "";
+                            } else if (data == "completed" || data == "rejected" || data == "cancelled") {
+                                appointmentStatusItem = "";
+                            }
+                        } else {
+                            cancelReasonTitle = "";
                         }
                         return `<a class="badge fw-semibold fs-1 ${getStatusColor(row.status)}" ${data=='cancelled'?'data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-custom-class="custom-popover" data-bs-placement="left" data-bs-original-title="Cancelled Reason '+cancelReasonTitle+'" data-bs-content="'+cancelReason+'"':''}>${capitalize(row.status)}</a>
                         ${appointmentStatusItem}
@@ -668,242 +841,504 @@
             });
         }
 
-        $('#myTable').on('click', '.cancel-appointment', function(e) {
-            e.preventDefault();
-            let appointmentId = $(this).data('id');
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Swal.fire({
-                title: 'Cancel Appointment',
-                input: 'textarea',
-                inputPlaceholder: 'Enter reason for cancellation...',
-                inputAttributes: {
-                    'aria-label': 'Enter your reason'
-                },
-                showCancelButton: true,
-                confirmButtonText: 'Cancel Appointment',
-                cancelButtonText: 'Close',
-                confirmButtonColor: "#1376F8",
-                cancelButtonColor: "#d33",
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'Cancellation reason is required!';
+        @if (Auth::user()->role == 'doctor')
+            $('#myTable').on('click', '.cancel-appointment', function(e) {
+                e.preventDefault();
+                let appointmentId = $(this).data('id');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
                     }
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let reason = result.value;
-                    $.ajax({
-                        url: `{{ url('doctor/appointments/appointmentCancel') }}/${appointmentId}`,
-                        type: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            doctor_cancellation_reason: reason
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Toast.fire({
-                                    icon: "success",
-                                    title: response.success,
-                                });
-                                myTable.ajax.reload(null, false);
-                                globalNotificationsTriggered();
-                            } else {
+                });
+                Swal.fire({
+                    title: 'Cancel Appointment',
+                    input: 'textarea',
+                    inputPlaceholder: 'Enter reason for cancellation...',
+                    inputAttributes: {
+                        'aria-label': 'Enter your reason'
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'Cancel Appointment',
+                    cancelButtonText: 'Close',
+                    confirmButtonColor: "#1376F8",
+                    cancelButtonColor: "#d33",
+                    inputValidator: (value) => {
+                        if (!value) {
+                            return 'Cancellation reason is required!';
+                        }
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let reason = result.value;
+                        $.ajax({
+                            url: `{{ url('doctor/appointments/appointmentCancel') }}/${appointmentId}`,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                doctor_cancellation_reason: reason
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: response.success,
+                                    });
+                                    myTable.ajax.reload(null, false);
+                                    globalNotificationsTriggered();
+                                } else {
+                                    Toast.fire({
+                                        icon: "error",
+                                        title: response.error,
+                                    });
+                                }
+                            },
+                            error: function(xhr) {
                                 Toast.fire({
                                     icon: "error",
-                                    title: response.error,
+                                    title: "Something went wrong. Please try again later.",
                                 });
                             }
-                        },
-                        error: function(xhr) {
-                            Toast.fire({
-                                icon: "error",
-                                title: "Something went wrong. Please try again later.",
-                            });
-                        }
-                    });
-                }
+                        });
+                    }
+                });
             });
-        });
 
-        $('#myTable').on('click', '.approve-appointment', function(e) {
-            e.preventDefault();
-            let appointmentId = $(this).data('id');
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Swal.fire({
-                title: 'Are you sure?',
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonText: 'Yes, Approve it!',
-                cancelButtonText: 'Close',
-                confirmButtonColor: "#1376F8",
-                cancelButtonColor: "#d33",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
-                        type: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            appointment_status: 'approved'
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Toast.fire({
-                                    icon: "success",
-                                    title: response.success,
-                                });
-                                myTable.ajax.reload(null, false);
-                                globalNotificationsTriggered();
-                            } else {
+            $('#myTable').on('click', '.approve-appointment', function(e) {
+                e.preventDefault();
+                let appointmentId = $(this).data('id');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, Approve it!',
+                    cancelButtonText: 'Close',
+                    confirmButtonColor: "#1376F8",
+                    cancelButtonColor: "#d33",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                appointment_status: 'approved'
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: response.success,
+                                    });
+                                    myTable.ajax.reload(null, false);
+                                    globalNotificationsTriggered();
+                                } else {
+                                    Toast.fire({
+                                        icon: "error",
+                                        title: response.error,
+                                    });
+                                }
+                            },
+                            error: function(xhr) {
                                 Toast.fire({
                                     icon: "error",
-                                    title: response.error,
+                                    title: "Something went wrong. Please try again later.",
                                 });
                             }
-                        },
-                        error: function(xhr) {
-                            Toast.fire({
-                                icon: "error",
-                                title: "Something went wrong. Please try again later.",
-                            });
-                        }
-                    });
-                }
+                        });
+                    }
+                });
             });
-        });
 
-        $('#myTable').on('click', '.reject-appointment', function(e) {
-            e.preventDefault();
-            let appointmentId = $(this).data('id');
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Swal.fire({
-                title: 'Are you sure?',
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonText: 'Yes, Reject it!',
-                cancelButtonText: 'Close',
-                confirmButtonColor: "#1376F8",
-                cancelButtonColor: "#d33",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
-                        type: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            appointment_status: 'rejected'
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Toast.fire({
-                                    icon: "success",
-                                    title: response.success,
-                                });
-                                myTable.ajax.reload(null, false);
-                                globalNotificationsTriggered();
-                            } else {
+            $('#myTable').on('click', '.reject-appointment', function(e) {
+                e.preventDefault();
+                let appointmentId = $(this).data('id');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, Reject it!',
+                    cancelButtonText: 'Close',
+                    confirmButtonColor: "#1376F8",
+                    cancelButtonColor: "#d33",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                appointment_status: 'rejected'
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: response.success,
+                                    });
+                                    myTable.ajax.reload(null, false);
+                                    globalNotificationsTriggered();
+                                } else {
+                                    Toast.fire({
+                                        icon: "error",
+                                        title: response.error,
+                                    });
+                                }
+                            },
+                            error: function(xhr) {
                                 Toast.fire({
                                     icon: "error",
-                                    title: response.error,
+                                    title: "Something went wrong. Please try again later.",
                                 });
                             }
-                        },
-                        error: function(xhr) {
-                            Toast.fire({
-                                icon: "error",
-                                title: "Something went wrong. Please try again later.",
-                            });
-                        }
-                    });
-                }
+                        });
+                    }
+                });
             });
-        });
 
-        $('#myTable').on('click', '.complete-appointment', function(e) {
-            e.preventDefault();
-            let appointmentId = $(this).data('id');
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Swal.fire({
-                title: 'Are you sure?',
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonText: 'Yes, Complete it!',
-                cancelButtonText: 'Close',
-                confirmButtonColor: "#1376F8",
-                cancelButtonColor: "#d33",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
-                        type: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            appointment_status: 'completed'
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Toast.fire({
-                                    icon: "success",
-                                    title: response.success,
-                                });
-                                myTable.ajax.reload(null, false);
-                                globalNotificationsTriggered();
-                            } else {
+            $('#myTable').on('click', '.complete-appointment', function(e) {
+                e.preventDefault();
+                let appointmentId = $(this).data('id');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, Complete it!',
+                    cancelButtonText: 'Close',
+                    confirmButtonColor: "#1376F8",
+                    cancelButtonColor: "#d33",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `{{ url('doctor/appointments/appointmentStatusUpdate') }}/${appointmentId}`,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                appointment_status: 'completed'
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: response.success,
+                                    });
+                                    myTable.ajax.reload(null, false);
+                                    globalNotificationsTriggered();
+                                } else {
+                                    Toast.fire({
+                                        icon: "error",
+                                        title: response.error,
+                                    });
+                                }
+                            },
+                            error: function(xhr) {
                                 Toast.fire({
                                     icon: "error",
-                                    title: response.error,
+                                    title: "Something went wrong. Please try again later.",
                                 });
                             }
+                        });
+                    }
+                });
+            });
+        @endif
+
+        $(document).ready(function() {
+            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'doctor')
+                function fetchFamilyMembers(search = '') {
+                    $.ajax({
+                        url: `{{ url(Auth::user()->role . '/family/familyFetch/' . $patient->id) }}`,
+                        type: 'GET',
+                        data: {
+                            search: search
                         },
-                        error: function(xhr) {
-                            Toast.fire({
-                                icon: "error",
-                                title: "Something went wrong. Please try again later.",
+                        beforeSend: function() {
+                            $('#loader').fadeIn(500).show();
+                        },
+                        complete: function() {
+                            $('#loader').fadeOut(500);
+                        },
+                        success: function(response) {
+                            let doctorHTML = '';
+                            if (response.length === 0) {
+                                document.querySelector("#count").innerText = 0;
+                                if (search.trim() !== '') {
+                                    $("#topContainer, #count").removeClass("d-none");
+                                } else {
+                                    $("#topContainer, #count").addClass("d-none");
+                                }
+                                document.querySelector("#familyContainer").innerHTML = `
+                                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                                    <div class="row justify-content-center w-100">
+                                        <div class="col-lg-8">
+                                            <div class="text-center">
+                                                <img src="{{ asset('assets/dash/assets/images/backgrounds/family_bg.svg') }}" alt=""
+                                                    class="img-fluid w-100">
+                                                <h3 class="fw-semibold mb-3">Family Members Not Found!!!</h3>
+                                                <p class="fw-normal mb-7 fs-4">It seems the family members you’re looking for is unavailable. Please check
+                                                    back later or explore other content.</p>
+                                                <a class="btn btn-primary" href="javascript:void()" onclick="window.location.reload()"
+                                                    role="button">Try Again...</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+                                return;
+                            }
+                            response.forEach(doctor => {
+                                let profileImage = doctor.admin_profile.profile_img ?
+                                    `{{ asset('profile_images/${doctor.admin_profile.profile_img}') }}` :
+                                    `assets/images/profile/user-1.jpg`;
+                                doctorHTML += `
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body p-4 text-center">
+                                            <div class="profile-pic d-flex flex-column align-items-center">
+                                                <img src="${profileImage}" alt="" class="rounded-circle" width="80" height="80">
+                                                <span class="badge text-bg-primary rounded-pill text-uppercase fs-1 mt-n2 mb-3" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Family Relation" data-bs-original-title="Family Relation">${doctor.pivot.relation}</span>
+                                                <h5 class="fw-semibold mb-0">${doctor.name}</h5>
+                                                <span class="text-dark fs-2">${doctor.admin_profile.bio ?? 'No bio available'}</span>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 border-top">
+                                            <div class="row text-center">
+                                                <div class="col-6 border-end">
+                                                    <a href="#" class="link text-dark d-flex align-items-center justify-content-center font-weight-medium"><i class="ti ti-message me-1 fs-6"></i>Message</a>
+                                                </div>
+                                                <div class="col-6">
+                                                    <a href="{{ url(Auth::user()->role . '/family/familyDetail') }}/${doctor.id}" class="link text-dark d-flex align-items-center justify-content-center font-weight-medium"><i class="ti ti-artboard me-1 fs-6"></i>Family Profile</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            });
+                            document.querySelector("#familyContainer").innerHTML = doctorHTML;
+                            document.querySelector("#count").innerText = response.length.toString()
+                                .padStart(2, '0');
+                            var tooltipTriggerList = [].slice.call(document.querySelectorAll(
+                                '[data-bs-toggle="tooltip"]'));
+                            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                                return new bootstrap.Tooltip(tooltipTriggerEl);
                             });
                         }
                     });
                 }
-            });
+
+                fetchFamilyMembers();
+                $('#search').on('keyup', function() {
+                    let searchValue = $(this).val();
+                    fetchFamilyMembers(searchValue);
+                });
+            @endif
+
+            @if (Auth::user()->role == 'admin')
+                function fetchAllFamilyMembers(search = '') {
+                    $.ajax({
+                        url: `{{ route('family.fetch.all') }}`,
+                        type: 'GET',
+                        data: {
+                            search: search
+                        },
+                        beforeSend: function() {
+                            $('#loader2').fadeIn(500).show();
+                        },
+                        complete: function() {
+                            $('#loader2').fadeOut(500);
+                        },
+                        success: function(response) {
+                            let doctorHTML = '';
+                            if (response.length === 0) {
+                                document.querySelector("#familyCount").innerText = 0;
+                                if (search.trim() !== '') {
+                                    $("#topContainer, #familyCount").removeClass("d-none");
+                                } else {
+                                    $("#topContainer, #familyCount").addClass("d-none");
+                                }
+                                document.querySelector("#allFamilyMembersContainer").innerHTML = `
+                                <div class="d-flex align-items-center justify-content-center w-100 mb-5">
+                                    <div class="row justify-content-center w-100">
+                                        <div class="col-lg-8">
+                                            <div class="text-center">
+                                                <img src="{{ asset('assets/dash/assets/images/backgrounds/family_bg.svg') }}" alt=""
+                                                    class="img-fluid w-100">
+                                                <h3 class="fw-semibold mb-3">Family Members Not Found!!!</h3>
+                                                <p class="fw-normal mb-7 fs-4">It seems the family members you’re looking for is unavailable. Please check
+                                                    back later or explore other content.</p>
+                                                <a class="btn btn-primary" href="javascript:void()" onclick="window.location.reload()"
+                                                    role="button">Try Again...</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+                                return;
+                            }
+                            response.forEach(doctor => {
+                                let profileImage = doctor.admin_profile.profile_img ?
+                                    `{{ asset('profile_images/${doctor.admin_profile.profile_img}') }}` :
+                                    `assets/images/profile/user-1.jpg`;
+                                doctorHTML += `
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body p-4 text-center">
+                                            <div class="profile-pic">
+                                                <img src="${profileImage}" alt="" class="rounded-circle mb-3" width="80" height="80">
+                                                <h5 class="fw-semibold mb-0">${doctor.name}</h5>
+                                                <span class="text-dark fs-2">${doctor.admin_profile.bio ?? 'No bio available'}</span>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 border-top">
+                                            <div class="row text-center">
+                                                <div class="col-12 ${doctor.patients.length==0?'d-none':''}">
+                                                    <a href="javascript::void(0)" class="link text-dark d-flex align-items-center justify-content-center font-weight-medium"><i class="ti ti-circle-check-filled me-1 fs-6"></i>Family Assigned</a>
+                                                </div>
+                                                <div class="col-12 ${doctor.patients.length==0?'':'d-none'}">
+                                                    <a href="javascript::void(0)" data-id="${doctor.id}" class="link text-dark d-flex align-items-center justify-content-center font-weight-medium assignFamilyMember"><i class="ti ti-artboard me-1 fs-6"></i>Assign Family Member</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            });
+                            document.querySelector("#allFamilyMembersContainer").innerHTML = doctorHTML;
+                            document.querySelector("#familyCount").innerText = response.length
+                                .toString()
+                                .padStart(2, '0');
+                        }
+                    });
+                }
+
+                fetchAllFamilyMembers();
+                $('#searchFamily').on('keyup', function() {
+                    let searchValue = $(this).val();
+                    fetchAllFamilyMembers(searchValue);
+                });
+                $('#familyMembers').modal({
+                    backdrop: false
+                });
+
+                $('#familyMembers').on('click', '.assignFamilyMember', function(e) {
+                    e.preventDefault();
+                    let modal = $('#familyMembers');
+                    modal.modal('hide');
+                    let familyId = $(this).data('id');
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        icon: "question",
+                        input: 'select',
+                        inputPlaceholder: `Select family member's relation`,
+                        inputAttributes: {
+                            'aria-label': `Select family member's relation`
+                        },
+                        inputOptions: {
+                            father: "Father",
+                            mother: "Mother",
+                            sibling: "Sibling",
+                            guardian: "Guardian"
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, Assign Family!',
+                        cancelButtonText: 'Close',
+                        confirmButtonColor: "#1376F8",
+                        cancelButtonColor: "#d33",
+                        inputValidator: (value) => {
+                            if (!value) {
+                                return 'Family Member relation is required!';
+                            }
+                        },
+                        willClose: () => {
+                            modal.modal('show');
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            let relation = result.value;
+                            $.ajax({
+                                url: `{{ url('admin/family/assignFamilyMember/' . $patient->id) }}`,
+                                type: 'POST',
+                                data: {
+                                    _token: '{{ csrf_token() }}',
+                                    family_member_id: familyId,
+                                    relation: relation
+                                },
+                                success: function(response) {
+                                    if (response.success) {
+                                        modal.modal('show');
+                                        fetchFamilyMembers();
+                                        fetchAllFamilyMembers();
+                                        Toast.fire({
+                                            icon: "success",
+                                            title: response.success,
+                                        });
+                                    } else {
+                                        Toast.fire({
+                                            icon: "error",
+                                            title: response.error,
+                                        });
+                                    }
+                                },
+                                error: function(xhr) {
+                                    Toast.fire({
+                                        icon: "error",
+                                        title: "Something went wrong. Please try again later.",
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            @endif
         });
     </script>
 @endsection

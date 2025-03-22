@@ -27,9 +27,11 @@
 
     @vite(['resources/js/app.js'])
     <link rel="preload" href="{{ asset('assets/dash/assets/css/styles.css') }}" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" as="style">
     <link rel="stylesheet" href="{{ asset('assets/dash/assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dash/assets/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
 </head>
 
 <body>

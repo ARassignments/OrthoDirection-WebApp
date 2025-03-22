@@ -139,7 +139,8 @@
                         return;
                     }
                     blogs.forEach(blog => {
-                        const differenceInMs = new Date() - new Date(`${blog.date}T${blog.time}`)
+                        const blogDateTime =  new Date(`${blog.date}T${blog.time}`);
+                        const differenceInMs = new Date() - blogDateTime;
                         const days = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
                         const hours = Math.floor(differenceInMs / (1000 * 60 * 60));
                         const minutes = Math.floor(differenceInMs / (1000 * 60));
@@ -179,7 +180,7 @@
                                         <a class="btn mb-1 waves-effect waves-light bg-primary-subtle text-primary d-flex align-items-center justify-content-center p-2 fs-4 rounded-circle"
                                             href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="left"
                                             data-bs-title="Show/Hide" onclick="toggleStatus(${blog.id})">
-                                            ${blog.status ? '<i class="ti ti-eye"></i>' : '<i class="ti ti-eye-off"></i>'}
+                                            ${blog.status ? '<i class="ti ti-eye"></i>' : '<i class="ti ti-eye-closed"></i>'}
                                         </a>
                                         <a class="btn mb-1 waves-effect waves-light bg-secondary-subtle text-secondary d-flex align-items-center justify-content-center p-2 fs-4 rounded-circle"
                                             href="{{ url('admin/blogs/blogEdit') }}/${blog.id}" data-bs-toggle="tooltip" data-bs-placement="left"

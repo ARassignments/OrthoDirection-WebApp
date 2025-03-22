@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Stripe\Stripe;
+use Stripe\Product;
+use Stripe\Price;
+use Stripe\Balance;
 use App\Models\AdminProfile;
 use App\Models\Service;
 use App\Models\Blog;
@@ -12,31 +16,75 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use App\Mail\NewsletterMail;
+use App\Models\Appoinment;
+use App\Models\Appointment;
 use App\Models\DeviceLog;
 use App\Models\Newsletter;
 use App\Models\Contact;
+use App\Models\Plan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
+use Symfony\Component\Console\Output\NullOutput;
 
 class AdminController extends Controller
 {
 
     public function getFamilies()
     {
-        $users = User::where('role', 'admin')->get();
+        $users = User::where('role', 'family')->with(['adminProfile:id,user_id,profile_img'])->get();
         return datatables()->of($users)->make(true);
     }
 
+    public function familyDetail($id)
+    {
+        $family = User::where('role', 'family')
+            ->with([
+                'adminProfile'
+            ])
+            ->findOrFail($id);
+
+        if (!$family) {
+            return response()->json(['error' => 'Family Member not found!']);
+        }
+
+        return view('doctor.family.family-detail', [
+            'family' => $family
+        ]);
+    }
+
+    // Patients
     public function getPatients()
     {
-        $users = User::where('role', 'patient')->get();
+        $users = User::where('role', 'patient')->with(['adminProfile:id,user_id,profile_img'])->get();
         return datatables()->of($users)->make(true);
+    }
+
+    public function patientDetail($id)
+    {
+        $patient = User::where('role', 'patient')
+            ->with([
+                'adminProfile',
+                'patientAppointments' => function ($query) use ($id) {
+                    $query->where('patient_id', $id)
+                        ->select('doctor_id', 'patient_id', 'date', 'slot', 'status');
+                }
+            ])
+            ->findOrFail($id);
+
+        if (!$patient) {
+            return response()->json(['error' => 'Patient not found!']);
+        }
+
+        return view('doctor.patients.patients-detail', [
+            'patient' => $patient,
+            'appointments' => $patient->patientAppointments
+        ]);
     }
 
     public function getDoctors()
     {
-        $users = User::where('role', 'doctor')->get();
+        $users = User::where('role', 'doctor')->with(['adminProfile:id,user_id,profile_img'])->get();
         return datatables()->of($users)->make(true);
     }
 
@@ -190,6 +238,233 @@ class AdminController extends Controller
         return response()->json(['success' => 'Blog Status Updated!', 'status' => $blog->status]);
     }
 
+    // Stripe API
+    public function checkStripeApiKey()
+    {
+        try {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+            Balance::retrieve();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    // CRUD Plans
+    public function planStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'plan_type' => ['required', Rule::in(['free', 'paid'])],
+            'monthly_price' => 'nullable|numeric|min:0',
+            'yearly_price' => 'nullable|numeric|min:0',
+            'features' => 'nullable|array',
+            'features.*.name' => 'required|string|max:255',
+            'features.*.status' => 'required|in:0,1',
+            'plan_popular' => 'required|in:0,1',
+        ]);
+
+        if (!$this->checkStripeApiKey()) {
+            return response()->json(['error' => 'Invalid Stripe API Key! Please check your configuration.']);
+        }
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $stripeProduct = Product::create([
+            'name' => $request->name,
+            'type' => 'service',
+        ]);
+
+        $monthlyPriceId = null;
+        $yearlyPriceId = null;
+
+        if ($request->plan_type === 'paid') {
+            if ($request->monthly_price) {
+                $monthlyPrice = Price::create([
+                    'unit_amount' => $request->monthly_price * 100,
+                    'currency' => 'usd',
+                    'recurring' => ['interval' => 'month'],
+                    'product' => $stripeProduct->id,
+                ]);
+                $monthlyPriceId = $monthlyPrice->id;
+            }
+
+            if ($request->yearly_price) {
+                $yearlyPrice = Price::create([
+                    'unit_amount' => $request->yearly_price * 100,
+                    'currency' => 'usd',
+                    'recurring' => ['interval' => 'year'],
+                    'product' => $stripeProduct->id,
+                ]);
+                $yearlyPriceId = $yearlyPrice->id;
+            }
+        }
+
+        $featuresArray = [];
+        if ($request->has('features')) {
+            foreach ($request->features as $feature) {
+                $featuresArray[] = [
+                    'name' => $feature['name'],
+                    'status' => (bool) $feature['status'],
+                ];
+            }
+        }
+
+        Plan::create([
+            'name' => $request->name,
+            'monthly_price' => $request->plan_type === 'paid' ? $request->monthly_price : null,
+            'yearly_price' => $request->plan_type === 'paid' ? $request->yearly_price : null,
+            'features' => json_encode($featuresArray),
+            'plan_type' => $request->plan_type,
+            'plan_popular' => (bool) $request->plan_popular,
+            'status' => (bool) $request->status,
+            'stripe_product_id' => $stripeProduct->id,
+            'stripe_price_id_monthly' => $monthlyPriceId,
+            'stripe_price_id_yearly' => $yearlyPriceId,
+        ]);
+        return response()->json(['success' => 'Plan Created Successfully!']);
+    }
+
+    public function planFetch(Request $request)
+    {
+        $query = Plan::query();
+        $plans = $query->orderBy('created_at', 'desc')->get();
+        return response()->json($plans);
+    }
+
+    public function planEdit($id)
+    {
+        $plan = Plan::find($id);
+        if (!$plan) {
+            return response()->json(['error' => 'Plan not found!']);
+        }
+        return view('admin.plans.edit-plan', compact(['plan' => 'plan']));
+    }
+
+    public function planUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'plan_type' => ['required', Rule::in(['free', 'paid'])],
+            'monthly_price' => 'nullable|numeric|min:0',
+            'yearly_price' => 'nullable|numeric|min:0',
+            'features' => 'nullable|array',
+            'features.*.name' => 'required|string|max:255',
+            'features.*.status' => 'required|in:0,1',
+            'plan_popular' => 'required|in:0,1',
+        ]);
+
+        $featuresArray = [];
+        if ($request->has('features')) {
+            foreach ($request->features as $feature) {
+                $featuresArray[] = [
+                    'name' => $feature['name'],
+                    'status' => (bool) $feature['status'],
+                ];
+            }
+        }
+
+        $plan = Plan::find($id);
+        if (!$plan) {
+            return response()->json(['error' => 'Plan not found!']);
+        }
+
+        if (!$this->checkStripeApiKey()) {
+            return response()->json(['error' => 'Invalid Stripe API Key! Please check your configuration.']);
+        }
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Product::update($plan->stripe_product_id, [
+            'name' => $request->name,
+        ]);
+        if ($request->plan_type === 'paid') {
+            if ($request->monthly_price) {
+                if ($plan->stripe_price_id_monthly) {
+                    Price::update($plan->stripe_price_id_monthly, ['active' => false]);
+                }
+                $monthlyPrice = Price::create([
+                    'product' => $plan->stripe_product_id,
+                    'unit_amount' => $request->monthly_price * 100,
+                    'currency' => 'usd',
+                    'recurring' => ['interval' => 'month'],
+                ]);
+                $plan->stripe_price_id_monthly = $monthlyPrice->id;
+            }
+
+            if ($request->yearly_price) {
+                if ($plan->stripe_price_id_yearly) {
+                    Price::update($plan->stripe_price_id_yearly, ['active' => false]);
+                }
+                $yearlyPrice = Price::create([
+                    'product' => $plan->stripe_product_id,
+                    'unit_amount' => $request->yearly_price * 100,
+                    'currency' => 'usd',
+                    'recurring' => ['interval' => 'year'],
+                ]);
+                $plan->stripe_price_id_yearly = $yearlyPrice->id;
+            }
+        } else {
+            if ($plan->stripe_price_id_monthly) {
+                Price::update($plan->stripe_price_id_monthly, ['active' => false]);
+                $plan->stripe_price_id_monthly = null;
+            }
+            if ($plan->stripe_price_id_yearly) {
+                Price::update($plan->stripe_price_id_yearly, ['active' => false]);
+                $plan->stripe_price_id_yearly = null;
+            }
+        }
+
+
+        $plan->name = $request->name;
+        $plan->monthly_price = $request->plan_type === 'paid' ? $request->monthly_price : null;
+        $plan->yearly_price = $request->plan_type === 'paid' ? $request->yearly_price : null;
+        $plan->features = json_encode($featuresArray);
+        $plan->plan_type = $request->plan_type;
+        $plan->plan_popular = (bool) $request->plan_popular;
+        $plan->status = (bool) $request->status;
+        $plan->save();
+        return response()->json(['success' => 'Plan Updated Successfully!']);
+    }
+
+    public function planDestroy($id)
+    {
+        $plan = Plan::find($id);
+        if (!$plan) {
+            return response()->json(['error' => 'Plan not found!']);
+        }
+        if (!$this->checkStripeApiKey()) {
+            return response()->json(['error' => 'Invalid Stripe API Key! Please check your configuration.']);
+        }
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        try {
+            if ($plan->stripe_price_id_monthly) {
+                $monthlyPrice = Price::retrieve($plan->stripe_price_id_monthly);
+                $monthlyPrice->delete();
+            }
+
+            if ($plan->stripe_price_id_yearly) {
+                $yearlyPrice = Price::retrieve($plan->stripe_price_id_yearly);
+                $yearlyPrice->delete();
+            }
+            $stripeProduct = Product::retrieve($plan->stripe_product_id);
+            $stripeProduct->delete();
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete from Stripe: ' . $e->getMessage()]);
+        }
+        $plan->delete();
+        return response()->json(['success' => 'Plan Deleted Successfully!']);
+    }
+
+    public function planToggleStatus($id)
+    {
+        $plan = Plan::find($id);
+        if (!$plan) {
+            return response()->json(['error' => 'Plan not found!']);
+        }
+        $plan->status = !$plan->status;
+        $plan->save();
+        return response()->json(['success' => 'Plan Status Updated!', 'status' => $plan->status]);
+    }
+
     // CRUD Services
     public function serviceStore(Request $request)
     {
@@ -327,5 +602,31 @@ class AdminController extends Controller
                 'errors' => $validator->errors(),
             ]);
         }
+    }
+
+    // Appointments
+    public function patientAppointmentFetch($id)
+    {
+        $doctor = Appointment::where('patient_id', $id)
+            ->select('id', 'doctor_id', 'treatment_type', 'user_cancellation_reason', 'doctor_cancellation_reason', 'user_cancelled', 'patient_id', 'date', 'slot', 'status')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return datatables()->of($doctor)->make(true);
+    }
+
+    public function assignFamilyMember(Request $request, $patientId)
+    {
+        $patient = User::findOrFail($patientId);
+        $request->validate([
+            'family_member_id' => 'required|exists:users,id',
+            'relation' => 'required|string'
+        ]);
+        $exists = $patient->familyMembers()->wherePivot('family_member_id', $request->family_member_id)->exists();
+        if ($exists) {
+            return response()->json(['error' => 'Family Member is already assigned']);
+        }
+
+        $patient->familyMembers()->attach($request->family_member_id, ['relation' => $request->relation]);
+        return response()->json(['success' => 'Family Member linked successfully']);
     }
 }

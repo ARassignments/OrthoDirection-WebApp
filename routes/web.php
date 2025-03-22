@@ -60,6 +60,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('/subscription')->group(function () {
+        Route::get('/subscription-details', [GeneralController::class, 'getSubscriptionDetails']);
+        Route::post('/subscribe', [GeneralController::class, 'subscribe']);
+        Route::post('/cancel-subscription', [GeneralController::class, 'cancelSubscription']);
+        Route::post('/change-plan', [GeneralController::class, 'changePlan']);
+        Route::post('/reset-plan', [GeneralController::class, 'resetPlan']);
+    });
 });
 
 Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
@@ -102,6 +109,27 @@ Route::prefix('/admin')->middleware(['auth', 'verified', 'role:admin'])->group(f
     });
     Route::prefix('/appointments')->group(function () {
         Route::view('/', 'admin.appointments.appointments')->name('admin.appointments');
+        Route::get('/patientAppointmentFetch/{id}', [AdminController::class, 'patientAppointmentFetch'])->name('patient.appointments.fetch');
+    });
+    Route::prefix('/plans')->group(function () {
+        Route::view('/', 'admin.plans.plans')->name('admin.plans');
+        Route::view('/add-plan', 'admin.plans.add-plan')->name('admin.add-plan');
+        Route::post('/planStore', [AdminController::class, 'planStore'])->name('plan.store');
+        Route::get('/planFetch', [AdminController::class, 'planFetch'])->name('admin.plans.fetch');
+        Route::get('/planEdit/{id}', [AdminController::class, 'planEdit'])->name('plans.edit');
+        Route::post('/planUpdate/{id}', [AdminController::class, 'planUpdate'])->name('plans.update');
+        Route::get('/planDestroy/{id}', [AdminController::class, 'planDestroy'])->name('plans.destroy');
+        Route::get('/planToggleStatus/{id}', [AdminController::class, 'planToggleStatus'])->name('plans.toggleStatus');
+    });
+    Route::prefix('/patients')->group(function () {
+        Route::get('/patientFetch/{familyId}', [DoctorController::class, 'familyMemberPatientFetch'])->name('patient.fetch');
+        Route::get('/patientDetail/{id}', [AdminController::class, 'patientDetail'])->name('admin.patients.detail');
+    });
+    Route::prefix('/family')->group(function () {
+        Route::get('/familyFetch/{patientId}', [DoctorController::class, 'patientFamilyMemberFetch'])->name('family.fetch');
+        Route::get('/familyMemberFetchAll', [DoctorController::class, 'familyMemberFetchAll'])->name('family.fetch.all');
+        Route::get('/familyDetail/{id}', [AdminController::class, 'familyDetail'])->name('admin.family.detail');
+        Route::post('/assignFamilyMember/{patientId}', [AdminController::class, 'assignFamilyMember'])->name('admin.patients.family');
     });
     Route::get('/getFamilies', [AdminController::class, 'getFamilies'])->name('admin.getFamilies');
     Route::get('/getPatients', [AdminController::class, 'getPatients'])->name('admin.getPatients');
@@ -134,8 +162,17 @@ Route::prefix('/doctor/')->middleware(['auth', 'verified', 'role:doctor'])->grou
     });
     Route::prefix('/patients')->group(function () {
         Route::view('/', 'doctor.patients.patients')->name('doctor.patients');
+        Route::get('/patientFetch/{familyId}', [DoctorController::class, 'familyMemberPatientFetch'])->name('patient.fetch');
         Route::get('/patientFetch', [DoctorController::class, 'patientFetch'])->name('doctor.patients.fetch');
         Route::get('/patientDetail/{id}', [DoctorController::class, 'patientDetail'])->name('doctor.patients.detail');
+    });
+    Route::prefix('/family')->group(function () {
+        Route::get('/familyFetch/{patientId}', [DoctorController::class, 'patientFamilyMemberFetch'])->name('family.fetch');
+        Route::get('/familyDetail/{id}', [DoctorController::class, 'familyDetail'])->name('doctor.family.detail');
+    });
+    Route::prefix('/plans')->group(function () {
+        Route::view('/', 'general.plans.plans')->name('user.plans');
+        Route::get('/planFetch', [GeneralController::class, 'planFetch'])->name('plans.fetch');
     });
 });
 
@@ -146,6 +183,18 @@ Route::prefix('/family/')->middleware(['auth', 'verified', 'role:family'])->grou
         Route::get('/', [GeneralController::class, 'getProfileDetails'])->name('family.profile');
         Route::get('/edit-profile', [GeneralController::class, 'getProfile'])->name('family.profile.edit');
         Route::post('/profileUpload', [GeneralController::class, 'profileUpload'])->name('family.profile.update');
+    });
+    Route::prefix('/patients')->group(function () {
+        Route::get('/patientFetch/{familyId}', [DoctorController::class, 'familyMemberPatientFetch'])->name('patient.fetch');
+        Route::get('/patientDetail/{id}', [AdminController::class, 'patientDetail'])->name('doctor.patients.detail');
+    });
+    Route::prefix('/appointments')->group(function () {
+        Route::view('/', 'family.appointments.appointments')->name('family.appointments');
+        Route::get('/appointmentFetch', [FamilyController::class, 'appointmentFetch'])->name('family.appointments.fetch');
+        Route::get('/patientAppointmentFetch/{id}', [AdminController::class, 'patientAppointmentFetch'])->name('patient.appointments.fetch');
+    });
+    Route::prefix('/tracking')->group(function () {
+        Route::view('/', 'family.tracking.tracking')->name('family.tracking');
     });
 });
 
@@ -167,6 +216,13 @@ Route::prefix('/patient/')->middleware(['auth', 'verified', 'role:patient'])->gr
         Route::view('/', 'patient.doctors.doctors')->name('patient.doctors');
         Route::get('/doctorFetch', [PatientController::class, 'doctorFetch'])->name('patient.doctors.fetch');
         Route::get('/doctorDetail/{id}', [PatientController::class, 'doctorDetail'])->name('patient.doctors.detail');
+    });
+    Route::prefix('/family')->group(function () {
+        Route::get('/familyFetch/{patientId}', [DoctorController::class, 'patientFamilyMemberFetch'])->name('family.fetch');
+        Route::get('/familyDetail/{id}', [DoctorController::class, 'familyDetail'])->name('doctor.family.detail');
+    });
+    Route::prefix('/tracking')->group(function () {
+        Route::view('/', 'patient.tracking.tracking')->name('patient.tracking');
     });
 });
 

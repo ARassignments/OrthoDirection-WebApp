@@ -67,10 +67,10 @@
             <li class="nav-item" role="presentation">
                 <button
                     class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-4"
-                    id="pills-bills-tab" data-bs-toggle="pill" data-bs-target="#pills-bills" type="button" role="tab"
-                    aria-controls="pills-bills" aria-selected="false" tabindex="-1">
-                    <i class="ti ti-article me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Bills</span>
+                    id="pills-subscription-tab" data-bs-toggle="pill" data-bs-target="#pills-subscription" type="button"
+                    role="tab" aria-controls="pills-subscription" aria-selected="false" tabindex="-1">
+                    <i class="ti ti-credit-card me-2 fs-6"></i>
+                    <span class="d-none d-md-block">Subscription</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -331,129 +331,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-bills" role="tabpanel" aria-labelledby="pills-bills-tab"
-                    tabindex="0">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-9">
-                            <div class="card">
-                                <div class="card-body p-4">
-                                    <h4 class="fw-semibold mb-3">Billing Information</h4>
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="mb-4">
-                                                    <label for="exampleInputtext6" class="form-label fw-semibold">Business
-                                                        Name*</label>
-                                                    <input type="text" class="form-control" id="exampleInputtext6"
-                                                        placeholder="Visitor Analytics">
-                                                </div>
-                                                <div class="mb-4">
-                                                    <label for="exampleInputtext7" class="form-label fw-semibold">Business
-                                                        Address*</label>
-                                                    <input type="text" class="form-control" id="exampleInputtext7"
-                                                        placeholder="">
-                                                </div>
-                                                <div class="">
-                                                    <label for="exampleInputtext8" class="form-label fw-semibold">First
-                                                        Name*</label>
-                                                    <input type="text" class="form-control" id="exampleInputtext8"
-                                                        placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="mb-4">
-                                                    <label for="exampleInputtext9" class="form-label fw-semibold">Business
-                                                        Sector*</label>
-                                                    <input type="text" class="form-control" id="exampleInputtext9"
-                                                        placeholder="Arts, Media &amp; Entertainment">
-                                                </div>
-                                                <div class="mb-4">
-                                                    <label for="exampleInputtext10"
-                                                        class="form-label fw-semibold">Country*</label>
-                                                    <input type="text" class="form-control" id="exampleInputtext10"
-                                                        placeholder="Romania">
-                                                </div>
-                                                <div class="">
-                                                    <label for="exampleInputtext11" class="form-label fw-semibold">Last
-                                                        Name*</label>
-                                                    <input type="text" class="form-control" id="exampleInputtext11"
-                                                        placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="card">
-                                <div class="card-body p-4">
-                                    <h4 class="fw-semibold mb-3">Current Plan : <span
-                                            class="text-success">Executive</span></h4>
-                                    <p>Thanks for being a premium member and supporting our development.</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-7 mb-3">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div
-                                                class="text-bg-light rounded-1 p-6 d-flex align-items-center justify-content-center">
-                                                <i class="ti ti-package text-dark d-block fs-7" width="22"
-                                                    height="22"></i>
-                                            </div>
-                                            <div>
-                                                <p class="mb-0">Current Plan</p>
-                                                <h5 class="fs-4 fw-semibold">750.000 Monthly Visits</h5>
-                                            </div>
-                                        </div>
-                                        <a class="text-dark fs-6 d-flex align-items-center justify-content-center bg-transparent p-2 fs-4 rounded-circle"
-                                            href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            data-bs-title="Add">
-                                            <i class="ti ti-circle-plus"></i>
-                                        </a>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-3">
-                                        <button class="btn btn-primary">Change Plan</button>
-                                        <button class="btn btn-outline-danger">Reset Plan</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="card">
-                                <div class="card-body p-4">
-                                    <h4 class="fw-semibold mb-3">Payment Method</h4>
-                                    <p>On 26 December, 2023</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-7">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div
-                                                class="text-bg-light rounded-1 p-6 d-flex align-items-center justify-content-center">
-                                                <i class="ti ti-credit-card text-dark d-block fs-7" width="22"
-                                                    height="22"></i>
-                                            </div>
-                                            <div>
-                                                <h5 class="fs-4 fw-semibold">Visa</h5>
-                                                <p class="mb-0 text-dark">*****2102</p>
-                                            </div>
-                                        </div>
-                                        <a class="text-dark fs-6 d-flex align-items-center justify-content-center bg-transparent p-2 fs-4 rounded-circle"
-                                            href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            data-bs-title="Edit">
-                                            <i class="ti ti-pencil-minus"></i>
-                                        </a>
-                                    </div>
-                                    <p class="my-2">If you updated your payment method, it will only be dislpayed here
-                                        after your
-                                        next billing cycle.</p>
-                                    <div class="d-flex align-items-center gap-3">
-                                        <button class="btn btn-outline-danger">Cancel Subscription</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center justify-content-end gap-3">
-                                <button class="btn btn-primary">Save</button>
-                                <button class="btn bg-danger-subtle text-danger">Cancel</button>
-                            </div>
-                        </div>
+                <div class="tab-pane fade" id="pills-subscription" role="tabpanel"
+                    aria-labelledby="pills-subscription-tab" tabindex="0">
+                    <div class="row justify-content-center" id="subscription-details">
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pills-security" role="tabpanel" aria-labelledby="pills-security-tab"
@@ -796,6 +677,110 @@
                             console.error('Error:', error);
                         });
                 });
+            });
+
+            function loadSubscription() {
+                $.ajax({
+                    url: "{{ url('subscription/subscription-details') }}",
+                    type: "GET",
+                    success: function(response) {
+                        $('#subscription-details').html(response.html);
+                        if (response.has_subscription) {
+                            $('#cancel-subscription').show();
+                            $('#reset-plan').show();
+                            $('#change-plan').show();
+                        }
+                        $('[data-bs-toggle="tooltip"]').tooltip({
+                            trigger: "hover",
+                            container: "body"
+                        });
+                    }
+                });
+            }
+            loadSubscription();
+
+            $(document).on("click", "#cancel-subscription", function() {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Do you want to cancel your subscription?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1376F8",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, Cancel Subscription!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(this).prop('disabled', true).html(`<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Cancelling...`);
+                        $.ajax({
+                            url: "{{ url('subscription/cancel-subscription') }}",
+                            type: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                Toast.fire({
+                                    icon: "success",
+                                    title: response.message
+                                });
+                                $(this).prop('disabled', false).html(
+                                    `Cancel Subscription`);
+                                loadSubscription();
+                            },
+                            error: function(xhr) {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: response.error
+                                });
+                                $(this).prop('disabled', false).html(
+                                    `Cancel Subscription`);
+                            }
+                        });
+                    }
+                });
+            });
+
+            $(document).on("click", "#reset-plan", function() {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Do you want to reset your plan?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1376F8",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, Reset Plan!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(this).prop('disabled', true).html(`<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Resetting...`);
+                        $.ajax({
+                            url: "{{ url('subscription/reset-plan') }}",
+                            type: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                Toast.fire({
+                                    icon: "success",
+                                    title: response.message
+                                });
+                                $(this).prop('disabled', false).html(`Reset Plan`);
+                                loadSubscription();
+                            },
+                            error: function(xhr) {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: response.error
+                                });
+                                $(this).prop('disabled', false).html(`Reset Plan`);
+                            }
+                        });
+                    }
+                });
+            });
+
+            $(document).on("click", "#change-plan", function() {
+                window.location.href = "{{ route('user.plans') }}";
             });
         });
     </script>

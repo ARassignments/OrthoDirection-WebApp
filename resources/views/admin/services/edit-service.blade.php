@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
-                            <select class="form-control" id="icon_img" name="icon_img" required>
+                            <select class="form-control text-capitalize" id="icon_img" name="icon_img" required>
                                 <option selected disabled>Select Icon</option>
                                 @php
                                     $icons = ['user', 'cart'];
