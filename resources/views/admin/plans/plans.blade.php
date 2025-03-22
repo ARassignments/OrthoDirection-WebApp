@@ -82,8 +82,6 @@
                 complete: function() {
                     $('#loader').fadeOut(500);
                     setTimeout(() => {
-                        $('#planTitle').fadeIn(500).show();
-                        $('#planChanger').fadeIn(500).show();
                         $('#planContainer').fadeIn(500).show();
                     }, 550);
                 },
@@ -99,14 +97,20 @@
                                             class="img-fluid w-100">
                                         <h3 class="fw-semibold mb-3">Pricing Plans Not Found!!!</h3>
                                         <p class="fw-normal mb-7 fs-4">It looks like there are no pricing plans here. Explore other sections or try again later.</p>
-                                        <a class="btn btn-primary" href="javascript:void()" onclick="window.location.reload()" role="button">Try Again...</a>
+                                        <a class="btn btn-primary" href="javascript:void(0)" onclick="window.location.reload()" role="button">Try Again...</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         `;
+                        $('#planTitle').hide();
+                        $('#planChanger').hide();
                         return;
                     }
+                    setTimeout(() => {
+                        $('#planTitle').fadeIn(500).show();
+                        $('#planChanger').fadeIn(500).show();
+                    }, 550);
                     plans.forEach(plan => {
                         let features = "";
                         JSON.parse(plan.features).forEach(feature => {
